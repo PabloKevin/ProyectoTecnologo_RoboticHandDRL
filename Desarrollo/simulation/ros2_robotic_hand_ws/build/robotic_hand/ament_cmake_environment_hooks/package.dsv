@@ -1,0 +1,4 @@
+source;share/robotic_hand/local_setup.bash
+source;share/robotic_hand/local_setup.dsv
+source;share/robotic_hand/local_setup.sh
+source;share/robotic_hand/local_setup.zsh
