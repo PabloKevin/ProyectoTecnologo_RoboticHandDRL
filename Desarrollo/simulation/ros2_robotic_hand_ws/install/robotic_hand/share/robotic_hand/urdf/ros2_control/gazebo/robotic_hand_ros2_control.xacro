@@ -1,0 +1,184 @@
+<!-- This file is a conversion of the robotic hand model from SDF to URDF/Xacro -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotic_hand">
+
+  <!-- Define macros for reusable components -->
+  <xacro:property name="pi" value="3.14159265359"/>
+  <xacro:property name="default_inertial_mass" value="0.1"/>
+  <xacro:property name="default_inertial_inertia" value="0.001"/>
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <inertial>
+      <mass value="${default_inertial_mass}"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="${default_inertial_inertia}" ixy="0" ixz="0" iyy="${default_inertial_inertia}" iyz="0" izz="${default_inertial_inertia}"/>
+    </inertial>
+  </link>
+
+  <!-- Base Joint -->
+  <joint name="base_to_hand_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hand_link"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Hand Link -->
+  <link name="hand_link">
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.002" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.002"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_hand/meshes/palma_dorso_link.stl"/>
+      </geometry>
+      <material name="hand_material">
+        <color rgba="0.8 0.8 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_hand/meshes/palma_dorso_link.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Fingers -->
+  <xacro:macro name="finger" params="name link0_mesh link1_mesh link2_mesh mass inertia_xyz inertia_rpy xyz rpy">
+    <link name="${name}_link0">
+      <inertial>
+        <mass value="${mass}"/>
+        <origin xyz="${inertia_xyz}" rpy="${inertia_rpy}"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link0_mesh}.stl"/>
+        </geometry>
+        <material name="${name}_link0_material">
+          <color rgba="0.9 0.9 0.9 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link0_mesh}.stl"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${name}_joint0" type="revolute">
+      <parent link="hand_link"/>
+      <child link="${name}_link0"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.5"/>
+    </joint>
+
+    <link name="${name}_link1">
+      <inertial>
+        <mass value="${mass}"/>
+        <origin xyz="${inertia_xyz}" rpy="${inertia_rpy}"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link1_mesh}.stl"/>
+        </geometry>
+        <material name="${name}_link1_material">
+          <color rgba="0.9 0.9 0.9 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link1_mesh}.stl"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${name}_joint1" type="revolute">
+      <parent link="${name}_link0"/>
+      <child link="${name}_link1"/>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.5"/>
+    </joint>
+
+    <link name="${name}_link2">
+      <inertial>
+        <mass value="${mass}"/>
+        <origin xyz="${inertia_xyz}" rpy="${inertia_rpy}"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link2_mesh}.stl"/>
+        </geometry>
+        <material name="${name}_link2_material">
+          <color rgba="0.9 0.9 0.9 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robotic_hand/meshes/${link2_mesh}.stl"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${name}_joint2" type="revolute">
+      <parent link="${name}_link1"/>
+      <child link="${name}_link2"/>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.5"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Define the fingers using data from the SDF file -->
+  <xacro:finger name="index_finger" link0_mesh="indice_link0" link1_mesh="indice_link1" link2_mesh="indice_link2" mass="0.05" inertia_xyz="0 0 0" inertia_rpy="0 0 0" xyz="0.02 0.05 0" rpy="0 0 0"/>
+  <xacro:finger name="middle_finger" link0_mesh="medio_link0" link1_mesh="medio_link1" link2_mesh="medio_link2" mass="0.05" inertia_xyz="0 0 0" inertia_rpy="0 0 0" xyz="0.0 0.05 0" rpy="0 0 0"/>
+  <xacro:finger name="ring_finger" link0_mesh="anular_link0" link1_mesh="anular_link1" link2_mesh="anular_link2" mass="0.05" inertia_xyz="0 0 0" inertia_rpy="0 0 0" xyz="-0.02 0.05 0" rpy="0 0 0"/>
+  <xacro:finger name="pinky_finger" link0_mesh="menique_link0" link1_mesh="menique_link1" link2_mesh="menique_link2" mass="0.05" inertia_xyz="0 0 0" inertia_rpy="0 0 0" xyz="-0.04 0.05 0" rpy="0 0 0"/>
+  <xacro:finger name="thumb_finger" link0_mesh="pulgar_link0" link1_mesh="pulgar_link1" link2_mesh="pulgar_link1" mass="0.05" inertia_xyz="0 0 0" inertia_rpy="0 0 0" xyz="0.02 -0.02 0" rpy="0 0 -0.2"/>
+
+  <!-- ROS 2 Control Plugin Configuration -->
+  <ros2_control name="HandControlSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <!-- Define command and state interfaces for each finger joint -->
+    <xacro:macro name="finger_joint_interfaces" params="joint_name">
+      <joint name="${joint_name}">
+        <command_interface name="position">
+          <param name="min">-1.57</param>
+          <param name="max">1.57</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+    </xacro:macro>
+
+    <!-- Add command and state interfaces for all finger joints -->
+    <xacro:finger_joint_interfaces joint_name="index_finger_joint0"/>
+    <xacro:finger_joint_interfaces joint_name="index_finger_joint1"/>
+    <xacro:finger_joint_interfaces joint_name="index_finger_joint2"/>
+    <xacro:finger_joint_interfaces joint_name="middle_finger_joint0"/>
+    <xacro:finger_joint_interfaces joint_name="middle_finger_joint1"/>
+    <xacro:finger_joint_interfaces joint_name="middle_finger_joint2"/>
+    <xacro:finger_joint_interfaces joint_name="ring_finger_joint0"/>
+    <xacro:finger_joint_interfaces joint_name="ring_finger_joint1"/>
+    <xacro:finger_joint_interfaces joint_name="ring_finger_joint2"/>
+    <xacro:finger_joint_interfaces joint_name="pinky_finger_joint0"/>
+    <xacro:finger_joint_interfaces joint_name="pinky_finger_joint1"/>
+    <xacro:finger_joint_interfaces joint_name="pinky_finger_joint2"/>
+    <xacro:finger_joint_interfaces joint_name="thumb_finger_joint0"/>
+    <xacro:finger_joint_interfaces joint_name="thumb_finger_joint1"/>
+    <xacro:finger_joint_interfaces joint_name="thumb_finger_joint2"/>
+  </ros2_control>
+
+</robot>

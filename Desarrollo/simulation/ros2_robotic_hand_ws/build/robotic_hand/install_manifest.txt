@@ -1,4 +1,6 @@
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/robotic_hand.sdf
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/ros2_control/gazebo/robotic_hand_ros2_control.xacro
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/ros2_control/gazebo/robotic_hand.urdf.xacro
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/medio_link1.STL
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/conectores_links.STL
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/anular_link1.STL
