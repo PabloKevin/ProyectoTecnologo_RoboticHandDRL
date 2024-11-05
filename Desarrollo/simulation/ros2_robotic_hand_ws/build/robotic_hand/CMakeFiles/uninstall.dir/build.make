@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pablo_kevin/ros2_robotic_hand_ws/src/robotic_hand
+CMAKE_SOURCE_DIR = /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pablo_kevin/ros2_robotic_hand_ws/build/robotic_hand
+CMAKE_BINARY_DIR = /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/pablo_kevin/ros2_robotic_hand_ws/build/robotic_hand && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pablo_kevin/ros2_robotic_hand_ws/src/robotic_hand /home/pablo_kevin/ros2_robotic_hand_ws/src/robotic_hand /home/pablo_kevin/ros2_robotic_hand_ws/build/robotic_hand /home/pablo_kevin/ros2_robotic_hand_ws/build/robotic_hand /home/pablo_kevin/ros2_robotic_hand_ws/build/robotic_hand/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

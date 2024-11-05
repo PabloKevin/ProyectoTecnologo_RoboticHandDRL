@@ -1,64 +1,55 @@
-from launch import LaunchDescription
-from launch.actions import ExecuteProcess, TimerAction
-from launch_ros.actions import Node
-from launch.substitutions import PathJoinSubstitution
+import os
+
 from ament_index_python.packages import get_package_share_directory
 
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+
+from launch_ros.actions import Node
+
+# Obtener la ruta de instalación del paquete
+packagepath = get_package_share_directory('robotic_hand')  # Cambiar 'nav_car' por 'robotic_hand'
+print(packagepath)
+print(os.path.dirname(__file__))
+
+carmodel = packagepath + '/urdf/robotic_hand.sdf'  # Actualizar la ruta al modelo
+robot_desc = open(carmodel).read()
+
 def generate_launch_description():
-    # Rutas a archivos y directorios
-    package_name = 'robotic_hand'
-    sdf_path = PathJoinSubstitution(
-        [get_package_share_directory(package_name), 'urdf', 'robotic_hand.sdf']
+    gazebo_node = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(
+            get_package_share_directory('ros_gz_sim'), 'launch',
+            'gz_sim.launch.py')),
+        launch_arguments={'gz_args': packagepath + '/worlds/empty.sdf -r -v4'}.items()  # Cambiar a tu archivo de mundo
     )
-    controller_config = PathJoinSubstitution(
-        [get_package_share_directory(package_name), 'config', 'hand_controllers.yaml']
+
+    robot_to_gazebo = Node(
+        package='ros_gz_sim',
+        executable='create',
+        arguments=['-string', robot_desc, '-x', '0', '-y', '0', '-z', '0.05', '-name', 'robotic_hand']
+    )
+
+    bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        parameters=[{'config_file': packagepath + '/config/hand_controllers.yaml'}]  # Cambiar a la ruta correcta del archivo de configuración
+    )
+
+    robot_desc_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='both',
+        parameters=[
+            {'use_sim_time': True},
+            {'robot_description': robot_desc},
+        ]
     )
 
     return LaunchDescription([
-        # Iniciar Gazebo Sim Harmonic en un mundo vacío
-        ExecuteProcess(
-            cmd=['gz', 'sim', '-r', 'empty.sdf'],  # Cambiado a 'gz' para Gazebo Sim
-            output='screen',
-        ),
-        # Esperar a que Gazebo se inicie correctamente antes de continuar
-        TimerAction(
-            period=5.0,  # Esperar 5 segundos para asegurarse de que Gazebo esté completamente iniciado
-            actions=[
-                # Spawnear el robot usando el comando de Gazebo
-                ExecuteProcess(
-                    cmd=[
-                        'gz', 'sim', '--spawn-file', sdf_path.perform(None),
-                        '--name', 'robotic_hand', '--pose', '0 0 0 0 0 0'
-                    ],
-                    output='screen'
-                )
-            ]
-        ),
-        # Spawnear los controladores después de que el robot ha sido spawnado
-        TimerAction(
-            period=10.0,  # Esperar otros 5 segundos después de spawnear el robot
-            actions=[
-                # Inicializar controller_manager
-                Node(
-                    package='controller_manager',
-                    executable='ros2_control_node',
-                    parameters=[controller_config],
-                    output='screen'
-                ),
-                # Spawner del joint_state_controller
-                Node(
-                    package='controller_manager',
-                    executable='spawner',
-                    arguments=['joint_state_controller', '--controller-manager', '/controller_manager'],
-                    output='screen',
-                ),
-                # Spawner del joint_trajectory_controller
-                Node(
-                    package='controller_manager',
-                    executable='spawner',
-                    arguments=['joint_trajectory_controller', '--controller-manager', '/controller_manager'],
-                    output='screen',
-                ),
-            ]
-        ),
+        gazebo_node,
+        robot_to_gazebo,
+        bridge_node,
+        robot_desc_node,
     ])
