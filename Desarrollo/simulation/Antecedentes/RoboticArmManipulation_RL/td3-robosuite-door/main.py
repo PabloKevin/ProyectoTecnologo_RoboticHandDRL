@@ -6,6 +6,8 @@ from torch.utils.tensorboard import SummaryWriter
 import robosuite as suite
 from robosuite.wrappers import GymWrapper
 
+from networks import CriticNetwork,ActorNetwork
+from buffer import ReplayBuffer
 
 if __name__ == '__main__':
 
@@ -27,3 +29,9 @@ if __name__ == '__main__':
 
     env = GymWrapper(env)
 
+
+    ###
+    critic_network = CriticNetwork(input_dims=[8], n_actions=8)
+    actor_network = ActorNetwork(input_dims=[8], fc1_dims=8)
+
+    replay_buffer = ReplayBuffer(max_size=8, input_shape=[8], n_actions=8)
