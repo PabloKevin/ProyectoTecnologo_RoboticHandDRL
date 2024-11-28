@@ -16,18 +16,19 @@ if __name__ == '__main__':
 
     env_name = "Door"
 
+    # https://robosuite.ai/docs/modules/environments.html
     env = suite.make(
-        env_name,
-        robots=["Panda"],
-        controller_configs=suite.load_controller_config(default_controller="JOINT_VELOCITY"),
-        has_renderer = False,
-        use_camera_obs = False,
-        horizon = 300,
-        reward_shaping=True,
-        control_freq=20,
+        env_name,                   
+        robots=["Panda"],           # load a Panda robot
+        controller_configs=suite.load_controller_config(default_controller="JOINT_VELOCITY"),       # arms controlled via OSC, other parts via JOINT_POSITION/JOINT_VELOCITY
+        has_renderer = False,       # on-screen rendering
+        use_camera_obs = False,     # no observations needed
+        horizon = 300,              # each episode terminates after 300 steps. Ajustar según problema.
+        reward_shaping=True,        # use a dense reward signal for learning
+        control_freq=20,            # 20 hz control for applied actions
     )
 
-    env = GymWrapper(env)
+    env = GymWrapper(env) #pone el env en el formato esperado para gym, se podría usar un env fuera de robosuite
 
 
     ###

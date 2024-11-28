@@ -1,6 +1,6 @@
 import numpy as np
 
-# (state, action, reward, next_state, done)
+# (state, action, reward, next_state, done)  estas features/parámetros son comunes en muchos algoritmos de RL
 
 class ReplayBuffer:
     def __init__(self, max_size, input_shape, n_actions):
