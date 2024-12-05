@@ -1,4 +1,28 @@
-#18.16
+"""
+Twin Delayed Deep Deterministic Policy Gradient (TD3) es un algoritmo de Deep Reinforcement Learning diseñado para trabajar con espacios de acción continuos. 
+Es una mejora sobre el algoritmo DDPG (Deep Deterministic Policy Gradient) y aborda sus principales debilidades, como la sobreestimación de los valores Q. 
+TD3 utiliza tres estrategias principales para mejorar la estabilidad y la precisión del aprendizaje:
+
+* Principales características de TD3:
+- Uso de dos redes críticas (Twin Critics):
+En lugar de usar una sola red para estimar Q(s,a), TD3 utiliza dos redes críticas independientes.
+Durante el entrenamiento, utiliza el valor más bajo de las dos estimaciones (min(Q1,Q2)) para reducir la sobreestimación del valor Q. Esto hace que las actualizaciones 
+sean más conservadoras y evita políticas subóptimas.
+
+- Política retardada (Delayed Policy Updates):
+El actor (red de políticas) no se actualiza con cada paso de tiempo. En su lugar, se actualiza después de varios pasos de entrenamiento de las redes críticas.
+Esto permite que las redes críticas converjan mejor antes de actualizar la política, lo que estabiliza el aprendizaje.
+
+- Ruido dirigido a la acción (Target Policy Smoothing):
+Se agrega ruido gaussiano a las acciones objetivo (a') antes de calcular los valores Q. Esto actúa como un mecanismo de regularización que ayuda a manejar el error de 
+extrapolación y evita que el modelo confíe en estimaciones extremas de Q.
+
+* Flujo general del algoritmo:
+1. Se utilizan las redes críticas para calcular el valor esperado Q(s,a) basado en las transiciones almacenadas en el Replay Buffer.
+2. El actor se entrena para maximizar el valor Q(s,a), es decir, para elegir acciones que conduzcan a mayores recompensas.
+3. Las redes objetivo (actor y críticos) se actualizan gradualmente utilizando un "soft update" para garantizar estabilidad.
+"""
+
 import os
 import torch as T
 import torch.nn.functional as F
@@ -83,24 +107,35 @@ class Agent:
         self.memory.store_transition(state, action, reward, next_state, done)
 
     def learn(self):
-        if self.memory.mem_ctr < self.batch_size * 10:
+        # Asegura suficientes transiciones en memoria antes de entrenar, evitando aprendizaje prematuro y fomentando una exploración inicial.
+        # Evitar un aprendizaje prematuro: Si el agente empieza a entrenar demasiado pronto, puede intentar ajustar las redes con datos insuficientes o poco representativos 
+        # del entorno, lo cual podría resultar en un entrenamiento inestable o ineficaz.
+        # Reforzar exploración inicial: Durante las primeras iteraciones, el agente debería enfocarse más en explorar el entorno para recopilar información útil. 
+        if self.memory.mem_ctr < self.batch_size * 10: 
             return
 
+        # Obtiene un batch de muestras aleatorias desde el Replay Buffer
         state, action, reward, next_state, done = self.memory.sample_buffer(self.batch_size)
 
+        # Convierte las muestras del batch a tensores y las mueve al dispositivo adecuado (CPU o GPU).
         reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
         done = T.tensor(done).to(self.critic_1.device)
         next_state = T.tensor(next_state, dtype=T.float).to(self.critic_1.device)
         state = T.tensor(state, dtype=T.float).to(self.critic_1.device)
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
 
+        # Genera las acciones objetivo utilizando la red objetivo del actor,
+        # y agrega ruido para evitar sobreestimaciones de los valores Q.
         target_actions = self.target_actor.forward(next_state)
         target_actions = target_actions + T.clamp(T.tensor(np.random.normal(scale=0.2)), -0.5, 0.5)
+        # Asegura que las acciones objetivo estén dentro de los límites permitidos.
         target_actions = T.clamp(target_actions, self.min_action[0], self.max_action[0])
 
+        # Calcula los valores Q objetivo utilizando las redes críticas objetivo y las acciones objetivo.
         next_q1 = self.target_critic_1.forward(next_state, target_actions)
         next_q2 = self.target_critic_2.forward(next_state, target_actions)
         
+        # Calcula los valores Q actuales usando las redes críticas principales.
         q1 = self.critic_1.forward(state, action)
         q2 = self.critic_2.forward(state, action)
 
@@ -110,33 +145,50 @@ class Agent:
         next_q1 = next_q1.view(-1)
         next_q2 = next_q2.view(-1)
 
+        # Utiliza el valor Q mínimo para reducir el riesgo de sobreestimación.
         next_critic_value = T.min(next_q1, next_q2)
+
+        # Además de la recompensa del estado actual, da buena (casi igual) importancia a la recompensa del estado siguiente (futuro), lo que ayuda en el aprendizaje
+        # porque un estado "malo" puede en realidad ser el camino a un estado siguiente muy bueno. Revisar ecuación de Bellman. 
+        # El siguiente approach también es interesante: q_target = reward + self.gamma * next_q * (1 - done) .
         target = reward + self.gamma * next_critic_value
         target = target.view(self.batch_size, 1)
 
+        # Reinicia los gradientes antes de realizar las actualizaciones.
         self.critic_1.optimizer.zero_grad()
         self.critic_2.optimizer.zero_grad()
 
+        # Calcula las pérdidas de las redes críticas usando Mean Squared Error (MSE) entre los valores Q actuales y los objetivos.
         q1_loss = F.mse_loss(target, q1)
         q2_loss = F.mse_loss(target, q2)
 
+        # Retropropaga las pérdidas.
         critic_loss = q1_loss + q2_loss
         critic_loss.backward()
 
+        # Actualiza los parámetros de las redes críticas.
         self.critic_1.optimizer.step()
         self.critic_2.optimizer.step()
 
+        # Incrementa el contador de pasos de aprendizaje.
         self.learn_step_cntr += 1
 
+        # Actualiza la red del actor solo después de un número determinado de pasos.
         if self.learn_step_cntr % self.update_actor_iter != 0:
             return
 
+        # Calcula la pérdida del actor basada en las predicciones de la critic_1, tratando de maximizar los valores Q de las acciones generadas.
         self.actor.optimizer.zero_grad()
         actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state))
-        actor_loss = -T.mean(actor_q1_loss)
+        # Durante el entrenamiento, se trabaja con batches de datos, con lo cual el actor_q1_loss tendrá el Q_value para cada estado y acción del batch, 
+        # y por eso tiene sentido el .mean() (si en vez de batch, fuera un solo Q_value, no tendría sentido hacer el promedio), para no darle sobreimportancia al tamaño del batch.
+        actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de minimización.
+        
+        # Retropropaga la pérdida y actualiza los parámetros de la red del actor.
         actor_loss.backward()
-
         self.actor.optimizer.step()
+
+        # Realiza una actualización suave (soft update) de las redes objetivo.
         self.update_networks_parameters()
 
     
