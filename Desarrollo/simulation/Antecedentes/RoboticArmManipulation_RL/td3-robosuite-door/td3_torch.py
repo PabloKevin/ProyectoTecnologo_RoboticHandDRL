@@ -192,5 +192,70 @@ class Agent:
         self.update_networks_parameters()
 
     
-    def update_networks_parameters(self, tau):
-        pass
+    def update_network_parameters(self, tau=None):
+        # Si no se proporciona un valor para tau, se utiliza el valor por defecto definido en la clase.
+        if tau == None:
+            tau = self.tau
+
+        # Recupera los parámetros actuales (pesos y sesgos) de las redes principales y objetivo.
+        actor_params = self.actor.named_parameters()
+        critic_1_params = self.critic_1.named_parameters()
+        critic_2_params = self.critic_2.named_parameters()
+        target_actor_params = self.target_actor.named_parameters()
+        target_critic_1_params = self.target_critic_1.named_parameters()
+        target_critic_2_params = self.target_critic_2.named_parameters()
+
+        # Convierte los parámetros de las redes en diccionarios para una manipulación más directa.
+        actor_state_dict = dict(actor_params)
+        critic_1_state_dict = dict(critic_1_params)
+        critic_2_state_dict = dict(critic_2_params)
+        target_actor_state_dict = dict(target_actor_params)
+        target_critic_1_state_dict = dict(target_critic_1_params)
+        target_critic_2_state_dict = dict(target_critic_2_params)
+
+        # Actualiza los parámetros de las redes objetivo mediante un promedio ponderado (soft update, controlado por tau) entre los parámetros actuales de la red principal y los 
+        # parámetros de  la red objetivo. Este enfoque asegura que las redes objetivo converjan gradualmente hacia las principales, mejorando la estabilidad del aprendizaje y 
+        # reduciendo el riesgo de errores por sobreestimación de los valores Q. Un enfoque alternativo sería copiar directamente los parámetros de la red principal en la red objetivo 
+        # (hard update), pero esto puede generar fluctuaciones bruscas y menor estabilidad en el entrenamiento. 
+        # Cuando el algoritmo esté "bien entrenado" las redes objetivo se acercarán bastante a las principales (check).
+        for name in critic_1_state_dict:
+            critic_1_state_dict[name] = tau * critic_1_state_dict[name].clone() + \
+                                        (1 - tau) * target_critic_1_state_dict[name].clone()
+
+        for name in critic_2_state_dict:
+            critic_2_state_dict[name] = tau * critic_2_state_dict[name].clone() + \
+                                        (1 - tau) * target_critic_2_state_dict[name].clone()
+
+        for name in actor_state_dict:
+            actor_state_dict[name] = tau * actor_state_dict[name].clone() + \
+                                    (1 - tau) * target_actor_state_dict[name].clone()
+
+        # Carga los nuevos parámetros actualizados en las redes objetivo correspondientes.
+        self.target_critic_1.load_state_dict(critic_1_state_dict)
+        self.target_critic_2.load_state_dict(critic_2_state_dict)
+        self.target_actor.load_state_dict(actor_state_dict)
+
+
+    def save_models(self):
+        # Guarda los checkpoints de todas las redes (principales y objetivo) en sus respectivos directorios. Un checkpoint es un estado guardado del modelo en un momento 
+        # dado del entrenamiento. Incluye principalmente los parámetros y pesos del modelo que han sido aprendidos hasta ese punto.
+        self.actor.save_checkpoint()
+        self.target_actor.save_checkpoint()
+        self.critic_1.save_checkpoint()
+        self.critic_2.save_checkpoint()
+        self.target_critic_1.save_checkpoint()
+        self.target_critic_2.save_checkpoint()
+
+    def load_models(self):
+        try:
+            # Intenta cargar los checkpoints de las redes principales y objetivo.
+            self.actor.load_checkpoint()
+            self.target_actor.load_checkpoint()
+            self.critic_1.load_checkpoint()
+            self.critic_2.load_checkpoint()
+            self.target_critic_1.load_checkpoint()
+            self.target_critic_2.load_checkpoint()
+            print("Successfully loaded models")
+        except:
+            # Si ocurre un error, imprime un mensaje e inicia desde cero.
+            print("Failed to load models. Starting from scratch")
