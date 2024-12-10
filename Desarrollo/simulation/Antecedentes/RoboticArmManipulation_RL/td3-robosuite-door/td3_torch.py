@@ -74,7 +74,7 @@ class Agent:
                                              name='target_critic_2', learning_rate=critic_learning_rate)
 
         self.noise = noise
-        self.update_network_parameters(tau=1)
+        self.update_networks_parameters(tau=1)
 
 
     def choose_action(self, observation, validation=False):
@@ -192,7 +192,7 @@ class Agent:
         self.update_networks_parameters()
 
     
-    def update_network_parameters(self, tau=None):
+    def update_networks_parameters(self, tau=None):
         # Si no se proporciona un valor para tau, se utiliza el valor por defecto definido en la clase.
         if tau == None:
             tau = self.tau
