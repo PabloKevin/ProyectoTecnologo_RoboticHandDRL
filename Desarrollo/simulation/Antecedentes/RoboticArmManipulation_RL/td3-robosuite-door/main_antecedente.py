@@ -43,36 +43,28 @@ if __name__ == '__main__':
                   layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size)
 
     writer = SummaryWriter("logs")
-    n_games = 10 #10000 recomendados en el video
-    
-    
-    for experiment in range(3,7):
-        best_score = 0
+    n_games = 5000 #10000 recomendados en el video
+    best_score = 0
+    episode_identifier = f"1 - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size}"
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size}"
+    agent.load_models()
 
-        #agent.load_models()
+    for i in range(n_games):
+        observation = env.reset()
+        done = False
+        score = 0
 
-        for i in range(n_games):
-            observation = env.reset()
-            done = False
-            score = 0
+        while not done:
+            action = agent.choose_action(observation)
+            next_observation, reward, done, info = env.step(action)
+            score += reward
+            agent.remember(observation, action, reward, next_observation, done)
+            agent.learn()
+            observation = next_observation
 
-            while not done:
-                action = agent.choose_action(observation)
-                next_observation, reward, done, info = env.step(action)
-                score += reward
-                agent.remember(observation, action, reward, next_observation, done)
-                agent.learn()
-                observation = next_observation
+        writer.add_scalar(tag=f"Score - {episode_identifier}", scalar_value=score, global_step=i)
 
-            writer.add_scalar(f"Score - {episode_identifier}", scalar_value=score, global_step=i)
+        if i % 10 == 0:
+            agent.save_models()
 
-            if i % 10 == 0:
-                agent.save_models()
-
-            print(f"Episode: {i} Score: {score}")
-
-        # Hiperparámetros a buscar:
-        actor_learning_rate *= 0.8
-        
+        print(f"Episode: {i} Score: {score}")
