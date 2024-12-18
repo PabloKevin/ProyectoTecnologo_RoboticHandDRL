@@ -40,7 +40,7 @@ if __name__ == '__main__':
                   input_dims=env.observation_space.shape, env=env, n_actions=env.action_space.shape[0],
                   layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size)
 
-    n_games = 3 
+    n_games = 1 
     best_score = 0
     episode_identifier = f"1 - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size}"
 
@@ -48,6 +48,7 @@ if __name__ == '__main__':
     agent.load_models()
 
     for i in range(n_games):
+        #print("n_actions", agent.n_actions) #solo por curiosidad, porque en el código usaba =2 por defecto, pero en este entorno es 8.
         observation = env.reset()
         done = False
         score = 0
