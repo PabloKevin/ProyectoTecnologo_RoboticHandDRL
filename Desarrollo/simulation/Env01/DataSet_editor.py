@@ -46,6 +46,20 @@ class DataSet_editor:
                 # Crear la imagen binaria (0 = negro, 255 = blanco)
                 img_binaria = np.zeros((img.shape[0], img.shape[1]), dtype=np.uint8)
                 img_binaria[mascara] = 255
+                # Apply morphological closing to fill small holes and connect nearby white pixels
+                kernel = np.ones((3,3), np.uint8)
+                img_binaria = cv2.morphologyEx(img_binaria, cv2.MORPH_CLOSE, kernel)
+                
+                # Iterate through pixels (excluding borders)
+                for i in range(1, img_binaria.shape[0]-1):
+                    for j in range(1, img_binaria.shape[1]-1):
+                        # Get 8-connected neighbors
+                        neighbors = img_binaria[i-1:i+2, j-1:j+2]
+                        # Count white pixels in neighborhood
+                        white_count = np.sum(neighbors == 255)
+                        # If majority of neighbors are white, make pixel white
+                        if white_count >= 5:  # Threshold of 5 out of 9 pixels
+                            img_binaria[i,j] = 255
 
                 # Guardar la imagen resultante
                 cv2.imwrite(ruta_salida, img_binaria)
@@ -54,4 +68,5 @@ class DataSet_editor:
 
 if __name__ == "__main__":
     editor = DataSet_editor()
-    editor.raw2bw(sobreescribir=False, umbral=5)
+    #editor.raw2bw(images_list=["Martillo01.jpg"],sobreescribir=True, umbral=10)
+    editor.raw2bw(images_list="All", sobreescribir=False, umbral=10)
