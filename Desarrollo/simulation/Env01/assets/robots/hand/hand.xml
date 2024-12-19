@@ -1,0 +1,193 @@
+<mujoco model="robotic_hand">
+    <compiler angle="radian" inertiafromgeom="false" coordinate="local"/>
+    
+    <default>
+        <joint armature="1" damping="1" limited="true"/>
+        <motor ctrllimited="true" ctrlrange="-1 1"/>
+    </default>
+
+    <asset>
+        <!-- Base -->
+        <mesh name="palma_dorso" file="meshes/palma_dorso_link.STL"/>
+        <mesh name="conectores" file="meshes/conectores_links.STL"/>
+        
+        <!-- Index finger -->
+        <mesh name="indice_link0" file="meshes/indice_link0.STL"/>
+        <mesh name="indice_link1" file="meshes/indice_link1.STL"/>
+        <mesh name="indice_link2" file="meshes/indice_link2.STL"/>
+        
+        <!-- Middle finger -->
+        <mesh name="medio_link0" file="meshes/medio_link0.STL"/>
+        <mesh name="medio_link1" file="meshes/medio_link1.STL"/>
+        <mesh name="medio_link2" file="meshes/medio_link2.STL"/>
+        
+        <!-- Ring finger -->
+        <mesh name="anular_link0" file="meshes/anular_link0.STL"/>
+        <mesh name="anular_link1" file="meshes/anular_link1.STL"/>
+        <mesh name="anular_link2" file="meshes/anular_link2.STL"/>
+        
+        <!-- Little finger -->
+        <mesh name="menique_link0" file="meshes/menique_link0.STL"/>
+        <mesh name="menique_link1" file="meshes/menique_link1.STL"/>
+        <mesh name="menique_link2" file="meshes/menique_link2.STL"/>
+        
+        <!-- Thumb -->
+        <mesh name="pulgar_link0" file="meshes/pulgar_link0.STL"/>
+        <mesh name="pulgar_link1" file="meshes/pulgar_link1.STL"/>
+        
+        <material name="purple" rgba="0.25 0.0 0.3 1.0"/>
+    </asset>
+
+    <worldbody>
+        <body name="base_link" pos="0 0 0">
+            <inertial pos="0.01266 0.007711 0.22272" mass="0.20247" 
+                     diaginertia="0.0014611 0.00098384 0.00050623" 
+                     xyinertia="3.6753e-05" xzinertia="-4.2033e-06" yzinertia="-0.00016151"/>
+            <geom type="mesh" material="purple" mesh="palma_dorso"/>
+            <geom type="mesh" material="purple" mesh="conectores" pos="0.00762 -0.225244 0.236582" euler="1.5708 0 0"/>
+            
+            <!-- Index finger -->
+            <body name="indice_link0" pos="0.017381 -0.10655 0.111803" euler="1.5708 0 0.09642">
+                <inertial pos="-0.000138 0.012553 -0.016706" mass="0.0112932"
+                         diaginertia="1.70111e-06 1.39435e-06 8.46994e-07"
+                         xyinertia="-1.07101e-09" xzinertia="-8.52503e-09" yzinertia="1.09842e-09"/>
+                <joint name="joint_indice_0" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                <geom type="mesh" material="purple" mesh="indice_link0"/>
+                
+                <body name="indice_link1" pos="0 0.000534 -0.032043">
+                    <inertial pos="-0.000615 0.011916 -0.015288" mass="0.0094502"
+                             diaginertia="1.06519e-06 9.75778e-07 5.57819e-07"
+                             xyinertia="-3.7385e-10" xzinertia="3.33799e-08" yzinertia="2.66689e-09"/>
+                    <joint name="joint_indice_1" type="hinge" axis="0 1 0" range="-0.95993 0"/>
+                    <geom type="mesh" material="purple" mesh="indice_link1"/>
+                    
+                    <body name="indice_link2" pos="0 0.001236 -0.031738">
+                        <inertial pos="-0.000414 0.01074 -0.013386" mass="0.00844698"
+                                 diaginertia="9.20898e-07 9.06546e-07 3.65181e-07"
+                                 xyinertia="2.2781e-11" xzinertia="2.33875e-08" yzinertia="-9.81161e-10"/>
+                        <joint name="joint_indice_2" type="hinge" axis="0 1 0" range="0 1.1868"/>
+                        <geom type="mesh" material="purple" mesh="indice_link2"/>
+                    </body>
+                </body>
+            </body>
+            
+            <!-- Middle finger -->
+            <body name="medio_link0" pos="0.017396 -0.10571 0.1" euler="1.5708 0 0.12292">
+                <inertial pos="-0.000157 -0.004676 -0.017777" mass="0.0148708"
+                         diaginertia="2.70022e-06 2.29788e-06 1.24182e-06"
+                         xyinertia="-1.50316e-09" xzinertia="-1.3278e-08" yzinertia="8.77395e-09"/>
+                <joint name="joint_medio_0" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                <geom type="mesh" material="purple" mesh="medio_link0"/>
+                
+                <body name="medio_link1" pos="-2.1e-05 0 -0.03524">
+                    <inertial pos="-0.000643 -0.004885 -0.017081" mass="0.0121315"
+                             diaginertia="1.64138e-06 1.54301e-06 8.12468e-07"
+                             xyinertia="-1.95095e-10" xzinertia="5.14142e-08" yzinertia="5.52304e-10"/>
+                    <joint name="joint_medio_1" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                    <geom type="mesh" material="purple" mesh="medio_link1"/>
+                    
+                    <body name="medio_link2" pos="0 0 -0.035366">
+                        <inertial pos="-0.005047 0.007266 0.087066" mass="0.20247"
+                                 diaginertia="0.00145186 0.000985511 0.000513804"
+                                 xyinertia="5.30453e-05" xzinertia="9.35133e-05" yzinertia="-0.000154434"/>
+                        <joint name="joint_medio_2" type="hinge" axis="0.000914 -0.999987 -0.005061" range="-3.14159 3.14159"/>
+                        <geom type="mesh" material="purple" mesh="medio_link2"/>
+                    </body>
+                </body>
+            </body>
+            
+            <!-- Ring finger -->
+            <body name="anular_link0" pos="0.017396 -0.10601 0.079212" euler="1.5708 0 0.13729">
+                <inertial pos="-0.000147 -0.012697 -0.017313" mass="0.0126336"
+                         diaginertia="2.06877e-06 1.7254e-06 1.00343e-06"
+                         xyinertia="-1.20016e-09" xzinertia="-9.77141e-09" yzinertia="6.07253e-09"/>
+                <joint name="joint_anular_0" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                <geom type="mesh" material="purple" mesh="anular_link0"/>
+                
+                <body name="anular_link1" pos="-2.1e-05 -0.000351 -0.033417">
+                    <inertial pos="-0.000639 -0.012513 -0.016258" mass="0.010609"
+                             diaginertia="1.3028e-06 1.2133e-06 6.683e-07"
+                             xyinertia="-1.4775e-10" xzinertia="4.3567e-08" yzinertia="-3.0441e-10"/>
+                    <joint name="joint_anular_1" type="hinge" axis="0.000146 1 -0.000863" range="-3.14159 3.14159"/>
+                    <geom type="mesh" material="purple" mesh="anular_link1"/>
+                    
+                    <body name="anular_link2" pos="0 -0.000424 -0.033504">
+                        <inertial pos="-0.000444 -0.012109 -0.014311" mass="0.00947096"
+                                 diaginertia="1.12538e-06 1.11933e-06 4.39896e-07"
+                                 xyinertia="-6.25777e-10" xzinertia="3.16594e-08" yzinertia="-3.97943e-10"/>
+                        <joint name="joint_anular_2" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                        <geom type="mesh" material="purple" mesh="anular_link2"/>
+                    </body>
+                </body>
+            </body>
+            
+            <!-- Little finger -->
+            <body name="menique_link0" pos="0.018096 -0.11691 0.049705" euler="1.5708 0 0">
+                <inertial pos="-0.000147 -0.011566 -0.014748" mass="0.00880254"
+                         diaginertia="1.06448e-06 8.71957e-07 5.8784e-07"
+                         xyinertia="-7.25387e-10" xzinertia="-5.5521e-09" yzinertia="3.34074e-09"/>
+                <joint name="joint_menique_0" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                <geom type="mesh" material="purple" mesh="menique_link0"/>
+                
+                <body name="menique_link1" pos="0 -0.000695 -0.0281">
+                    <inertial pos="-0.000609 -0.010995 -0.013626" mass="0.0074677"
+                             diaginertia="6.7288e-07 6.2574e-07 3.9564e-07"
+                             xyinertia="-9.6056e-11" xzinertia="2.4674e-08" yzinertia="2.4801e-10"/>
+                    <joint name="joint_menique_1" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                    <geom type="mesh" material="purple" mesh="menique_link1"/>
+                    
+                    <body name="menique_link2" pos="0 -0.000975 -0.028">
+                        <inertial pos="-0.000425 -0.010032 -0.011482" mass="0.00613512"
+                                 diaginertia="5.34284e-07 5.392e-07 2.36691e-07"
+                                 xyinertia="4.89343e-11" xzinertia="1.501e-08" yzinertia="-4.52288e-10"/>
+                        <joint name="joint_menique_2" type="hinge" axis="0 1 0" range="-3.14159 3.14159"/>
+                        <geom type="mesh" material="purple" mesh="menique_link2"/>
+                    </body>
+                </body>
+            </body>
+            
+            <!-- Thumb -->
+            <body name="pulgar_link0" pos="0.018291 -0.13588 0.129681" euler="1.5708 -0.47347 0">
+                <inertial pos="0.004274 0.035281 0.03492" mass="0.0324581"
+                         diaginertia="1.35094e-05 6.92053e-06 9.69092e-06"
+                         xyinertia="-1.51351e-06" xzinertia="9.14252e-07" yzinertia="4.18994e-06"/>
+                <joint name="joint_pulgar_0" type="hinge" axis="0 0 1" range="-3.14159 3.14159"/>
+                <geom type="mesh" material="purple" mesh="pulgar_link0"/>
+                
+                <body name="pulgar_link1" pos="-0.016974 0.039947 -0.024949" euler="-0.17928 -0.16915 -0.27411">
+                    <inertial pos="0.032966 0.035823 0.028152" mass="0.0188"
+                             diaginertia="3.50846e-06 2.33645e-06 2.8012e-06"
+                             xyinertia="-5.45407e-07" xzinertia="3.34377e-07" yzinertia="9.85584e-07"/>
+                    <joint name="joint_pulgar_1" type="hinge" axis="0.52368 0.38683 0.75902" range="-3.14159 3.14159"/>
+                    <geom type="mesh" material="purple" mesh="pulgar_link1"/>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <!-- Index finger -->
+        <motor joint="joint_indice_0"/>
+        <motor joint="joint_indice_1"/>
+        <motor joint="joint_indice_2"/>
+        
+        <!-- Middle finger -->
+        <motor joint="joint_medio_0"/>
+        <motor joint="joint_medio_1"/>
+        <motor joint="joint_medio_2"/>
+        
+        <!-- Ring finger -->
+        <motor joint="joint_anular_0"/>
+        <motor joint="joint_anular_1"/>
+        <motor joint="joint_anular_2"/>
+        
+        <!-- Little finger -->
+        <motor joint="joint_menique_0"/>
+        <motor joint="joint_menique_1"/>
+        <motor joint="joint_menique_2"/>
+        
+        <!-- Thumb -->
+        <motor joint="joint_pulgar_0"/>
+        <motor joint="joint_pulgar_1"/>
+    </actuator>
+</mujoco>

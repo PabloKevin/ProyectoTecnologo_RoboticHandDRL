@@ -1,117 +1,70 @@
-import robosuite as suite
-from robosuite.models.robots import MujocoRobot
-from robosuite.utils.mjcf_utils import xml_path_completion, array_to_string
-import numpy as np
 import gym
 from gym import spaces
+import numpy as np
 
-class RoboticHand(MujocoRobot):
-    """Custom robotic hand model"""
-    def __init__(self):
-        super().__init__("robotic_hand")
+class ToolManipulationEnv(gym.Env):
+    def __init__(self, image_shape=(64, 64, 1), n_fingers=5):
+        super(ToolManipulationEnv, self).__init__()
         
-        # Define robot parameters
-        self.n_joints = 15  # Total number of joints (3 per finger x 5 fingers)
-        self.joint_names = [
-            # Índice
-            "joint_indice_0", "joint_indice_1", "joint_indice_2",
-            # Medio
-            "joint_medio_0", "joint_medio_1", "joint_medio_2",
-            # Anular
-            "joint_anular_0", "joint_anular_1", "joint_anular_2",
-            # Meñique
-            "joint_menique_0", "joint_menique_1", "joint_menique_2",
-            # Pulgar
-            "joint_pulgar_0", "joint_pulgar_1"
-        ]
+        # Observation space: image + finger states
+        self.image_shape = image_shape
+        self.n_fingers = n_fingers
+        self.observation_space = spaces.Dict({
+            # Image in black and white, so 0 = Black, 1 = White , uint8 enough
+            'image': spaces.Box(low=0, high=1, shape=self.image_shape, dtype=np.uint8),
+            # Finger states in degrees, so 0 = 0 degrees, 180 = 180 degrees, flaot16 enough and scalable if wanted float numbers
+            'finger_states': spaces.Box(low=0, high=180, shape=(self.n_fingers,), dtype=np.float16)
+        })
         
-        # Joint limits from SDF
-        self.joint_limits = {
-            "joint_indice_1": {"lower": -0.95993, "upper": 0},
-            "joint_indice_2": {"lower": 0, "upper": 1.1868},
-            # Other joints default to [-π, π] if not specified
+        # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
+        self.action_space = spaces.MultiDiscrete([3] * self.n_fingers)
+        
+        # Initialize state
+        self.state = {
+            'image': np.zeros(self.image_shape, dtype=np.uint8),
+            'finger_states': np.zeros(self.n_fingers, dtype=np.float16)
         }
-
-class RoboticHandEnv(gym.Env):
-    def __init__(self):
-        self.hand = RoboticHand()
         
-        # Initialize robosuite environment
-        self.env = suite.make(
-            "Empty",  # Empty environment as base
-            robots=[self.hand],
-            has_renderer=True,
-            has_offscreen_renderer=True,
-            render_camera="frontview",
-            render_collision_mesh=False,
-            control_freq=20,
-            horizon=500,
-            use_camera_obs=False,
-        )
-        
-        # Define action and observation spaces
-        self.action_space = spaces.Box(
-            low=-1.0,
-            high=1.0,
-            shape=(self.hand.n_joints,),
-            dtype=np.float32
-        )
-        
-        # Observation space includes joint positions and velocities
-        self.observation_space = spaces.Box(
-            low=-np.inf,
-            high=np.inf,
-            shape=(self.hand.n_joints * 2,),  # positions + velocities
-            dtype=np.float32
-        )
-
     def reset(self):
-        """Reset environment to initial state"""
-        obs = self.env.reset()
-        return self._get_obs()
-
+        # Reset the environment to an initial state
+        self.state['image'] = self._get_initial_image()
+        self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float16)
+        return self.state
+    
     def step(self, action):
-        """Execute action and return new state"""
-        # Scale actions from [-1, 1] to actual joint limits
-        scaled_action = self._scale_action(action)
+        # Update finger states based on action
+        for i in range(self.n_fingers):
+            if action[i] == 0:
+                self.state['finger_states'][i] = 0.0  # Open
+            elif action[i] == 1:
+                self.state['finger_states'][i] = 90.0  # Medium closed
+            elif action[i] == 2:
+                self.state['finger_states'][i] = 180.0  # Fully closed
         
-        # Execute action
-        obs, reward, done, info = self.env.step(scaled_action)
+        # Calculate reward
+        reward = self._calculate_reward(self.state, action)
         
-        return self._get_obs(), reward, done, info
-
-    def _get_obs(self):
-        """Get current observation"""
-        robot_states = self.env.robots[0].get_robot_state()
+        # Check if the task is done
+        done = self._check_done(self.state)
         
-        # Combine joint positions and velocities
-        obs = np.concatenate([
-            robot_states['joint_pos'],
-            robot_states['joint_vel'],
-        ])
-        
-        return obs
-
-    def _scale_action(self, action):
-        """Scale actions from [-1, 1] to actual joint limits"""
-        scaled_action = np.zeros_like(action)
-        for i, joint_name in enumerate(self.hand.joint_names):
-            if joint_name in self.hand.joint_limits:
-                limits = self.hand.joint_limits[joint_name]
-                scaled_action[i] = (
-                    (action[i] + 1) / 2 * 
-                    (limits["upper"] - limits["lower"]) + 
-                    limits["lower"]
-                )
-            else:
-                scaled_action[i] = action[i] * np.pi  # Default to [-π, π]
-                
-        return scaled_action
-
+        return self.state, reward, done, {} 
+        # the {} is for the info dictionary, it's empty because we don't need to pass any info, usefull in debugging
+    
     def render(self, mode='human'):
-        """Render environment"""
-        return self.env.render()
-
-    def close(self):
-        """Clean up resources"""
-        self.env.close() 
+        # Optionally implement rendering
+        pass
+    
+    def _get_initial_image(self):
+        # Generate or load the initial image
+        return np.random.randint(0, 256, self.image_shape, dtype=np.uint8)
+    
+    def _calculate_reward(self, state, action):
+        # Implement a reward function based on the state and action
+        # For example, reward could be based on how well the fingers are positioned to use the tool
+        return 0.0
+    
+    def _check_done(self, state):
+        # Determine if the task is complete
+        # For example, check if the fingers are in the desired position
+        # The first approach is just one action and reward, if not the tool would fall maybe. 
+        return True
