@@ -172,8 +172,8 @@ class DataSet_editor:
 
 
 
-if __name__ == "__main__":
-    editor = DataSet_editor()
+#if __name__ == "__main__":
+    #editor = DataSet_editor()
     #editor.raw2bw(images_list="empty.png", sobreescribir=True, umbral=10)
     """
     ruta = os.path.join(editor.directorio_salida, "bw_Martillo01.jpg")

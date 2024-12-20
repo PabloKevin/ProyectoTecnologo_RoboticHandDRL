@@ -4,6 +4,7 @@ import numpy as np
 import os
 import cv2
 from DataSet_editor import DataSet_editor
+import matplotlib.pyplot as plt 
 
 class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=5):
@@ -27,11 +28,14 @@ class ToolManipulationEnv(gym.Env):
             'image': np.zeros(self.image_shape, dtype=np.uint8),
             'finger_states': np.zeros(self.n_fingers, dtype=np.float16)
         }
+
+        self.reward = 0
         
     def reset(self):
         # Reset the environment to an initial state
         self.state['image'] = self._get_initial_image()
         self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float16)
+        self.reward = 0 # Is it correct to start the reward at 0?
         return self.state
     
     def step(self, action):
@@ -45,17 +49,27 @@ class ToolManipulationEnv(gym.Env):
                 self.state['finger_states'][i] = 180.0  # Fully closed
         
         # Calculate reward
-        reward = self._calculate_reward(self.state, action)
+        self.reward = self._calculate_reward(self.state, action)
         
         # Check if the task is done
         done = self._check_done(self.state)
         
-        return self.state, reward, done, {} 
+        return self.state, self.reward, done, {} 
         # the {} is for the info dictionary, it's empty because we don't need to pass any info, usefull in debugging
     
-    def render(self, mode='human'):
-        # Optionally implement rendering
-        pass
+    def render(self):
+        plt.imshow(self.state['image'], cmap='gray')
+        plt.title('Episode Image')
+        plt.axis('off')  # Ocultar los ejes
+        
+        # Add text annotation for finger states
+        finger_states_text = f"Finger states after action: {self.state['finger_states']}"
+        plt.text(-12, 266, finger_states_text, color='white', fontsize=12, 
+                 bbox=dict(facecolor='black', alpha=0.7))
+        plt.text(-12, 286, f"Reward: {self.reward}", color='white', fontsize=12, 
+                 bbox=dict(facecolor='black', alpha=0.7))
+        
+        plt.show()
     
     def _get_initial_image(self):
         # Directory containing images
@@ -88,6 +102,9 @@ class ToolManipulationEnv(gym.Env):
 
         # Extract the current finger states
         current_finger_states = state['finger_states']
+        # Find a way to "subtract" reward if the object falls, or if the object is too large
+        # to use few fingers, so it doesn't bias towards using the first combination. 
+        # Watch the quantity of white pixels.
 
         # Check for each combination and assign rewards
         if np.array_equal(current_finger_states, combination_1):
@@ -108,14 +125,11 @@ class ToolManipulationEnv(gym.Env):
         return True
 
    
-import matplotlib.pyplot as plt 
+
 if __name__ == "__main__":
     env = ToolManipulationEnv()
-    image = env._get_initial_image()
-    
-    # Mostrar la imagen usando matplotlib
-    plt.imshow(image, cmap='gray')
-    plt.title('Imagen Inicial')
-    plt.axis('off')  # Ocultar los ejes
-    plt.show()
+    env.reset()
+    action = env.action_space.sample()  # Randomly sample a valid action
+    print(env.step(action))
+    env.render()
 
