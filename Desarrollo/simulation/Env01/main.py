@@ -9,47 +9,36 @@ from robosuite.wrappers import GymWrapper
 from networks import CriticNetwork,ActorNetwork
 from buffer import ReplayBuffer
 from td3_torch import Agent
+from custom_hand_env import ToolManipulationEnv
 
 if __name__ == '__main__':
 
     if not os.path.exists("tmp/td3"):
         os.makedirs("tmp/td3")
 
-    env_name = "Door"
-
-    # https://robosuite.ai/docs/modules/environments.html
-    env = suite.make(
-        env_name,                   
-        robots=["Panda"],           # load a Panda robot
-        controller_configs=suite.load_controller_config(default_controller="JOINT_VELOCITY"),       # arms controlled via OSC, other parts via JOINT_POSITION/JOINT_VELOCITY
-        has_renderer = False,       # on-screen rendering
-        use_camera_obs = False,     # no observations needed
-        horizon = 300,              # each episode terminates after 300 steps. Ajustar según problema.
-        reward_shaping=True,        # use a dense reward signal for learning
-        control_freq=20,            # 20 hz control for applied actions
-    )
-
-    env = GymWrapper(env) #pone el env en el formato esperado para gym, se podría usar un env fuera de robosuite
-
+    # Create an instance of your custom environment
+    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)
 
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
     layer1_size = 256
     layer2_size = 128
+    warmup = 1000
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
-                  input_dims=env.observation_space.shape, env=env, n_actions=env.action_space.shape[0],
-                  layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size)
+                  input_dims=env.observation_space.shape, env=env, n_actions=env.action_space.nvec.size,
+                  layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size, warmup=warmup)
 
+    print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("logs")
     n_games = 10 #10000 recomendados en el video
     
     
-    for experiment in range(3,7):
+    for experiment in range(0,1):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size}"
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size} _ RoboticHand"
 
         #agent.load_models()
 

@@ -91,6 +91,8 @@ class ToolManipulationEnv(gym.Env):
         # Transform the image so there is a "different" image for each episode
         editor = DataSet_editor()
         img = editor.transform_image(img)
+        #white_pixels = np.argwhere(img == 255)
+        #print(len(white_pixels))
         return img
     
     def _calculate_reward(self, state, action):
@@ -105,16 +107,22 @@ class ToolManipulationEnv(gym.Env):
         # Find a way to "subtract" reward if the object falls, or if the object is too large
         # to use few fingers, so it doesn't bias towards using the first combination. 
         # Watch the quantity of white pixels.
-
+        n_white_pixels = len(np.argwhere(self.state['image'] == 255))
+        negative_reward = np.sqrt(n_white_pixels/1000)
         # Check for each combination and assign rewards
         if np.array_equal(current_finger_states, combination_1):
-            return 2.5
+            return 2.5 - negative_reward * 1
         elif np.array_equal(current_finger_states, combination_2):
-            return 2.0
+            return 2.0 - negative_reward * 0.5
         elif np.array_equal(current_finger_states, combination_3):
-            return 1.5
+            return 1.5 - negative_reward * 0.25
         elif np.array_equal(current_finger_states, combination_4):
-            return 1.0 # Check if the reward is enough or should be on other side
+            #return 1.0 - negative_reward * 1
+            if n_white_pixels == 0:
+                return 4.0
+            else:
+                return 1.0 - negative_reward * 0.5
+        # Check if the reward is enough or should be on other side
         else:
             return -1.0  # Malfunction or undesired combination
     
@@ -125,7 +133,7 @@ class ToolManipulationEnv(gym.Env):
         return True
 
    
-
+"""
 if __name__ == "__main__":
     env = ToolManipulationEnv()
     env.reset()
@@ -133,3 +141,4 @@ if __name__ == "__main__":
     print(env.step(action))
     env.render()
 
+"""

@@ -171,12 +171,12 @@ class DataSet_editor:
         return img
 
 
-
-#if __name__ == "__main__":
-    #editor = DataSet_editor()
+"""
+if __name__ == "__main__":
+    editor = DataSet_editor()
     #editor.raw2bw(images_list="empty.png", sobreescribir=True, umbral=10)
-    """
-    ruta = os.path.join(editor.directorio_salida, "bw_Martillo01.jpg")
+    
+    ruta = os.path.join(editor.directorio_salida, "bw_Lapicera01.jpg")
     img = cv2.imread(ruta)
     t_img = editor.transform_image(img)
     import matplotlib.pyplot as plt 
