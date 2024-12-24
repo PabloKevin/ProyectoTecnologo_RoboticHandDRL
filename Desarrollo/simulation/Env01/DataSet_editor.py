@@ -3,17 +3,19 @@ import numpy as np
 import os
 
 class DataSet_editor:
-    def __init__(self):
+    def __init__(self, img_width=256, img_height=256):
         # Directorio de imágenes originales
         self.directorio_imagenes = "Desarrollo/simulation/Env01/DataSets/RawTools/"
 
         # Directorio para guardar las imágenes procesadas
         self.directorio_salida = "Desarrollo/simulation/Env01/DataSets/B&W_Tools/"
 
+        self.img_width = img_width
+        self.img_height = img_height
         # Asegurarse de que el directorio de salida existe y crearlo si no existe
         os.makedirs(self.directorio_salida, exist_ok=True)
 
-    def raw2bw(self, images_list = "All", sobreescribir=False, umbral=6, width=256, height=256):
+    def raw2bw(self, images_list = "All", sobreescribir=False, umbral=6):
         if images_list == "All":
             images_list = os.listdir(self.directorio_imagenes)
         for nombre_archivo in images_list:
@@ -29,7 +31,7 @@ class DataSet_editor:
                     print(f"No se pudo cargar la imagen {nombre_archivo}. Verifica la ruta.")
                 
                 # Redimensionar la imagen a 256x256
-                img = cv2.resize(img, (width, height), interpolation=cv2.INTER_AREA)
+                img = cv2.resize(img, (self.img_width, self.img_height), interpolation=cv2.INTER_AREA)
                 
                 # Obtener el color del fondo desde la esquina superior izquierda
                 color_fondo = img[0, 0]  # Esto retorna [B, G, R]
@@ -98,7 +100,9 @@ class DataSet_editor:
             start_x = (new_width - width) // 2
             start_y = (new_height - height) // 2
             scaled_img = scaled_img[start_y:start_y + height, start_x:start_x + width]
-
+        
+        # Resize again to ensure the final size is exactly 256x256
+        scaled_img = cv2.resize(scaled_img, (width, height), interpolation=cv2.INTER_LINEAR)
         return scaled_img
     
 
@@ -140,7 +144,7 @@ class DataSet_editor:
 
         # Check if there are any white pixels
         if white_pixels.size == 0:
-            print("No white pixels found in the image. Skipping translation.")
+            #print("No white pixels found in the image. Skipping translation.")
             return img
 
         min_y, min_x = white_pixels.min(axis=0)

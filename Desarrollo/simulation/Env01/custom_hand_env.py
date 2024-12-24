@@ -26,17 +26,28 @@ class ToolManipulationEnv(gym.Env):
         # Initialize state
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
-            'finger_states': np.zeros(self.n_fingers, dtype=np.float16)
+            'finger_states': np.zeros(self.n_fingers, dtype=np.float16) #llevar a uint8
         }
 
         self.reward = 0
-        
+    
+    def get_observation_space_shape(self):
+        # first approach
+        # return (self.image_shape[0], self.image_shape[1], self.image_shape[2] + self.n_fingers)
+        # probar usar un flatten, usar todo en un vector
+        return (np.prod(self.image_shape) + self.n_fingers,)
+
     def reset(self):
         # Reset the environment to an initial state
         self.state['image'] = self._get_initial_image()
         self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float16)
-        self.reward = 0 # Is it correct to start the reward at 0?
-        return self.state
+        self.reward = 0
+        
+        # Flatten the image and concatenate with finger states
+        flattened_image = self.state['image'].flatten()
+        observation = np.concatenate((flattened_image, self.state['finger_states']))
+        
+        return observation
     
     def step(self, action):
         # Update finger states based on action
@@ -54,8 +65,11 @@ class ToolManipulationEnv(gym.Env):
         # Check if the task is done
         done = self._check_done(self.state)
         
-        return self.state, self.reward, done, {} 
-        # the {} is for the info dictionary, it's empty because we don't need to pass any info, usefull in debugging
+        # Flatten the image and concatenate with finger states
+        flattened_image = self.state['image'].flatten()
+        observation = np.concatenate((flattened_image, self.state['finger_states']))
+        
+        return observation, self.reward, done, {}
     
     def render(self):
         plt.imshow(self.state['image'], cmap='gray')
@@ -110,6 +124,7 @@ class ToolManipulationEnv(gym.Env):
         n_white_pixels = len(np.argwhere(self.state['image'] == 255))
         negative_reward = np.sqrt(n_white_pixels/1000)
         # Check for each combination and assign rewards
+        # usar diccionarios para pesos y grados, como buena práctica.
         if np.array_equal(current_finger_states, combination_1):
             return 2.5 - negative_reward * 1
         elif np.array_equal(current_finger_states, combination_2):
@@ -138,7 +153,10 @@ if __name__ == "__main__":
     env = ToolManipulationEnv()
     env.reset()
     action = env.action_space.sample()  # Randomly sample a valid action
-    print(env.step(action))
+    #print(env.step(action))
+    print(env.step(action)[0].shape)
+    print(env.reset().shape)
+    print(env.get_observation_space_shape())
     env.render()
 
 """

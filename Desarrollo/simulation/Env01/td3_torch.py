@@ -37,8 +37,6 @@ class Agent:
 
         self.gamma = gamma
         self.tau = tau
-        self.max_action = env.action_space.high
-        self.min_action = env.action_space.low
         self.memory = ReplayBuffer(max_size, input_dims, n_actions)
         self.batch_size = batch_size
         self.learn_step_cntr = 0
@@ -82,26 +80,17 @@ class Agent:
         # formar una política. validation = True, permite saltar el warmup (que es un int), podría ser si ya tiene entrenamiento.
 
         if self.time_step < self.warmup and validation is False:
-            mu = T.tensor(np.random.normal(scale=self.noise, size=(self.n_actions,))).to(self.actor.device)
-
-        # Luego del warmup, las acciones se desarrollan en función del estado, con una política ya creada (que va a seguir mejorando).
+            # Use tensor to generate random actions
+            action = T.tensor(np.random.choice(self.n_actions, size=(self.n_actions,)), dtype=T.float).to(self.actor.device)
         else:
             state = T.tensor(observation, dtype=T.float).to(self.actor.device)
-            mu = self.actor.forward(state).to(self.actor.device)    #el .to(self.actor.device) manda el mu a la GPU o CPU (según corresponda)
+            action = self.actor.forward(state).to(self.actor.device)
 
-        # Para mejorar el entrenamiento, se le añade un ruido normal a la acción, para ayudar a explotar durante todo el entrenamiento.
-        # Esto es útil sobre todo para espacios de acciones continuos (no discretos) o muy grandes, en lo que además se enfoca el algoritmo td3.
-        # Pero el fundamento de no cerrarse en la política es interesante para espacios de acciones discretos, probarlo en el problema.
-        mu_prime = mu + T.tensor(np.random.normal(scale=self.noise), dtype=T.float).to(self.actor.device)
-
-        # Más allá del espacio continuo, pueden haber restricciones físicas u otras, entonces el .clamp se asegura que el ruido no marque acciones
-        # fuera de los límites de acción. Ej: que la velocidad de motores no sea mayor a 50.
-        mu_prime = T.clamp(mu_prime, self.min_action[0], self.max_action[0])
+        # Convert action to NumPy array
+        action = action.cpu().detach().numpy()
 
         self.time_step += 1
-
-        # manda el mu_prime a la cpu, lo transforma en un tensor, y luego lo transforma en un valor np para leer la acción y ejecutarla o mandarla a otro lado.
-        return mu_prime.cpu().detach().numpy()  
+        return action
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.store_transition(state, action, reward, next_state, done)
@@ -129,7 +118,7 @@ class Agent:
         target_actions = self.target_actor.forward(next_state)
         target_actions = target_actions + T.clamp(T.tensor(np.random.normal(scale=0.2)), -0.5, 0.5)
         # Asegura que las acciones objetivo estén dentro de los límites permitidos.
-        target_actions = T.clamp(target_actions, self.min_action[0], self.max_action[0])
+        target_actions = T.clamp(target_actions, 0, 1)
 
         # Calcula los valores Q objetivo utilizando las redes críticas objetivo y las acciones objetivo.
         next_q1 = self.target_critic_1.forward(next_state, target_actions)
@@ -194,7 +183,7 @@ class Agent:
     
     def update_networks_parameters(self, tau=None):
         # Si no se proporciona un valor para tau, se utiliza el valor por defecto definido en la clase.
-        if tau == None:
+        if tau is None:
             tau = self.tau
 
         # Recupera los parámetros actuales (pesos y sesgos) de las redes principales y objetivo.

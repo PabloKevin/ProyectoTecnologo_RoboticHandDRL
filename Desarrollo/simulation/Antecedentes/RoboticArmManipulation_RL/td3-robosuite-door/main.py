@@ -44,8 +44,8 @@ if __name__ == '__main__':
 
     writer = SummaryWriter("logs")
     n_games = 10 #10000 recomendados en el video
-    
-    
+    print(env.observation_space.shape)
+    """
     for experiment in range(3,7):
         best_score = 0
 
@@ -76,3 +76,4 @@ if __name__ == '__main__':
         # Hiperparámetros a buscar:
         actor_learning_rate *= 0.8
         
+"""

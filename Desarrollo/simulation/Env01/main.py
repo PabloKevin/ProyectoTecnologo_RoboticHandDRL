@@ -18,21 +18,26 @@ if __name__ == '__main__':
 
     # Create an instance of your custom environment
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)
-
+# Ir probando con numeros más simples para que lleve menos tiempo. Dado que el problemas es más simple,
+# usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
-    layer1_size = 256
+    layer1_size = 256 #32/64
     layer2_size = 128
     warmup = 1000
 
-    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
-                  input_dims=env.observation_space.shape, env=env, n_actions=env.action_space.nvec.size,
-                  layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size, warmup=warmup)
+    # Reduce the replay buffer size
+    max_size = 10000  # Adjust this value based on your memory capacity
 
-    print("n_actions: ", agent.n_actions)
+    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
+                  input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers,
+                  layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size, warmup=warmup,
+                  max_size=max_size)  # Pass the max_size to the Agent
+
+    #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("logs")
-    n_games = 10 #10000 recomendados en el video
+    episodes = 5000 #10000 recomendados en el video
     
     
     for experiment in range(0,1):
@@ -42,7 +47,7 @@ if __name__ == '__main__':
 
         #agent.load_models()
 
-        for i in range(n_games):
+        for i in range(episodes):
             observation = env.reset()
             done = False
             score = 0
