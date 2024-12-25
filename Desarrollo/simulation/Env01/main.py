@@ -13,8 +13,8 @@ from custom_hand_env import ToolManipulationEnv
 
 if __name__ == '__main__':
 
-    if not os.path.exists("tmp/td3"):
-        os.makedirs("tmp/td3")
+    if not os.path.exists("Desarrollo/simulation/Env01/tmp/td3"):
+        os.makedirs("Desarrollo/simulation/Env01/tmp/td3")
 
     # Create an instance of your custom environment
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)
@@ -23,9 +23,9 @@ if __name__ == '__main__':
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
-    layer1_size = 256 #32/64
-    layer2_size = 128
-    warmup = 1000
+    layer1_size = 64 #32/64 , the antecedente was 256/128
+    layer2_size = 32
+    warmup = 900
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
@@ -36,7 +36,7 @@ if __name__ == '__main__':
                   max_size=max_size)  # Pass the max_size to the Agent
 
     #print("n_actions: ", agent.n_actions)
-    writer = SummaryWriter("logs")
+    writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
     episodes = 5000 #10000 recomendados en el video
     
     
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             if i % 10 == 0:
                 agent.save_models()
 
-            print(f"Episode: {i} Score: {score}")
+            print(f"Episode: {i} Score: {score} Action: {action}")
 
         # Hiperparámetros a buscar:
         actor_learning_rate *= 0.8

@@ -50,13 +50,16 @@ class ToolManipulationEnv(gym.Env):
         return observation
     
     def step(self, action):
+        # Define a tolerance for floating-point comparison
+        tolerance = 0.1
+
         # Update finger states based on action
         for i in range(self.n_fingers):
-            if action[i] == 0:
+            if abs(action[i] - (-1)) < tolerance:
                 self.state['finger_states'][i] = 0.0  # Open
-            elif action[i] == 1:
+            elif abs(action[i] - 0) < tolerance:
                 self.state['finger_states'][i] = 90.0  # Medium closed
-            elif action[i] == 2:
+            elif abs(action[i] - 1) < tolerance:
                 self.state['finger_states'][i] = 180.0  # Fully closed
         
         # Calculate reward

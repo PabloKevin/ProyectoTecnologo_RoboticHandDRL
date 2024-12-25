@@ -9,8 +9,8 @@ import numpy as np
 
 class CriticNetwork(nn.Module):  
     # Actualiza el Q-value en función del estado y la acción tomada. Controla qué tan bien la ActorNetwork está accionando. 
-    # Actualiza el Q-value en función del estado y la acción tomada, actualiza la política.   
-    def __init__(self, input_dims, n_actions, fc1_dims=256, fc2_dims=128, name='critic', checkpoint_dir='tmp/td3', learning_rate=10e-3):
+    # Actualiza el Q-value en función del estado y la acción tomada, actualiza la política.
+    def __init__(self, input_dims, n_actions, fc1_dims=256, fc2_dims=128, name='critic', checkpoint_dir='Desarrollo/simulation/Env01/tmp/td3', learning_rate=10e-3):
         super(CriticNetwork, self).__init__()
 
         self.input_dims = input_dims
@@ -52,7 +52,7 @@ class CriticNetwork(nn.Module):
 
 class ActorNetwork(nn.Module):      
     #Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims, fc1_dims=256, fc2_dims=128, learning_rate=10e-3, n_actions=2, name='actor', checkpoint_dir='tmp/td3'):
+    def __init__(self, input_dims, fc1_dims=256, fc2_dims=128, learning_rate=10e-3, n_actions=2, name='actor', checkpoint_dir='Desarrollo/simulation/Env01/tmp/td3'):
         super(ActorNetwork, self).__init__()
 
         self.input_dims = input_dims

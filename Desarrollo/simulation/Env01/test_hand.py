@@ -1,15 +1,15 @@
 import numpy as np
-from custom_hand_env import RoboticHandEnv
+from custom_hand_env import ToolManipulationEnv
 
 def main():
     # Create environment
-    env = RoboticHandEnv()
+    env = ToolManipulationEnv()
     
     # Reset environment
     obs = env.reset()
     
     # Simple control loop
-    for _ in range(1000):
+    for _ in range(3):
         # Random actions
         action = env.action_space.sample()
         
