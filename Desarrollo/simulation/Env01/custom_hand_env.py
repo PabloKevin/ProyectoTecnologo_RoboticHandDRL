@@ -17,7 +17,7 @@ class ToolManipulationEnv(gym.Env):
             # Image in black and white, so 0 = Black, 1 = White , uint8 enough
             'image': spaces.Box(low=0, high=1, shape=self.image_shape, dtype=np.uint8),
             # Finger states in degrees, so 0 = 0 degrees, 180 = 180 degrees, flaot16 enough and scalable if wanted float numbers
-            'finger_states': spaces.Box(low=0, high=180, shape=(self.n_fingers,), dtype=np.float16)
+            'finger_states': spaces.Box(low=0, high=180, shape=(self.n_fingers,), dtype=np.uint8)
         })
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
@@ -50,17 +50,14 @@ class ToolManipulationEnv(gym.Env):
         return observation
     
     def step(self, action):
-        # Define a tolerance for floating-point comparison
-        tolerance = 0.1
-
         # Update finger states based on action
         for i in range(self.n_fingers):
-            if abs(action[i] - (-1)) < tolerance:
-                self.state['finger_states'][i] = 0.0  # Open
-            elif abs(action[i] - 0) < tolerance:
-                self.state['finger_states'][i] = 90.0  # Medium closed
-            elif abs(action[i] - 1) < tolerance:
-                self.state['finger_states'][i] = 180.0  # Fully closed
+            if action[i] == 0:
+                self.state['finger_states'][i] = 0  # Open
+            elif action[i] == 1:
+                self.state['finger_states'][i] = 90  # Medium closed
+            elif action[i] == 2:
+                self.state['finger_states'][i] = 180  # Fully closed
         
         # Calculate reward
         self.reward = self._calculate_reward(self.state, action)
@@ -74,7 +71,7 @@ class ToolManipulationEnv(gym.Env):
         
         return observation, self.reward, done, {}
     
-    def render(self):
+    def render(self, timeout=None):
         plt.imshow(self.state['image'], cmap='gray')
         plt.title('Episode Image')
         plt.axis('off')  # Ocultar los ejes
@@ -86,7 +83,12 @@ class ToolManipulationEnv(gym.Env):
         plt.text(-12, 286, f"Reward: {self.reward}", color='white', fontsize=12, 
                  bbox=dict(facecolor='black', alpha=0.7))
         
-        plt.show()
+        if timeout is not None:
+            plt.show(block=False)
+            plt.pause(timeout)  # Show plot for 0.5 seconds
+            plt.close()  # Close the plot window
+        else:
+            plt.show()
     
     def _get_initial_image(self):
         # Directory containing images
@@ -129,16 +131,17 @@ class ToolManipulationEnv(gym.Env):
         # Check for each combination and assign rewards
         # usar diccionarios para pesos y grados, como buena práctica.
         if np.array_equal(current_finger_states, combination_1):
-            return 2.5 - negative_reward * 1
+            return 3.5 - negative_reward * 1
         elif np.array_equal(current_finger_states, combination_2):
-            return 2.0 - negative_reward * 0.5
+            return 2.5 - negative_reward * 0.5
         elif np.array_equal(current_finger_states, combination_3):
             return 1.5 - negative_reward * 0.25
         elif np.array_equal(current_finger_states, combination_4):
             #return 1.0 - negative_reward * 1
             if n_white_pixels == 0:
-                return 4.0
+                return 2.75
             else:
+                # if it continues to be biased, try to use a more negative reward here
                 return 1.0 - negative_reward * 0.5
         # Check if the reward is enough or should be on other side
         else:

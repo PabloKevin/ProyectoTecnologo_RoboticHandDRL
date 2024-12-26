@@ -21,9 +21,9 @@ if __name__ == '__main__':
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
-    layer1_size = 256 #32/64
-    layer2_size = 128
-    warmup = 1000
+    layer1_size = 64 #32/64
+    layer2_size = 32
+    warmup = 900
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
@@ -33,10 +33,10 @@ if __name__ == '__main__':
                   layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size, warmup=warmup,
                   max_size=max_size)  # Pass the max_size to the Agent
 
-    n_games = 3 
+    n_games = 6 
     best_score = 0
     
-    agent.load_models()
+    #agent.load_models()
 
     for i in range(n_games):
         #print("n_actions", agent.n_actions) #solo por curiosidad, porque en el código usaba =2 por defecto, pero en este entorno es 8.
@@ -47,9 +47,10 @@ if __name__ == '__main__':
         while not done:
             action = agent.choose_action(observation, validation=True) #Importante el validation=True para que no entre en warmup y haga acciones randoms
             next_observation, reward, done, info = env.step(action)
-            env.render()
+            #env.render(timeout=2)
             score += reward
             observation = next_observation
             time.sleep(0.01)
 
-        print(f"Episode: {i} Score: {score} Action: {action}")
+        #print(f"Episode: {i}; Score: {score}; Action: {env.state['finger_states']}")
+        print(f"Episode: {i}; Score: {score}; Action: {action}")

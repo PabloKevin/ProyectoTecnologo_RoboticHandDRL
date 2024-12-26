@@ -25,7 +25,7 @@ if __name__ == '__main__':
     batch_size = 128
     layer1_size = 64 #32/64 , the antecedente was 256/128
     layer2_size = 32
-    warmup = 900
+    warmup = 1000
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
-    episodes = 5000 #10000 recomendados en el video
+    episodes = 7000 #10000 recomendados en el video
     
     
     for experiment in range(0,1):
@@ -46,6 +46,9 @@ if __name__ == '__main__':
         episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size} _ RoboticHand"
 
         #agent.load_models()
+
+        # Open a log file in append mode
+        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}.txt", "a")
 
         for i in range(episodes):
             observation = env.reset()
@@ -62,11 +65,18 @@ if __name__ == '__main__':
 
             writer.add_scalar(f"Score - {episode_identifier}", scalar_value=score, global_step=i)
 
+            # Log the information to the text file
+            log_file.write(f"Episode: {i}; Score: {score}; Action: {action}\n")
+            print(f"Episode: {i}; Score: {score}; Action: {action}")
+
             if i % 10 == 0:
                 agent.save_models()
 
-            print(f"Episode: {i} Score: {score} Action: {action}")
+        # Close the log file
+        log_file.close()
 
         # Hiperparámetros a buscar:
         actor_learning_rate *= 0.8
+        
+        
         

@@ -33,7 +33,7 @@ from networks import ActorNetwork, CriticNetwork
 class Agent:
     # Va a estar compuesto en total por 6 redes neuronales
     def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=2, max_size=1000000, layer1_size=256, layer2_size=128, batch_size=100, noise=0.1):
+                 n_actions=5, max_size=1000000, layer1_size=256, layer2_size=128, batch_size=100, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
@@ -81,9 +81,9 @@ class Agent:
 
         if self.time_step < self.warmup and validation is False:
             # Use tensor to generate random actions
-            action = T.tensor(np.random.choice(self.n_actions, size=(self.n_actions,)), dtype=T.float).to(self.actor.device)
+            action = T.tensor(self.action_space.sample(), dtype=T.uint8).to(self.actor.device)
         else:
-            state = T.tensor(observation, dtype=T.float).to(self.actor.device)
+            state = T.tensor(observation, dtype=T.float).to(self.actor.device) #check the dtypes
             action = self.actor.forward(state).to(self.actor.device)
 
         # Convert action to NumPy array
