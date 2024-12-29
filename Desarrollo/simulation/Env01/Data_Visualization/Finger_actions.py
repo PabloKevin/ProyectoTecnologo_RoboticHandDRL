@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import re
 
 # Function to parse the log file
 def parse_log(file_path):
@@ -21,8 +20,8 @@ def parse_log(file_path):
             score = float(parts[1].split(":")[1].strip())
             
             # Extract Actions
-            action_str = parts[2].split(":")[1].strip("[]")
-            action_list = [float(x) for x in action_str.split(" ").strip()]
+            action_str = parts[2].split(":")[1].replace('[', '').replace(']', '')
+            action_list = [float(x) for x in action_str.split(" ") if (x!='' and x!='\n')]
             
             # Append to lists
             episodes.append(episode)
@@ -45,12 +44,23 @@ df = parse_log(log_file_path)
 
 # Extract the first finger's actions
 first_finger_actions = [actions[0] for actions in df["Actions"]]
-
+#print("min:",min(first_finger_actions))
 # Plot a histogram of the first finger's actions
-plt.hist(first_finger_actions, bins=range(int(min(first_finger_actions)) -2, int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
+plt.hist(first_finger_actions, bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
 plt.xlabel("Action of First Finger")
 plt.ylabel("Frequency")
 plt.title("Histogram of First Finger Actions")
 plt.show()
 
-print(df.info)
+plt.hist(first_finger_actions[:1000], bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
+plt.xlabel("Action of First Finger")
+plt.ylabel("Frequency")
+plt.title("Histogram of First Finger Actions, Warm Up")
+plt.show()
+
+plt.hist(first_finger_actions[1000:], bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
+plt.xlabel("Action of First Finger")
+plt.ylabel("Frequency")
+plt.title("Histogram of First Finger Actions, Training")
+plt.show()
+#print(df.info)
