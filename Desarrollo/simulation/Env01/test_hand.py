@@ -9,6 +9,9 @@ def main():
     # Reset environment
     obs = env.reset()
     actions = []
+    
+    
+    
     # Simple control loop
     for _ in range(100):
         # Random actions
@@ -24,6 +27,7 @@ def main():
             obs = env.reset()
 
         actions.append(action[0])
+
 
     plt.hist(actions)
     plt.show()
