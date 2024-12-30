@@ -186,5 +186,4 @@ if __name__ == "__main__":
     print(env.reset().shape)
     print(env.get_observation_space_shape())
     env.render()
-
 """

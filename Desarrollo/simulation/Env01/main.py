@@ -26,7 +26,7 @@ if __name__ == '__main__':
     warmup = 1000
 
     # Reduce the replay buffer size
-    max_size = 5000  # Adjust this value based on your memory capacity
+    max_size = 10000  # Adjust this value based on your memory capacity
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
                   input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers,
@@ -35,18 +35,18 @@ if __name__ == '__main__':
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
-    episodes = 10000 #10000 recomendados en el video
+    episodes = 5000 #10000 recomendados en el video
     
     
-    for experiment in range(0, 32):
+    for experiment in range(0, 1):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup}"
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_alpha} _e3"
 
         #agent.load_models()
 
         # Open a log file in append mode
-        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e1.txt", "a")
+        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e3.txt", "a")
 
         for i in range(episodes):
             observation = env.reset()
@@ -77,15 +77,18 @@ if __name__ == '__main__':
         actor_learning_rate *= 0.8
         critic_learning_rate *= 0.8
         
-        if experiment % 4 == 0:
+        if experiment % 2 == 0:
+            env.reward_alpha *= 2
+            actor_learning_rate = 0.001 # quizá probar también con 0.01
+            critic_learning_rate = 0.001
+
+        if experiment % 6 == 0:
             layer1_size *= 2
             layer2_size *= 2
             actor_learning_rate = 0.001 # quizá probar también con 0.01
             critic_learning_rate = 0.001
+            env.reward_alpha = 1
 
-        if experiment % 16 == 0:
-            layer1_size = 16
-            layer2_size = 32
         
         
         
