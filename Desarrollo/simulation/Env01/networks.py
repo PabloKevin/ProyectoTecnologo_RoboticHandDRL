@@ -66,7 +66,7 @@ class ActorNetwork(nn.Module):
 
         self.fc1 = nn.Linear(*self.input_dims, self.fc1_dims)       # input de la DNN: estado (con sus dimensiones correspondientes)
         self.fc2 = nn.Linear(self.fc1_dims, self.fc2_dims)
-        self.output = nn.Linear(self.fc2_dims, self.n_actions)      # output de la DNN: logits para cada acción
+        self.output = nn.Linear(self.fc2_dims, self.n_actions * self.n_actions_per_finger)      # output de la DNN: logits para cada acción
 
         self.optimizer = optim.Adam(self.parameters(), lr=learning_rate)
         self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
@@ -84,11 +84,13 @@ class ActorNetwork(nn.Module):
         x = F.relu(self.fc2(x))
         logits = self.output(x)  # shape: [batch_size, 15]
         
-        # Reshape to [batch_size, 5, 3]
+        # Reshape to [batch_size, 5, 3]. 
+        # The -1: PyTorch calculates the value for the dimension marked with -1 so that the total number 
+        # of elements in the tensor remains constant before and after reshaping.
         logits = logits.view(-1, self.n_actions, self.n_actions_per_finger)
 
         # Convert to probability distribution along dimension=2 (the 3 discrete actions)
-        probs = F.softmax(logits, dim=-1)  # shape: [batch_size, 5, 3]
+        probs = F.softmax(logits, dim=2)  # shape: [batch_size, 5, 3]
 
         # Argmax across the 3 possible actions => shape [batch_size, 5]
         actions = T.argmax(probs, dim=2)

@@ -44,6 +44,7 @@ class Agent:
         self.warmup = warmup
         self.n_actions = n_actions
         self.update_actor_iter = update_actor_interval
+        self.env = env
 
         # Create the networks
         self.actor = ActorNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
@@ -81,7 +82,7 @@ class Agent:
 
         if self.time_step < self.warmup and validation is False:
             # Use tensor to generate random actions
-            action = T.tensor(self.action_space.sample(), dtype=T.uint8).to(self.actor.device)
+            action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device)
         else:
             state = T.tensor(observation, dtype=T.float).to(self.actor.device) #check the dtypes
             action = self.actor.forward(state).to(self.actor.device)

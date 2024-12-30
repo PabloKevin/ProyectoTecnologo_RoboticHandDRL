@@ -35,7 +35,7 @@ if __name__ == '__main__':
     n_games = 6 
     best_score = 0
     
-    #agent.load_models()
+    agent.load_models()
 
     for i in range(n_games):
         #print("n_actions", agent.n_actions) #solo por curiosidad, porque en el código usaba =2 por defecto, pero en este entorno es 8.
@@ -46,7 +46,7 @@ if __name__ == '__main__':
         while not done:
             action = agent.choose_action(observation, validation=True) #Importante el validation=True para que no entre en warmup y haga acciones randoms
             next_observation, reward, done, info = env.step(action)
-            #env.render(timeout=2)
+            env.render(timeout=2)
             score += reward
             observation = next_observation
             time.sleep(0.01)

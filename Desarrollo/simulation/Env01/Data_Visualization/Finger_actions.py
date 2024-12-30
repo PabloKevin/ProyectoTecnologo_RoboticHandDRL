@@ -37,30 +37,56 @@ def parse_log(file_path):
     return df
 
 # Path to your episode log file
-log_file_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env01/logs_txt/episode_log_0.txt"
+directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env01/logs_txt/"
+file_name = "episode_log_1.txt"
+log_file_path = directory_path + file_name
 
 # Parse the log and load it into a DataFrame
 df = parse_log(log_file_path)
 
-# Extract the first finger's actions
-first_finger_actions = [actions[0] for actions in df["Actions"]]
-#print("min:",min(first_finger_actions))
-# Plot a histogram of the first finger's actions
-plt.hist(first_finger_actions, bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
-plt.xlabel("Action of First Finger")
-plt.ylabel("Frequency")
-plt.title("Histogram of First Finger Actions")
-plt.show()
+# Separate warmup and training
+warmup_cutoff = 1000
+actions_all = [list(actions) for actions in df["Actions"]]
+actions_warmup = actions_all[:warmup_cutoff]
+actions_training = actions_all[warmup_cutoff:]
 
-plt.hist(first_finger_actions[:1000], bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
-plt.xlabel("Action of First Finger")
-plt.ylabel("Frequency")
-plt.title("Histogram of First Finger Actions, Warm Up")
-plt.show()
+# Colors for each row
+row_colors = ['skyblue', 'lightgreen', 'lightcoral']
+# Titles for each row
+row_titles = ["All Frequency", "Warmup Frequency", "Training Frequency"]
 
-plt.hist(first_finger_actions[1000:], bins=range(int(min(first_finger_actions)), int(max(first_finger_actions)) + 2), align='left', edgecolor='black')
-plt.xlabel("Action of First Finger")
-plt.ylabel("Frequency")
-plt.title("Histogram of First Finger Actions, Training")
+# Create subplots
+fig, axes = plt.subplots(3, 5, figsize=(22, 12), constrained_layout=False)
+
+# Iterate through fingers (columns)
+for finger_idx in range(5):
+    for row_idx, (title, actions_subset, color) in enumerate(zip(row_titles, [actions_all, actions_warmup, actions_training], row_colors)):
+        finger_actions = [actions[finger_idx] for actions in actions_subset]
+        axes[row_idx, finger_idx].hist(
+            finger_actions,
+            bins=range(int(min(finger_actions)), int(max(finger_actions)) + 2),
+            align='left',
+            edgecolor='black',
+            color=color
+        )
+        if row_idx == 0:
+            axes[row_idx, finger_idx].set_title(f"Finger {finger_idx + 1}")
+        if finger_idx == 0:
+            # Add row titles
+            axes[row_idx, finger_idx].annotate(
+                title,
+                xy=(-0.7, 0.5),
+                xycoords='axes fraction',
+                fontsize=16,
+                ha='center',
+                va='center',
+                rotation=0
+            )
+        axes[row_idx, finger_idx].set_xlabel("Action")
+
+# Adjust padding to create more space at the top and right
+fig.subplots_adjust(left=0.15, right=0.95, top=0.92, bottom=0.1, hspace=0.5, wspace=0.4)
+
+# Add overall title
+fig.suptitle(f"Action Distribution per Finger of {file_name[:-4]}", fontsize=18)
 plt.show()
-#print(df.info)

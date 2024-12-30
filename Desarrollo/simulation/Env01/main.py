@@ -35,13 +35,13 @@ if __name__ == '__main__':
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
-    episodes = 7000 #10000 recomendados en el video
+    episodes = 5000 #10000 recomendados en el video
     
     
-    for experiment in range(0,1):
+    for experiment in range(1,2):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size} _ RoboticHand"
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} layer1_size={layer1_size} layer2_size={layer2_size} _ RoboticHand_ML"
 
         #agent.load_models()
 
