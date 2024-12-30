@@ -90,3 +90,28 @@ fig.subplots_adjust(left=0.15, right=0.95, top=0.92, bottom=0.1, hspace=0.5, wsp
 # Add overall title
 fig.suptitle(f"Action Distribution per Finger of {file_name[:-4]}", fontsize=18)
 plt.show()
+
+
+# Calculate frequencies of combinations
+# Action combinations to check
+combinations = {
+    "Combination 1": [2, 1, 2, 2, 2],  # Thumb closed, index half, others closed
+    "Combination 2": [2, 1, 1, 2, 2],  # Thumb closed, index and middle half, others open
+    "Combination 3": [1, 1, 1, 1, 1],     # All fingers half closed
+    "Combination 4": [0, 0, 0, 0, 0]           # All fingers opened
+}
+
+combination_counts = {name: 0 for name in combinations.keys()}
+for action in df["Actions"]:
+    for name, combination in combinations.items():
+        if action == combination:
+            combination_counts[name] += 1
+
+# Create the histogram
+plt.bar(combination_counts.keys(), combination_counts.values(), color="orange", edgecolor="black")
+plt.xlabel("Action Combinations")
+plt.ylabel("Frequency")
+plt.title(f"Frequency of Specific Action Combinations, total episodes: {len(df)}")
+plt.xticks(rotation=15)
+plt.tight_layout()
+plt.show()

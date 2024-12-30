@@ -10,6 +10,7 @@ class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=5):
         super(ToolManipulationEnv, self).__init__()
         
+        self.reward_alpha = 1
         # Observation space: image + finger states
         self.image_shape = image_shape
         self.n_fingers = n_fingers
@@ -50,6 +51,7 @@ class ToolManipulationEnv(gym.Env):
         return observation
     
     def step(self, action):
+        """
         # Update finger states based on action
         for i in range(self.n_fingers):
             if action[i] == 0:
@@ -58,6 +60,7 @@ class ToolManipulationEnv(gym.Env):
                 self.state['finger_states'][i] = 90  # Medium closed
             elif action[i] == 2:
                 self.state['finger_states'][i] = 180  # Fully closed
+        """
         
         # Calculate reward
         self.reward = self._calculate_reward(self.state, action)
@@ -115,14 +118,15 @@ class ToolManipulationEnv(gym.Env):
         return img
     
     def _calculate_reward(self, state, action):
+        reward = 0
         # Define the desired finger state combinations
-        combination_1 = [180, 90, 180, 180, 180]  # Thumb closed, index half, others closed
-        combination_2 = [180, 90, 90, 180, 180] # Thumb closed, index and middle half, others open
-        combination_3 = [90, 90, 90, 90, 90] # All fingers half closed
+        combination_1 = [2, 1, 2, 2, 2]  # Thumb closed, index half, others closed
+        combination_2 = [2, 1, 1, 2, 2] # Thumb closed, index and middle half, others open
+        combination_3 = [1, 1, 1, 1, 1] # All fingers half closed
         combination_4 = [0, 0, 0, 0, 0] # All fingers opened
 
         # Extract the current finger states
-        current_finger_states = state['finger_states']
+        #current_finger_states = state['finger_states']
         # Find a way to "subtract" reward if the object falls, or if the object is too large
         # to use few fingers, so it doesn't bias towards using the first combination. 
         # Watch the quantity of white pixels.
@@ -130,22 +134,40 @@ class ToolManipulationEnv(gym.Env):
         negative_reward = np.sqrt(n_white_pixels/1000)
         # Check for each combination and assign rewards
         # usar diccionarios para pesos y grados, como buena práctica.
-        if np.array_equal(current_finger_states, combination_1):
-            return 3.5 - negative_reward * 1
-        elif np.array_equal(current_finger_states, combination_2):
-            return 2.5 - negative_reward * 0.5
-        elif np.array_equal(current_finger_states, combination_3):
-            return 1.5 - negative_reward * 0.25
-        elif np.array_equal(current_finger_states, combination_4):
+        if np.array_equal(action, combination_1):
+            reward += (3.5 - negative_reward * 1) * self.reward_alpha
+        elif np.array_equal(action, combination_2):
+            reward += (2.5 - negative_reward * 0.5) * self.reward_alpha
+        elif np.array_equal(action, combination_3):
+            reward += (1.5 - negative_reward * 0.25) * self.reward_alpha
+        elif np.array_equal(action, combination_4):
             #return 1.0 - negative_reward * 1
             if n_white_pixels == 0:
-                return 2.75
+                reward += 2.75 * self.reward_alpha
             else:
                 # if it continues to be biased, try to use a more negative reward here
-                return 1.0 - negative_reward * 0.5
+                reward += (1.0 - negative_reward * 0.6) * self.reward_alpha
         # Check if the reward is enough or should be on other side
         else:
-            return -1.0  # Malfunction or undesired combination
+            reward += -2.0  # Malfunction or undesired combination
+        
+        # reward for each finger so as to motivate the combinations
+        if action[0] == 2:
+            reward += 0.3
+        if action[1] == 1:
+            reward += 0.3
+        if action[2] == 1:
+            reward += 0.3
+        if action[3] == 2:
+            reward += 0.3
+        if action[4] == 2:
+            reward += 0.3
+
+        #final reward
+        return reward
+
+        
+        
     
     def _check_done(self, state):
         # Determine if the task is complete

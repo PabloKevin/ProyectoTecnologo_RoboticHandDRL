@@ -46,7 +46,7 @@ if __name__ == '__main__':
         while not done:
             action = agent.choose_action(observation, validation=True) #Importante el validation=True para que no entre en warmup y haga acciones randoms
             next_observation, reward, done, info = env.step(action)
-            env.render(timeout=2)
+            #env.render(timeout=2)
             score += reward
             observation = next_observation
             time.sleep(0.01)
