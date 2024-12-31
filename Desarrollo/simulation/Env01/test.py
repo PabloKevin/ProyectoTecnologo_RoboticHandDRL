@@ -20,8 +20,9 @@ if __name__ == '__main__':
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
-    layer1_size = 64 #32/64
-    layer2_size = 32
+    
+    layer1_size = 256 #32/64
+    layer2_size = 128
     warmup = 900
 
     # Reduce the replay buffer size
@@ -32,7 +33,7 @@ if __name__ == '__main__':
                   layer1_size=layer1_size, layer2_size=layer2_size, batch_size=batch_size, warmup=warmup,
                   max_size=max_size)  # Pass the max_size to the Agent
 
-    n_games = 10
+    n_games = 5
     best_score = 0
     
     agent.load_models()
@@ -44,8 +45,8 @@ if __name__ == '__main__':
         score = 0
 
         while not done:
-            #action = agent.choose_action(observation, validation=True) #Importante el validation=True para que no entre en warmup y haga acciones randoms
-            action = np.array(env.combinations_of_interest)[np.random.randint(0, len(env.combinations_of_interest))]
+            action = agent.choose_action(observation, validation=True) #Importante el validation=True para que no entre en warmup y haga acciones randoms
+            #action = np.array(env.combinations_of_interest)[np.random.randint(0, len(env.combinations_of_interest))]
             next_observation, reward, done, info = env.step(action)
             env.render(timeout=None)
             score += reward

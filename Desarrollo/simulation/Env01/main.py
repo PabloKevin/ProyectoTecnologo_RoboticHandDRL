@@ -20,12 +20,12 @@ if __name__ == '__main__':
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
-    batch_size = 128
-    layer1_size = 256 #32/64 , the antecedente was 256/128
-    layer2_size = 128
-    warmup = 1200
-    episodes = 5000 #10000 recomendados en el video
-    env.reward_weights["reward_alpha"] = 1.5
+    batch_size = 128 #128
+    layer1_size = 64 #32/64 , the antecedente was 256/128
+    layer2_size = 32
+    warmup = 1000
+    episodes = 7000 #10000 recomendados en el video
+    env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
@@ -40,15 +40,15 @@ if __name__ == '__main__':
 
     
     
-    for experiment in range(2, 3):
+    for experiment in range(0, 1):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_alpha}   _e4"
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_weights['reward_alpha']}   _e5"
 
-        #agent.load_models()
+        agent.load_models()
 
         # Open a log file in append mode
-        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e4.txt", "a")
+        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e5.txt", "a")
 
         for i in range(episodes):
             observation = env.reset()
@@ -89,7 +89,7 @@ if __name__ == '__main__':
             layer2_size *= 2
             actor_learning_rate = 0.001 # quizá probar también con 0.01
             critic_learning_rate = 0.001
-            env.reward_alpha = 1
+            env.reward_weights["reward_alpha"] = 1
 
         
         

@@ -119,7 +119,8 @@ class ToolManipulationEnv(gym.Env):
         random_index = np.random.randint(0, num_images)
         
         # Select an image with that index
-        selected_image_path = os.path.join(image_dir, image_files[random_index])
+        #selected_image_path = os.path.join(image_dir, image_files[random_index])
+        selected_image_path = "Desarrollo/simulation/Env01/DataSets/B&W_Tools/bw_Martillo01.jpg"
         
         # Load the image
         img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
