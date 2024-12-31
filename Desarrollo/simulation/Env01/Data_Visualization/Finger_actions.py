@@ -38,7 +38,7 @@ def parse_log(file_path):
 
 # Path to your episode log file
 directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env01/logs_txt/"
-file_name = "episode_log_0_e2.txt"
+file_name = "episode_log_0_e4.txt"
 log_file_path = directory_path + file_name
 
 # Parse the log and load it into a DataFrame

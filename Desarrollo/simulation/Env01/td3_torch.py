@@ -81,11 +81,18 @@ class Agent:
         # formar una política. validation = True, permite saltar el warmup (que es un int), podría ser si ya tiene entrenamiento.
 
         if self.time_step < self.warmup and validation is False:
+            if self.time_step % 2 == 0:
+                action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
-            action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device)
+            else:
+                action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device)
         else:
-            state = T.tensor(observation, dtype=T.float).to(self.actor.device) #check the dtypes
-            action = self.actor.forward(state).to(self.actor.device)
+            if self.time_step % int(np.sqrt(self.time_step)-20.0) == 0 and validation is False:
+                action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
+            # Use tensor to generate random actions
+            else:
+                state = T.tensor(observation, dtype=T.float).to(self.actor.device) #check the dtypes
+                action = self.actor.forward(state).to(self.actor.device)
 
         # Convert action to NumPy array
         action = action.cpu().detach().numpy()

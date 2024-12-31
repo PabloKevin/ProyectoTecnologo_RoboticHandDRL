@@ -21,9 +21,11 @@ if __name__ == '__main__':
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128
-    layer1_size = 32 #32/64 , the antecedente was 256/128
-    layer2_size = 16
-    warmup = 1000
+    layer1_size = 256 #32/64 , the antecedente was 256/128
+    layer2_size = 128
+    warmup = 1200
+    episodes = 5000 #10000 recomendados en el video
+    env.reward_weights["reward_alpha"] = 1.5
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
@@ -35,18 +37,18 @@ if __name__ == '__main__':
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
-    episodes = 5000 #10000 recomendados en el video
+
     
     
-    for experiment in range(0, 1):
+    for experiment in range(2, 3):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_alpha} _e3"
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_alpha}   _e4"
 
         #agent.load_models()
 
         # Open a log file in append mode
-        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e3.txt", "a")
+        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e4.txt", "a")
 
         for i in range(episodes):
             observation = env.reset()
