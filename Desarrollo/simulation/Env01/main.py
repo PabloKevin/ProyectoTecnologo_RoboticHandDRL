@@ -51,6 +51,7 @@ if __name__ == '__main__':
         while os.path.exists(directory_path + file_name):
             experiment += 1
             print("Experiment already exists. Trying with experiment number: ", experiment)
+            file_name = f"experiment_log_{experiment}_{version}.txt"
         else:
             print("Starting:",file_name)
 

@@ -50,9 +50,7 @@ class ToolManipulationEnv(gym.Env):
         # probar usar un flatten, usar todo en un vector
         # return (np.prod(self.image_shape) + self.n_fingers,)
         # probar con unicamente la imagen
-        #return (np.prod(self.image_shape),)
-        # probar con imagen ordenada
-        return (self.image_shape[0], self.image_shape[1])
+        return (np.prod(self.image_shape),)
 
     def reset(self):
         # Reset the environment to an initial state
@@ -66,10 +64,8 @@ class ToolManipulationEnv(gym.Env):
         
         #return observation
         # probar unicamente con la imagen
-        #return flattened_image
-        # probar con imagen ordenada
-        return self.state['image']
-    
+        return flattened_image
+
     def step(self, action):
         """
         # Update finger states based on action
@@ -91,10 +87,10 @@ class ToolManipulationEnv(gym.Env):
         done = self._check_done(self.state)
         
         # Flatten the image and concatenate with finger states
-        #flattened_image = self.state['image'].flatten()
+        flattened_image = self.state['image'].flatten()
         #observation = np.concatenate((flattened_image, action))
         # probar unicamente con la imagen
-        observation = self.state['image']
+        observation = flattened_image
         
         return observation, self.reward, done, {}
     
