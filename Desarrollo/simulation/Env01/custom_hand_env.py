@@ -28,7 +28,8 @@ class ToolManipulationEnv(gym.Env):
         self.reward_weights = { "reward_alpha" : 1,
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
                                "reward_beta" : [5.9, 5.3, 2, 5.15, 3.0, 0.0],
-                               "reward_gamma" : [1.0, 0.70, -1.2, 0.6]
+                               "reward_gamma" : [1.0, 0.70, -1.2, 0.6],
+                               "repeted_action_penalty" : [0.1, 0.1]
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
@@ -47,7 +48,11 @@ class ToolManipulationEnv(gym.Env):
         # first approach
         # return (self.image_shape[0], self.image_shape[1], self.image_shape[2] + self.n_fingers)
         # probar usar un flatten, usar todo en un vector
-        return (np.prod(self.image_shape) + self.n_fingers,)
+        # return (np.prod(self.image_shape) + self.n_fingers,)
+        # probar con unicamente la imagen
+        #return (np.prod(self.image_shape),)
+        # probar con imagen ordenada
+        return (self.image_shape[0], self.image_shape[1])
 
     def reset(self):
         # Reset the environment to an initial state
@@ -59,7 +64,11 @@ class ToolManipulationEnv(gym.Env):
         flattened_image = self.state['image'].flatten()
         observation = np.concatenate((flattened_image, self.state['finger_states']))
         
-        return observation
+        #return observation
+        # probar unicamente con la imagen
+        #return flattened_image
+        # probar con imagen ordenada
+        return self.state['image']
     
     def step(self, action):
         """
@@ -82,8 +91,10 @@ class ToolManipulationEnv(gym.Env):
         done = self._check_done(self.state)
         
         # Flatten the image and concatenate with finger states
-        flattened_image = self.state['image'].flatten()
-        observation = np.concatenate((flattened_image, action))
+        #flattened_image = self.state['image'].flatten()
+        #observation = np.concatenate((flattened_image, action))
+        # probar unicamente con la imagen
+        observation = self.state['image']
         
         return observation, self.reward, done, {}
     
@@ -186,9 +197,9 @@ class ToolManipulationEnv(gym.Env):
                 reward += self.reward_weights["individual_finger_reward"][4]
         
         # Penalize wrong actions
-        if reward < 2.25:
+        if reward < self.reward_weights["repeted_action_penalty"][0]:
             self.wrong_action_cntr += 1
-            reward -= self.wrong_action_cntr * 0.2
+            reward -= self.wrong_action_cntr * self.reward_weights["repeted_action_penalty"][1]
         else:
             self.wrong_action_cntr = 0
 

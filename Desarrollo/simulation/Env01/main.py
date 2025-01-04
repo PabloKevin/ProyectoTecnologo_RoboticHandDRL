@@ -21,10 +21,11 @@ if __name__ == '__main__':
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
     batch_size = 128 #128
+
     layer1_size = 64 #32/64 , the antecedente was 256/128
     layer2_size = 32
     warmup = 1000
-    episodes = 7000 #10000 recomendados en el video
+    episodes = 5000 #10000 recomendados en el video
     env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
@@ -43,12 +44,22 @@ if __name__ == '__main__':
     for experiment in range(0, 1):
         best_score = 0
 
-        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_weights['reward_alpha']}   _e5"
+        directory_path = "Desarrollo/simulation/Env01/logs_txt"
+        version = "e6"
+        file_name = f"experiment_log_{experiment}_{version}.txt"
 
-        agent.load_models()
+        while os.path.exists(directory_path + file_name):
+            experiment += 1
+            print("Experiment already exists. Trying with experiment number: ", experiment)
+        else:
+            print("Starting:",file_name)
+
+        episode_identifier = f"{experiment} - actor_learning_rate={actor_learning_rate} critic_learning_rate={critic_learning_rate} h_layer1_size={layer1_size} h_layer2_size={layer2_size} warmup={warmup} reward_alpha={env.reward_weights['reward_alpha']}   _{version}"
 
         # Open a log file in append mode
-        log_file = open(f"Desarrollo/simulation/Env01/logs_txt/episode_log_{experiment}_e5.txt", "a")
+        log_file = open(directory_path + file_name, "a")
+
+        #agent.load_models()
 
         for i in range(episodes):
             observation = env.reset()
@@ -80,7 +91,7 @@ if __name__ == '__main__':
         critic_learning_rate *= 0.8
         
         if experiment % 2 == 0:
-            env.reward_alpha *= 2
+            env.reward_weights["reward_alpha"] *= 2
             actor_learning_rate = 0.001 # quizá probar también con 0.01
             critic_learning_rate = 0.001
 
