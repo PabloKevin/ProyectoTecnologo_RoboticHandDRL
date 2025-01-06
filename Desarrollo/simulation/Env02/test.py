@@ -10,8 +10,8 @@ from custom_hand_env import ToolManipulationEnv
 
 if __name__ == '__main__':
 
-    if not os.path.exists("Desarrollo/simulation/Env01/tmp/td3"):
-        os.makedirs("Desarrollo/simulation/Env01/tmp/td3")
+    if not os.path.exists("Desarrollo/simulation/Env02/tmp/td3"):
+        os.makedirs("Desarrollo/simulation/Env02/tmp/td3")
 
     # Create an instance of your custom environment
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)

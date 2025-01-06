@@ -23,7 +23,6 @@ extrapolación y evita que el modelo confíe en estimaciones extremas de Q.
 3. Las redes objetivo (actor y críticos) se actualizan gradualmente utilizando un "soft update" para garantizar estabilidad.
 """
 
-import os
 import torch as T
 import torch.nn.functional as F
 import numpy as np
@@ -33,7 +32,7 @@ from networks import ActorNetwork, CriticNetwork
 class Agent:
     # Va a estar compuesto en total por 6 redes neuronales
     def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=5, max_size=1000000, layer1_size=256, layer2_size=128, batch_size=100, noise=0.1):
+                 n_actions=5, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
@@ -47,29 +46,29 @@ class Agent:
         self.env = env
 
         # Create the networks
-        self.actor = ActorNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
-                                  fc2_dims=layer2_size, n_actions=n_actions, name='actor', 
+        self.actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                  hidden_size=256 , n_actions=n_actions, name='actor', 
                                   learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
-                                      fc2_dims=layer2_size, n_actions=n_actions, 
+        self.critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                      hidden_size=256, n_actions=n_actions, 
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
-                                      fc2_dims=layer2_size, n_actions=n_actions, 
+        self.critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                      hidden_size=256, n_actions=n_actions, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
-        self.target_actor = ActorNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
-                                         fc2_dims=layer2_size, n_actions=n_actions, 
+        self.target_actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                         hidden_size=256, n_actions=n_actions, 
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims=input_dims, fc1_dims=layer1_size, 
-                                             fc2_dims=layer2_size, n_actions=n_actions, 
+        self.target_critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                             hidden_size=256, n_actions=n_actions, 
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims=input_dims, fc1_dims=layer1_size,
-                                             fc2_dims=layer2_size, n_actions=n_actions,
+        self.target_critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
+                                             hidden_size=256, n_actions=n_actions,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
 
         self.noise = noise
@@ -102,8 +101,8 @@ class Agent:
         self.time_step += 1
         return action
 
-    def remember(self, state, action, reward, next_state, done):
-        self.memory.store_transition(state, action, reward, next_state, done)
+    def remember(self, state, action, reward):
+        self.memory.store_transition(state, action, reward)
 
     def learn(self):
         # Asegura suficientes transiciones en memoria antes de entrenar, evitando aprendizaje prematuro y fomentando una exploración inicial.
@@ -114,32 +113,32 @@ class Agent:
             return
 
         # Obtiene un batch de muestras aleatorias desde el Replay Buffer
-        state, action, reward, next_state, done = self.memory.sample_buffer(self.batch_size)
+        state, action, reward = self.memory.sample_buffer(self.batch_size)
 
         # Convierte las muestras del batch a tensores y las mueve al dispositivo adecuado (CPU o GPU).
         reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
-        done = T.tensor(done).to(self.critic_1.device)
-        next_state = T.tensor(next_state, dtype=T.float).to(self.critic_1.device)
+        
+        
         state = T.tensor(state, dtype=T.float).to(self.critic_1.device)
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
 
         # Genera las acciones objetivo utilizando la red objetivo del actor,
         # y agrega ruido para evitar sobreestimaciones de los valores Q.
-        target_actions = self.target_actor.forward(next_state)
+        target_actions = self.actor.forward(state)
         target_actions = target_actions + T.clamp(T.tensor(np.random.normal(scale=0.2)), -0.5, 0.5)
         # Asegura que las acciones objetivo estén dentro de los límites permitidos.
         target_actions = T.clamp(target_actions, 0, 1)
 
         # Calcula los valores Q objetivo utilizando las redes críticas objetivo y las acciones objetivo.
-        next_q1 = self.target_critic_1.forward(next_state, target_actions)
-        next_q2 = self.target_critic_2.forward(next_state, target_actions)
+        next_q1 = self.critic_1.forward(state, target_actions)
+        next_q2 = self.critic_2.forward(state, target_actions)
         
         # Calcula los valores Q actuales usando las redes críticas principales.
         q1 = self.critic_1.forward(state, action)
         q2 = self.critic_2.forward(state, action)
 
-        next_q1[done] = 0.0
-        next_q2[done] = 0.0
+        
+        
 
         next_q1 = next_q1.view(-1)
         next_q2 = next_q2.view(-1)
@@ -150,8 +149,8 @@ class Agent:
         # Además de la recompensa del estado actual, da buena (casi igual) importancia a la recompensa del estado siguiente (futuro), lo que ayuda en el aprendizaje
         # porque un estado "malo" puede en realidad ser el camino a un estado siguiente muy bueno. Revisar ecuación de Bellman. 
         # El siguiente approach también es interesante: q_target = reward + self.gamma * next_q * (1 - done) .
-        target = reward + self.gamma * next_critic_value
-        target = target.view(self.batch_size, 1)
+        target = reward
+        target = target.view(-1, 1)
 
         # Reinicia los gradientes antes de realizar las actualizaciones.
         self.critic_1.optimizer.zero_grad()

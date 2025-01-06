@@ -5,10 +5,10 @@ import os
 class DataSet_editor:
     def __init__(self, img_width=256, img_height=256):
         # Directorio de imágenes originales
-        self.directorio_imagenes = "Desarrollo/simulation/Env01/DataSets/RawTools/"
+        self.directorio_imagenes = "Desarrollo/simulation/Env02/DataSets/RawTools/"
 
         # Directorio para guardar las imágenes procesadas
-        self.directorio_salida = "Desarrollo/simulation/Env01/DataSets/B&W_Tools/"
+        self.directorio_salida = "Desarrollo/simulation/Env02/DataSets/B&W_Tools/"
 
         self.img_width = img_width
         self.img_height = img_height

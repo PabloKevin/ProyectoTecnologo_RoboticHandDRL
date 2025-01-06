@@ -46,7 +46,8 @@ class ToolManipulationEnv(gym.Env):
     
     def get_observation_space_shape(self):
         # probar con imagen ordenada
-        return (self.image_shape[0], self.image_shape[1])
+        #return (self.image_shape[0], self.image_shape[1], self.image_shape[2])
+        return self.image_shape
 
     def reset(self):
         # Reset the environment to an initial state
@@ -74,16 +75,13 @@ class ToolManipulationEnv(gym.Env):
         # Calculate reward
         self.reward = self._calculate_reward(self.state, action)
         
-        # Check if the task is done
-        done = self._check_done(self.state)
-        
         # Flatten the image and concatenate with finger states
         #flattened_image = self.state['image'].flatten()
         #observation = np.concatenate((flattened_image, action))
         # probar unicamente con la imagen
         observation = self.state['image']
         
-        return observation, self.reward, done, {}
+        return observation, self.reward, {}
     
     def render(self, timeout=None):
         plt.imshow(self.state['image'], cmap='gray')
@@ -106,7 +104,7 @@ class ToolManipulationEnv(gym.Env):
     
     def _get_initial_image(self):
         # Directory containing images
-        image_dir = "Desarrollo/simulation/Env01/DataSets/B&W_Tools/"
+        image_dir = "Desarrollo/simulation/Env02/DataSets/B&W_Tools/"
         
         # List all image files in the directory
         image_files = [f for f in os.listdir(image_dir)]
@@ -118,7 +116,7 @@ class ToolManipulationEnv(gym.Env):
         
         # Select an image with that index
         #selected_image_path = os.path.join(image_dir, image_files[random_index])
-        selected_image_path = "Desarrollo/simulation/Env01/DataSets/B&W_Tools/bw_Martillo01.jpg"
+        selected_image_path = "Desarrollo/simulation/Env02/DataSets/B&W_Tools/bw_Martillo01.jpg"
         
         # Load the image
         img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
@@ -193,14 +191,7 @@ class ToolManipulationEnv(gym.Env):
         # Final reward
         return reward
 
-        
-        
     
-    def _check_done(self, state):
-        # Determine if the task is complete
-        # For example, check if the fingers are in the desired position
-        # The first approach is just one action and reward, if not the tool would fall maybe. 
-        return True
 
    
 """
