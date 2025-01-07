@@ -37,7 +37,7 @@ if __name__ == '__main__':
                   max_size=max_size)  # Pass the max_size to the Agent
 
     #print("n_actions: ", agent.n_actions)
-    writer = SummaryWriter("Desarrollo/simulation/Env01/logs")
+    writer = SummaryWriter("Desarrollo/simulation/Env02/logs")
 
     
     

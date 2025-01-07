@@ -48,6 +48,7 @@ class ToolManipulationEnv(gym.Env):
         # probar con imagen ordenada
         #return (self.image_shape[0], self.image_shape[1], self.image_shape[2])
         return self.image_shape
+        #return (self.image_shape[0], self.image_shape[1])
 
     def reset(self):
         # Reset the environment to an initial state
@@ -130,6 +131,8 @@ class ToolManipulationEnv(gym.Env):
         img[img >=  255/2] = 1
         #file = "Desarrollo/simulation/Env01/img.txt"
         #np.savetxt(file, img, fmt="%d", delimiter=" ") 
+        img = np.expand_dims(img, axis=-1)
+        print("im_shape", img.shape)
         return img
     
     def _calculate_reward(self, state, action):
@@ -204,4 +207,4 @@ if __name__ == "__main__":
     print(env.reset().shape)
     print(env.get_observation_space_shape())
     env.render()
-"""
+#"""

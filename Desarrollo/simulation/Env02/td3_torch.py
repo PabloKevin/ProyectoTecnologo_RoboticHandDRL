@@ -109,7 +109,7 @@ class Agent:
         # Evitar un aprendizaje prematuro: Si el agente empieza a entrenar demasiado pronto, puede intentar ajustar las redes con datos insuficientes o poco representativos 
         # del entorno, lo cual podría resultar en un entrenamiento inestable o ineficaz.
         # Reforzar exploración inicial: Durante las primeras iteraciones, el agente debería enfocarse más en explorar el entorno para recopilar información útil. 
-        if self.memory.mem_ctr < self.batch_size * 10: 
+        if self.memory.mem_cntr < self.batch_size * 10: 
             return
 
         # Obtiene un batch de muestras aleatorias desde el Replay Buffer

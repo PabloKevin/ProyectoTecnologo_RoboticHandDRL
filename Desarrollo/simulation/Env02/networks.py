@@ -16,7 +16,7 @@ class CriticNetwork(nn.Module):
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_td3')
 
-        self.conv1 = nn.Conv2d(in_channels=input_dims[2], out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8) + n_actions, hidden_size)
@@ -58,7 +58,7 @@ class ActorNetwork(nn.Module):
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_td3')
 
-        self.conv1 = nn.Conv2d(in_channels=input_dims[2], out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_size)
