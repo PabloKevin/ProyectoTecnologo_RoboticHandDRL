@@ -35,7 +35,11 @@ class CriticNetwork(nn.Module):
         x = torch.relu(self.conv1(state))
         x = torch.relu(self.conv2(x))
         x = torch.relu(self.conv3(x))
-        x = x.view(-1)
+        # Check if the input is a batch or a single image
+        if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
+            x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
+        elif len(x.shape) == 3:  # Single image case: [channels, height, width]
+            x = x.reshape(-1)  # Flatten the single image
         x = torch.cat([x, action], dim=1)
         x = torch.relu(self.fc1(x))
         q_value = self.fc2(x)
@@ -78,10 +82,18 @@ class ActorNetwork(nn.Module):
         x = torch.relu(self.conv1(state))
         x = torch.relu(self.conv2(x))
         x = torch.relu(self.conv3(x))
-        x = x.view(-1)
-        x = torch.relu(self.fc1(x))
-        logits = self.fc2(x).view(self.n_actions, self.n_choices_per_finger)
-        actions = torch.argmax(logits, dim=1)  # Discrete action output
+        print(f"Shape after conv3: {x.shape}")
+        # Check if the input is a batch or a single image
+        if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
+            x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
+            x = torch.relu(self.fc1(x))
+            logits = self.fc2(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
+            actions = torch.argmax(logits, dim=2)  # Discrete action output
+        elif len(x.shape) == 3:  # Single image case: [channels, height, width]
+            x = x.reshape(-1)  # Flatten the single image
+            x = torch.relu(self.fc1(x))
+            logits = self.fc2(x).reshape((self.n_actions, self.n_choices_per_finger))
+            actions = torch.argmax(logits, dim=1)  # Discrete action output
         return actions
 
     def save_checkpoint(self):

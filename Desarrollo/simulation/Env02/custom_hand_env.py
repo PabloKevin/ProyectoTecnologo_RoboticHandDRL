@@ -133,7 +133,6 @@ class ToolManipulationEnv(gym.Env):
         #file = "Desarrollo/simulation/Env01/img.txt"
         #np.savetxt(file, img, fmt="%d", delimiter=" ") 
         img = np.expand_dims(img, axis=-1)
-        print("im_shape", img.shape)
         return img
     
     def _calculate_reward(self, state, action):

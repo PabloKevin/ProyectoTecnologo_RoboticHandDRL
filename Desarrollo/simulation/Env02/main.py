@@ -20,16 +20,16 @@ if __name__ == '__main__':
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     actor_learning_rate = 0.001
     critic_learning_rate = 0.001
-    batch_size = 128 #128
+    batch_size = 64 #128
 
     conv_channels=[16, 32, 64] 
     hidden_size=256
     warmup = 1000
-    episodes = 5000 #10000 recomendados en el video
+    episodes = 10000 #10000 recomendados en el video
     env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
-    max_size = 10000  # Adjust this value based on your memory capacity
+    max_size = 500  # Adjust this value based on your memory capacity
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
                   input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers, 

@@ -74,12 +74,13 @@ class Agent:
 
         self.noise = noise
         self.update_networks_parameters(tau=1)
+        self.last_int_ts = 0 # util en el choose action para que no entre al mismo condicional veces seguidas
 
 
     def choose_action(self, observation, validation=False):
         # Los primeros episodios (de warm up) son con acciones randoms para permitir al agente explorar el entorno y sus reacciones,
         # formar una política. validation = True, permite saltar el warmup (que es un int), podría ser si ya tiene entrenamiento.
-
+        
         if self.time_step < self.warmup and validation is False:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
             if self.time_step % 2 == 0:
@@ -89,7 +90,9 @@ class Agent:
                 action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device)
         else:
             # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
-            if self.time_step % int(np.sqrt(self.time_step)-20.0) == 0 and validation is False:
+            new_int_ts = int(np.sqrt(self.time_step)-20.0)
+            if new_int_ts != self.last_int_ts and self.time_step % new_int_ts == 0 and validation is False and self.time_step > 22*22:
+                self.last_int_ts = new_int_ts
                 action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
             else:
