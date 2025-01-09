@@ -82,7 +82,7 @@ class ActorNetwork(nn.Module):
         x = torch.relu(self.conv1(state))
         x = torch.relu(self.conv2(x))
         x = torch.relu(self.conv3(x))
-        print(f"Shape after conv3: {x.shape}")
+        #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch

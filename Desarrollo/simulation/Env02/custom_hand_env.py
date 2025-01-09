@@ -30,7 +30,7 @@ class ToolManipulationEnv(gym.Env):
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
                                "reward_beta" : [5.9, 5.3, 2, 5.15, 3.0, 0.0],
                                "reward_gamma" : [1.0, 0.70, -1.2, 0.6],
-                               "repeted_action_penalty" : [0.1, 0.1]
+                               "repeted_action_penalty" : [0.6, 0.2]
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space

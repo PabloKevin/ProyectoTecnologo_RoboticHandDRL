@@ -83,7 +83,7 @@ class Agent:
         
         if self.time_step < self.warmup and validation is False:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
-            if self.time_step % 2 == 0:
+            if self.time_step % 4 == 0:
                 action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
             else:

@@ -4,10 +4,10 @@ import os
 import math
 
 # Directory containing the log files
-directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env01/logs_txt/"
+directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env02/logs_txt/"
 
 # Get the list of files in the directory
-log_files = [file for file in os.listdir(directory_path) if file.endswith("e2.txt")]
+log_files = [file for file in os.listdir(directory_path) if file.endswith("e0.txt")]
 
 # Function to parse the log file
 def parse_log(file_path):
