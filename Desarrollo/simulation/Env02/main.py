@@ -32,9 +32,9 @@ if __name__ == '__main__':
     max_size = 10000  # Adjust this value based on your memory capacity
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
-                  input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers,
-                  conv_channels=conv_channels, hidden_size=hidden_size, batch_size=batch_size, warmup=warmup,
-                  max_size=max_size)  # Pass the max_size to the Agent
+                  input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers, 
+                  n_choices_per_finger=env.n_choices_per_finger, conv_channels=conv_channels, hidden_size=hidden_size, 
+                  batch_size=batch_size, warmup=warmup, max_size=max_size) 
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env02/logs")
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     for experiment in range(0, 1):
         best_score = 0
 
-        directory_path = "Desarrollo/simulation/Env02/logs_txt"
+        directory_path = "Desarrollo/simulation/Env02/logs_txt/"
         version = "e0"
         file_name = f"experiment_log_{experiment}_{version}.txt"
 

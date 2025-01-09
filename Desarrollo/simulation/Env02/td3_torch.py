@@ -32,7 +32,7 @@ from networks import ActorNetwork, CriticNetwork
 class Agent:
     # Va a estar compuesto en total por 6 redes neuronales
     def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=5, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
+                 n_actions=5, n_choices_per_finger=3, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
@@ -42,12 +42,13 @@ class Agent:
         self.time_step = 0
         self.warmup = warmup
         self.n_actions = n_actions
+        self.n_choices_per_finger = n_choices_per_finger
         self.update_actor_iter = update_actor_interval
         self.env = env
 
         # Create the networks
         self.actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                  hidden_size=256 , n_actions=n_actions, name='actor', 
+                                  hidden_size=256 , n_actions=n_actions, n_choices_per_finger=n_choices_per_finger, name='actor', 
                                   learning_rate=actor_learning_rate)
 
         self.critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
@@ -60,7 +61,7 @@ class Agent:
 
         # Create the target networks
         self.target_actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                         hidden_size=256, n_actions=n_actions, 
+                                         hidden_size=256, n_actions=n_actions, n_choices_per_finger=n_choices_per_finger,
                                          name='target_actor', learning_rate=actor_learning_rate)
 
         self.target_critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
@@ -92,7 +93,9 @@ class Agent:
                 action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
             else:
-                state = T.tensor(observation, dtype=T.float).to(self.actor.device) #check the dtypes
+                # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
+                # which is the format expected by PyTorch convolutional layers.
+                state = T.tensor(observation, dtype=T.float).permute(2, 0, 1).to(self.actor.device)
                 action = self.actor.forward(state).to(self.actor.device)
 
         # Convert action to NumPy array
@@ -118,8 +121,9 @@ class Agent:
         # Convierte las muestras del batch a tensores y las mueve al dispositivo adecuado (CPU o GPU).
         reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
         
-        
-        state = T.tensor(state, dtype=T.float).to(self.critic_1.device)
+        # .permute() cambia el orden de las dimensiones de un tensor. En este caso, cambia el orden de las dimensiones de las imágenes de (batch, height, width, channels) a (batch, channels, height, width).
+        state = T.tensor(state, dtype=T.float).permute(0, 3, 1, 2).to(self.critic_1.device)
+
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
 
         # Genera las acciones objetivo utilizando la red objetivo del actor,

@@ -7,12 +7,13 @@ from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
 
 class ToolManipulationEnv(gym.Env):
-    def __init__(self, image_shape=(256, 256, 1), n_fingers=5):
+    def __init__(self, image_shape=(256, 256, 1), n_fingers=5, n_choices_per_finger=3):
         super(ToolManipulationEnv, self).__init__()
         
         # Observation space: image + finger states
         self.image_shape = image_shape
         self.n_fingers = n_fingers
+        self.n_choices_per_finger = n_choices_per_finger
         self.observation_space = spaces.Dict({
             # Image in black and white, so 0 = Black, 1 = White , uint8 enough
             'image': spaces.Box(low=0, high=1, shape=self.image_shape, dtype=np.uint8),
@@ -33,7 +34,7 @@ class ToolManipulationEnv(gym.Env):
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
-        self.action_space = spaces.MultiDiscrete([3] * self.n_fingers)
+        self.action_space = spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
         
         # Initialize state
         self.state = {
