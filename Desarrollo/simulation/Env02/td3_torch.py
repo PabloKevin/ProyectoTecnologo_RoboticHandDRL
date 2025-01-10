@@ -31,7 +31,7 @@ from networks import ActorNetwork, CriticNetwork
 
 class Agent:
     # Va a estar compuesto en total por 6 redes neuronales
-    def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=1, warmup=1000, 
+    def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
                  n_actions=5, n_choices_per_finger=3, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
 
         self.gamma = gamma
@@ -148,11 +148,12 @@ class Agent:
 
         # Utiliza el valor Q mínimo para reducir el riesgo de sobreestimación.
         next_critic_value = T.min(next_q1, next_q2)
+        #print("next_critic_value=", next_critic_value)
 
         # Además de la recompensa del estado actual, da buena (casi igual) importancia a la recompensa del estado siguiente (futuro), lo que ayuda en el aprendizaje
         # porque un estado "malo" puede en realidad ser el camino a un estado siguiente muy bueno. Revisar ecuación de Bellman. 
         # El siguiente approach también es interesante: q_target = reward + self.gamma * next_q * (1 - done) .
-        target = reward
+        target = reward + self.gamma * next_critic_value
         target = target.view(-1, 1)
 
         # Reinicia los gradientes antes de realizar las actualizaciones.
@@ -163,9 +164,21 @@ class Agent:
         q1_loss = F.mse_loss(target, q1)
         q2_loss = F.mse_loss(target, q2)
 
+        #print("target", target)
+        #print("q1=", q1, ",  q2=", q2)
+
         # Retropropaga las pérdidas.
         critic_loss = q1_loss + q2_loss
         critic_loss.backward()
+
+        # Verificar gradientes de Critic1
+        """
+        for param in self.critic_1.parameters():
+            if param.grad is not None:
+                print(f"Gradiente del critic1: {param.grad.norm().item()}")
+            else:
+                print("Critic1 no tiene gradiente")
+        """
 
         # Actualiza los parámetros de las redes críticas.
         self.critic_1.optimizer.step()
@@ -173,20 +186,29 @@ class Agent:
 
         # Incrementa el contador de pasos de aprendizaje.
         self.learn_step_cntr += 1
-
         # Actualiza la red del actor solo después de un número determinado de pasos.
         if self.learn_step_cntr % self.update_actor_iter != 0:
             return
-
         # Calcula la pérdida del actor basada en las predicciones de la critic_1, tratando de maximizar los valores Q de las acciones generadas.
         self.actor.optimizer.zero_grad()
         actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state))
+        
+        print("actor_q1_loss=", actor_q1_loss)
         # Durante el entrenamiento, se trabaja con batches de datos, con lo cual el actor_q1_loss tendrá el Q_value para cada estado y acción del batch, 
         # y por eso tiene sentido el .mean() (si en vez de batch, fuera un solo Q_value, no tendría sentido hacer el promedio), para no darle sobreimportancia al tamaño del batch.
         actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de minimización.
         
+        print("actor_loss=", actor_loss)
         # Retropropaga la pérdida y actualiza los parámetros de la red del actor.
         actor_loss.backward()
+
+        # Verificar gradientes del actor
+        for param in self.actor.parameters():
+            if param.grad is not None:
+                print(f"Gradiente del actor: {param.grad.norm().item()}")
+            else:
+                print("El actor no tiene gradiente")
+
         self.actor.optimizer.step()
 
         # Realiza una actualización suave (soft update) de las redes objetivo.
