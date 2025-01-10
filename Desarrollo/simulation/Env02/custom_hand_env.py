@@ -15,10 +15,10 @@ class ToolManipulationEnv(gym.Env):
         self.n_fingers = n_fingers
         self.n_choices_per_finger = n_choices_per_finger
         self.observation_space = spaces.Dict({
-            # Image in black and white, so 0 = Black, 1 = White , uint8 enough
-            'image': spaces.Box(low=0, high=1, shape=self.image_shape, dtype=np.uint8),
-            # Finger states in degrees, so 0 = 0 degrees, 180 = 180 degrees, flaot16 enough and scalable if wanted float numbers
-            'finger_states': spaces.Box(low=0, high=180, shape=(self.n_fingers,), dtype=np.uint8)
+            # Image in black and white, so 0 = Black, 1 = White 
+            'image': spaces.MultiDiscrete([2] * np.prod(self.image_shape)),
+            
+            'finger_states': spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
         })
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
@@ -30,7 +30,7 @@ class ToolManipulationEnv(gym.Env):
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
                                "reward_beta" : [5.9, 5.3, 2, 5.15, 3.0, 0.0],
                                "reward_gamma" : [1.0, 0.70, -1.2, 0.6],
-                               "repeted_action_penalty" : [0.6, 0.2]
+                               "repeated_action_penalty" : [0.8, 0.2]
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
@@ -39,11 +39,12 @@ class ToolManipulationEnv(gym.Env):
         # Initialize state
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
-            'finger_states': np.zeros(self.n_fingers, dtype=np.float16) #llevar a uint8
+            'finger_states': np.zeros(self.n_fingers, dtype=np.uint8)
         }
 
         self.reward = 0
         self.wrong_action_cntr = 0
+        self.previous_action = np.zeros(self.n_fingers, dtype=np.uint8)
     
     def get_observation_space_shape(self):
         # probar con imagen ordenada
@@ -185,12 +186,15 @@ class ToolManipulationEnv(gym.Env):
                 reward += self.reward_weights["individual_finger_reward"][4]
         
         # Penalize wrong actions
-        if reward < self.reward_weights["repeted_action_penalty"][0]:
+        if reward < self.reward_weights["repeated_action_penalty"][0]:
             self.wrong_action_cntr += 1
-            reward -= self.wrong_action_cntr * self.reward_weights["repeted_action_penalty"][1]
+            reward -= self.wrong_action_cntr * self.reward_weights["repeated_action_penalty"][1]
+            if np.array_equal(action, self.previous_action):
+                reward -= self.reward_weights["repeated_action_penalty"][1]
         else:
             self.wrong_action_cntr = 0
 
+        self.previous_action = action  # Actualizar la acción anterior
         # Final reward
         return reward
 

@@ -31,7 +31,7 @@ from networks import ActorNetwork, CriticNetwork
 
 class Agent:
     # Va a estar compuesto en total por 6 redes neuronales
-    def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
+    def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=1, warmup=1000, 
                  n_actions=5, n_choices_per_finger=3, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
 
         self.gamma = gamma
@@ -47,34 +47,36 @@ class Agent:
         self.env = env
 
         # Create the networks
-        self.actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                  hidden_size=256 , n_actions=n_actions, n_choices_per_finger=n_choices_per_finger, name='actor', 
+        self.actor = ActorNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                  hidden_size=hidden_size , n_actions=n_actions, n_choices_per_finger=n_choices_per_finger, name='actor', 
                                   learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                      hidden_size=256, n_actions=n_actions, 
+        self.critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                      hidden_size=hidden_size, n_actions=n_actions, 
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                      hidden_size=256, n_actions=n_actions, 
+        self.critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                      hidden_size=hidden_size, n_actions=n_actions, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
-        self.target_actor = ActorNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                         hidden_size=256, n_actions=n_actions, n_choices_per_finger=n_choices_per_finger,
+        self.target_actor = ActorNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                         hidden_size=hidden_size, n_actions=n_actions, n_choices_per_finger=n_choices_per_finger,
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                             hidden_size=256, n_actions=n_actions, 
+        self.target_critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                             hidden_size=hidden_size, n_actions=n_actions, 
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=[16, 32, 64], 
-                                             hidden_size=256, n_actions=n_actions,
+        self.target_critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
+                                             hidden_size=hidden_size, n_actions=n_actions,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
 
         self.noise = noise
         self.update_networks_parameters(tau=1)
-        self.last_int_ts = 0 # util en el choose action para que no entre al mismo condicional veces seguidas
+        self.epsilon = 0.4
+        self.epsilon_decay = 0.8
+        self.min_epsilon = 0.08
 
 
     def choose_action(self, observation, validation=False):
@@ -83,22 +85,21 @@ class Agent:
         
         if self.time_step < self.warmup and validation is False:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
-            if self.time_step % 4 == 0:
+            if self.time_step % 6 == 0:
                 action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
             else:
-                action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device)
+                action = T.tensor(self.env.action_space.sample(), dtype=T.uint8).to(self.actor.device) 
         else:
             # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
-            new_int_ts = int(np.sqrt(self.time_step)-20.0)
-            if new_int_ts != self.last_int_ts and self.time_step % new_int_ts == 0 and validation is False and self.time_step > 22*22:
-                self.last_int_ts = new_int_ts
+            if np.random.random() < self.epsilon and validation is False:
+                self.epsilon = max(self.epsilon * self.epsilon_decay, self.min_epsilon)
                 action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.uint8).to(self.actor.device)
             # Use tensor to generate random actions
             else:
                 # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
                 # which is the format expected by PyTorch convolutional layers.
-                state = T.tensor(observation, dtype=T.float).permute(2, 0, 1).to(self.actor.device)
+                state = T.tensor(observation, dtype=T.float32).permute(2, 0, 1).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
                 action = self.actor.forward(state).to(self.actor.device)
 
         # Convert action to NumPy array
@@ -122,19 +123,16 @@ class Agent:
         state, action, reward = self.memory.sample_buffer(self.batch_size)
 
         # Convierte las muestras del batch a tensores y las mueve al dispositivo adecuado (CPU o GPU).
-        reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
+        reward = T.tensor(reward, dtype=T.float32).to(self.critic_1.device)
         
         # .permute() cambia el orden de las dimensiones de un tensor. En este caso, cambia el orden de las dimensiones de las imágenes de (batch, height, width, channels) a (batch, channels, height, width).
-        state = T.tensor(state, dtype=T.float).permute(0, 3, 1, 2).to(self.critic_1.device)
+        state = T.tensor(state, dtype=T.float32).permute(0, 3, 1, 2).to(self.critic_1.device)
 
-        action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
+        action = T.tensor(action, dtype=T.uint8).to(self.critic_1.device)
 
         # Genera las acciones objetivo utilizando la red objetivo del actor,
         # y agrega ruido para evitar sobreestimaciones de los valores Q.
         target_actions = self.actor.forward(state)
-        target_actions = target_actions + T.clamp(T.tensor(np.random.normal(scale=0.2)), -0.5, 0.5)
-        # Asegura que las acciones objetivo estén dentro de los límites permitidos.
-        target_actions = T.clamp(target_actions, 0, 1)
 
         # Calcula los valores Q objetivo utilizando las redes críticas objetivo y las acciones objetivo.
         next_q1 = self.critic_1.forward(state, target_actions)
@@ -145,8 +143,6 @@ class Agent:
         q2 = self.critic_2.forward(state, action)
 
         
-        
-
         next_q1 = next_q1.view(-1)
         next_q2 = next_q2.view(-1)
 

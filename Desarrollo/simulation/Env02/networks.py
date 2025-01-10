@@ -88,12 +88,22 @@ class ActorNetwork(nn.Module):
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
             x = torch.relu(self.fc1(x))
             logits = self.fc2(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
-            actions = torch.argmax(logits, dim=2)  # Discrete action output
+            # Use softmax with the logits so as to get probabilities
+            probabilities = F.softmax(logits, dim=1)
+            actions = torch.argmax(probabilities, dim=2)  # Discrete action output
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
             x = x.reshape(-1)  # Flatten the single image
             x = torch.relu(self.fc1(x))
             logits = self.fc2(x).reshape((self.n_actions, self.n_choices_per_finger))
-            actions = torch.argmax(logits, dim=1)  # Discrete action output
+            probabilities = F.softmax(logits, dim=1)
+            #print("probabilities: ", probabilities)
+
+            directory_path = "Desarrollo/simulation/Env02/logs_txt/"
+            file_name = f"probabilities_log_3.txt"
+            log_file = open(directory_path + file_name, "a")
+            log_file.write(f"probabilities: {probabilities}\n")
+
+            actions = torch.argmax(probabilities, dim=1)  # Discrete action output
         return actions
 
     def save_checkpoint(self):
