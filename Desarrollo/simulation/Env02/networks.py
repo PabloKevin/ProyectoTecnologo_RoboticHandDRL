@@ -30,9 +30,12 @@ class CriticNetwork(nn.Module):
         self.to(self.device)
         
 
-    def forward(self, state, action):
+    def forward(self, state, probabilities):
         state = state.to(self.device)
-        action = action.to(self.device)
+        if len(probabilities.shape) == 2:
+            action = probabilities.to(self.device)
+        elif len(probabilities.shape) == 3:
+            action = torch.argmax(probabilities, dim=-1).to(self.device)
         x = torch.relu(self.conv1(state))
         x = torch.relu(self.conv2(x))
         x = torch.relu(self.conv3(x))
@@ -91,7 +94,8 @@ class ActorNetwork(nn.Module):
             logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
             # Use softmax with the logits so as to get probabilities
             probabilities = F.softmax(logits, dim=2)
-            actions = torch.argmax(probabilities, dim=2)  # Discrete action output
+            #actions = torch.argmax(probabilities, dim=2)  # Discrete action output
+
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
             x = x.reshape(-1)  # Flatten the single image
             x = torch.relu(self.fc1(x))
@@ -104,9 +108,9 @@ class ActorNetwork(nn.Module):
             file_name = f"probabilities_log_3.txt"
             log_file = open(directory_path + file_name, "a")
             log_file.write(f"probabilities: {probabilities}\n")
-
-            actions = torch.argmax(probabilities, dim=1)  # Discrete action output
-        return actions
+            #actions = torch.argmax(probabilities, dim=1)  # Discrete action output
+            
+        return probabilities
 
     def save_checkpoint(self):
         torch.save(self.state_dict(), self.checkpoint_file)
