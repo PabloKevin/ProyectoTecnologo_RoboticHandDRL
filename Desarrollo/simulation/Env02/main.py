@@ -18,15 +18,15 @@ if __name__ == '__main__':
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)
 # Ir probando con numeros más simples para que lleve menos tiempo. Dado que el problemas es más simple,
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
-    actor_learning_rate = 0.001 #0.001
-    critic_learning_rate = 0.001 #0.001
-    batch_size = 128 #128
+    actor_learning_rate = 0.005 #0.001
+    critic_learning_rate = 0.0007 #0.001
+    batch_size = 64 #128
 
     conv_channels=[4, 16, 32] #[16, 32, 64]
     hidden_size=128 #256
     warmup = 1000
     episodes = 5000 #10000 recomendados en el video
-    env.reward_weights["reward_alpha"] = 7
+    env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
     max_size = 500  # Adjust this value based on your memory capacity

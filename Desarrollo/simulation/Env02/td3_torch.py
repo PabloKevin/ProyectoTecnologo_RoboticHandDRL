@@ -116,7 +116,7 @@ class Agent:
         # Evitar un aprendizaje prematuro: Si el agente empieza a entrenar demasiado pronto, puede intentar ajustar las redes con datos insuficientes o poco representativos 
         # del entorno, lo cual podría resultar en un entrenamiento inestable o ineficaz.
         # Reforzar exploración inicial: Durante las primeras iteraciones, el agente debería enfocarse más en explorar el entorno para recopilar información útil. 
-        if self.memory.mem_cntr < self.batch_size * 10: 
+        if self.memory.mem_cntr < self.batch_size * 10:  
             return
 
         # Obtiene un batch de muestras aleatorias desde el Replay Buffer
@@ -169,6 +169,7 @@ class Agent:
 
         # Retropropaga las pérdidas.
         critic_loss = q1_loss + q2_loss
+        print("critic_loss=", critic_loss)
         critic_loss.backward()
 
         # Verificar gradientes de Critic1
@@ -193,21 +194,29 @@ class Agent:
         self.actor.optimizer.zero_grad()
         actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state))
         
-        print("actor_q1_loss=", actor_q1_loss)
+        #print("actor_q1_loss=", actor_q1_loss)
         # Durante el entrenamiento, se trabaja con batches de datos, con lo cual el actor_q1_loss tendrá el Q_value para cada estado y acción del batch, 
         # y por eso tiene sentido el .mean() (si en vez de batch, fuera un solo Q_value, no tendría sentido hacer el promedio), para no darle sobreimportancia al tamaño del batch.
-        actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de minimización.
+        actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de maximización.
         
         print("actor_loss=", actor_loss)
         # Retropropaga la pérdida y actualiza los parámetros de la red del actor.
         actor_loss.backward()
 
         # Verificar gradientes del actor
+        """
         for param in self.actor.parameters():
             if param.grad is not None:
                 print(f"Gradiente del actor: {param.grad.norm().item()}")
             else:
                 print("El actor no tiene gradiente")
+        """
+        for name, param in self.actor.named_parameters():
+            if param.grad is not None:
+                print(f"Layer {name} gradient norm: {param.grad.norm().item()}")
+            else:
+                print(f"Layer {name} has no gradient")
+
 
         self.actor.optimizer.step()
 

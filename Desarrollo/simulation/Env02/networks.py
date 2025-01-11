@@ -20,7 +20,8 @@ class CriticNetwork(nn.Module):
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_size)
-        self.fc2 = nn.Linear(hidden_size + n_actions, 1)
+        self.fc2 = nn.Linear(hidden_size, 1)
+        self.fc3 = nn.Linear(1 + n_actions, 1)
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
 
@@ -38,8 +39,9 @@ class CriticNetwork(nn.Module):
         # Check if the input is a batch or a single image
         x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
         x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
         x = torch.cat([x, action], dim=1)
-        q_value = self.fc2(x)
+        q_value = self.fc3(x)
         return q_value
 
     def save_checkpoint(self):
@@ -65,7 +67,8 @@ class ActorNetwork(nn.Module):
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_size)
-        self.fc2 = nn.Linear(hidden_size, n_actions * n_choices_per_finger)
+        self.fc2 = nn.Linear(hidden_size, 1)
+        self.fc3 = nn.Linear(1, n_actions * n_choices_per_finger)
         
         self.optimizer = optim.Adam(self.parameters(), lr=learning_rate)
         
@@ -84,14 +87,16 @@ class ActorNetwork(nn.Module):
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
             x = torch.relu(self.fc1(x))
-            logits = self.fc2(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
+            x = torch.relu(self.fc2(x))
+            logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
             # Use softmax with the logits so as to get probabilities
-            probabilities = F.softmax(logits, dim=1)
+            probabilities = F.softmax(logits, dim=2)
             actions = torch.argmax(probabilities, dim=2)  # Discrete action output
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
             x = x.reshape(-1)  # Flatten the single image
             x = torch.relu(self.fc1(x))
-            logits = self.fc2(x).reshape((self.n_actions, self.n_choices_per_finger))
+            x = torch.relu(self.fc2(x))
+            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
             probabilities = F.softmax(logits, dim=1)
             #print("probabilities: ", probabilities)
 
