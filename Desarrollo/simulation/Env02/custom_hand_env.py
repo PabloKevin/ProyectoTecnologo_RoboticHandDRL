@@ -5,6 +5,7 @@ import os
 import cv2
 from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
+import torch
 
 class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=5, n_choices_per_finger=3):
@@ -136,8 +137,9 @@ class ToolManipulationEnv(gym.Env):
         img = np.expand_dims(img, axis=-1)
         return img
     
-    def _calculate_reward(self, state, action):
+    def _calculate_reward(self, state, probs):
         reward = 0
+        action = self.probs2actions(probs)
         # Extract the current finger states
         #current_finger_states = state['finger_states']
         # Find a way to "subtract" reward if the object falls, or if the object is too large
@@ -199,7 +201,12 @@ class ToolManipulationEnv(gym.Env):
         return reward
 
     
-
+    def probs2actions(self, probs):
+        print(probs)
+        action = np.argmax(probs, axis=1)
+        print(action)
+        self.state['finger_states'] = action
+        return action
    
 """
 if __name__ == "__main__":

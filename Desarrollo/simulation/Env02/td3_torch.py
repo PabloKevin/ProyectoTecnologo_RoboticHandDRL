@@ -125,8 +125,8 @@ class Agent:
         actor_loss = -T.mean(actor_q1_loss)
 
         # Dummy loss to force gradients for debugging
-        dummy_loss = T.sum(actor_probabilities)
-        dummy_loss.backward()
+        #dummy_loss = T.sum(actor_probabilities)
+        #dummy_loss.backward()
 
         actor_loss.backward()
         self.actor.optimizer.step()
