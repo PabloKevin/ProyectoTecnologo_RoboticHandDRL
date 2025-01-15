@@ -59,15 +59,16 @@ class Agent:
         if self.time_step < self.warmup and validation is False:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
             if self.time_step % 6 == 0:
-                action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.float).to(self.actor.device)
+                action = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
             # Use tensor to generate random actions
             else:
-                action = T.tensor(self.env.action_space.sample(), dtype=T.float).to(self.actor.device) 
+                random_probs = np.random.dirichlet(np.ones(self.n_choices_per_finger), size=self.n_actions)
+                action = T.tensor(random_probs, dtype=T.float).to(self.actor.device)
         else:
             # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
             if np.random.random() < self.epsilon and validation is False:
                 self.epsilon = max(self.epsilon * self.epsilon_decay, self.min_epsilon)
-                action = T.tensor(np.array(self.env.combinations_of_interest)[np.random.randint(0, len(self.env.combinations_of_interest))], dtype=T.float).to(self.actor.device)
+                action = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
             # Use tensor to generate random actions
             else:
                 # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],

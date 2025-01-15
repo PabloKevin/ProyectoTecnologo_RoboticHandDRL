@@ -5,7 +5,6 @@ import os
 import cv2
 from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
-import torch
 
 class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=5, n_choices_per_finger=3):
@@ -25,6 +24,11 @@ class ToolManipulationEnv(gym.Env):
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
                                          [1, 1, 1, 1, 1], # All fingers half closed
                                          [0, 0, 0, 0, 0]  # All fingers opened
+        ]
+        self.probabilities_of_interest = [[[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0],[0.0, 0.0, 1.0]], # Thumb closed, index half, others closed,
+                                         [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0],[0.0, 0.0, 1.0]],  # Thumb closed, index and middle half, others open
+                                         [[0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0],[0.0, 1.0, 0.0]],  # All fingers half closed
+                                         [[1.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0],[1.0, 0.0, 0.0]],  # All fingers opened
         ]
         
         self.reward_weights = { "reward_alpha" : 1,
@@ -203,6 +207,7 @@ class ToolManipulationEnv(gym.Env):
     
     def probs2actions(self, probs):
         print(probs)
+        np.array(probs)
         action = np.argmax(probs, axis=1)
         print(action)
         self.state['finger_states'] = action
