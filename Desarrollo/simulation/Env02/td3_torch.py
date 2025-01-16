@@ -59,29 +59,26 @@ class Agent:
         if self.time_step < self.warmup and validation is False:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
             if self.time_step % 6 == 0:
-                action = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
+                action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
             # Use tensor to generate random actions
             else:
                 random_probs = np.random.dirichlet(np.ones(self.n_choices_per_finger), size=self.n_actions)
-                action = T.tensor(random_probs, dtype=T.float).to(self.actor.device)
+                action_probs = T.tensor(random_probs, dtype=T.float).to(self.actor.device)
         else:
             # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
             if np.random.random() < self.epsilon and validation is False:
                 self.epsilon = max(self.epsilon * self.epsilon_decay, self.min_epsilon)
-                action = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
+                action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
             # Use tensor to generate random actions
             else:
                 # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
                 # which is the format expected by PyTorch convolutional layers.
                 state = T.tensor(observation, dtype=T.float).permute(2, 0, 1).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
-                probabilities = self.actor.forward(state).to(self.actor.device)
-                action = T.argmax(probabilities, dim=-1).to(self.actor.device)
-
-        # Convert action to NumPy array
-        action = action.cpu().detach().numpy()
+                action_probs = self.actor.forward(state).to(self.actor.device)
 
         self.time_step += 1
-        return action
+
+        return action_probs.cpu().detach().numpy() # Convert action to NumPy array and return
 
     def remember(self, state, action, reward):
         self.memory.store_transition(state, action, reward)
@@ -132,11 +129,18 @@ class Agent:
         actor_loss.backward()
         self.actor.optimizer.step()
 
-        print(f"Actor Loss: {actor_loss.item()}, Critic Loss: {critic_loss.item()}")
-
+        #print(f"Actor Loss: {actor_loss.item()}, Critic Loss: {critic_loss.item()}")
+        print("Actor")
         for name, param in self.actor.named_parameters():
             if param.grad is not None:
-                print(f"Layer {name} gradient norm: {param.grad.norm().item()}")
+                print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
+            else:
+                print(f"Layer {name} has no gradient")
+
+        print("\nCritic 1")
+        for name, param in self.critic_1.named_parameters():
+            if param.grad is not None:
+                print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
             else:
                 print(f"Layer {name} has no gradient")
 

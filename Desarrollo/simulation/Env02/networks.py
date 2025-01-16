@@ -99,14 +99,9 @@ class ActorNetwork(nn.Module):
             x = x.reshape(-1)  # Flatten the single image
             x = torch.relu(self.fc1(x))
             x = torch.relu(self.fc2(x))
-            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
+            logits = torch.relu(self.fc3(x)).reshape((self.n_actions, self.n_choices_per_finger))
             probabilities = F.softmax(logits, dim=1)
             #print("probabilities: ", probabilities)
-
-            directory_path = "Desarrollo/simulation/Env02/logs_txt/"
-            file_name = f"probabilities_log_3.txt"
-            log_file = open(directory_path + file_name, "a")
-            log_file.write(f"probabilities: {probabilities}\n")
             #actions = torch.argmax(probabilities, dim=1)  # Discrete action output
             
         return probabilities

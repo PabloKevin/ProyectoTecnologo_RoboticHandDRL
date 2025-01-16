@@ -34,7 +34,7 @@ class ToolManipulationEnv(gym.Env):
         self.reward_weights = { "reward_alpha" : 1,
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
                                "reward_beta" : [5.9, 5.3, 2, 5.15, 3.0, 0.0],
-                               "reward_gamma" : [1.0, 0.70, -1.2, 0.6],
+                               "reward_gamma" : [1.0, 0.70, -1.5, 0.6],
                                "repeated_action_penalty" : [0.8, 0.2]
         }
         
@@ -141,9 +141,10 @@ class ToolManipulationEnv(gym.Env):
         img = np.expand_dims(img, axis=-1)
         return img
     
-    def _calculate_reward(self, state, probs):
+    def _calculate_reward(self, state, action):
         reward = 0
-        action = self.probs2actions(probs)
+        
+        #action = self.probs2actions(action)
         # Extract the current finger states
         #current_finger_states = state['finger_states']
         # Find a way to "subtract" reward if the object falls, or if the object is too large
@@ -206,10 +207,12 @@ class ToolManipulationEnv(gym.Env):
 
     
     def probs2actions(self, probs):
-        print(probs)
-        np.array(probs)
+        #print(probs)
+        probs = np.array(probs)
+        #if probs.ndim == 1:
+        #probs = probs.reshape(self.n_fingers, self.n_choices_per_finger)
         action = np.argmax(probs, axis=1)
-        print(action)
+        #print(action)
         self.state['finger_states'] = action
         return action
    
