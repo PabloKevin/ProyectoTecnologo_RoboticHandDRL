@@ -45,6 +45,20 @@ class Agent:
         self.target_critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
                                              hidden_size=hidden_size, n_actions=n_actions,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
+        
+        # Initialize weights for all networks
+        def initialize_weights(m):
+            if isinstance(m, T.nn.Linear) or isinstance(m, T.nn.Conv2d):
+                T.nn.init.xavier_uniform_(m.weight)
+                if m.bias is not None:
+                    T.nn.init.zeros_(m.bias)
+
+        self.actor.apply(initialize_weights)
+        self.critic_1.apply(initialize_weights)
+        self.critic_2.apply(initialize_weights)
+        self.target_actor.apply(initialize_weights)
+        self.target_critic_1.apply(initialize_weights)
+        self.target_critic_2.apply(initialize_weights)
 
         self.noise = noise
         self.update_networks_parameters(tau=1)
@@ -106,6 +120,11 @@ class Agent:
 
         critic_loss = q1_loss + q2_loss
         critic_loss.backward()
+
+        # Clip Critic gradients
+        T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=1.0)
+        T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=1.0)
+
         self.critic_1.optimizer.step()
         self.critic_2.optimizer.step()
 
@@ -127,6 +146,10 @@ class Agent:
         #dummy_loss.backward()
 
         actor_loss.backward()
+
+        # Clip Actor gradients
+        T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
+        
         self.actor.optimizer.step()
 
         #print(f"Actor Loss: {actor_loss.item()}, Critic Loss: {critic_loss.item()}")
@@ -144,7 +167,7 @@ class Agent:
             else:
                 print(f"Layer {name} has no gradient")
 
-        self.update_networks_parameters()
+        #self.update_networks_parameters()
 
     def update_networks_parameters(self, tau=None):
         if tau is None:
