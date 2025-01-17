@@ -98,26 +98,35 @@ class Agent:
         self.memory.store_transition(state, action, reward)
 
     def learn(self):
-        if self.memory.mem_cntr < self.batch_size*10:
+        if self.memory.mem_cntr < self.batch_size * 10:
             return
 
+        # Sample a batch from the replay buffer
         state, action, reward = self.memory.sample_buffer(self.batch_size)
 
         state = T.tensor(state, dtype=T.float).permute(0, 3, 1, 2).to(self.critic_1.device)
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
         reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
 
+        # Update Critic networks
         self.critic_1.optimizer.zero_grad()
         self.critic_2.optimizer.zero_grad()
 
-        # Compute critic loss
+        # Compute target Q-value using the target networks
+        with T.no_grad():
+            # For single-step episodes, the target is the immediate reward
+            target_q1 = self.target_critic_1.forward(state, action)
+            target_q2 = self.target_critic_2.forward(state, action)
+            target_q = T.min(target_q1, target_q2)  # TD3 minimizes Q-value to reduce overestimation
+            target = reward.view(-1, 1) + 0.0 * target_q  # 0.0 * target_q ensures compatibility with TD3 logic
+
+        # Compute current Q-values from the Critic networks
         q1 = self.critic_1.forward(state, action)
         q2 = self.critic_2.forward(state, action)
-        target = reward.view(-1, 1)
 
+        # Compute Critic loss
         q1_loss = F.mse_loss(q1, target)
         q2_loss = F.mse_loss(q2, target)
-
         critic_loss = q1_loss + q2_loss
         critic_loss.backward()
 
@@ -125,34 +134,31 @@ class Agent:
         T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=1.0)
         T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=1.0)
 
+        # Update Critic optimizers
         self.critic_1.optimizer.step()
         self.critic_2.optimizer.step()
 
         self.learn_step_cntr += 1
 
+        # Update Actor network at specified intervals
         if self.learn_step_cntr % self.update_actor_iter != 0:
             return
 
         self.actor.optimizer.zero_grad()
 
-        # Compute actor loss
+        # Compute Actor loss
         actor_probabilities = self.actor.forward(state)
-        #print("state_shape ",state.shape, "  probs_shape: ", actor_probabilities.shape)
         actor_q1_loss = self.critic_1.forward(state, actor_probabilities)
-        actor_loss = -T.mean(actor_q1_loss)
-
-        # Dummy loss to force gradients for debugging
-        #dummy_loss = T.sum(actor_probabilities)
-        #dummy_loss.backward()
-
+        actor_loss = -T.mean(actor_q1_loss)  # Maximize Q-value for the Actor
         actor_loss.backward()
 
         # Clip Actor gradients
         T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
-        
+
+        # Update Actor optimizer
         self.actor.optimizer.step()
 
-        #print(f"Actor Loss: {actor_loss.item()}, Critic Loss: {critic_loss.item()}")
+        # Debugging: Log gradient norms for the Actor and Critic networks
         print("Actor")
         for name, param in self.actor.named_parameters():
             if param.grad is not None:
@@ -167,7 +173,9 @@ class Agent:
             else:
                 print(f"Layer {name} has no gradient")
 
-        #self.update_networks_parameters()
+        # Update target networks
+        self.update_networks_parameters()
+
 
     def update_networks_parameters(self, tau=None):
         if tau is None:

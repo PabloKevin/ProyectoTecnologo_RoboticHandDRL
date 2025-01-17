@@ -99,7 +99,7 @@ class ActorNetwork(nn.Module):
             x = x.reshape(-1)  # Flatten the single image
             x = torch.relu(self.fc1(x))
             x = torch.relu(self.fc2(x))
-            logits = torch.relu(self.fc3(x)).reshape((self.n_actions, self.n_choices_per_finger))
+            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
             probabilities = F.softmax(logits, dim=1)
             #print("probabilities: ", probabilities)
             #actions = torch.argmax(probabilities, dim=1)  # Discrete action output
