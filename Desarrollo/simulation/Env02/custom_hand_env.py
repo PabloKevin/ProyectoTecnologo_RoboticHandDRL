@@ -33,8 +33,8 @@ class ToolManipulationEnv(gym.Env):
         
         self.reward_weights = { "reward_alpha" : 1,
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
-                               "reward_beta" : [5.9, 5.3, -3.1, 5.15, 3.0, 0.0],
-                               "reward_gamma" : [1.0, 0.70, -1.0, 0.6],
+                               "reward_beta" : [5.0, 5.0, 5.0, 5.0, 1.0, 0.0],
+                               "reward_gamma" : [0.0, 0.0, 0.0, 0.0],
                                "repeated_action_penalty" : [0.8, 0.2]
         }
         
@@ -157,17 +157,17 @@ class ToolManipulationEnv(gym.Env):
         if np.array_equal(action, self.combinations_of_interest[0]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            else:
+            elif negative_reward <= 4.5:
                 reward += (self.reward_weights["reward_beta"][0] - negative_reward * self.reward_weights["reward_gamma"][0]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[1]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            else:
+            elif negative_reward < 4.5:
                 reward += (self.reward_weights["reward_beta"][1] - negative_reward * self.reward_weights["reward_gamma"][1]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[2]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            else:
+            elif negative_reward > 4.5:
                 reward += (self.reward_weights["reward_beta"][2] - negative_reward * self.reward_weights["reward_gamma"][2]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[3]):
             #return 1.0 - negative_reward * 1
