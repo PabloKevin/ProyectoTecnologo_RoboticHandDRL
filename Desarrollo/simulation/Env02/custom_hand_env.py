@@ -115,7 +115,9 @@ class ToolManipulationEnv(gym.Env):
         image_dir = "Desarrollo/simulation/Env02/DataSets/B&W_Tools/"
         
         # List all image files in the directory
-        image_files = [f for f in os.listdir(image_dir)]
+        #image_files = [f for f in os.listdir(image_dir)]
+        images_of_interest = ["bw_Martillo01.jpg", "empty.png"]
+        image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
         # Check how many images are there
         num_images = len(image_files)
         
@@ -157,17 +159,17 @@ class ToolManipulationEnv(gym.Env):
         if np.array_equal(action, self.combinations_of_interest[0]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            elif negative_reward <= 4.5:
+            elif negative_reward**2 <= 3:
                 reward += (self.reward_weights["reward_beta"][0] - negative_reward * self.reward_weights["reward_gamma"][0]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[1]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            elif negative_reward < 4.5:
+            elif negative_reward**2 < 3:
                 reward += (self.reward_weights["reward_beta"][1] - negative_reward * self.reward_weights["reward_gamma"][1]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[2]):
             if n_white_pixels == 0:
                 reward += (self.reward_weights["reward_beta"][4] - negative_reward * self.reward_weights["reward_gamma"][3]) * self.reward_weights["reward_alpha"]
-            elif negative_reward > 4.5:
+            elif negative_reward**2 > 3:
                 reward += (self.reward_weights["reward_beta"][2] - negative_reward * self.reward_weights["reward_gamma"][2]) * self.reward_weights["reward_alpha"]
         elif np.array_equal(action, self.combinations_of_interest[3]):
             #return 1.0 - negative_reward * 1
@@ -182,15 +184,15 @@ class ToolManipulationEnv(gym.Env):
         
             # reward for each finger so as to motivate the combinations
             if action[0] == 2:
-                reward += self.reward_weights["individual_finger_reward"][0]
+                reward += self.reward_weights["individual_finger_reward"][0] * self.reward_weights["reward_alpha"]
             if action[1] == 1:
-                reward += self.reward_weights["individual_finger_reward"][1]
+                reward += self.reward_weights["individual_finger_reward"][1] * self.reward_weights["reward_alpha"]
             if action[2] == 1:
-                reward += self.reward_weights["individual_finger_reward"][2]
+                reward += self.reward_weights["individual_finger_reward"][2] * self.reward_weights["reward_alpha"]
             if action[3] == 2:
-                reward += self.reward_weights["individual_finger_reward"][3]
+                reward += self.reward_weights["individual_finger_reward"][3] * self.reward_weights["reward_alpha"]
             if action[4] == 2:
-                reward += self.reward_weights["individual_finger_reward"][4]
+                reward += self.reward_weights["individual_finger_reward"][4] * self.reward_weights["reward_alpha"]
         
         # Penalize wrong actions
         if reward < self.reward_weights["repeated_action_penalty"][0]:

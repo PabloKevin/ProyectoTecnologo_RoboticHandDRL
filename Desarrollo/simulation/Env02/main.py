@@ -1,7 +1,6 @@
 import time
 import os
-#import gym
-import numpy as np
+#import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 
 #from networks import CriticNetwork,ActorNetwork
@@ -19,20 +18,20 @@ if __name__ == '__main__':
 # Ir probando con numeros más simples para que lleve menos tiempo. Dado que el problemas es más simple,
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     load_models = False
-    actor_learning_rate = 0.01 #0.001
-    critic_learning_rate = 0.01 #0.001
+    actor_learning_rate = 0.001 #0.001    1.0
+    critic_learning_rate = 0.001 #0.001   0.001
     batch_size = 128 #128
 
     conv_channels=[4, 16, 32] #[16, 32, 64]
     hidden_size=128 #256
     warmup = 1000
-    episodes = 10000 #10000
+    episodes = 7000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
-    max_size = 500  # Adjust this value based on your memory capacity
+    max_size = 10000  # Adjust this value based on your memory capacity
 
-    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.005,
+    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.05, #tau=0.005
                   input_dims=env.get_observation_space_shape(), env=env, n_actions=env.n_fingers, 
                   n_choices_per_finger=env.n_choices_per_finger, conv_channels=conv_channels, hidden_size=hidden_size, 
                   batch_size=batch_size, warmup=warmup, max_size=max_size) 
@@ -46,7 +45,7 @@ if __name__ == '__main__':
         best_score = 0
 
         directory_path = "Desarrollo/simulation/Env02/logs_txt/"
-        version = "e1"
+        version = "e2"
         file_name = f"experiment_log_{experiment}_{version}.txt"
         file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
 
@@ -74,7 +73,6 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
-            done = False
             score = 0
 
             action_probs = agent.choose_action(observation)

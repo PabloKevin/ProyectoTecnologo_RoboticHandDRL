@@ -35,15 +35,16 @@ class CriticNetwork(nn.Module):
     def forward(self, state, action_probs):
         state = state.to(self.device)
         action_probs = action_probs.reshape((action_probs.shape[0],-1)).to(self.device)
-        x = torch.relu(self.conv1(state))
-        x = torch.relu(self.conv2(x))
-        x = torch.relu(self.conv3(x))
+        x = F.leaky_relu(self.conv1(state))
+        x = F.leaky_relu(self.conv2(x))
+        x = F.leaky_relu(self.conv3(x))
         # Check if the input is a batch or a single image
         x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
+        x = F.leaky_relu(self.fc1(x))
+        x = F.leaky_relu(self.fc2(x))
         x = torch.cat([x, action_probs], dim=1)
-        q_value = self.fc3(x)
+        q_value = torch.clamp(self.fc3(x), max=5.0)
+
         return q_value
 
     def save_checkpoint(self):
@@ -72,7 +73,7 @@ class ActorNetwork(nn.Module):
         self.fc2 = nn.Linear(hidden_size, 1)
         self.fc3 = nn.Linear(1, n_actions * n_choices_per_finger)
         
-        self.optimizer = optim.Adam(self.parameters(), lr=learning_rate)
+        self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         print(f"Created Actor Network on device: {self.device}")
@@ -81,15 +82,15 @@ class ActorNetwork(nn.Module):
 
     def forward(self, state):
         state = state.to(self.device)
-        x = torch.relu(self.conv1(state))
-        x = torch.relu(self.conv2(x))
-        x = torch.relu(self.conv3(x))
+        x = F.leaky_relu(self.conv1(state))
+        x = F.leaky_relu(self.conv2(x))
+        x = F.leaky_relu(self.conv3(x))
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
-            x = torch.relu(self.fc1(x))
-            x = torch.relu(self.fc2(x))
+            x = F.leaky_relu(self.fc1(x))
+            x = F.leaky_relu(self.fc2(x))
             logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
             # Use softmax with the logits so as to get probabilities
             probabilities = F.softmax(logits, dim=2)
@@ -97,9 +98,9 @@ class ActorNetwork(nn.Module):
 
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
             x = x.reshape(-1)  # Flatten the single image
-            x = torch.relu(self.fc1(x))
-            x = torch.relu(self.fc2(x))
-            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
+            x = F.leaky_relu(self.fc1(x))
+            x = F.leaky_relu(self.fc2(x))
+            logits = F.leaky_relu(self.fc3(x)).reshape((self.n_actions, self.n_choices_per_finger))
             probabilities = F.softmax(logits, dim=1)
             #print("probabilities: ", probabilities)
             #actions = torch.argmax(probabilities, dim=1)  # Discrete action output
