@@ -32,6 +32,10 @@ class DynamicBatchGenerator:
             images.append(image)
             labels.append(label)
 
+        # Convert to numpy array for being faster
+        images = np.array(images)
+        labels = np.array(labels)
+
         # Convert to PyTorch tensors
         images = torch.tensor(images, dtype=torch.float)
         labels = torch.tensor(labels, dtype=torch.float)
@@ -44,8 +48,8 @@ class DynamicBatchGenerator:
         
         # List all image files in the directory
         #image_files = [f for f in os.listdir(image_dir)]
-        # ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png"]
-        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png"]
+        # ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
+        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
         image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
         # Check how many images are there
         num_images = len(image_files)
@@ -77,10 +81,14 @@ class DynamicBatchGenerator:
 
         if n_white_pixels == 0:
             return 0.0
-        elif n_white_pixels < 2.5:
+        elif n_white_pixels < 0.5:
             return 1.0
-        elif n_white_pixels < 10.0:
-            return 6.0
+        elif n_white_pixels < 2.7:
+            return 2.0
+        elif n_white_pixels < 5.0:
+            return 3.0
+        elif n_white_pixels < 12:
+            return 4.0
 
 
 # Observer Network
@@ -91,7 +99,7 @@ class ObserverNetwork(nn.Module):
         self.input_dims = input_dims
         self.checkpoint_dir = checkpoint_dir
         self.name = name
-        self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_td3')
+        self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_supervised')
 
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
@@ -142,6 +150,10 @@ class Trainer():
         self.learning_rate = learning_rate
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         print(f"Using device: {self.device}")
+        # Initialize Observer Network
+        self.observer = ObserverNetwork(input_dims=self.image_shape, learning_rate=self.learning_rate)
+        self.observer.to(self.device)
+
 
     def train(self, epochs = None):
         if epochs is None:
@@ -150,9 +162,7 @@ class Trainer():
         # Initialize Dynamic Batch Generator
         dynamic_batch_generator = DynamicBatchGenerator(batch_size=self.batch_size, image_shape=self.image_shape)
 
-        # Initialize Observer Network
-        observer = ObserverNetwork(input_dims=self.image_shape, learning_rate=self.learning_rate)
-        observer.to(device)
+        observer = self.observer
 
         # Loss function and optimizer
         criterion = nn.MSELoss()  # Mean Squared Error for regression
@@ -207,6 +217,7 @@ class Evaluator():
             plt.show()
 
 if __name__ == '__main__':
+    """
     observer = ObserverNetwork(input_dims=(256, 256, 1))
     observer.load_checkpoint()
 
@@ -215,3 +226,9 @@ if __name__ == '__main__':
 
     for img in images:
         evaluator.render(img)
+    
+    """
+    
+
+    #trainer = Trainer()
+    #trainer.train()
