@@ -100,6 +100,7 @@ class ActorNetwork(nn.Module):
             x = x.reshape(-1)  # Flatten the single image
             x = F.leaky_relu(self.fc1(x))
             x = F.leaky_relu(self.fc2(x))
+            print(f"Observer: {x}")
             logits = F.leaky_relu(self.fc3(x)).reshape((self.n_actions, self.n_choices_per_finger))
             probabilities = F.softmax(logits, dim=1)
             #print("probabilities: ", probabilities)

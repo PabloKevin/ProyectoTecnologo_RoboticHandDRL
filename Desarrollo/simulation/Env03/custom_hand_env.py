@@ -207,7 +207,6 @@ class ToolManipulationEnv(gym.Env):
         # Final reward
         return reward
 
-    
     def probs2actions(self, probs):
         #print(probs)
         probs = np.array(probs)
