@@ -9,7 +9,7 @@ class CriticNetwork(nn.Module):
     # Actualiza el Q-value en función del estado y la acción tomada. Controla qué tan bien la ActorNetwork está accionando. 
     # Actualiza el Q-value en función del estado y la acción tomada, actualiza la política.
     # Dado que es un single-step episode, predice solamente el Q-value inmediato para la acción tomada.
-    def __init__(self, input_dims, n_actions,  hidden_layers=[128,64], name='critic', checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3', 
+    def __init__(self, input_dims,  hidden_layers=[128,64], name='critic', checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3', 
                  learning_rate=0.001, n_choices_per_finger = 3):
         super(CriticNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
@@ -89,9 +89,10 @@ class ActorNetwork(nn.Module):
 # Observer Network
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims, output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[256,5], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
+    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[256,5], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
+        self.output_dims = output_dims
         self.checkpoint_dir = checkpoint_dir
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_supervised')
@@ -130,5 +131,6 @@ class ObserverNetwork(nn.Module):
     def save_checkpoint(self):
         torch.save(self.state_dict(), self.checkpoint_file)
 
-    def load_checkpoint(self):
+    def load_model(self):
         self.load_state_dict(torch.load(self.checkpoint_file))
+        print("Successfully loaded observer model")

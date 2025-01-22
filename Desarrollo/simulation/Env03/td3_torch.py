@@ -2,15 +2,14 @@ import torch as T
 import torch.nn.functional as F
 import numpy as np
 from buffer import ReplayBuffer
-from networks import ActorNetwork, CriticNetwork
+from networks import ActorNetwork, CriticNetwork, ObserverNetwork
 
 class Agent:
-    def __init__(self, actor_learning_rate, critic_learning_rate, input_dims, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=5, n_choices_per_finger=3, max_size=1000000, conv_channels=[16, 32, 64], hidden_size=256, batch_size=100, noise=0.1):
+    def __init__(self, actor_learning_rate, critic_learning_rate, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
+                 n_actions=5, n_choices_per_finger=3, max_size=1000000, hidden_layers=[64,32], batch_size=100, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
-        self.memory = ReplayBuffer(max_size, input_dims, n_actions)
         self.batch_size = batch_size
         self.learn_step_cntr = 0 
         self.time_step = 0
@@ -20,36 +19,39 @@ class Agent:
         self.update_actor_iter = update_actor_interval
         self.env = env
 
+        # Create and load observer
+        self.observer = ObserverNetwork()
+        self.observer.load_model()
+
+        self.input_dims = self.observer.output_dims
+        self.memory = ReplayBuffer(max_size, self.input_dims, n_actions)
+
         # Create the networks
-        self.actor = ActorNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                  hidden_size=hidden_size , n_actions=n_actions, n_choices_per_finger=n_choices_per_finger, name='actor', 
+        self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions, 
+                                  n_choices_per_finger=n_choices_per_finger, name='actor', 
                                   learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                      hidden_size=hidden_size, n_actions=n_actions, 
+        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                      hidden_size=hidden_size, n_actions=n_actions, 
+        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
-        self.target_actor = ActorNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                         hidden_size=hidden_size, n_actions=n_actions, n_choices_per_finger=n_choices_per_finger,
+        self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions, 
+                                         n_choices_per_finger=n_choices_per_finger,
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                             hidden_size=hidden_size, n_actions=n_actions, 
+        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims=input_dims, conv_channels=conv_channels, 
-                                             hidden_size=hidden_size, n_actions=n_actions,
+        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
         
         # Initialize weights for all networks
-        def initialize_weights(m):
+        """def initialize_weights(m):
             if isinstance(m, T.nn.Linear) or isinstance(m, T.nn.Conv2d):
-                T.nn.init.kaiming_uniform_(m.weight,  nonlinearity='relu')
+                T.nn.init.kaiming_uniform_(m.weight,  nonlinearity='leaky_relu')
                 if m.bias is not None:
                     T.nn.init.zeros_(m.bias)
 
@@ -59,6 +61,7 @@ class Agent:
         self.target_actor.apply(initialize_weights)
         self.target_critic_1.apply(initialize_weights)
         self.target_critic_2.apply(initialize_weights)
+        """
 
         self.noise = noise
         self.update_networks_parameters(tau=1)
@@ -87,7 +90,7 @@ class Agent:
             else:
                 # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
                 # which is the format expected by PyTorch convolutional layers.
-                state = T.tensor(observation, dtype=T.float).permute(2, 0, 1).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
+                state = T.tensor(observation, dtype=T.float).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
                 action_probs = self.actor.forward(state).to(self.actor.device)
 
         self.time_step += 1
@@ -104,7 +107,7 @@ class Agent:
         # Sample a batch from the replay buffer
         state, action, reward = self.memory.sample_buffer(self.batch_size)
 
-        state = T.tensor(state, dtype=T.float).permute(0, 3, 1, 2).to(self.critic_1.device)
+        state = T.tensor(state, dtype=T.float).to(self.critic_1.device)
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
         reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
 
@@ -131,14 +134,14 @@ class Agent:
         critic_loss.backward()
 
         # Clip Critic gradients
-        T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=5.0)
+        """T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=5.0)
         T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=5.0)
 
         noise_scale = 1e-5
 
         for param in self.critic_1.parameters():
             if param.grad is not None:
-                param.grad += T.randn_like(param.grad) * noise_scale
+                param.grad += T.randn_like(param.grad) * noise_scale"""
 
         # Update Critic optimizers
         self.critic_1.optimizer.step()
@@ -159,19 +162,19 @@ class Agent:
         actor_loss.backward()
 
         # Clip Actor gradients
-        T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=5.0)
+        """T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=5.0)
 
         noise_scale = 1e-3
 
         for param in self.actor.parameters():
             if param.grad is not None:
-                param.grad += T.randn_like(param.grad) * noise_scale
+                param.grad += T.randn_like(param.grad) * noise_scale"""
 
         # Update Actor optimizer
         self.actor.optimizer.step()
 
         # Debugging: Log gradient norms for the Actor and Critic networks
-        """print("Actor")
+        print("Actor")
         for name, param in self.actor.named_parameters():
             if param.grad is not None:
                 print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
@@ -183,7 +186,7 @@ class Agent:
             if param.grad is not None:
                 print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
             else:
-                print(f"Layer {name} has no gradient")"""
+                print(f"Layer {name} has no gradient")#"""
 
         # Update target networks
         self.update_networks_parameters()

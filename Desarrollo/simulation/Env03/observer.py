@@ -129,7 +129,6 @@ class ObserverNetwork(nn.Module):
         x = F.leaky_relu(self.fc1(x))
         x = F.leaky_relu(self.fc2(x))
         tool_reg = F.leaky_relu(self.fc3(x))
-            
         return tool_reg # Tool regresion
 
     def save_checkpoint(self):

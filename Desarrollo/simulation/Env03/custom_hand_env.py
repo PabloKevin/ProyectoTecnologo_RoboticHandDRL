@@ -50,12 +50,7 @@ class ToolManipulationEnv(gym.Env):
         self.reward = 0
         self.wrong_action_cntr = 0
         self.previous_action = np.zeros(self.n_fingers, dtype=np.uint8)
-    
-    def get_observation_space_shape(self):
-        # probar con imagen ordenada
-        #return (self.image_shape[0], self.image_shape[1], self.image_shape[2])
-        return self.image_shape
-        #return (self.image_shape[0], self.image_shape[1])
+        
 
     def reset(self):
         # Reset the environment to an initial state
