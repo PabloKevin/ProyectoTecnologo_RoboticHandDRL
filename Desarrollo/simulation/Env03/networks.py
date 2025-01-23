@@ -10,13 +10,12 @@ class CriticNetwork(nn.Module):
     # Actualiza el Q-value en función del estado y la acción tomada, actualiza la política.
     # Dado que es un single-step episode, predice solamente el Q-value inmediato para la acción tomada.
     def __init__(self, input_dims,  hidden_layers=[128,64], name='critic', checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3', 
-                 learning_rate=0.001, n_choices_per_finger = 3):
+                 learning_rate=0.001):
         super(CriticNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
         self.checkpoint_dir = checkpoint_dir
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_td3')
-        self.n_choices_per_finger = n_choices_per_finger
 
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
@@ -29,12 +28,11 @@ class CriticNetwork(nn.Module):
         self.to(self.device)
         
 
-    def forward(self, state, action_probs):
-        action_probs = action_probs.reshape((action_probs.shape[0],-1))
-        input = torch.cat([state, action_probs], dim=1)
+    def forward(self, state, action):
+        input = torch.cat([state, action], dim=1)
         x = F.leaky_relu(self.fc1(input))
         x = F.leaky_relu(self.fc2(x))
-        q_value = torch.clamp(self.fc3(x), max=5.0)
+        q_value = self.fc3(x)
 
         return q_value
 
@@ -74,14 +72,9 @@ class ActorNetwork(nn.Module):
         x = F.leaky_relu(self.fc2(x))
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
-        if len(x.shape) == 2:
-            logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
-        elif len(x.shape) == 1:
-            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
-        # Use softmax with the logits so as to get probabilities
-        probabilities = F.softmax(logits, dim=-1)
+        action = torch.tanh(self.fc3(x)) # output between (-1,1)
             
-        return probabilities
+        return action
 
     def save_checkpoint(self):
         torch.save(self.state_dict(), self.checkpoint_file)

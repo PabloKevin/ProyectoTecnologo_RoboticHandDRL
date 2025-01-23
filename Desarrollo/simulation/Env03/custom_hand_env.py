@@ -36,7 +36,7 @@ class ToolManipulationEnv(gym.Env):
                                "right" : 3.0,
                                "wrong" : 1.0,
                                "awful" : 0.0,
-                               "repeated_action_penalty" : [0.8, 0.2]
+                               "repeated_action_penalty" : [1.2, 0.2, -3.0]
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
@@ -112,7 +112,8 @@ class ToolManipulationEnv(gym.Env):
         
         # List all image files in the directory
         #image_files = [f for f in os.listdir(image_dir)]
-        images_of_interest = ["bw_Martillo01.jpg", "empty.png"]
+        #["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
+        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_tornillo01.jpg"]
         image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
         # Check how many images are there
         num_images = len(image_files)
@@ -187,7 +188,7 @@ class ToolManipulationEnv(gym.Env):
                 reward += self.reward_weights["individual_finger_reward"][4] * self.reward_weights["reward_alpha"]"""
         
         # Penalize wrong actions
-        if reward < self.reward_weights["repeated_action_penalty"][0]:
+        if reward < self.reward_weights["repeated_action_penalty"][0] and reward > self.reward_weights["repeated_action_penalty"][2]:
             self.wrong_action_cntr += 1
             reward -= self.wrong_action_cntr * self.reward_weights["repeated_action_penalty"][1]
             if np.array_equal(action, self.previous_action):

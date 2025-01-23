@@ -18,12 +18,14 @@ class Agent:
         self.n_choices_per_finger = n_choices_per_finger
         self.update_actor_iter = update_actor_interval
         self.env = env
+        self.min_action = -1.0 # Para ser concistente con la red, después se cambia a [0,2]
+        self.max_action = 1.0
 
         # Create and load observer
         self.observer = ObserverNetwork()
         self.observer.load_model()
 
-        self.input_dims = self.observer.output_dims
+        self.input_dims = self.observer.output_dims + 1 # +1 = f_idx (finger index)
         self.memory = ReplayBuffer(max_size, self.input_dims, n_actions)
 
         # Create the networks
@@ -71,130 +73,116 @@ class Agent:
 
     def choose_action(self, observation, validation=False):
         # Los primeros episodios (de warm up) son con acciones randoms para permitir al agente explorar el entorno y sus reacciones,
-        # formar una política. validation = True, permite saltar el warmup (que es un int), podría ser si ya tiene entrenamiento.
-        
-        if self.time_step < self.warmup and validation is False:
-            # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
-            if self.time_step % 4 == 0:
-                action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
-                action = action_probs
-            # Use tensor to generate random actions
-            else:
-                random_probs = np.random.dirichlet(np.ones(self.n_choices_per_finger), size=self.n_actions)
-                action_probs = T.tensor(random_probs, dtype=T.float).to(self.actor.device)
-                action = action_probs
-        else:
-            # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
-            if np.random.random() < self.epsilon and validation is False:
-                self.epsilon = max(self.epsilon * self.epsilon_decay, self.min_epsilon)
-                action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
-                action = action_probs
-            # Use tensor to generate random actions
-            else:
-                # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
-                # which is the format expected by PyTorch convolutional layers.
-                state = T.tensor(observation, dtype=T.float).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
-                action_probs = self.actor.forward(state).to(self.actor.device)
-                action = action_probs
+        # formar una política. validation = True, permite saltar el warmup, podría ser si ya tiene entrenamiento.
 
+        if self.time_step < self.warmup and validation is False:
+            mu = T.tensor(np.random.uniform(low=-1, high=1, size=(self.n_actions,))).to(self.actor.device)
+
+        # Luego del warmup, las acciones se desarrollan en función del estado, con una política ya creada (que va a seguir mejorando).
+        else:
+            state = T.tensor(observation, dtype=T.float).to(self.actor.device)
+            mu = self.actor.forward(state).to(self.actor.device)    #el .to(self.actor.device) manda el mu a la GPU o CPU (según corresponda)
+
+        # Para mejorar el entrenamiento, se le añade un ruido normal a la acción, para ayudar a explotar durante todo el entrenamiento.
+        # Esto es útil sobre todo para espacios de acciones continuos (no discretos) o muy grandes, en lo que además se enfoca el algoritmo td3.
+        # Pero el fundamento de no cerrarse en la política es interesante para espacios de acciones discretos, probarlo en el problema.
+        mu_prime = mu + T.tensor(np.random.normal(scale=self.noise), dtype=T.float).to(self.actor.device)
+
+        # Más allá del espacio continuo, pueden haber restricciones físicas u otras, entonces el .clamp se asegura que el ruido no marque acciones
+        # fuera de los límites de acción. Ej: que la velocidad de motores no sea mayor a 50.
+        mu_prime = T.clamp(mu_prime, self.min_action, self.max_action)
 
         self.time_step += 1
 
-        return action.cpu().detach().numpy() # Convert action to NumPy array and return
+        # manda el mu_prime a la cpu, lo transforma en un tensor, y luego lo transforma en un valor np para leer la acción y ejecutarla o mandarla a otro lado.
+        return mu_prime.cpu().detach().numpy() 
 
     def remember(self, state, action, reward):
         self.memory.store_transition(state, action, reward)
 
     def learn(self):
-        if self.memory.mem_cntr < self.batch_size * 10:
+        # Asegura suficientes transiciones en memoria antes de entrenar, evitando aprendizaje prematuro y fomentando una exploración inicial.
+        # Evitar un aprendizaje prematuro: Si el agente empieza a entrenar demasiado pronto, puede intentar ajustar las redes con datos insuficientes o poco representativos 
+        # del entorno, lo cual podría resultar en un entrenamiento inestable o ineficaz.
+        # Reforzar exploración inicial: Durante las primeras iteraciones, el agente debería enfocarse más en explorar el entorno para recopilar información útil. 
+        if self.memory.mem_ctr < self.batch_size * 10: 
             return
 
-        # Sample a batch from the replay buffer
-        state, action, reward = self.memory.sample_buffer(self.batch_size)
+        # Obtiene un batch de muestras aleatorias desde el Replay Buffer
+        state, action, reward, next_state, done = self.memory.sample_buffer(self.batch_size)
 
+        # Convierte las muestras del batch a tensores y las mueve al dispositivo adecuado (CPU o GPU).
+        reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
+        done = T.tensor(done).to(self.critic_1.device)
+        next_state = T.tensor(next_state, dtype=T.float).to(self.critic_1.device)
         state = T.tensor(state, dtype=T.float).to(self.critic_1.device)
         action = T.tensor(action, dtype=T.float).to(self.critic_1.device)
-        reward = T.tensor(reward, dtype=T.float).to(self.critic_1.device)
 
-        # Update Critic networks
-        self.critic_1.optimizer.zero_grad()
-        self.critic_2.optimizer.zero_grad()
+        # Genera las acciones objetivo utilizando la red objetivo del actor,
+        # y agrega ruido para evitar sobreestimaciones de los valores Q.
+        target_actions = self.target_actor.forward(next_state)
+        target_actions = target_actions + T.clamp(T.tensor(np.random.normal(scale=0.2)), -0.5, 0.5)
+        # Asegura que las acciones objetivo estén dentro de los límites permitidos.
+        target_actions = T.clamp(target_actions, self.min_action, self.max_action)
 
-        # Compute target Q-value using the target networks
-        with T.no_grad():
-            # For single-step episodes, the target is the immediate reward
-            target_q1 = self.target_critic_1.forward(state, action)
-            target_q2 = self.target_critic_2.forward(state, action)
-            target_q = T.min(target_q1, target_q2)  # TD3 minimizes Q-value to reduce overestimation
-            target = reward.view(-1, 1) + 0.0 * target_q  # 0.0 * target_q ensures compatibility with TD3 logic
-
-        # Compute current Q-values from the Critic networks
+        # Calcula los valores Q objetivo utilizando las redes críticas objetivo y las acciones objetivo.
+        next_q1 = self.target_critic_1.forward(next_state, target_actions)
+        next_q2 = self.target_critic_2.forward(next_state, target_actions)
+        
+        # Calcula los valores Q actuales usando las redes críticas principales.
         q1 = self.critic_1.forward(state, action)
         q2 = self.critic_2.forward(state, action)
 
-        # Compute Critic loss
-        q1_loss = F.mse_loss(q1, target)
-        q2_loss = F.mse_loss(q2, target)
+        next_q1[done] = 0.0
+        next_q2[done] = 0.0
+
+        next_q1 = next_q1.view(-1)
+        next_q2 = next_q2.view(-1)
+
+        # Utiliza el valor Q mínimo para reducir el riesgo de sobreestimación.
+        next_critic_value = T.min(next_q1, next_q2)
+
+        # Además de la recompensa del estado actual, da buena (casi igual) importancia a la recompensa del estado siguiente (futuro), lo que ayuda en el aprendizaje
+        # porque un estado "malo" puede en realidad ser el camino a un estado siguiente muy bueno. Revisar ecuación de Bellman. 
+        # El siguiente approach también es interesante: q_target = reward + self.gamma * next_q * (1 - done) .
+        target = reward + self.gamma * next_critic_value
+        target = target.view(self.batch_size, 1)
+
+        # Reinicia los gradientes antes de realizar las actualizaciones.
+        self.critic_1.optimizer.zero_grad()
+        self.critic_2.optimizer.zero_grad()
+
+        # Calcula las pérdidas de las redes críticas usando Mean Squared Error (MSE) entre los valores Q actuales y los objetivos.
+        q1_loss = F.mse_loss(target, q1)
+        q2_loss = F.mse_loss(target, q2)
+
+        # Retropropaga las pérdidas.
         critic_loss = q1_loss + q2_loss
         critic_loss.backward()
 
-        # Clip Critic gradients
-        
-        T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=1.0)
-        T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=1.0)
-        """
-        noise_scale = 1e-5
-
-        for param in self.critic_1.parameters():
-            if param.grad is not None:
-                param.grad += T.randn_like(param.grad) * noise_scale"""
-
-        # Update Critic optimizers
+        # Actualiza los parámetros de las redes críticas.
         self.critic_1.optimizer.step()
         self.critic_2.optimizer.step()
 
+        # Incrementa el contador de pasos de aprendizaje.
         self.learn_step_cntr += 1
 
-        # Update Actor network at specified intervals
+        # Actualiza la red del actor solo después de un número determinado de pasos.
         if self.learn_step_cntr % self.update_actor_iter != 0:
             return
 
+        # Calcula la pérdida del actor basada en las predicciones de la critic_1, tratando de maximizar los valores Q de las acciones generadas.
         self.actor.optimizer.zero_grad()
-
-        # Compute Actor loss
-        actor_probabilities = self.actor.forward(state)
-        actor_q1_loss = self.critic_1.forward(state, actor_probabilities)
-        actor_loss = -T.mean(actor_q1_loss)  # Maximize Q-value for the Actor
+        actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state))
+        # Durante el entrenamiento, se trabaja con batches de datos, con lo cual el actor_q1_loss tendrá el Q_value para cada estado y acción del batch, 
+        # y por eso tiene sentido el .mean() (si en vez de batch, fuera un solo Q_value, no tendría sentido hacer el promedio), para no darle sobreimportancia al tamaño del batch.
+        actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de minimización.
+        
+        # Retropropaga la pérdida y actualiza los parámetros de la red del actor.
         actor_loss.backward()
-
-        # Clip Actor gradients
-        T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
-
-        noise_scale = 1e-5
-
-        for param in self.actor.parameters():
-            if param.grad is not None:
-                param.grad += T.randn_like(param.grad) * noise_scale
-
-        # Update Actor optimizer
         self.actor.optimizer.step()
 
-        # Debugging: Log gradient norms for the Actor and Critic networks
-        print("Actor")
-        for name, param in self.actor.named_parameters():
-            if param.grad is not None:
-                print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
-            else:
-                print(f"Layer {name} has no gradient")
-
-        print("\nCritic 1")
-        for name, param in self.critic_1.named_parameters():
-            if param.grad is not None:
-                print(f"Layer {name} gradient norm: {param.grad.norm().item():.10f}")
-            else:
-                print(f"Layer {name} has no gradient")#"""
-
-        # Update target networks
+        # Realiza una actualización suave (soft update) de las redes objetivo.
         self.update_networks_parameters()
 
 
