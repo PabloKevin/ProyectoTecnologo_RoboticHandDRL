@@ -18,13 +18,13 @@ if __name__ == '__main__':
 # Ir probando con numeros más simples para que lleve menos tiempo. Dado que el problemas es más simple,
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     load_models = False
-    actor_learning_rate = 0.001 #0.001    1.0
+    actor_learning_rate = 0.003 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
     batch_size = 64 #128
 
-    hidden_layers=[128,64] #256
+    hidden_layers=[32,32] #256
     warmup = 1200
-    episodes = 7000 #10000
+    episodes = 15000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
@@ -33,6 +33,7 @@ if __name__ == '__main__':
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.05, #tau=0.005
                   env=env, n_actions=env.n_fingers, n_choices_per_finger=env.n_choices_per_finger, hidden_layers=hidden_layers, 
                   batch_size=batch_size, warmup=warmup, max_size=max_size) 
+    agent.train()
 
     #print("n_actions: ", agent.n_actions)
     writer = SummaryWriter("Desarrollo/simulation/Env03/logs")
@@ -71,7 +72,7 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
-            observation = agent.observer(observation) # Takes the image and outputs a tool value
+            observation = agent.observer(observation).cpu().detach().numpy() # Takes the image and outputs a tool value
             score = 0
             action_probs = agent.choose_action(observation)
             action = agent.env.probs2actions(action_probs)

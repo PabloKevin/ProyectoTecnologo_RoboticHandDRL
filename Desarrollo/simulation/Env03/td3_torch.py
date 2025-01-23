@@ -31,10 +31,10 @@ class Agent:
                                   n_choices_per_finger=n_choices_per_finger, name='actor', 
                                   learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers, 
+        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
@@ -42,14 +42,14 @@ class Agent:
                                          n_choices_per_finger=n_choices_per_finger,
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
         
-        # Initialize weights for all networks
-        """def initialize_weights(m):
+        """# Initialize weights for all networks
+        def initialize_weights(m):
             if isinstance(m, T.nn.Linear) or isinstance(m, T.nn.Conv2d):
                 T.nn.init.kaiming_uniform_(m.weight,  nonlinearity='leaky_relu')
                 if m.bias is not None:
@@ -60,8 +60,8 @@ class Agent:
         self.critic_2.apply(initialize_weights)
         self.target_actor.apply(initialize_weights)
         self.target_critic_1.apply(initialize_weights)
-        self.target_critic_2.apply(initialize_weights)
-        """
+        self.target_critic_2.apply(initialize_weights)"""
+        
 
         self.noise = noise
         self.update_networks_parameters(tau=1)
@@ -77,25 +77,30 @@ class Agent:
             # Asegurar que cada cierto tiempo se ejecute una de las acciones de interés
             if self.time_step % 4 == 0:
                 action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
+                action = action_probs
             # Use tensor to generate random actions
             else:
                 random_probs = np.random.dirichlet(np.ones(self.n_choices_per_finger), size=self.n_actions)
                 action_probs = T.tensor(random_probs, dtype=T.float).to(self.actor.device)
+                action = action_probs
         else:
             # Asegurar que cada cierto tiempo (cada vez menos) se ejecute una de las acciones de interés
             if np.random.random() < self.epsilon and validation is False:
                 self.epsilon = max(self.epsilon * self.epsilon_decay, self.min_epsilon)
                 action_probs = T.tensor(np.array(self.env.probabilities_of_interest)[np.random.randint(0, len(self.env.probabilities_of_interest))], dtype=T.float).to(self.actor.device)
+                action = action_probs
             # Use tensor to generate random actions
             else:
                 # permute(0, 3, 1, 2) rearranges the dimensions from [height, width, channels] to [channels, height, width],
                 # which is the format expected by PyTorch convolutional layers.
                 state = T.tensor(observation, dtype=T.float).to(self.actor.device) #tiene que ser float para que no haya problemas con la multiplicación de los pesos de la red
                 action_probs = self.actor.forward(state).to(self.actor.device)
+                action = action_probs
+
 
         self.time_step += 1
 
-        return action_probs.cpu().detach().numpy() # Convert action to NumPy array and return
+        return action.cpu().detach().numpy() # Convert action to NumPy array and return
 
     def remember(self, state, action, reward):
         self.memory.store_transition(state, action, reward)
@@ -134,9 +139,10 @@ class Agent:
         critic_loss.backward()
 
         # Clip Critic gradients
-        """T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=5.0)
-        T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=5.0)
-
+        
+        T.nn.utils.clip_grad_norm_(self.critic_1.parameters(), max_norm=1.0)
+        T.nn.utils.clip_grad_norm_(self.critic_2.parameters(), max_norm=1.0)
+        """
         noise_scale = 1e-5
 
         for param in self.critic_1.parameters():
@@ -162,13 +168,13 @@ class Agent:
         actor_loss.backward()
 
         # Clip Actor gradients
-        """T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=5.0)
+        T.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
 
-        noise_scale = 1e-3
+        noise_scale = 1e-5
 
         for param in self.actor.parameters():
             if param.grad is not None:
-                param.grad += T.randn_like(param.grad) * noise_scale"""
+                param.grad += T.randn_like(param.grad) * noise_scale
 
         # Update Actor optimizer
         self.actor.optimizer.step()
@@ -221,3 +227,11 @@ class Agent:
         self.target_critic_1.load_checkpoint()
         self.target_critic_2.load_checkpoint()
         print("Successfully loaded models")
+
+    def train(self):
+        self.actor.train()
+        self.critic_1.train()
+        self.critic_2.train()
+        self.target_actor.train()
+        self.target_critic_1.train()
+        self.target_critic_2.train()

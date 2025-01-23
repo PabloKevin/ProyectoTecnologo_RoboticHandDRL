@@ -8,9 +8,9 @@ class ReplayBuffer:
     def __init__(self, max_size, input_shape, n_actions, n_choices_per_finger=3):
         self.mem_size = max_size
         self.mem_cntr = 0
-        self.state_memory = np.zeros((self.mem_size, *input_shape), dtype=np.uint8)  # Binary image: dtype=np.uint8
-        self.action_memory = np.zeros((self.mem_size, n_actions, n_choices_per_finger), dtype=np.uint8)  # Discrete actions: dtype=np.uint8
-        self.reward_memory = np.zeros(self.mem_size, dtype=np.float32)  # Rewards remain float32
+        self.state_memory = np.zeros((self.mem_size, input_shape), dtype=np.float64)  # Binary image: dtype=np.uint8.  *input_shape the "*" unpack the elements in the iterable as different arguments
+        self.action_memory = np.zeros((self.mem_size, n_actions, n_choices_per_finger), dtype=np.float64)  # Discrete actions: dtype=np.uint8
+        self.reward_memory = np.zeros(self.mem_size, dtype=np.float64)  # Rewards remain float32
 
     def store_transition(self, state, action, reward):
         index = self.mem_cntr % self.mem_size  # Circular buffer logic

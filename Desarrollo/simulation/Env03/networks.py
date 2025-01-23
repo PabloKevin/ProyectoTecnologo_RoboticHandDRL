@@ -30,6 +30,7 @@ class CriticNetwork(nn.Module):
         
 
     def forward(self, state, action_probs):
+        action_probs = action_probs.reshape((action_probs.shape[0],-1))
         input = torch.cat([state, action_probs], dim=1)
         x = F.leaky_relu(self.fc1(input))
         x = F.leaky_relu(self.fc2(x))
@@ -73,9 +74,12 @@ class ActorNetwork(nn.Module):
         x = F.leaky_relu(self.fc2(x))
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
-        logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
+        if len(x.shape) == 2:
+            logits = self.fc3(x).reshape((x.size(0),self.n_actions, self.n_choices_per_finger))
+        elif len(x.shape) == 1:
+            logits = self.fc3(x).reshape((self.n_actions, self.n_choices_per_finger))
         # Use softmax with the logits so as to get probabilities
-        probabilities = F.softmax(logits, dim=2)
+        probabilities = F.softmax(logits, dim=-1)
             
         return probabilities
 
@@ -112,7 +116,7 @@ class ObserverNetwork(nn.Module):
         
 
     def forward(self, img):
-        img = img.to(self.device)
+        img = torch.tensor(img, dtype=torch.float).permute(2, 0, 1).to(self.device)
         x = F.leaky_relu(self.conv1(img))
         x = F.leaky_relu(self.conv2(x))
         x = F.leaky_relu(self.conv3(x))

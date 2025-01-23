@@ -33,8 +33,9 @@ class ToolManipulationEnv(gym.Env):
         
         self.reward_weights = { "reward_alpha" : 1,
                                "individual_finger_reward" : [0.25, 0.25, 0.25, 0.25, 0.25],
-                               "reward_beta" : [5.0, 5.0, 5.0, 5.0, 1.0, 0.0],
-                               "reward_gamma" : [0.0, 0.0, 0.0, 0.0],
+                               "right" : 3.0,
+                               "wrong" : 1.0,
+                               "awful" : 0.0,
                                "repeated_action_penalty" : [0.8, 0.2]
         }
         
