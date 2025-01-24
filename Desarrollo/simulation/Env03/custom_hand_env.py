@@ -14,12 +14,15 @@ class ToolManipulationEnv(gym.Env):
         self.image_shape = image_shape
         self.n_fingers = n_fingers
         self.n_choices_per_finger = n_choices_per_finger
+        #fijarse si es necesario es observation_space
         self.observation_space = spaces.Dict({
             # Image in black and white, so 0 = Black, 1 = White 
             'image': spaces.MultiDiscrete([2] * np.prod(self.image_shape)),
-            
+            'f_idx': 0.0,
+            'finger_state': 0.0,
             'finger_states': spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
         })
+
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
                                          [1, 1, 1, 1, 1], # All fingers half closed
@@ -45,9 +48,12 @@ class ToolManipulationEnv(gym.Env):
         # Initialize state
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
-            'finger_states': np.zeros(self.n_fingers, dtype=np.uint8)
+            'f_idx': 0.0,
+            'finger_state': 0.0,
+            'finger_states': np.zeros(self.n_fingers, dtype=np.uint8),
+            'best_combination': np.zeros(self.n_fingers, dtype=np.uint8)
         }
-
+        self.done = False
         self.reward = 0
         self.wrong_action_cntr = 0
         self.previous_action = np.zeros(self.n_fingers, dtype=np.uint8)
@@ -56,9 +62,13 @@ class ToolManipulationEnv(gym.Env):
     def reset(self):
         # Reset the environment to an initial state
         self.state['image'] = self._get_initial_image()
-        self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float16)
+        self.state['f_idx'] = 0.0
+        self.state['finger_state'] = 0.0
+        self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float64)
+        self.state['best_combination'] = self._calculate_best_combination(self.state['image'])
+        self.done = False
         self.reward = 0
-        observation = self.state['image']
+        observation = (self.state['image'], self.state['f_idx'])
 
         return observation
     
@@ -74,7 +84,13 @@ class ToolManipulationEnv(gym.Env):
                 self.state['finger_states'][i] = 180  # Fully closed
         """
         # Update the finger states
-        self.state['finger_states'] = action
+        self.state['f_idx'] += 1 
+        if self.state['f_idx'] == 5:
+            self.done = True
+        else:
+            self.done = False
+        self.state['finger_state'] = action
+        self.state['finger_states'][self.state['f_idx']] = action
 
         # Calculate reward
         self.reward = self._calculate_reward(self.state, action)
@@ -83,9 +99,10 @@ class ToolManipulationEnv(gym.Env):
         #flattened_image = self.state['image'].flatten()
         #observation = np.concatenate((flattened_image, action))
         # probar unicamente con la imagen
-        observation = self.state['image']
+        next_observation = (self.state['image'], self.state['f_idx'])
+        info = {} # no le he encontrado utilidad, pero podría ser util.
         
-        return observation, self.reward, {}
+        return next_observation, self.reward, self.done, info
     
     def render(self, timeout=None):
         plt.imshow(self.state['image'], cmap='gray')
@@ -140,54 +157,36 @@ class ToolManipulationEnv(gym.Env):
         img = np.expand_dims(img, axis=-1)
         return img
     
+    def _calculate_best_combination(self, img):
+        n_white_pixels = len(np.argwhere(img == 1))
+        if n_white_pixels/1000 > 0.0 and n_white_pixels/1000 < 0.5:
+            best_combination = self.combinations_of_interest[0]
+        elif n_white_pixels/1000 >= 0.5 and n_white_pixels/1000 < 2.7:
+            best_combination = self.combinations_of_interest[1]
+        elif n_white_pixels/1000 >= 2.7 and n_white_pixels/1000 < 12.0:
+            best_combination = self.combinations_of_interest[2]
+        elif n_white_pixels == 0:
+            best_combination = self.combinations_of_interest[3]
+        return best_combination
+
     def _calculate_reward(self, state, action):
-        reward = 0
+        self.reward = abs(action - state['best_combination'][state['f_idx']])
         
-        #action = self.probs2actions(action)
-        # Extract the current finger states
-        #current_finger_states = state['finger_states']
-        # Find a way to "subtract" reward if the object falls, or if the object is too large
-        # to use few fingers, so it doesn't bias towards using the first combination. 
-        # Watch the quantity of white pixels.
-        n_white_pixels = len(np.argwhere(self.state['image'] == 1))
-        # Check for each combination and assign rewards
-        # usar diccionarios para pesos y grados, como buena práctica. 
-        if np.array_equal(action, self.combinations_of_interest[0]):
-            if n_white_pixels/1000 > 0.0 and n_white_pixels/1000 < 0.5:
-                reward += self.reward_weights["right"] * self.reward_weights["reward_alpha"]
-            else:
-                reward += self.reward_weights["wrong"] * self.reward_weights["reward_alpha"]
-        elif np.array_equal(action, self.combinations_of_interest[1]):
-            if n_white_pixels/1000 >= 0.5 and n_white_pixels/1000 < 2.7:
-                reward += self.reward_weights["right"] * self.reward_weights["reward_alpha"]
-            else:
-                reward += self.reward_weights["wrong"] * self.reward_weights["reward_alpha"]
-        elif np.array_equal(action, self.combinations_of_interest[2]):
-            if n_white_pixels/1000 >= 2.7 and n_white_pixels/1000 < 12.0:
-                reward += self.reward_weights["right"] * self.reward_weights["reward_alpha"]
-            else:
-                reward += self.reward_weights["wrong"] * self.reward_weights["reward_alpha"]
-        elif np.array_equal(action, self.combinations_of_interest[3]):
-            if n_white_pixels == 0:
-                reward += self.reward_weights["right"] * self.reward_weights["reward_alpha"]
-            else:
-                reward += self.reward_weights["wrong"] * self.reward_weights["reward_alpha"]
-        else:
-            reward += self.reward_weights["awful"] * self.reward_weights["reward_alpha"]  # Malfunction or undesired combination
         
-            """# reward for each finger so as to motivate the combinations
-            if action[0] == 2:
-                reward += self.reward_weights["individual_finger_reward"][0] * self.reward_weights["reward_alpha"]
-            if action[1] == 1:
-                reward += self.reward_weights["individual_finger_reward"][1] * self.reward_weights["reward_alpha"]
-            if action[2] == 1:
-                reward += self.reward_weights["individual_finger_reward"][2] * self.reward_weights["reward_alpha"]
-            if action[3] == 2:
-                reward += self.reward_weights["individual_finger_reward"][3] * self.reward_weights["reward_alpha"]
-            if action[4] == 2:
-                reward += self.reward_weights["individual_finger_reward"][4] * self.reward_weights["reward_alpha"]"""
         
-        # Penalize wrong actions
+        """# reward for each finger so as to motivate the combinations
+        if action[0] == 2:
+            reward += self.reward_weights["individual_finger_reward"][0] * self.reward_weights["reward_alpha"]
+        if action[1] == 1:
+            reward += self.reward_weights["individual_finger_reward"][1] * self.reward_weights["reward_alpha"]
+        if action[2] == 1:
+            reward += self.reward_weights["individual_finger_reward"][2] * self.reward_weights["reward_alpha"]
+        if action[3] == 2:
+            reward += self.reward_weights["individual_finger_reward"][3] * self.reward_weights["reward_alpha"]
+        if action[4] == 2:
+            reward += self.reward_weights["individual_finger_reward"][4] * self.reward_weights["reward_alpha"]"""
+        
+        """# Penalize wrong actions
         if reward < self.reward_weights["repeated_action_penalty"][0] and reward > self.reward_weights["repeated_action_penalty"][2]:
             self.wrong_action_cntr += 1
             reward -= self.wrong_action_cntr * self.reward_weights["repeated_action_penalty"][1]
@@ -196,9 +195,9 @@ class ToolManipulationEnv(gym.Env):
         else:
             self.wrong_action_cntr = 0
 
-        self.previous_action = action  # Actualizar la acción anterior
+        self.previous_action = action  # Actualizar la acción anterior"""
         # Final reward
-        return reward
+        return self.reward
 
     def probs2actions(self, probs):
         #print(probs)

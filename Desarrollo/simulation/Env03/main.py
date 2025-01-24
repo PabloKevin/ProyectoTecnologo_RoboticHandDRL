@@ -72,20 +72,21 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
-            observation = agent.observer(observation).cpu().detach().numpy() # Takes the image and outputs a tool value
+            done = False
             score = 0
-            action_probs = agent.choose_action(observation)
-            action = agent.env.probs2actions(action_probs)
-            next_observation, reward, info = env.step(action)
-            score += reward
-            agent.remember(observation, action_probs, reward)
-            agent.learn()
+            while not done:
+                observation = agent.observer(observation).cpu().detach().numpy() # Takes the image and outputs a tool value
+                action = agent.choose_action(observation)
+                next_observation, reward, done, info = env.step(action)
+                score += reward
+                agent.remember(observation, action, reward, next_observation, done)
+                agent.learn()
+                observation = next_observation
 
             writer.add_scalar(f"Score - {episode_identifier}", scalar_value=score, global_step=i)
 
             # Log the information to the text file
             log_file.write(f"Episode: {i}; Score: {score}; Action: {action}\n")
-            log_file_probs.write(f"probabilities: {action_probs}\n")
             print(f"Episode: {i}; Score: {score}; Action: {action}")
 
             if i % 10 == 0:
