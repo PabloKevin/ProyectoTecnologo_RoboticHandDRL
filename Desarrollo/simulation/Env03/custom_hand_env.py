@@ -130,7 +130,7 @@ class ToolManipulationEnv(gym.Env):
         # List all image files in the directory
         #image_files = [f for f in os.listdir(image_dir)]
         #["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
-        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_tornillo01.jpg"]
+        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
         image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
         # Check how many images are there
         num_images = len(image_files)
