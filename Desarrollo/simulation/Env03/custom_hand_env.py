@@ -105,15 +105,15 @@ class ToolManipulationEnv(gym.Env):
         return next_observation, self.reward, self.done, info
     
     def render(self, timeout=None):
-        plt.imshow(self.state['image'], cmap='gray')
+        plt.imshow(self.state['image'].squeeze(), cmap='gray')
         plt.title('Episode Image')
         plt.axis('off')  # Ocultar los ejes
         
         # Add text annotation for finger states
-        finger_states_text = f"Finger states after action: {self.state['finger_states']}"
+        finger_states_text = f"Finger states after action: {self.complete_action()[1]}"
         plt.text(-12, 266, finger_states_text, color='white', fontsize=12, 
                  bbox=dict(facecolor='black', alpha=0.7))
-        plt.text(-12, 286, f"Reward: {self.reward}", color='white', fontsize=12, 
+        plt.text(-12, 286, f"Score: {self.reward}", color='white', fontsize=12, 
                  bbox=dict(facecolor='black', alpha=0.7))
         
         if timeout is not None:
@@ -156,7 +156,7 @@ class ToolManipulationEnv(gym.Env):
         #np.savetxt(file, img, fmt="%d", delimiter=" ") 
         #img = np.expand_dims(img, axis=-1)
         # Normalize the image and add a channel dimension
-        img = np.expand_dims(img / 255.0, axis=0)
+        img = np.expand_dims(img, axis=0)
         return img
     
     def _calculate_best_combination(self, img):

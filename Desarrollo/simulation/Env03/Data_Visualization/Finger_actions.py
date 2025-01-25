@@ -40,14 +40,14 @@ def parse_log(file_path):
 
 # Path to your episode log file
 directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env03/logs_txt/"
-file_name = "experiment_log_20_e3.txt"
+file_name = "experiment_log_0_e4.txt"
 log_file_path = directory_path + file_name
 
 # Parse the log and load it into a DataFrame
 df = parse_log(log_file_path)
 
 # Separate warmup and training
-warmup_cutoff = 800
+warmup_cutoff = 1200
 actions_all = [list(actions) for actions in df["Actions"]]
 actions_warmup = actions_all[:warmup_cutoff]
 actions_training = actions_all[warmup_cutoff:]

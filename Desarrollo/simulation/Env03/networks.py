@@ -86,7 +86,7 @@ class ActorNetwork(nn.Module):
 # Observer Network
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[256,5], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
+    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[256,8], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
         self.output_dims = output_dims
