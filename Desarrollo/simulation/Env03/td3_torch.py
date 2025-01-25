@@ -6,7 +6,7 @@ from networks import ActorNetwork, CriticNetwork, ObserverNetwork
 
 class Agent:
     def __init__(self, actor_learning_rate, critic_learning_rate, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=5, n_choices_per_finger=3, max_size=1000000, hidden_layers=[64,32], batch_size=100, noise=0.1):
+                 n_actions=5, max_size=1000000, hidden_layers=[64,32], batch_size=100, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
@@ -15,7 +15,6 @@ class Agent:
         self.time_step = 0
         self.warmup = warmup
         self.n_actions = n_actions
-        self.n_choices_per_finger = n_choices_per_finger
         self.update_actor_iter = update_actor_interval
         self.env = env
         self.min_action = -1.0 # Para ser concistente con la red, después se cambia a [0,2]
@@ -29,25 +28,23 @@ class Agent:
         self.memory = ReplayBuffer(max_size, self.input_dims, n_actions)
 
         # Create the networks
-        self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions, 
-                                  n_choices_per_finger=n_choices_per_finger, name='actor', 
-                                  learning_rate=actor_learning_rate)
+        self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions,
+                                  name='actor', learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
+        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers, 
+        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
         self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions, 
-                                         n_choices_per_finger=n_choices_per_finger,
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
+        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions*n_choices_per_finger, hidden_layers=hidden_layers,
+        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
         
         """# Initialize weights for all networks
@@ -90,15 +87,15 @@ class Agent:
 
         # Más allá del espacio continuo, pueden haber restricciones físicas u otras, entonces el .clamp se asegura que el ruido no marque acciones
         # fuera de los límites de acción. Ej: que la velocidad de motores no sea mayor a 50.
-        mu_prime = T.clamp(mu_prime, self.min_action, self.max_action)
+        mu_prime = T.clamp(mu_prime, min=self.min_action, max=self.max_action)
 
         self.time_step += 1
 
         # manda el mu_prime a la cpu, lo transforma en un tensor, y luego lo transforma en un valor np para leer la acción y ejecutarla o mandarla a otro lado.
         return mu_prime.cpu().detach().numpy() 
 
-    def remember(self, state, action, reward):
-        self.memory.store_transition(state, action, reward)
+    def remember(self, state, action, reward, next_state, done):
+        self.memory.store_transition(state, action, reward, next_state, done)
 
     def learn(self):
         # Asegura suficientes transiciones en memoria antes de entrenar, evitando aprendizaje prematuro y fomentando una exploración inicial.
@@ -173,7 +170,7 @@ class Agent:
 
         # Calcula la pérdida del actor basada en las predicciones de la critic_1, tratando de maximizar los valores Q de las acciones generadas.
         self.actor.optimizer.zero_grad()
-        actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state))
+        actor_q1_loss = self.critic_1.forward(state, self.actor.forward(state)) 
         # Durante el entrenamiento, se trabaja con batches de datos, con lo cual el actor_q1_loss tendrá el Q_value para cada estado y acción del batch, 
         # y por eso tiene sentido el .mean() (si en vez de batch, fuera un solo Q_value, no tendría sentido hacer el promedio), para no darle sobreimportancia al tamaño del batch.
         actor_loss = -T.mean(actor_q1_loss) #Como los optimizadores típicamente minimizan una función de pérdida, negamos el valor Q para convertir la tarea en un problema de minimización.

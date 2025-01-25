@@ -7,21 +7,20 @@ from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
 
 class ToolManipulationEnv(gym.Env):
-    def __init__(self, image_shape=(256, 256, 1), n_fingers=5, n_choices_per_finger=3):
+    def __init__(self, image_shape=(256, 256, 1), n_fingers=1):
         super(ToolManipulationEnv, self).__init__()
         
         # Observation space: image + finger states
         self.image_shape = image_shape
         self.n_fingers = n_fingers
-        self.n_choices_per_finger = n_choices_per_finger
         #fijarse si es necesario es observation_space
-        self.observation_space = spaces.Dict({
+        """self.observation_space = spaces.Dict({
             # Image in black and white, so 0 = Black, 1 = White 
             'image': spaces.MultiDiscrete([2] * np.prod(self.image_shape)),
             'f_idx': 0.0,
             'finger_state': 0.0,
-            'finger_states': spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
-        })
+            'finger_states': spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_choices_per_finger)
+        })"""
 
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
@@ -43,15 +42,15 @@ class ToolManipulationEnv(gym.Env):
         }
         
         # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
-        self.action_space = spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
+        #self.action_space = spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
         
         # Initialize state
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
             'f_idx': 0.0,
             'finger_state': 0.0,
-            'finger_states': np.zeros(self.n_fingers, dtype=np.uint8),
-            'best_combination': np.zeros(self.n_fingers, dtype=np.uint8)
+            'finger_states': np.zeros(5, dtype=np.uint8),
+            'best_combination': np.zeros(5, dtype=np.uint8)
         }
         self.done = False
         self.reward = 0
@@ -64,7 +63,7 @@ class ToolManipulationEnv(gym.Env):
         self.state['image'] = self._get_initial_image()
         self.state['f_idx'] = 0.0
         self.state['finger_state'] = 0.0
-        self.state['finger_states'] = np.zeros(self.n_fingers, dtype=np.float64)
+        self.state['finger_states'] = np.zeros(5, dtype=np.float64)
         self.state['best_combination'] = self._calculate_best_combination(self.state['image'])
         self.done = False
         self.reward = 0
@@ -84,17 +83,18 @@ class ToolManipulationEnv(gym.Env):
                 self.state['finger_states'][i] = 180  # Fully closed
         """
         # Update the finger states
+        
+        self.state['finger_state'] = action
+        self.state['finger_states'][int(self.state['f_idx'])] = action
+
+        # Calculate reward
+        self.reward = self._calculate_reward(self.state, action)
+        
         self.state['f_idx'] += 1 
         if self.state['f_idx'] == 5:
             self.done = True
         else:
             self.done = False
-        self.state['finger_state'] = action
-        self.state['finger_states'][self.state['f_idx']] = action
-
-        # Calculate reward
-        self.reward = self._calculate_reward(self.state, action)
-        
         # Flatten the image and concatenate with finger states
         #flattened_image = self.state['image'].flatten()
         #observation = np.concatenate((flattened_image, action))
@@ -170,7 +170,8 @@ class ToolManipulationEnv(gym.Env):
         return best_combination
 
     def _calculate_reward(self, state, action):
-        self.reward = abs(action - state['best_combination'][state['f_idx']])
+        action = action + 1 # Porque la salida está en (-1,1) y así pasamos a (0,2)
+        self.reward = - abs(action - state['best_combination'][int(state['f_idx'])])
         
         
         
@@ -208,6 +209,21 @@ class ToolManipulationEnv(gym.Env):
         #print(action)
         self.state['finger_states'] = action
         return action
+    
+    def complete_action(self):
+        c_action = []
+        o_action = []
+        for action in self.state['finger_states']:
+            if action < 2/3 - 1:
+                c_action.append(0)
+            elif action  < 2*2/3 - 1:
+                c_action.append(1)
+            else:
+                c_action.append(2)
+        for action in self.state['finger_states']:
+            o_action.append(round(action + 1, 2))
+        return o_action, c_action
+
    
 """
 if __name__ == "__main__":

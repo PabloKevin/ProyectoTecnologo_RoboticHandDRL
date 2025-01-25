@@ -7,6 +7,7 @@ from torch.utils.tensorboard import SummaryWriter
 #from buffer import ReplayBuffer
 from td3_torch import Agent
 from custom_hand_env import ToolManipulationEnv
+import numpy as np
 
 if __name__ == '__main__':
 
@@ -14,7 +15,7 @@ if __name__ == '__main__':
         os.makedirs("Desarrollo/simulation/Env03/tmp/td3")
 
     # Create an instance of your custom environment
-    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=5)
+    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1)
 # Ir probando con numeros más simples para que lleve menos tiempo. Dado que el problemas es más simple,
 # usar menos neuronas, probablemente no necesite tantas imágenes para aprender. Quizá probar con 1 sola capa.
     load_models = False
@@ -23,15 +24,15 @@ if __name__ == '__main__':
     batch_size = 64 #128
 
     hidden_layers=[32,16] #256
-    warmup = 1200
-    episodes = 15000 #10000
+    warmup = 1200 * 5
+    episodes = 10000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     # Reduce the replay buffer size
     max_size = 10000  # Adjust this value based on your memory capacity
 
-    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate, tau=0.05, #tau=0.005
-                  env=env, n_actions=env.n_fingers, n_choices_per_finger=env.n_choices_per_finger, hidden_layers=hidden_layers, 
+    agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate,
+                  tau=0.005, env=env, n_actions=env.n_fingers, hidden_layers=hidden_layers, 
                   batch_size=batch_size, warmup=warmup, max_size=max_size) 
     agent.train()
 
@@ -44,7 +45,7 @@ if __name__ == '__main__':
         best_score = 0
 
         directory_path = "Desarrollo/simulation/Env03/logs_txt/"
-        version = "e0"
+        version = "e3"
         file_name = f"experiment_log_{experiment}_{version}.txt"
         file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
 
@@ -72,12 +73,14 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
+            tool = agent.observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
+            observation = np.array([tool.item(), observation[1]]) # [tool, f_idx]
             done = False
             score = 0
             while not done:
-                observation = agent.observer(observation).cpu().detach().numpy() # Takes the image and outputs a tool value
-                action = agent.choose_action(observation)
+                action = agent.choose_action(observation) 
                 next_observation, reward, done, info = env.step(action)
+                next_observation = np.array([tool.item(), next_observation[1]]) # [tool, f_idx]
                 score += reward
                 agent.remember(observation, action, reward, next_observation, done)
                 agent.learn()
@@ -86,8 +89,8 @@ if __name__ == '__main__':
             writer.add_scalar(f"Score - {episode_identifier}", scalar_value=score, global_step=i)
 
             # Log the information to the text file
-            log_file.write(f"Episode: {i}; Score: {score}; Action: {action}\n")
-            print(f"Episode: {i}; Score: {score}; Action: {action}")
+            log_file.write(f"Episode: {i}; Score: {score}; Action: {env.complete_action()}\n")
+            print(f"Episode: {i}; Score: {score}; Action: {env.complete_action()}")
 
             if i % 10 == 0:
                 agent.save_models()

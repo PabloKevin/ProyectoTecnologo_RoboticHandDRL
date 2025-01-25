@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import os
+import numpy as np
 
 # Critic Network
 class CriticNetwork(nn.Module):
@@ -46,19 +47,18 @@ class CriticNetwork(nn.Module):
 # Actor Network
 class ActorNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims, n_actions, n_choices_per_finger, hidden_layers=[64,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3', learning_rate=0.001):
+    def __init__(self, input_dims, n_actions, hidden_layers=[64,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3', learning_rate=0.001):
         super(ActorNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
         self.checkpoint_dir = checkpoint_dir
         self.n_actions = n_actions
-        self.n_choices_per_finger = n_choices_per_finger
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_td3')
 
         
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
-        self.fc3 = nn.Linear(hidden_layers[1], n_actions * n_choices_per_finger)
+        self.fc3 = nn.Linear(hidden_layers[1], n_actions)
         
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
@@ -109,7 +109,7 @@ class ObserverNetwork(nn.Module):
         
 
     def forward(self, img):
-        img = torch.tensor(img, dtype=torch.float).permute(2, 0, 1).to(self.device)
+        img = torch.tensor(np.array(img), dtype=torch.float).permute(2, 0, 1).to(self.device)
         x = F.leaky_relu(self.conv1(img))
         x = F.leaky_relu(self.conv2(x))
         x = F.leaky_relu(self.conv3(x))
