@@ -17,11 +17,13 @@ def parse_log(file_path):
             episode = int(parts[0].split(":")[1].strip())
             
             # Extract Score
-            score = float(parts[1].split(":")[1].strip())
+            score = float(parts[1].split(":")[1].replace('[', '').replace(']', '').strip())
             
             # Extract Actions
-            action_str = parts[2].split(":")[1].replace('[', '').replace(']', '')
-            action_list = [float(x) for x in action_str.split(" ") if (x!='' and x!='\n')]
+            action_raw_str = parts[2].split(":")[1].split("],")[0].replace('[', '').replace(']', '').replace('(', '').replace(')', '')
+            action_str = parts[2].split(":")[1].split("],")[1].replace('[', '').replace(']', '').replace('(', '').replace(')', '')
+            action_list = [float(x) for x in action_str.split(",")]
+            action_raw_list = [float(x) for x in action_raw_str.split(",")]
             
             # Append to lists
             episodes.append(episode)
@@ -37,15 +39,15 @@ def parse_log(file_path):
     return df
 
 # Path to your episode log file
-directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env02/logs_txt/"
-file_name = "experiment_log_1_e2.txt"
+directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env03/logs_txt/"
+file_name = "experiment_log_20_e3.txt"
 log_file_path = directory_path + file_name
 
 # Parse the log and load it into a DataFrame
 df = parse_log(log_file_path)
 
 # Separate warmup and training
-warmup_cutoff = 1000
+warmup_cutoff = 800
 actions_all = [list(actions) for actions in df["Actions"]]
 actions_warmup = actions_all[:warmup_cutoff]
 actions_training = actions_all[warmup_cutoff:]

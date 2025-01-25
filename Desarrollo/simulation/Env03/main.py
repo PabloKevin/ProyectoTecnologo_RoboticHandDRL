@@ -47,19 +47,19 @@ if __name__ == '__main__':
         directory_path = "Desarrollo/simulation/Env03/logs_txt/"
         version = "e3"
         file_name = f"experiment_log_{experiment}_{version}.txt"
-        file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
+        #file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
 
         while os.path.exists(directory_path + file_name):
             experiment += 1
             print("Experiment already exists. Trying with experiment number: ", experiment)
             file_name = f"experiment_log_{experiment}_{version}.txt"
-            file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
+            #file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
         
         if load_models:
             agent.load_models()
             experiment -=1
             file_name = f"experiment_log_{experiment}_{version}.txt"
-            file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
+            #file_name_probs = f"probabilities_log_{experiment}_{version}.txt"
             
         print("Starting:",file_name)
 
@@ -67,13 +67,14 @@ if __name__ == '__main__':
 
         # Open a log file in append mode
         log_file = open(directory_path + file_name, "a")
-        log_file_probs = open(directory_path + file_name_probs, "a")
+        #log_file_probs = open(directory_path + file_name_probs, "a")
             
         #agent.load_models()
 
         for i in range(episodes):
             observation = env.reset()
             tool = agent.observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
+            print(tool)
             observation = np.array([tool.item(), observation[1]]) # [tool, f_idx]
             done = False
             score = 0

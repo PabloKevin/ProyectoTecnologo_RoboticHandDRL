@@ -154,7 +154,9 @@ class ToolManipulationEnv(gym.Env):
         img[img >=  255/2] = 1
         #file = "Desarrollo/simulation/Env01/img.txt"
         #np.savetxt(file, img, fmt="%d", delimiter=" ") 
-        img = np.expand_dims(img, axis=-1)
+        #img = np.expand_dims(img, axis=-1)
+        # Normalize the image and add a channel dimension
+        img = np.expand_dims(img / 255.0, axis=0)
         return img
     
     def _calculate_best_combination(self, img):

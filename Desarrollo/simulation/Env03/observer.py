@@ -27,7 +27,8 @@ class DynamicBatchGenerator:
             label = self.get_label(image)
 
             # Normalize the image and add a channel dimension
-            image = np.expand_dims(image / 255.0, axis=0)
+            #image = np.expand_dims(image / 255.0, axis=0)
+            image = np.expand_dims(image, axis=0)
 
             images.append(image)
             labels.append(label)
@@ -216,7 +217,7 @@ class Evaluator():
             plt.show()
 
 if __name__ == '__main__':
-    """
+    
     observer = ObserverNetwork(input_dims=(256, 256, 1))
     observer.load_checkpoint()
 
@@ -226,7 +227,7 @@ if __name__ == '__main__':
     for img in images:
         evaluator.render(img)
     
-    """
+    
     
 
     #trainer = Trainer()
