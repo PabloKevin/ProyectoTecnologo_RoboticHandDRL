@@ -7,30 +7,17 @@ from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
 
 class ToolManipulationEnv(gym.Env):
-    def __init__(self, image_shape=(256, 256, 1), n_fingers=1):
+    def __init__(self, image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all"):
         super(ToolManipulationEnv, self).__init__()
         
-        # Observation space: image + finger states
         self.image_shape = image_shape
         self.n_fingers = n_fingers
-        #fijarse si es necesario es observation_space
-        """self.observation_space = spaces.Dict({
-            # Image in black and white, so 0 = Black, 1 = White 
-            'image': spaces.MultiDiscrete([2] * np.prod(self.image_shape)),
-            'f_idx': 0.0,
-            'finger_state': 0.0,
-            'finger_states': spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_choices_per_finger)
-        })"""
+        self.images_of_interest = images_of_interest
 
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
                                          [1, 1, 1, 1, 1], # All fingers half closed
                                          [0, 0, 0, 0, 0]  # All fingers opened
-        ]
-        self.probabilities_of_interest = [[[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [0.0, 0.0, 1.0],[0.0, 0.0, 1.0]], # Thumb closed, index half, others closed,
-                                         [[0.0, 0.0, 1.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0],[0.0, 0.0, 1.0]],  # Thumb closed, index and middle half, others open
-                                         [[0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [0.0, 1.0, 0.0],[0.0, 1.0, 0.0]],  # All fingers half closed
-                                         [[1.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 0.0, 0.0],[1.0, 0.0, 0.0]],  # All fingers opened
         ]
         
         self.reward_weights = { "reward_alpha" : 1,
@@ -41,10 +28,6 @@ class ToolManipulationEnv(gym.Env):
                                "repeated_action_penalty" : [1.2, 0.2, -3.0]
         }
         
-        # Action space: 3 actions per finger. If it's going to be a continuous action space, it should be a Box space
-        #self.action_space = spaces.MultiDiscrete([self.n_choices_per_finger] * self.n_fingers)
-        
-        # Initialize state
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
             'f_idx': 0.0,
@@ -72,18 +55,7 @@ class ToolManipulationEnv(gym.Env):
         return observation
     
     def step(self, action):
-        """
-        # Update finger states based on action
-        for i in range(self.n_fingers):
-            if action[i] == 0:
-                self.state['finger_states'][i] = 0  # Open
-            elif action[i] == 1:
-                self.state['finger_states'][i] = 90  # Medium closed
-            elif action[i] == 2:
-                self.state['finger_states'][i] = 180  # Fully closed
-        """
         # Update the finger states
-        
         self.state['finger_state'] = action
         self.state['finger_states'][int(self.state['f_idx'])] = action
 
@@ -95,10 +67,7 @@ class ToolManipulationEnv(gym.Env):
             self.done = True
         else:
             self.done = False
-        # Flatten the image and concatenate with finger states
-        #flattened_image = self.state['image'].flatten()
-        #observation = np.concatenate((flattened_image, action))
-        # probar unicamente con la imagen
+
         next_observation = (self.state['image'], self.state['f_idx'])
         info = {} # no le he encontrado utilidad, pero podría ser util.
         
@@ -118,7 +87,7 @@ class ToolManipulationEnv(gym.Env):
         
         if timeout is not None:
             plt.show(block=False)
-            plt.pause(timeout)  # Show plot for 0.5 seconds
+            plt.pause(timeout)  # Show plot for x seconds
             plt.close()  # Close the plot window
         else:
             plt.show()
@@ -127,35 +96,30 @@ class ToolManipulationEnv(gym.Env):
         # Directory containing images
         image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
         
-        # List all image files in the directory
-        #image_files = [f for f in os.listdir(image_dir)]
-        #["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
-        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
-        image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
-        # Check how many images are there
+        if self.images_of_interest == "all":
+            # List all image files in the directory
+            image_files = [f for f in os.listdir(image_dir)]
+        else:
+            image_files = [f for f in os.listdir(image_dir) if f in self.images_of_interest]
+
+        # Select an random image
         num_images = len(image_files)
-        
-        # Create a random index
         random_index = np.random.randint(0, num_images)
-        
-        # Select an image with that index
         selected_image_path = os.path.join(image_dir, image_files[random_index])
-        #selected_image_path = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/bw_Martillo01.jpg"
         
         # Load the image
         img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
         # Transform the image so there is a "different" image for each episode
         editor = DataSet_editor()
         img = editor.transform_image(img)
-        #white_pixels = np.argwhere(img == 255)
-        #print(len(white_pixels))
-        # Convert 255 pixels to 1
+
+        # Convert pixels values from 255 to 1
         img[img < 255/2] = 0  
         img[img >=  255/2] = 1
         #file = "Desarrollo/simulation/Env01/img.txt"
         #np.savetxt(file, img, fmt="%d", delimiter=" ") 
-        #img = np.expand_dims(img, axis=-1)
-        # Normalize the image and add a channel dimension
+        
+        # Add a channel dimension to the image
         img = np.expand_dims(img, axis=0)
         return img
     
@@ -201,16 +165,6 @@ class ToolManipulationEnv(gym.Env):
         self.previous_action = action  # Actualizar la acción anterior"""
         # Final reward
         return self.reward
-
-    def probs2actions(self, probs):
-        #print(probs)
-        probs = np.array(probs)
-        #if probs.ndim == 1:
-        #probs = probs.reshape(self.n_fingers, self.n_choices_per_finger)
-        action = np.argmax(probs, axis=1)
-        #print(action)
-        self.state['finger_states'] = action
-        return action
     
     def complete_action(self):
         c_action = []

@@ -5,8 +5,8 @@ from buffer import ReplayBuffer
 from networks import ActorNetwork, CriticNetwork, ObserverNetwork
 
 class Agent:
-    def __init__(self, actor_learning_rate, critic_learning_rate, tau, env, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 n_actions=5, max_size=1000000, hidden_layers=[64,32], batch_size=100, noise=0.1):
+    def __init__(self, env, actor_learning_rate=0.003, critic_learning_rate=0.0008, tau=0.005, gamma=0.99, update_actor_interval=2, warmup=1000, 
+                 max_size=1000000, hidden_layers=[64,32], batch_size=64, noise=0.1):
 
         self.gamma = gamma
         self.tau = tau
@@ -14,7 +14,7 @@ class Agent:
         self.learn_step_cntr = 0 
         self.time_step = 0
         self.warmup = warmup
-        self.n_actions = n_actions
+        self.n_actions = env.n_fingers
         self.update_actor_iter = update_actor_interval
         self.env = env
         self.min_action = -1.0 # Para ser concistente con la red, después se cambia a [0,2]
@@ -25,26 +25,26 @@ class Agent:
         self.observer.load_model()
 
         self.input_dims = self.observer.output_dims + 1 # +1 = f_idx (finger index)
-        self.memory = ReplayBuffer(max_size, self.input_dims, n_actions)
+        self.memory = ReplayBuffer(max_size, self.input_dims, self.n_actions)
 
         # Create the networks
-        self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions,
+        self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=self.n_actions,
                                   name='actor', learning_rate=actor_learning_rate)
 
-        self.critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.critic_1 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
                                       name='critic_1', learning_rate=critic_learning_rate)
 
-        self.critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers, 
+        self.critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers, 
                                       name='critic_2', learning_rate=critic_learning_rate)
 
         # Create the target networks
-        self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=n_actions, 
+        self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=self.n_actions, 
                                          name='target_actor', learning_rate=actor_learning_rate)
 
-        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_1', learning_rate=critic_learning_rate)
 
-        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + n_actions, hidden_layers=hidden_layers,
+        self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_2', learning_rate=critic_learning_rate)
         
         """# Initialize weights for all networks
