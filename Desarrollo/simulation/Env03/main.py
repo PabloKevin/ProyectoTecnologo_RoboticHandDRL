@@ -16,9 +16,9 @@ if __name__ == '__main__':
     load_models = False
     actor_learning_rate = 0.003 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
-    batch_size = 64 #128
+    batch_size = 128 #128
 
-    hidden_layers=[32,16] #256
+    hidden_layers=[32,32] #256
     warmup = 1200 * 5
     episodes = 10000 #10000
     env.reward_weights["reward_alpha"] = 1
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     max_size = 100000  # Adjust this value based on memory capacity
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate,
-                  tau=0.005, env=env, n_actions=env.n_fingers, hidden_layers=hidden_layers, 
+                  tau=0.005, env=env, hidden_layers=hidden_layers, 
                   batch_size=batch_size, warmup=warmup, max_size=max_size) 
     agent.train()
 

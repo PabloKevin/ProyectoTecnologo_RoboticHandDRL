@@ -76,20 +76,7 @@ class Agent:
         # formar una política. validation = True, permite saltar el warmup, podría ser si ya tiene entrenamiento.
         
         if self.time_step < self.warmup and validation is False:
-            if self.env.state['f_idx']==0.0 or self.comb_interest != 0:
-                #print(observation[0])
-                mu = T.tensor(self.env.combinations_of_interest[self.idx][self.comb_interest]-1.0, dtype=T.float).to(self.actor.device)
-                if self.comb_interest == 4:
-                    self.comb_interest = 0
-                    self.idx02 += 1
-                else:
-                    self.comb_interest += 1
-                if self.idx == 3:
-                    self.idx = 0
-                else:
-                    self.idx += 1
-            else:
-                mu = T.tensor(np.random.uniform(low=-1, high=1, size=(self.n_actions,))).to(self.actor.device)
+            mu = T.tensor(np.random.uniform(low=-1, high=1, size=(self.n_actions,))).to(self.actor.device)
 
         # Luego del warmup, las acciones se desarrollan en función del estado, con una política ya creada (que va a seguir mejorando).
         else:

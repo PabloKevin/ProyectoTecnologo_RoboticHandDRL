@@ -16,13 +16,13 @@ if __name__ == '__main__':
     images_of_interest = "all"
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
 
-    hidden_layers=[32,16] 
+    hidden_layers=[32,32] 
 
     agent = Agent(env=env, hidden_layers=hidden_layers, noise=0.0) 
 
     agent.load_models()
 
-    episodes = 1000 
+    episodes = 1000
     scores = []
     right_comb = 0
     for i in range(episodes):
