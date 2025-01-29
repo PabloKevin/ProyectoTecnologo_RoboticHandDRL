@@ -49,7 +49,7 @@ class DataSet_editor:
                 img_binaria = np.zeros((img.shape[0], img.shape[1]), dtype=np.uint8)
                 img_binaria[mascara] = 255
                 # Apply morphological closing to fill small holes and connect nearby white pixels
-                kernel = np.ones((3,3), np.uint8)
+                kernel = np.ones((5,5), np.uint8)
                 img_binaria = cv2.morphologyEx(img_binaria, cv2.MORPH_CLOSE, kernel)
                 
                 # Iterate through pixels (excluding borders)
@@ -178,7 +178,7 @@ class DataSet_editor:
 #"""
 if __name__ == "__main__":
     editor = DataSet_editor()
-    editor.raw2bw(images_list=["tornillo01.jpg"], sobreescribir=True, umbral=250)
+    editor.raw2bw(images_list=["tornillo02.png",], sobreescribir=True, umbral=330) # umbral: para tornillos 330 para lo demás 50
     
     """
     ruta = os.path.join(editor.directorio_salida, "bw_Lapicera01.jpg")

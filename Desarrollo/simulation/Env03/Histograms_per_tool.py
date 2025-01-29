@@ -3,10 +3,12 @@ import numpy as np
 from td3_torch import Agent
 from custom_hand_env import ToolManipulationEnv
 import matplotlib.pyplot as plt
+from collections import Counter
+import math
 
-
-
-tools_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
+image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
+tools_of_interest = [f for f in os.listdir(image_dir)]
+#tools_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
 
 # Action combinations to check
 combinations = {
@@ -29,7 +31,7 @@ for j, tool_name in enumerate(tools_of_interest):
 
     agent.load_models()
 
-    episodes = 500
+    episodes = 400
 
     for i in range(episodes):
         observation = env.reset()
@@ -55,10 +57,28 @@ for j, tool_name in enumerate(tools_of_interest):
             combination_counts_per_tool[j]["Weird Combination"] += 1
             weird_combinations[tool_name].append(env.complete_action()[1])
 
+# A helper function to format weird combos
+def format_weird_combos(tool_weird_list):
+    """
+    Converts the list of weird combos into a string like:
+    "weird combos: [2,1,1,1,1] x 5, [2,1,1,1,2] x 1"
+    or "No weird combos" if empty.
+    """
+    if not tool_weird_list:
+        return "No weird combos"
+    # Convert combos to tuples so they are hashable by Counter
+    combos_as_tuples = [tuple(c) for c in tool_weird_list]
+    combo_counter = Counter(combos_as_tuples)
+    # Build each part of the string
+    parts = []
+    for combo, freq in combo_counter.items():
+        parts.append(f"{list(combo)} x {freq}")
+    return "weird combos: " + ", ".join(parts)
 
 # Number of rows and columns for subplots
+# Number of rows and columns for subplots
 cols = 5
-rows = 1
+rows = math.ceil(len(tools_of_interest) / cols)
 
 # Create the figure and axes
 fig, axes = plt.subplots(rows, cols, figsize=(17, 10), constrained_layout=False)
@@ -103,6 +123,22 @@ for idx, tool in enumerate(tools_of_interest):
             color='black'
         )
     
+    # Format the weird combos text for the current tool
+    weird_text = format_weird_combos(weird_combinations.get(tool, []))
+    
+    # Add the weird combo text *below* the x-axis. 
+    # ax.transAxes: (0,0) is bottom-left of the entire Axes; (1,1) is top-right
+    ax.text(
+        0.5,
+        -0.2,                 # negative moves the text below the x-axis
+        weird_text,
+        transform=ax.transAxes,
+        ha='center',
+        va='top',
+        fontsize=8,
+        wrap=True  # wrap text if it's too long
+    )
+    
     # Axes formatting
     ax.set_xlabel("Action Combinations", fontsize=8)
     ax.set_ylabel("Frequency", fontsize=8)
@@ -116,7 +152,9 @@ fig.suptitle(
     fontsize=16
 )
 plt.xticks(rotation=15)
+# Increase bottom margin to accommodate the weird combos text
 plt.tight_layout()
+#plt.subplots_adjust(bottom=0.5)
 plt.show()
 
 print("weird combinations:", weird_combinations)
