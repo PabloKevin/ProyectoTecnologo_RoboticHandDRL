@@ -124,12 +124,22 @@ class ToolManipulationEnv(gym.Env):
         return img
     
     def _calculate_best_combination(self, img):
-        n_white_pixels = len(np.argwhere(img == 1))
+        """n_white_pixels = len(np.argwhere(img == 1))
         if n_white_pixels/1000 > 0.0 and n_white_pixels/1000 < 1.1:
             best_combination = self.combinations_of_interest[0]
-        elif n_white_pixels/1000 >= 1.1 and n_white_pixels/1000 < 2.8:
+        elif n_white_pixels/1000 >= 1.1 and n_white_pixels/1000 < 2.45:
             best_combination = self.combinations_of_interest[1]
-        elif n_white_pixels/1000 >= 2.8 and n_white_pixels/1000 < 12.0:
+        elif n_white_pixels/1000 >= 2.45 and n_white_pixels/1000 < 12.0:
+            best_combination = self.combinations_of_interest[2]
+        elif n_white_pixels == 0:
+            best_combination = self.combinations_of_interest[3]
+        return best_combination"""
+
+        if n_white_pixels/1000 > 0.0 and n_white_pixels/1000 < 1.1:
+            best_combination = self.combinations_of_interest[0]
+        elif n_white_pixels/1000 >= 1.1 and n_white_pixels/1000 < 2.45:
+            best_combination = self.combinations_of_interest[1]
+        elif n_white_pixels/1000 >= 2.45 and n_white_pixels/1000 < 12.0:
             best_combination = self.combinations_of_interest[2]
         elif n_white_pixels == 0:
             best_combination = self.combinations_of_interest[3]

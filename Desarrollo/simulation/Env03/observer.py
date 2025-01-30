@@ -49,8 +49,8 @@ class DynamicBatchGenerator:
         
         # List all image files in the directory
         #image_files = [f for f in os.listdir(image_dir)]
-        # ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
-        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
+        # ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"] ["bw_lapicera02.png","bw_lapicera02.png"]
+        images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg", "bw_lapicera02.png"]
         image_files = [f for f in os.listdir(image_dir) if f in images_of_interest]
         # Check how many images are there
         num_images = len(image_files)
@@ -82,9 +82,9 @@ class DynamicBatchGenerator:
 
         if n_white_pixels == 0:
             return 0.0
-        elif n_white_pixels < 0.5:
+        elif n_white_pixels < 1.1:
             return 1.0
-        elif n_white_pixels < 2.7:
+        elif n_white_pixels < 2.45:
             return 2.0
         elif n_white_pixels < 5.0:
             return 3.0
@@ -95,7 +95,7 @@ class DynamicBatchGenerator:
 # Observer Network
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims, output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[256,8], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
+    def __init__(self, input_dims, output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[64,8], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
         self.checkpoint_dir = checkpoint_dir

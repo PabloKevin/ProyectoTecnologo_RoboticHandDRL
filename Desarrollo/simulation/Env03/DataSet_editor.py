@@ -15,7 +15,7 @@ class DataSet_editor:
         # Asegurarse de que el directorio de salida existe y crearlo si no existe
         os.makedirs(self.directorio_salida, exist_ok=True)
 
-    def raw2bw(self, images_list = "All", sobreescribir=False, umbral=6):
+    def raw2bw(self, images_list = "All", sobreescribir=False, umbral=6, kernel=5, threshold_neighbors=5):
         if images_list == "All":
             images_list = os.listdir(self.directorio_imagenes)
         for nombre_archivo in images_list:
@@ -48,9 +48,11 @@ class DataSet_editor:
                 # Crear la imagen binaria (0 = negro, 255 = blanco)
                 img_binaria = np.zeros((img.shape[0], img.shape[1]), dtype=np.uint8)
                 img_binaria[mascara] = 255
-                # Apply morphological closing to fill small holes and connect nearby white pixels
-                kernel = np.ones((5,5), np.uint8)
-                img_binaria = cv2.morphologyEx(img_binaria, cv2.MORPH_CLOSE, kernel)
+                
+                if kernel is not None:
+                    # Apply morphological closing to fill small holes and connect nearby white pixels
+                    kernel = np.ones((kernel,kernel), np.uint8)
+                    img_binaria = cv2.morphologyEx(img_binaria, cv2.MORPH_CLOSE, kernel)
                 
                 # Iterate through pixels (excluding borders)
                 for i in range(1, img_binaria.shape[0]-1):
@@ -60,7 +62,7 @@ class DataSet_editor:
                         # Count white pixels in neighborhood
                         white_count = np.sum(neighbors == 255)
                         # If majority of neighbors are white, make pixel white
-                        if white_count >= 5:  # Threshold of 5 out of 9 pixels
+                        if white_count >= threshold_neighbors:  # Threshold of 5 out of 9 pixels
                             img_binaria[i,j] = 255
 
                 # Convertir la imagen a escala de grises
@@ -178,7 +180,7 @@ class DataSet_editor:
 #"""
 if __name__ == "__main__":
     editor = DataSet_editor()
-    editor.raw2bw(images_list=["tornillo02.png",], sobreescribir=True, umbral=330) # umbral: para tornillos 330 para lo demás 50
+    editor.raw2bw(images_list=["pinza_chica02.png",], sobreescribir=True, umbral=3, kernel=None, threshold_neighbors=5) # umbral: para tornillos 330 para lo demás 50
     
     """
     ruta = os.path.join(editor.directorio_salida, "bw_Lapicera01.jpg")
