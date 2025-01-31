@@ -9,8 +9,8 @@ if __name__ == '__main__':
     if not os.path.exists("Desarrollo/simulation/Env03/tmp/td3"):
         os.makedirs("Desarrollo/simulation/Env03/tmp/td3")
 
-    #images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
-    images_of_interest = "all"
+    images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg", "bw_lapicera02"]
+    #images_of_interest = "all"
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
 
     load_models = False
@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     hidden_layers=[32,32] #256
     warmup = 1200 * 5
-    episodes = 10000 #10000
+    episodes = 5000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     max_size = 100000  # Adjust this value based on memory capacity
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             writer.add_scalar(f"Score - {episode_identifier}", scalar_value=score, global_step=i)
 
             # Log the information to the text file
-            log_file.write(f"Episode: {i}; Score: {score}; Action: {env.complete_action()}\n")
+            log_file.write(f"Episode: {i}; Tool: {tool}; Score: {score}; Action: {env.complete_action()}\n")
             print(f"Episode: {i}; Score: {score}; Tool: {tool}; Action: {env.complete_action()}")
 
             if i % 10 == 0:
