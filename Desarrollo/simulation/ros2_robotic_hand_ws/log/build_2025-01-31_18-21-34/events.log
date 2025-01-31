@@ -1,0 +1,327 @@
+[0.000000] (-) TimerEvent: {}
+[0.000207] (robotic_hand) JobQueued: {'identifier': 'robotic_hand', 'dependencies': OrderedDict()}
+[0.000303] (robotic_hand) JobStarted: {'identifier': 'robotic_hand'}
+[0.005598] (robotic_hand) JobProgress: {'identifier': 'robotic_hand', 'progress': 'cmake'}
+[0.006234] (robotic_hand) Command: {'cmd': ['/usr/bin/cmake', '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand', '-DCMAKE_INSTALL_PREFIX=/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand'], 'cwd': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CONDA_PROMPT_MODIFIER': '(base)', 'USER': 'pablo_kevin', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz:/opt/ros/jazzy/opt/gz_sim_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_sim_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/gz_gui_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_gui_vendor/lib::/usr/lib/nvidia:/usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu', 'HOME': '/home/pablo_kevin', 'CONDA_SHLVL': '1', 'OLDPWD': '/home/pablo_kevin', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3568', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', '_CE_M': '', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'COLCON_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'pablo_kevin', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'pablo_kevin', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', '_CE_CONDA': '', 'WINDOWPATH': '2', 'PATH': '/home/pablo_kevin/miniconda3/bin:/home/pablo_kevin/miniconda3/condabin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin', 'SESSION_MANAGER': 'local/Apolo-Nitro-PK:@/tmp/.ICE-unix/3537,unix/Apolo-Nitro-PK:/tmp/.ICE-unix/3537', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/a7773926_d496_49a4_aa59_f6511485a85f', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.151', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy', 'CONDA_PYTHON_EXE': '/home/pablo_kevin/miniconda3/bin/python', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CONDA_DEFAULT_ENV': 'base', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'CONDA_EXE': '/home/pablo_kevin/miniconda3/bin/conda', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/pablo_kevin/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'CONDA_PREFIX': '/home/pablo_kevin/miniconda3', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.099439] (-) TimerEvent: {}
+[0.186613] (robotic_hand) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.3 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[0.199626] (-) TimerEvent: {}
+[0.250243] (robotic_hand) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.261732] (robotic_hand) StdoutLine: {'line': b'-- Found rclpy: 7.1.3 (/opt/ros/jazzy/share/rclpy/cmake)\n'}
+[0.261933] (robotic_hand) StdoutLine: {'line': b'-- Found std_msgs: 5.3.5 (/opt/ros/jazzy/share/std_msgs/cmake)\n'}
+[0.293921] (robotic_hand) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[0.299695] (-) TimerEvent: {}
+[0.303652] (robotic_hand) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[0.319882] (robotic_hand) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.367149] (robotic_hand) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.399856] (-) TimerEvent: {}
+[0.404899] (robotic_hand) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.5 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[0.446617] (robotic_hand) StdoutLine: {'line': b'-- Found urdf: 2.10.0 (/opt/ros/jazzy/share/urdf/cmake)\n'}
+[0.455110] (robotic_hand) StdoutLine: {'line': b'-- Found TinyXML2 via Config file: /usr/lib/x86_64-linux-gnu/cmake/tinyxml2\n'}
+[0.460095] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sim8 -- found version 8.7.0\n'}
+[0.466949] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sim8\n'}
+[0.467681] (robotic_hand) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.6.0\n'}
+[0.467846] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of sdformat14\n'}
+[0.474803] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[0.494059] (robotic_hand) StdoutLine: {'line': b'--   Found tinyxml2, version 10.0.0\n'}
+[0.500040] (-) TimerEvent: {}
+[0.536515] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[0.536931] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[0.537892] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[0.538296] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[0.542118] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[0.542567] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2\n'}
+[0.542808] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-utils2> component [cli]\n'}
+[0.544537] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2-cli -- found version 2.2.0\n'}
+[0.545143] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-utils2-cli\n'}
+[0.548975] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.3\n'}
+[0.549343] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[0.549962] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[0.551143] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [loader]\n'}
+[0.552870] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2-loader -- found version 2.0.3\n'}
+[0.553174] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-loader\n'}
+[0.554235] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [register]\n'}
+[0.555342] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2-register -- found version 2.0.3\n'}
+[0.555691] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2-register\n'}
+[0.558555] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.0\n'}
+[0.558952] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13\n'}
+[0.600280] (-) TimerEvent: {}
+[0.627357] (robotic_hand) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[0.636207] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[0.671513] (robotic_hand) StdoutLine: {'line': b'--   Found libzmq, version 4.3.5\n'}
+[0.700605] (-) TimerEvent: {}
+[0.784996] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[0.800718] (-) TimerEvent: {}
+[0.819177] (robotic_hand) StdoutLine: {'line': b'--   Found uuid, version 2.39.3\n'}
+[0.897150] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[0.898626] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[0.899100] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-msgs10\n'}
+[0.900800] (-) TimerEvent: {}
+[0.925227] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[0.925436] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[1.000923] (-) TimerEvent: {}
+[1.065136] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [log]\n'}
+[1.065564] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13-log -- found version 13.4.0\n'}
+[1.065704] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-log\n'}
+[1.066283] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-transport13> component [parameters]\n'}
+[1.066799] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13-parameters -- found version 13.4.0\n'}
+[1.066990] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-transport13-parameters\n'}
+[1.067782] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[1.068346] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[1.068390] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[1.068652] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[1.068775] (robotic_hand) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[1.068831] (robotic_hand) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[1.075295] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [av]\n'}
+[1.076267] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-av -- found version 5.7.0\n'}
+[1.076366] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-av\n'}
+[1.083428] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libswscale'\n"}
+[1.101133] (-) TimerEvent: {}
+[1.123013] (robotic_hand) StdoutLine: {'line': b'--   Found libswscale, version 7.5.100\n'}
+[1.201304] (-) TimerEvent: {}
+[1.235351] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libavdevice >= 56.4.100'\n"}
+[1.275351] (robotic_hand) StdoutLine: {'line': b'--   Found libavdevice, version 60.3.100\n'}
+[1.301502] (-) TimerEvent: {}
+[1.394479] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libavformat'\n"}
+[1.401647] (-) TimerEvent: {}
+[1.433559] (robotic_hand) StdoutLine: {'line': b'--   Found libavformat, version 60.16.100\n'}
+[1.501832] (-) TimerEvent: {}
+[1.542303] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libavcodec'\n"}
+[1.575579] (robotic_hand) StdoutLine: {'line': b'--   Found libavcodec, version 60.31.102\n'}
+[1.601947] (-) TimerEvent: {}
+[1.677186] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libavutil'\n"}
+[1.702115] (-) TimerEvent: {}
+[1.709611] (robotic_hand) StdoutLine: {'line': b'--   Found libavutil, version 58.29.100\n'}
+[1.796678] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[1.797957] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-events -- found version 5.7.0\n'}
+[1.798590] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-events\n'}
+[1.799650] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[1.801528] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[1.802179] (-) TimerEvent: {}
+[1.803028] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-graphics -- found version 5.7.0\n'}
+[1.803457] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-graphics\n'}
+[1.804619] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[1.812170] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [io]\n'}
+[1.813313] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-io -- found version 5.7.0\n'}
+[1.813584] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-io\n'}
+[1.814601] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [profiler]\n'}
+[1.815485] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-profiler -- found version 5.7.0\n'}
+[1.815715] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-profiler\n'}
+[1.818583] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-fuel_tools9 -- found version 9.1.0\n'}
+[1.818827] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-fuel_tools9\n'}
+[1.896259] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[1.902432] (-) TimerEvent: {}
+[1.933926] (robotic_hand) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[2.002609] (-) TimerEvent: {}
+[2.063006] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'yaml-0.1'\n"}
+[2.083580] (robotic_hand) StdoutLine: {'line': b'--   Found yaml-0.1, version 0.2.5\n'}
+[2.102807] (-) TimerEvent: {}
+[2.183589] (robotic_hand) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[2.202964] (-) TimerEvent: {}
+[2.220560] (robotic_hand) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[2.303128] (-) TimerEvent: {}
+[2.318012] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.319246] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.319828] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[2.320972] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.321499] (robotic_hand) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[2.321864] (robotic_hand) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[2.334038] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [testing]\n'}
+[2.335341] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-testing -- found version 5.7.0\n'}
+[2.335804] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-testing\n'}
+[2.337990] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.338995] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[2.342616] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-gui8 -- found version 8.3.0\n'}
+[2.343111] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-gui8\n'}
+[2.367729] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.368000] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.368264] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.368607] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.3\n'}
+[2.368949] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.0\n'}
+[2.369509] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.1\n'}
+[2.369679] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-rendering8\n'}
+[2.369963] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.370118] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7\n'}
+[2.370438] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.370581] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-math7> component [eigen3]\n'}
+[2.371136] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7-eigen3 -- found version 7.5.1\n'}
+[2.371327] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-math7-eigen3\n'}
+[2.373894] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.374132] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5\n'}
+[2.374601] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.374768] (robotic_hand) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[2.374842] (robotic_hand) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[2.395323] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [graphics]\n'}
+[2.396001] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [events]\n'}
+[2.396346] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-common5> component [geospatial]\n'}
+[2.397230] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5-geospatial -- found version 5.7.0\n'}
+[2.397795] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-common5-geospatial\n'}
+[2.399051] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.400325] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.403066] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.3\n'}
+[2.403552] (-) TimerEvent: {}
+[2.403809] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-plugin2\n'}
+[2.404122] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.404389] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-plugin2> component [all]\n'}
+[2.405479] (robotic_hand) StdoutLine: {'line': b'-- Looking for all libraries of gz-plugin2 -- found version 2.0.3\n'}
+[2.406204] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.3\n'}
+[2.407619] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.412176] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[2.433834] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-physics7 -- found version 7.4.0\n'}
+[2.433959] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7\n'}
+[2.434146] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.434310] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.434639] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-plugin2 -- found version 2.0.3\n'}
+[2.434872] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.435960] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [heightmap]\n'}
+[2.436466] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-physics7-heightmap -- found version 7.4.0\n'}
+[2.436517] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-heightmap\n'}
+[2.436778] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.437383] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [mesh]\n'}
+[2.437836] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-physics7-mesh -- found version 7.4.0\n'}
+[2.437890] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-mesh\n'}
+[2.438122] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.438574] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-physics7> component [sdf]\n'}
+[2.438990] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-physics7-sdf -- found version 7.4.0\n'}
+[2.439049] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-physics7-sdf\n'}
+[2.439275] (robotic_hand) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.6.0\n'}
+[2.440278] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.440330] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[2.455538] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.455835] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.456085] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.0\n'}
+[2.456364] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.1\n'}
+[2.456669] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[2.456960] (robotic_hand) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.6.0\n'}
+[2.457584] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_pressure]\n'}
+[2.458203] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_pressure -- found version 8.2.1\n'}
+[2.458258] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_pressure\n'}
+[2.458900] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [air_speed]\n'}
+[2.459396] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-air_speed -- found version 8.2.1\n'}
+[2.459455] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-air_speed\n'}
+[2.459926] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [altimeter]\n'}
+[2.460468] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-altimeter -- found version 8.2.1\n'}
+[2.460517] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-altimeter\n'}
+[2.461019] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [imu]\n'}
+[2.461485] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-imu -- found version 8.2.1\n'}
+[2.461588] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-imu\n'}
+[2.462167] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [force_torque]\n'}
+[2.462625] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-force_torque -- found version 8.2.1\n'}
+[2.462683] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-force_torque\n'}
+[2.463258] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [logical_camera]\n'}
+[2.463638] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-logical_camera -- found version 8.2.1\n'}
+[2.463743] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-logical_camera\n'}
+[2.464291] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [magnetometer]\n'}
+[2.464792] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-magnetometer -- found version 8.2.1\n'}
+[2.464840] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-magnetometer\n'}
+[2.465301] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [navsat]\n'}
+[2.465733] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-navsat -- found version 8.2.1\n'}
+[2.465800] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-navsat\n'}
+[2.466383] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [dvl]\n'}
+[2.467003] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-dvl -- found version 8.2.1\n'}
+[2.467058] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-dvl\n'}
+[2.467340] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.467440] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8\n'}
+[2.485002] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.485290] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-common5 -- found version 5.7.0\n'}
+[2.485609] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-transport13 -- found version 13.4.0\n'}
+[2.486055] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.1\n'}
+[2.486338] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-msgs10 -- found version 10.3.1\n'}
+[2.486604] (robotic_hand) StdoutLine: {'line': b'-- Looking for sdformat14 -- found version 14.6.0\n'}
+[2.486753] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[2.487317] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-rendering -- found version 8.2.1\n'}
+[2.487450] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rendering\n'}
+[2.488542] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rendering]\n'}
+[2.488650] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [lidar]\n'}
+[2.489039] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-lidar -- found version 8.2.1\n'}
+[2.489170] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-lidar\n'}
+[2.489396] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.489912] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [gpu_lidar]\n'}
+[2.490443] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-gpu_lidar -- found version 8.2.1\n'}
+[2.490579] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-gpu_lidar\n'}
+[2.490824] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.491400] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [camera]\n'}
+[2.491821] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-camera -- found version 8.2.1\n'}
+[2.491941] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-camera\n'}
+[2.492283] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.493142] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [boundingbox_camera]\n'}
+[2.493717] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-boundingbox_camera -- found version 8.2.1\n'}
+[2.493892] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-boundingbox_camera\n'}
+[2.494550] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [segmentation_camera]\n'}
+[2.495305] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-segmentation_camera -- found version 8.2.1\n'}
+[2.495481] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-segmentation_camera\n'}
+[2.496003] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [depth_camera]\n'}
+[2.496448] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-depth_camera -- found version 8.2.1\n'}
+[2.496547] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-depth_camera\n'}
+[2.496949] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.497510] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [rgbd_camera]\n'}
+[2.497953] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-rgbd_camera -- found version 8.2.1\n'}
+[2.498025] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-rgbd_camera\n'}
+[2.498320] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.499018] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [thermal_camera]\n'}
+[2.499387] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-thermal_camera -- found version 8.2.1\n'}
+[2.499495] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-thermal_camera\n'}
+[2.499766] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8 -- found version 8.2.1\n'}
+[2.500467] (robotic_hand) StdoutLine: {'line': b'-- Searching for <gz-sensors8> component [wide_angle_camera]\n'}
+[2.500926] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-sensors8-wide_angle_camera -- found version 8.2.1\n'}
+[2.501001] (robotic_hand) StdoutLine: {'line': b'-- Searching for dependencies of gz-sensors8-wide_angle_camera\n'}
+[2.501874] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-rendering8 -- found version 8.2.1\n'}
+[2.502078] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-math7 -- found version 7.5.1\n'}
+[2.502428] (robotic_hand) StdoutLine: {'line': b'-- Looking for gz-utils2 -- found version 2.2.0\n'}
+[2.503585] (-) TimerEvent: {}
+[2.518774] (robotic_hand) StdoutLine: {'line': b'-- Found trajectory_msgs: 5.3.5 (/opt/ros/jazzy/share/trajectory_msgs/cmake)\n'}
+[2.603675] (-) TimerEvent: {}
+[2.629795] (robotic_hand) StdoutLine: {'line': b'-- Configuring done (2.6s)\n'}
+[2.639009] (robotic_hand) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[2.641248] (robotic_hand) StdoutLine: {'line': b'-- Build files have been written to: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand\n'}
+[2.651002] (robotic_hand) CommandEnded: {'returncode': 0}
+[2.651678] (robotic_hand) JobProgress: {'identifier': 'robotic_hand', 'progress': 'build'}
+[2.652540] (robotic_hand) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', '--', '-j20', '-l20'], 'cwd': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CONDA_PROMPT_MODIFIER': '(base)', 'USER': 'pablo_kevin', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz:/opt/ros/jazzy/opt/gz_sim_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_sim_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/gz_gui_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_gui_vendor/lib::/usr/lib/nvidia:/usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu', 'HOME': '/home/pablo_kevin', 'CONDA_SHLVL': '1', 'OLDPWD': '/home/pablo_kevin', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3568', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', '_CE_M': '', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'COLCON_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'pablo_kevin', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'pablo_kevin', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', '_CE_CONDA': '', 'WINDOWPATH': '2', 'PATH': '/home/pablo_kevin/miniconda3/bin:/home/pablo_kevin/miniconda3/condabin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin', 'SESSION_MANAGER': 'local/Apolo-Nitro-PK:@/tmp/.ICE-unix/3537,unix/Apolo-Nitro-PK:/tmp/.ICE-unix/3537', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/a7773926_d496_49a4_aa59_f6511485a85f', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.151', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy', 'CONDA_PYTHON_EXE': '/home/pablo_kevin/miniconda3/bin/python', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CONDA_DEFAULT_ENV': 'base', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'CONDA_EXE': '/home/pablo_kevin/miniconda3/bin/conda', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/pablo_kevin/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'CONDA_PREFIX': '/home/pablo_kevin/miniconda3', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[2.703975] (-) TimerEvent: {}
+[2.706619] (robotic_hand) CommandEnded: {'returncode': 0}
+[2.707229] (robotic_hand) JobProgress: {'identifier': 'robotic_hand', 'progress': 'install'}
+[2.718893] (robotic_hand) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand'], 'cwd': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'CONDA_PROMPT_MODIFIER': '(base)', 'USER': 'pablo_kevin', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz:/opt/ros/jazzy/opt/gz_sim_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_sim_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/gz_gui_vendor/extra_cmake/lib:/opt/ros/jazzy/opt/gz_gui_vendor/lib::/usr/lib/nvidia:/usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu', 'HOME': '/home/pablo_kevin', 'CONDA_SHLVL': '1', 'OLDPWD': '/home/pablo_kevin', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3568', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', '_CE_M': '', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'COLCON_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'pablo_kevin', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'pablo_kevin', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', '_CE_CONDA': '', 'WINDOWPATH': '2', 'PATH': '/home/pablo_kevin/miniconda3/bin:/home/pablo_kevin/miniconda3/condabin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin', 'SESSION_MANAGER': 'local/Apolo-Nitro-PK:@/tmp/.ICE-unix/3537,unix/Apolo-Nitro-PK:/tmp/.ICE-unix/3537', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/a7773926_d496_49a4_aa59_f6511485a85f', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.151', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy', 'CONDA_PYTHON_EXE': '/home/pablo_kevin/miniconda3/bin/python', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CONDA_DEFAULT_ENV': 'base', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'CONDA_EXE': '/home/pablo_kevin/miniconda3/bin/conda', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/pablo_kevin/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'CONDA_PREFIX': '/home/pablo_kevin/miniconda3', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[2.734693] (robotic_hand) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[2.735861] (robotic_hand) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[2.736716] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/robotic_hand.sdf\n'}
+[2.736945] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/ros2_control/gazebo/robotic_hand.urdf.xacro\n'}
+[2.737149] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//urdf/ros2_control/gazebo/robotic_hand_ros2_control.xacro\n'}
+[2.737970] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/anular_link0.STL\n'}
+[2.738141] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/anular_link1.STL\n'}
+[2.738291] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/anular_link2.STL\n'}
+[2.738460] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/conectores_links.STL\n'}
+[2.738658] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/indice_link0.STL\n'}
+[2.738805] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/indice_link1.STL\n'}
+[2.738954] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/indice_link2.STL\n'}
+[2.739083] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/medio_link0.STL\n'}
+[2.739227] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/medio_link1.STL\n'}
+[2.739384] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/medio_link2.STL\n'}
+[2.739576] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/menique_link0.STL\n'}
+[2.739707] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/menique_link1.STL\n'}
+[2.739830] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/menique_link2.STL\n'}
+[2.739949] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/palma_dorso_link.STL\n'}
+[2.740065] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/pulgar_link0.STL\n'}
+[2.740181] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//meshes/pulgar_link1.STL\n'}
+[2.740595] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//launch/robotic_hand_gazebo.launch.py\n'}
+[2.740843] (robotic_hand) StdoutLine: {'line': b'-- Symlinking: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//launch/ros_gazebo.launch.py\n'}
+[2.753058] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/lib/robotic_hand/finger_control.py\n'}
+[2.753354] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//config/hand_controllers.yaml\n'}
+[2.753551] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/worlds/empty.sdf\n'}
+[2.753680] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/ament_index/resource_index/package_run_dependencies/robotic_hand\n'}
+[2.753827] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/ament_index/resource_index/parent_prefix_path/robotic_hand\n'}
+[2.753903] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/environment/ament_prefix_path.sh\n'}
+[2.754021] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/environment/ament_prefix_path.dsv\n'}
+[2.754136] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/environment/path.sh\n'}
+[2.754253] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/environment/path.dsv\n'}
+[2.754368] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/local_setup.bash\n'}
+[2.754503] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/local_setup.sh\n'}
+[2.754611] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/local_setup.zsh\n'}
+[2.754718] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/local_setup.dsv\n'}
+[2.754810] (robotic_hand) StdoutLine: {'line': b'-- Symlinking: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/package.dsv\n'}
+[2.762896] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/ament_index/resource_index/packages/robotic_hand\n'}
+[2.763003] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/cmake/robotic_handConfig.cmake\n'}
+[2.763046] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/cmake/robotic_handConfig-version.cmake\n'}
+[2.763104] (robotic_hand) StdoutLine: {'line': b'-- Up-to-date symlink: /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/package.xml\n'}
+[2.764490] (robotic_hand) CommandEnded: {'returncode': 0}
+[2.775035] (robotic_hand) JobEnded: {'identifier': 'robotic_hand', 'rc': 0}
+[2.775478] (-) EventReactorShutdown: {}

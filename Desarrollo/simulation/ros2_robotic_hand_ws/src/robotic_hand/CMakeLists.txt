@@ -39,4 +39,8 @@ install(DIRECTORY worlds/
     DESTINATION share/${PROJECT_NAME}/worlds
 )
 
+install(DIRECTORY description/
+    DESTINATION share/${PROJECT_NAME}/description
+)
+
 ament_package()

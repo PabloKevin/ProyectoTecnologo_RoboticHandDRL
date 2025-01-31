@@ -66,7 +66,7 @@ def generate_launch_description():
         ]
     )
 
-    # Arm controller
+    """# Arm controller
     load_arm_controller_cmd = Node(
         package='controller_manager',
         executable='spawner',
@@ -80,7 +80,7 @@ def generate_launch_description():
         executable='spawner',
         arguments=['grip_controller'],
         output='screen'
-    )
+    )"""
 
     # Launch description
     ld = LaunchDescription()
@@ -92,9 +92,9 @@ def generate_launch_description():
     # Add actions
     ld.add_action(start_gazebo_cmd)
     ld.add_action(spawn_robot_cmd)
-    ld.add_action(bridge_node)
+    """ ld.add_action(bridge_node)
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(load_arm_controller_cmd)
-    ld.add_action(load_gripper_controller_cmd)
+    ld.add_action(load_gripper_controller_cmd)"""
 
     return ld

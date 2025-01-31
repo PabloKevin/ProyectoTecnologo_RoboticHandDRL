@@ -328,6 +328,9 @@ ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_Robot
 # install(DIRECTORY "worlds/" "DESTINATION" "share/robotic_hand/worlds")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "worlds/" "DESTINATION" "share/robotic_hand/worlds")
 
+# install(DIRECTORY "description/" "DESTINATION" "share/robotic_hand/description")
+ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "description/" "DESTINATION" "share/robotic_hand/description")
+
 # install(FILES "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robotic_hand" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" FILES "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robotic_hand" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 
