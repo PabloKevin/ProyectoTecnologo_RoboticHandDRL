@@ -1,1 +1,1 @@
-rclpy;std_msgs;sensor_msgs;geometry_msgs;urdf;gz-sim8;gazebo_ros;gazebo_msgs;trajectory_msgs;controller_manager;ros2_control;gz_ros2_control;ament_lint_auto;ament_lint_common
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robotic_hand

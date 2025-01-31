@@ -1,22 +1,22 @@
 import os
+import xacro  # ✅ Added Xacro import
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler
-from launch.conditions import IfCondition
-from launch.event_handlers import OnProcessExit
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch_ros.actions import Node
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 # Get package path
 packagepath = get_package_share_directory('robotic_hand')
 
 # File paths
-sdf_model_path = os.path.join(packagepath, 'urdf', 'ros2_control', 'gazebo', 'robotic_hand.urdf.xacro')
+xacro_file_path = os.path.join(packagepath, 'urdf', 'ros2_control', 'gazebo', 'robotic_hand.urdf.xacro')
 world_file_path = os.path.join(packagepath, 'worlds', 'empty.sdf')
 config_file_path = os.path.join(packagepath, 'config', 'hand_controllers.yaml')
 
-robot_desc = open(sdf_model_path).read()
+# ✅ Convert Xacro to URDF
+robot_desc = xacro.process_file(xacro_file_path).toxml()
 
 def generate_launch_description():
     # Launch arguments
@@ -54,12 +54,12 @@ def generate_launch_description():
         parameters=[{'config_file': config_file_path}]
     )
 
-    # Robot state publisher
+    # ✅ Robot State Publisher with Correct Robot Description
     robot_state_publisher_cmd = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
-        output='both',
+        output='screen',
         parameters=[
             {'use_sim_time': True},
             {'robot_description': robot_desc},
@@ -69,7 +69,7 @@ def generate_launch_description():
     # Arm controller
     load_arm_controller_cmd = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         arguments=['arm_controller'],
         output='screen'
     )
@@ -77,7 +77,7 @@ def generate_launch_description():
     # Gripper controller
     load_gripper_controller_cmd = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         arguments=['grip_controller'],
         output='screen'
     )

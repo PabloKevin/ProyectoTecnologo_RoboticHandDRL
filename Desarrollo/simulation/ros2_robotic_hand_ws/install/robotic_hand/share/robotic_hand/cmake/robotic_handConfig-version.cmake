@@ -1,14 +1,1 @@
-# generated from ament/cmake/core/templates/nameConfig-version.cmake.in
-set(PACKAGE_VERSION "0.0.0")
-
-set(PACKAGE_VERSION_EXACT False)
-set(PACKAGE_VERSION_COMPATIBLE False)
-
-if("${PACKAGE_FIND_VERSION}" VERSION_EQUAL "${PACKAGE_VERSION}")
-  set(PACKAGE_VERSION_EXACT True)
-  set(PACKAGE_VERSION_COMPATIBLE True)
-endif()
-
-if("${PACKAGE_FIND_VERSION}" VERSION_LESS "${PACKAGE_VERSION}")
-  set(PACKAGE_VERSION_COMPATIBLE True)
-endif()
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/build/robotic_hand/ament_cmake_core/robotic_handConfig-version.cmake

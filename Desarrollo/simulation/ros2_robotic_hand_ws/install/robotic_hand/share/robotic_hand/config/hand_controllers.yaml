@@ -1,18 +1,1 @@
-controller_manager:
-  ros__parameters:
-    update_rate: 100
-    joint_state_controller:
-      type: joint_state_controller/JointStateController
-      publish_rate: 50
-    joint_trajectory_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
-      joints:
-        - joint_indice_0
-        - joint_indice_1
-        - joint_indice_2
-      state_publish_rate: 50
-      action_monitor_rate: 20
-      constraints:
-        goal_time: 0.5
-        stopped_velocity_tolerance: 0.01
-      interpolation_method: linear
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand/config/hand_controllers.yaml
