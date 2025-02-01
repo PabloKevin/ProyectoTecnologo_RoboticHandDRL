@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="RoboticHand01">
+  <link
+    name="palma_dorso_link">
+    <inertial>
+      <origin
+        xyz="0.01266 0.0077109 0.12272"
+        rpy="0 0 0" />
+      <mass
+        value="0.20247" />
+      <inertia
+        ixx="0.0014611"
+        ixy="3.6753E-05"
+        ixz="-4.2033E-06"
+        iyy="0.00098384"
+        iyz="-0.00016151"
+        izz="0.00050623" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/palma_dorso_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/palma_dorso_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="pulgar_link0">
+    <inertial>
+      <origin
+        xyz="0.00427406026562403 0.0352806424944036 0.0349204690408663"
+        rpy="0 0 0" />
+      <mass
+        value="0.0324581488421424" />
+      <inertia
+        ixx="1.3509408771223E-05"
+        ixy="-1.51351270034324E-06"
+        ixz="9.14252341013236E-07"
+        iyy="6.92052882865071E-06"
+        iyz="4.18994433750835E-06"
+        izz="9.69091713981264E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/pulgar_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/pulgar_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_pulgar_0"
+    type="continuous">
+    <origin
+      xyz="0.018291 -0.13588 0.029681"
+      rpy="1.5708 -0.47347 0" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="pulgar_link_0" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="pulgar_link1">
+    <inertial>
+      <origin
+        xyz="0.0329660327280432 0.0358232506817333 0.0281520989128223"
+        rpy="0 0 0" />
+      <mass
+        value="0.0187999709479692" />
+      <inertia
+        ixx="3.50846478944696E-06"
+        ixy="-5.4540650385842E-07"
+        ixz="3.34377289456695E-07"
+        iyy="2.33645482844339E-06"
+        iyz="9.85584245617834E-07"
+        izz="2.80119643730275E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/pulgar_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/pulgar_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_pulgar_1"
+    type="continuous">
+    <origin
+      xyz="-0.016974 0.039947 -0.024949"
+      rpy="-0.17928 -0.16915 -0.27411" />
+    <parent
+      link="pulgar_link0" />
+    <child
+      link="pulgar_link1" />
+    <axis
+      xyz="0.52368 0.38683 0.75902" />
+  </joint>
+  <link
+    name="indice_link0">
+    <inertial>
+      <origin
+        xyz="-0.000138061481416707 0.0125530441623433 -0.0167063970356744"
+        rpy="0 0 0" />
+      <mass
+        value="0.0112932423866571" />
+      <inertia
+        ixx="1.70110769761783E-06"
+        ixy="-1.0710080434343E-09"
+        ixz="-8.52502589404126E-09"
+        iyy="1.39435233820739E-06"
+        iyz="1.09841826901573E-09"
+        izz="8.46993685772682E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_indice_0"
+    type="continuous">
+    <origin
+      xyz="0.017381 -0.10655 0.011803"
+      rpy="1.5708 0 0.09642" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="indice_link0" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="indice_link1">
+    <inertial>
+      <origin
+        xyz="-0.000614876119123725 0.011915945826247 -0.0152877327569471"
+        rpy="0 0 0" />
+      <mass
+        value="0.00945019914988446" />
+      <inertia
+        ixx="1.06518897713154E-06"
+        ixy="-3.73850170666793E-10"
+        ixz="3.33799184111098E-08"
+        iyy="9.75777572443136E-07"
+        iyz="2.666892626722E-09"
+        izz="5.57818962637737E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_indice_1"
+    type="revolute">
+    <origin
+      xyz="0 0.00053441 -0.032043"
+      rpy="-0.0050999 -0.087262 0" />
+    <parent
+      link="indice_link0" />
+    <child
+      link="indice_link1" />
+    <axis
+      xyz="0 0.99999 0.0050999" />
+    <limit
+      lower="-0.95993"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="indice_link2">
+    <inertial>
+      <origin
+        xyz="-0.000413695339044184 0.010739872440223 -0.0133855490505303"
+        rpy="0 0 0" />
+      <mass
+        value="0.00844697715565134" />
+      <inertia
+        ixx="9.20897674909306E-07"
+        ixy="2.27810032741297E-11"
+        ixz="2.33874864282666E-08"
+        iyy="9.06546398140502E-07"
+        iyz="-9.81161474210494E-10"
+        izz="3.65180516689065E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/indice_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_indice_2"
+    type="revolute">
+    <origin
+      xyz="0 0.0012361 -0.031738"
+      rpy="0.0051159 -0.079246 -0.000405" />
+    <parent
+      link="indice_link1" />
+    <child
+      link="indice_link2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="1.1868"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="medio_link0">
+    <inertial>
+      <origin
+        xyz="-0.000156697335596553 -0.00467605663865933 -0.0177765685141926"
+        rpy="0 0 0" />
+      <mass
+        value="0.0148708376973653" />
+      <inertia
+        ixx="2.70021536499433E-06"
+        ixy="-1.50315664414973E-09"
+        ixz="-1.32779916211845E-08"
+        iyy="2.29787919716775E-06"
+        iyz="8.77395201260855E-09"
+        izz="1.24181995921591E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_medio_0"
+    type="continuous">
+    <origin
+      xyz="0.017396 -0.10571 0"
+      rpy="1.5708 0 0.12292" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="medio_link0" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="medio_link1">
+    <inertial>
+      <origin
+        xyz="-0.000643097201865117 -0.00488541457296997 -0.0170808244548924"
+        rpy="0 0 0" />
+      <mass
+        value="0.012131457804777" />
+      <inertia
+        ixx="1.64138039656642E-06"
+        ixy="-1.95095284432693E-10"
+        ixz="5.14141946477444E-08"
+        iyy="1.54300571479317E-06"
+        iyz="5.52303884823328E-10"
+        izz="8.1246788490104E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_medio_1"
+    type="continuous">
+    <origin
+      xyz="-2.08754344935879E-05 0 -0.0352397421865516"
+      rpy="0 -0.00126488888475103 0" />
+    <parent
+      link="medio_link0" />
+    <child
+      link="medio_link1" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="medio_link2">
+    <inertial>
+      <origin
+        xyz="-0.0050470107253316 0.00726568864822385 0.0870658457211163"
+        rpy="0 0 0" />
+      <mass
+        value="0.202470394943454" />
+      <inertia
+        ixx="0.00145186437375666"
+        ixy="5.30452916434077E-05"
+        ixz="9.35133276306999E-05"
+        iyy="0.000985510755679095"
+        iyz="-0.00015443421276343"
+        izz="0.000513803647276311" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/medio_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_medio_2"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.035366475417513"
+      rpy="-0.00504401820903985 -0.0191296518623243 -0.000914073340851768" />
+    <parent
+      link="medio_link1" />
+    <child
+      link="medio_link2" />
+    <axis
+      xyz="0.000913905969050752 -0.999986773013975 -0.00506147932691348" />
+  </joint>
+  <link
+    name="anular_link0">
+    <inertial>
+      <origin
+        xyz="-0.000146685997142321 -0.0126966761713894 -0.0173128446439132"
+        rpy="0 0 0" />
+      <mass
+        value="0.012633644061339" />
+      <inertia
+        ixx="2.06876995458836E-06"
+        ixy="-1.20016157979628E-09"
+        ixz="-9.77140732289136E-09"
+        iyy="1.72540122444841E-06"
+        iyz="6.07252946035932E-09"
+        izz="1.0034267809453E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_anular_0"
+    type="continuous">
+    <origin
+      xyz="0.017396 -0.10601 -0.020788"
+      rpy="1.5708 0 0.13729" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="anular_link0" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="anular_link1">
+    <inertial>
+      <origin
+        xyz="-0.00063881 -0.012513 -0.016258"
+        rpy="0 0 0" />
+      <mass
+        value="0.010609" />
+      <inertia
+        ixx="1.3028E-06"
+        ixy="-1.4775E-10"
+        ixz="4.3567E-08"
+        iyy="1.2133E-06"
+        iyz="-3.0441E-10"
+        izz="6.683E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_anular_1"
+    type="continuous">
+    <origin
+      xyz="-2.08754344922812E-05 -0.000350560080155715 -0.03341702508385"
+      rpy="0.0008483195681602 -0.0991968377807712 0.000146641500082829" />
+    <parent
+      link="anular_link0" />
+    <child
+      link="anular_link1" />
+    <axis
+      xyz="0.000145920613871728 0.999999617105372 -0.000862841980760904" />
+  </joint>
+  <link
+    name="anular_link2">
+    <inertial>
+      <origin
+        xyz="-0.000443921422519234 -0.0121091742980092 -0.0143108973504775"
+        rpy="0 0 0" />
+      <mass
+        value="0.0094709602444958" />
+      <inertia
+        ixx="1.1253846152645E-06"
+        ixy="-6.25777071027655E-10"
+        ixz="3.16593667755567E-08"
+        iyy="1.11933242103666E-06"
+        iyz="-3.97943046255207E-10"
+        izz="4.39896293158851E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/anular_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_anular_2"
+    type="continuous">
+    <origin
+      xyz="0 -0.000423840593102593 -0.0335040042404953"
+      rpy="-0.000864951864207458 0.0698595050006638 -0.000206296655481704" />
+    <parent
+      link="anular_link1" />
+    <child
+      link="anular_link2" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="menique_link0">
+    <inertial>
+      <origin
+        xyz="-0.000147353489185716 -0.0115658199049554 -0.014748223292958"
+        rpy="0 0 0" />
+      <mass
+        value="0.00880253930744336" />
+      <inertia
+        ixx="1.06448195535503E-06"
+        ixy="-7.25386767920673E-10"
+        ixz="-5.55210491800816E-09"
+        iyy="8.71957017197286E-07"
+        iyz="3.34074415980814E-09"
+        izz="5.87840051817751E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_menique_0"
+    type="continuous">
+    <origin
+      xyz="0.018096 -0.11691 -0.050295"
+      rpy="1.5708 0 0" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="menique_link0" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="menique_link1">
+    <inertial>
+      <origin
+        xyz="-0.00060931 -0.010995 -0.013626"
+        rpy="0 0 0" />
+      <mass
+        value="0.0074677" />
+      <inertia
+        ixx="6.7288E-07"
+        ixy="-9.6056E-11"
+        ixz="2.4674E-08"
+        iyy="6.2574E-07"
+        iyz="2.4801E-10"
+        izz="3.9564E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_menique_1"
+    type="continuous">
+    <origin
+      xyz="0 -0.00069536947134996 -0.0281000044569374"
+      rpy="0 0 0" />
+    <parent
+      link="menique_link0" />
+    <child
+      link="menique_link1" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="menique_link2">
+    <inertial>
+      <origin
+        xyz="-0.000425047963114263 -0.0100323107474543 -0.0114818633555668"
+        rpy="0 0 0" />
+      <mass
+        value="0.00613511944905811" />
+      <inertia
+        ixx="5.34283954479009E-07"
+        ixy="4.89342756427349E-11"
+        ixz="1.50099910426474E-08"
+        iyy="5.39200273156499E-07"
+        iyz="-4.52287902713272E-10"
+        izz="2.36691106422023E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/menique_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_menique_2"
+    type="continuous">
+    <origin
+      xyz="0 -0.000974801918927681 -0.0280000004172326"
+      rpy="0 0 0" />
+    <parent
+      link="menique_link1" />
+    <child
+      link="menique_link2" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="conectores_links">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/conectores_links.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RoboticHand01/meshes/conectores_links.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joints"
+    type="fixed">
+    <origin
+      xyz="0.00762023312950983 -0.225244090704331 0.136581773174753"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="palma_dorso_link" />
+    <child
+      link="conectores_links" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

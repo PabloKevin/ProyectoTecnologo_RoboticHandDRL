@@ -50,8 +50,8 @@
   </gazebo>
 
   <!-- Fingers Macro Definition -->
-  <xacro:macro name="finger" params="name link0_mesh link1_mesh link2_mesh mass inertia_xyz inertia_rpy xyz rpy axis lower_lim upper_lim">
-    <link name="${name}_link0">
+  <xacro:macro name="falange" params="name parent link_n link_mesh mass inertia_xyz inertia_rpy xyz rpy axis lower_lim upper_lim">
+    <link name="${link_mesh}_link${link_n}">
       <inertial>
         <mass value="${mass}"/>
         <origin xyz="${inertia_xyz}" rpy="${inertia_rpy}"/>
@@ -60,20 +60,70 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="file://$(find robotic_hand)/meshes/${link0_mesh}.STL"/>
+          <mesh filename="file://$(find robotic_hand)/meshes/${link_mesh}_link${link_n}.STL"/>
         </geometry>
       </visual>
     </link>
-    <joint name="${name}_joint0" type="revolute">
-      <parent link="hand_link"/>
-      <child link="${name}_link0"/>
+    <joint name="${link_mesh}_joint${link_n}" type="revolute">
+      <parent link="${parent}"/>
+      <child link="${link_mesh}_link${link_n}"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <axis xyz="${axis}"/>
       <limit lower="${lower_lim}" upper="${upper_lim}" effort="1.0" velocity="1.5"/>
     </joint>
   </xacro:macro>
 
+  <xacro:macro name="normal_finger" params="name link_mesh mass axis_0 axis_1 axis_2
+                                            inertia_xyz_0 inertia_rpy_0 xyz_0 rpy_0 
+                                            inertia_xyz_1 inertia_rpy_1 xyz_1 rpy_1 
+                                            inertia_xyz_2 inertia_rpy_2 xyz_2 rpy_2 
+                                            upper_lim_0 upper_lim_1 upper_lim_2">
+    <xacro:falange name="${link_mesh}_link0" parent="hand_link" link_n="0" link_mesh="${link_mesh}" mass="${mass}" 
+      inertia_xyz="${inertia_xyz_0}" inertia_rpy="${inertia_rpy_0}" 
+      xyz="${xyz_0}" rpy="${rpy_0}" axis="${axis_0}"
+      lower_lim="0.0" upper_lim="${upper_lim_0}"/>
+
+    <xacro:falange name="${link_mesh}_link1" parent="${link_mesh}_link0" link_n="1" link_mesh="${link_mesh}" mass="${mass}" 
+      inertia_xyz="${inertia_xyz_1}" inertia_rpy="${inertia_rpy_1}" 
+      xyz="${xyz_1}" rpy="${rpy_1}" axis="${axis_1}"
+      lower_lim="0.0" upper_lim="${upper_lim_1}"/>
+
+    <xacro:falange name="${link_mesh}_link2" parent="${link_mesh}_link1" link_n="2" link_mesh="${link_mesh}" mass="${mass}" 
+      inertia_xyz="${inertia_xyz_2}" inertia_rpy="${inertia_rpy_2}" 
+      xyz="${xyz_2}" rpy="${rpy_2}" axis="${axis_2}"
+      lower_lim="0.0" upper_lim="${upper_lim_2}"/>
+  </xacro:macro>
+
+  <xacro:macro name="pulgar_finger" params="name link_mesh mass axis_0 axis_1
+                                            inertia_xyz_0 inertia_rpy_0 xyz_0 rpy_0 
+                                            inertia_xyz_1 inertia_rpy_1 xyz_1 rpy_1 
+                                            upper_lim_0 upper_lim_1">
+    <xacro:falange name="${link_mesh}_link0" parent="hand_link" link_n="0" link_mesh="${link_mesh}" mass="${mass}" 
+      inertia_xyz="${inertia_xyz_0}" inertia_rpy="${inertia_rpy_0}" 
+      xyz="${xyz_0}" rpy="${rpy_0}" axis="${axis_0}"
+      lower_lim="0.0" upper_lim="${upper_lim_0}"/>
+
+    <xacro:falange name="${link_mesh}_link1" parent="${link_mesh}_link0" link_n="1" link_mesh="${link_mesh}" mass="${mass}" 
+      inertia_xyz="${inertia_xyz_1}" inertia_rpy="${inertia_rpy_1}" 
+      xyz="${xyz_1}" rpy="${rpy_1}" axis="${axis_1}"
+      lower_lim="0.0" upper_lim="${upper_lim_1}"/>
+  </xacro:macro>
+
   <!-- Define the fingers -->
+  <xacro:pulgar_finger name="thumb_finger" link_mesh="pulgar" mass="0.05" axis_0="0 0 1" axis_1="0.52368 0.38683 0.75902"
+    inertia_xyz_0="0.00427406026562403 0.0352806424944036 0.0349204690408663" inertia_rpy_0="0 0 0" 
+    xyz_0="0.018291 -0.13588 0.029681" rpy_0="1.5708 0.01053 0" 
+    inertia_xyz_1="0.0329660327280432 0.0358232506817333 0.0281520989128223" inertia_rpy_1="0 0 0" 
+    xyz_1="-0.016974 0.039947 -0.024949" rpy_1="-0.17928 -0.16915 -0.27411" 
+    upper_lim_0="-1.569" upper_lim_1="-1.569"/>
+  
+  <!-- 
+  <xacro:normal_finger name="index_finger" link0_mesh="indice_link0" link1_mesh="indice_link1" link2_mesh="indice_link2" mass="0.05" 
+    inertia_xyz="-0.000138061481416707 0.0125530441623433 -0.0167063970356744" inertia_rpy="0 0 0" 
+    xyz="0.017381 -0.10655 0.011803" rpy="1.5708 0 -0.06458" axis="0 1 0"
+    lower_lim="0.0" upper_lim="-1.281"/>
+-->
+  <!-- Define the fingers 
   <xacro:finger name="thumb_finger" link0_mesh="pulgar_link0" link1_mesh="pulgar_link1" link2_mesh="pulgar_link2" mass="0.05" 
     inertia_xyz="0.00427406026562403 0.0352806424944036 0.0349204690408663" inertia_rpy="0 0 0" 
     xyz="0.018291 -0.13588 0.029681" rpy="1.5708 0.01053 0" axis="0 0 1"
@@ -94,5 +144,7 @@
     inertia_xyz="-0.000147353489185716 -0.0115658199049554 -0.014748223292958" inertia_rpy="0 0 0" 
     xyz="0.018096 -0.11691 -0.050295" rpy="1.5708 0 -0.212" axis="0 1 0"
     lower_lim="0.0" upper_lim="-1.117"/>
+    -->
+
 
 </robot>
