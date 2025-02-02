@@ -12,7 +12,7 @@ packagepath = get_package_share_directory('robotic_hand')
 
 # File paths
 xacro_file_path = os.path.join(packagepath, 'urdf', 'ros2_control', 'gazebo', 'robotic_hand.urdf.xacro')
-world_file_path = os.path.join(packagepath, 'worlds', 'empty.sdf')
+world_file_path = os.path.join(packagepath, 'worlds', 'test_world.world')
 config_file_path = os.path.join(packagepath, 'config', 'hand_controllers.yaml')
 
 # ✅ Convert Xacro to URDF
