@@ -39,6 +39,38 @@
     </collision>
   </link>
 
+  <link
+    name="conectores_links">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.5" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find robotic_hand)/meshes/conectores_links.STL" />
+      </geometry>
+      <material name="hand_material">
+        <color rgba="0.8 0.8 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find robotic_hand)/meshes/conectores_links.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joints" type="fixed">
+    <origin
+      xyz="0.00762023312950983 -0.225244090704331 0.136581773174753"
+      rpy="1.5707963267949 0 0" />
+    <parent link="hand_link" />
+    <child link="conectores_links" />
+    <axis xyz="0 0 0" />
+  </joint>
+
   <!-- Gazebo Plugin Moved Here -->
   <gazebo>
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
@@ -62,7 +94,16 @@
         <geometry>
           <mesh filename="file://$(find robotic_hand)/meshes/${link_mesh}_link${link_n}.STL"/>
         </geometry>
+        <material name="hand_material">
+          <color rgba="0.8 0.8 0.8 1.0"/>
+        </material>
       </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find robotic_hand)/meshes/${link_mesh}_link${link_n}.STL"/>
+        </geometry>
+      </collision>
     </link>
     <joint name="${link_mesh}_joint${link_n}" type="revolute">
       <parent link="${parent}"/>
@@ -106,7 +147,7 @@
     <xacro:falange name="${link_mesh}_link1" parent="${link_mesh}_link0" link_n="1" link_mesh="${link_mesh}" mass="${mass}" 
       inertia_xyz="${inertia_xyz_1}" inertia_rpy="${inertia_rpy_1}" 
       xyz="${xyz_1}" rpy="${rpy_1}" axis="${axis_1}"
-      lower_lim="0.0" upper_lim="${upper_lim_1}"/>
+      lower_lim="0.395" upper_lim="${upper_lim_1}"/>
   </xacro:macro>
 
   <!-- Define the fingers -->
@@ -115,36 +156,42 @@
     xyz_0="0.018291 -0.13588 0.029681" rpy_0="1.5708 0.01053 0" 
     inertia_xyz_1="0.0329660327280432 0.0358232506817333 0.0281520989128223" inertia_rpy_1="0 0 0" 
     xyz_1="-0.016974 0.039947 -0.024949" rpy_1="-0.17928 -0.16915 -0.27411" 
-    upper_lim_0="-1.569" upper_lim_1="-1.569"/>
+    upper_lim_0="-1.569" upper_lim_1="-0.806"/>
   
-  <!-- 
-  <xacro:normal_finger name="index_finger" link0_mesh="indice_link0" link1_mesh="indice_link1" link2_mesh="indice_link2" mass="0.05" 
-    inertia_xyz="-0.000138061481416707 0.0125530441623433 -0.0167063970356744" inertia_rpy="0 0 0" 
-    xyz="0.017381 -0.10655 0.011803" rpy="1.5708 0 -0.06458" axis="0 1 0"
-    lower_lim="0.0" upper_lim="-1.281"/>
--->
-  <!-- Define the fingers 
-  <xacro:finger name="thumb_finger" link0_mesh="pulgar_link0" link1_mesh="pulgar_link1" link2_mesh="pulgar_link2" mass="0.05" 
-    inertia_xyz="0.00427406026562403 0.0352806424944036 0.0349204690408663" inertia_rpy="0 0 0" 
-    xyz="0.018291 -0.13588 0.029681" rpy="1.5708 0.01053 0" axis="0 0 1"
-    lower_lim="0.0" upper_lim="-1.569"/>
-  <xacro:finger name="index_finger" link0_mesh="indice_link0" link1_mesh="indice_link1" link2_mesh="indice_link2" mass="0.05" 
-    inertia_xyz="-0.000138061481416707 0.0125530441623433 -0.0167063970356744" inertia_rpy="0 0 0" 
-    xyz="0.017381 -0.10655 0.011803" rpy="1.5708 0 -0.06458" axis="0 1 0"
-    lower_lim="0.0" upper_lim="-1.281"/>
-  <xacro:finger name="middle_finger" link0_mesh="medio_link0" link1_mesh="medio_link1" link2_mesh="medio_link2" mass="0.05" 
-    inertia_xyz="-0.000156697335596553 -0.00467605663865933 -0.0177765685141926" inertia_rpy="0 0 0" 
-    xyz="0.017396 -0.10571 0" rpy="1.5708 0 -0.05508" axis="0 1 0"
-    lower_lim="0.0" upper_lim="-1.322"/>
-  <xacro:finger name="ring_finger" link0_mesh="anular_link0" link1_mesh="anular_link1" link2_mesh="anular_link2" mass="0.05" 
-    inertia_xyz="-0.000146685997142321 -0.0126966761713894 -0.0173128446439132" inertia_rpy="0 0 0" 
-    xyz="0.017396 -0.10601 -0.020788" rpy="1.5708 0 -0.05771" axis="0 1 0"
-    lower_lim="0.0" upper_lim="-1.305"/>
-  <xacro:finger name="pinky_finger" link0_mesh="menique_link0" link1_mesh="menique_link1" link2_mesh="menique_link2" mass="0.05" 
-    inertia_xyz="-0.000147353489185716 -0.0115658199049554 -0.014748223292958" inertia_rpy="0 0 0" 
-    xyz="0.018096 -0.11691 -0.050295" rpy="1.5708 0 -0.212" axis="0 1 0"
-    lower_lim="0.0" upper_lim="-1.117"/>
-    -->
+  <xacro:normal_finger name="index_finger" link_mesh="indice" mass="0.05"
+    inertia_xyz_0="-0.000138061481416707 0.0125530441623433 -0.0167063970356744" inertia_rpy_0="0 0 0" 
+    xyz_0="0.017381 -0.10655 0.011803" rpy_0="1.5708 0 -0.06458" axis_0="0 1 0"
+    inertia_xyz_1="-0.000614876119123725 0.011915945826247 -0.0152877327569471" inertia_rpy_1="0 0 0" 
+    xyz_1="0 0.00053441 -0.032043" rpy_1="-0.0050999 -0.087262 0" axis_1="0 0.99999 0.0050999"
+    inertia_xyz_2="-0.000413695339044184 0.010739872440223 -0.0133855490505303" inertia_rpy_2="0 0 0" 
+    xyz_2="0 0.0012361 -0.031738" rpy_2="0.0051159 -0.079246 -0.000405"  axis_2="0 1 0"
+    upper_lim_0="-1.281" upper_lim_1="-1.305" upper_lim_2="-1.224"/>
 
+  <xacro:normal_finger name="middle_finger" link_mesh="medio" mass="0.05"
+    inertia_xyz_0="-0.000156697335596553 -0.00467605663865933 -0.0177765685141926" inertia_rpy_0="0 0 0" 
+    xyz_0="0.017396 -0.10571 0" rpy_0="1.5708 0 -0.05508" axis_0="0 1 0"
+    inertia_xyz_1="-0.000643097201865117 -0.00488541457296997 -0.0170808244548924" inertia_rpy_1="0 0 0" 
+    xyz_1="-2.08754344935879E-05 0 -0.0352397421865516" rpy_1="0 -0.00126488888475103 0" axis_1="0 1 0"
+    inertia_xyz_2="-0.0050470107253316 0.00726568864822385 0.0870658457211163" inertia_rpy_2="0 0 0" 
+    xyz_2="0 0 -0.035366475417513" rpy_2="-0.00504401820903985 -0.0191296518623243 -0.000914073340851768" axis_2="0.000913905969050752 -0.999986773013975 -0.00506147932691348"
+    upper_lim_0="-1.322" upper_lim_1="-1.403" upper_lim_2="1.297"/>
+
+  <xacro:normal_finger name="ring_finger" link_mesh="anular" mass="0.05"
+    inertia_xyz_0="-0.000146685997142321 -0.0126966761713894 -0.0173128446439132" inertia_rpy_0="0 0 0" 
+    xyz_0="0.017396 -0.10601 -0.020788" rpy_0="1.5708 0 -0.05771" axis_0="0 1 0"
+    inertia_xyz_1="-0.00063881 -0.012513 -0.016258" inertia_rpy_1="0 0 0" 
+    xyz_1="-2.08754344922812E-05 -0.000350560080155715 -0.03341702508385" rpy_1="0.0008483195681602 -0.0991968377807712 0.000146641500082829" axis_1="0.000145920613871728 0.999999617105372 -0.000862841980760904"
+    inertia_xyz_2="-0.000443921422519234 -0.0121091742980092 -0.0143108973504775" inertia_rpy_2="0 0 0" 
+    xyz_2="0 -0.000423840593102593 -0.0335040042404953" rpy_2="-0.000864951864207458 0.0698595050006638 -0.000206296655481704" axis_2="0 1 0"
+    upper_lim_0="-1.305" upper_lim_1="-1.297" upper_lim_2="-1.378"/>
+
+  <xacro:normal_finger name="pinky_finger" link_mesh="menique" mass="0.05"
+    inertia_xyz_0="-0.000147353489185716 -0.0115658199049554 -0.014748223292958" inertia_rpy_0="0 0 0" 
+    xyz_0="0.018096 -0.11691 -0.050295" rpy_0="1.5708 0 -0.212" axis_0="0 1 0"
+    inertia_xyz_1="-0.00060931 -0.010995 -0.013626" inertia_rpy_1="0 0 0" 
+    xyz_1="0 -0.00069536947134996 -0.0281000044569374" rpy_1="0 0 0" axis_1="0 1 0"
+    inertia_xyz_2="-0.000425047963114263 -0.0100323107474543 -0.0114818633555668" inertia_rpy_2="0 0 0" 
+    xyz_2="0 -0.000974801918927681 -0.0280000004172326" rpy_2="0 0 0" axis_2="0 1 0"
+    upper_lim_0="-1.117" upper_lim_1="-1.297" upper_lim_2="-1.143"/>
 
 </robot>
