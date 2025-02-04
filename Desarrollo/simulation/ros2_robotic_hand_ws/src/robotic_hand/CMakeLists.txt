@@ -24,6 +24,7 @@ install(DIRECTORY launch
 # Instalar scripts de Python
 install(PROGRAMS
   scripts/test_control01.py
+  scripts/agent_controller.py
   DESTINATION lib/${PROJECT_NAME}  # Aquí se instalan los scripts en el directorio lib
 )
 

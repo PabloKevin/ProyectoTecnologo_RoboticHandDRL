@@ -316,8 +316,8 @@ ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_Robot
 # install(DIRECTORY "launch" "DESTINATION" "share/robotic_hand/")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "launch" "DESTINATION" "share/robotic_hand/")
 
-# install(PROGRAMS "scripts/test_control01.py" "DESTINATION" "lib/robotic_hand")
-ament_cmake_symlink_install_programs("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" PROGRAMS "scripts/test_control01.py" "DESTINATION" "lib/robotic_hand")
+# install(PROGRAMS "scripts/test_control01.py" "scripts/agent_controller.py" "DESTINATION" "lib/robotic_hand")
+ament_cmake_symlink_install_programs("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" PROGRAMS "scripts/test_control01.py" "scripts/agent_controller.py" "DESTINATION" "lib/robotic_hand")
 
 # install(DIRECTORY "config" "DESTINATION" "share/robotic_hand/config")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "config" "DESTINATION" "share/robotic_hand/config")

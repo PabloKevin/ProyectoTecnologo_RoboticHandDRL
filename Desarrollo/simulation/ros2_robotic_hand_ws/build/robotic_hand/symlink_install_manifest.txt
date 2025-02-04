@@ -18,6 +18,7 @@
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//launch/ros_gazebo.launch.py
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand//launch/ros_rviz.launch.py
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/lib/robotic_hand/test_control01.py
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/lib/robotic_hand/agent_controller.py
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/config/config/hand_controllers.yaml
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/config/config/robotic_hand_v1.rviz
 /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/worlds/empty.sdf
