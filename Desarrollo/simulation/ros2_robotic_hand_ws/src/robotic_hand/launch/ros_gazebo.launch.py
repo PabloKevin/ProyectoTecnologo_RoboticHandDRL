@@ -56,8 +56,8 @@ def generate_launch_description():
 
     # Run the node
     return LaunchDescription([
-        #gazebo,
         node_robot_state_publisher,
-        #spawn_entity
+        gazebo,
+        spawn_entity,
         #spawn_robot_cmd
     ])
