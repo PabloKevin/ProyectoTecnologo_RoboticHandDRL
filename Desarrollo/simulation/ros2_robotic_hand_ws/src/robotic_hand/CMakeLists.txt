@@ -13,10 +13,6 @@ find_package(gz-sim8 REQUIRED)  # Ajustado para Gazebo Sim Harmonic 8.6.0
 find_package(trajectory_msgs REQUIRED)
 
 # Instalar archivos URDF, mallas y archivos de lanzamiento
-install(DIRECTORY urdf
-  DESTINATION share/${PROJECT_NAME}/
-)
-
 install(DIRECTORY meshes
   DESTINATION share/${PROJECT_NAME}/
 )
@@ -27,12 +23,12 @@ install(DIRECTORY launch
 
 # Instalar scripts de Python
 install(PROGRAMS
-  scripts/finger_control.py
+  scripts/test_control01.py
   DESTINATION lib/${PROJECT_NAME}  # Aquí se instalan los scripts en el directorio lib
 )
 
 install(DIRECTORY config
-  DESTINATION share/${PROJECT_NAME}/
+  DESTINATION share/${PROJECT_NAME}/config
 )
 
 install(DIRECTORY worlds/

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
@@ -49,11 +50,17 @@ class Hand():
     @property
     def joint_positions(self):
         return [pos for finger in self.fingers.values() if finger is not None for pos in finger.positions]
+    
+    def action(self, combination):
+        for i, finger in enumerate(self.fingers):
+            self.fingers[finger].action(combination[i])
 
 
         
 
 def main():
+    rclpy.init()
+
     pulgar = Finger("pulgar", upper_lims=[-1.289, -0.533], lower_lims=[0.0, 0.395])
     indice = Finger("indice", upper_lims=[-1.281, -1.305, -0.880])
     medio = Finger("medio", upper_lims=[-1.322, -1.403, 0.953])
@@ -61,25 +68,30 @@ def main():
     menique = Finger("menique", upper_lims=[-1.117, -1.297, -1.094])
 
     left_hand = Hand(pulgar, indice, medio, anular, menique)
-
-    rclpy.init()
     node = JointPublisher(left_hand)
-    try:
-        for action in [0.0, 1.0, 2.0]:
-            print(f"Moving fingers to position: {action}")
-            for finger in left_hand.fingers:
-                left_hand.fingers[finger].action(action)
 
-            node.publish_joint_states()  # Publish the new joint states
-            rclpy.spin_once(node)  # Ensure message is processed
-            time.sleep(1)
+    combinations_of_interest = {
+        "Combination 1": [2, 1, 2, 2, 2],
+        "Combination 2": [2, 1, 1, 2, 2],
+        "Combination 3": [1, 1, 1, 1, 1],
+        "Combination 4": [0, 0, 0, 0, 0]  
+    }
+    try:
+        while True:  # Loop indefinitely until KeyboardInterrupt
+            for name, combination in combinations_of_interest.items():
+                print(f"Moving fingers to: {name} -> {combination}")
+                left_hand.action(combination)
+
+                node.publish_joint_states()  # Publish the new joint states
+                rclpy.spin_once(node)  # Ensure message is processed
+                time.sleep(1)  # Wait for visualization update
+
     except KeyboardInterrupt:
-        pass  # Catch manual Ctrl+C to avoid calling shutdown twice
+        print("\nStopping robot movement.")
     finally:
         node.destroy_node()
-        if rclpy.ok():  # Only shutdown if ROS 2 is still active
+        if rclpy.ok():
             rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
-

@@ -10,7 +10,7 @@ def generate_launch_description():
     # Package and file paths
     pkg_name = 'robotic_hand'
     file_subpath = 'description/robotic_hand.urdf.xacro'
-    rviz_config_file = os.path.join(get_package_share_directory(pkg_name), 'config', 'robotic_hand.rviz')
+    rviz_config_file = os.path.join(get_package_share_directory(pkg_name), 'config', 'robotic_hand_v1.rviz')
 
     # Process URDF
     xacro_file = os.path.join(get_package_share_directory(pkg_name), file_subpath)
@@ -25,14 +25,6 @@ def generate_launch_description():
                      'use_sim_time': True}]
     )
 
-    # Joint State Publisher (publishes joint states)
-    node_joint_state_publisher = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        output='screen'
-    )
-
     # RViz2 for visualization
     node_rviz2 = Node(
         package='rviz2',
@@ -44,6 +36,5 @@ def generate_launch_description():
 
     return LaunchDescription([
         node_robot_state_publisher,
-        #node_joint_state_publisher,
         node_rviz2
     ])

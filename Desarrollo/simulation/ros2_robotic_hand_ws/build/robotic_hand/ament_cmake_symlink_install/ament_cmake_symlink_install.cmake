@@ -310,20 +310,17 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
-# install(DIRECTORY "urdf" "DESTINATION" "share/robotic_hand/")
-ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "urdf" "DESTINATION" "share/robotic_hand/")
-
 # install(DIRECTORY "meshes" "DESTINATION" "share/robotic_hand/")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "meshes" "DESTINATION" "share/robotic_hand/")
 
 # install(DIRECTORY "launch" "DESTINATION" "share/robotic_hand/")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "launch" "DESTINATION" "share/robotic_hand/")
 
-# install(PROGRAMS "scripts/finger_control.py" "DESTINATION" "lib/robotic_hand")
-ament_cmake_symlink_install_programs("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" PROGRAMS "scripts/finger_control.py" "DESTINATION" "lib/robotic_hand")
+# install(PROGRAMS "scripts/test_control01.py" "DESTINATION" "lib/robotic_hand")
+ament_cmake_symlink_install_programs("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" PROGRAMS "scripts/test_control01.py" "DESTINATION" "lib/robotic_hand")
 
-# install(DIRECTORY "config" "DESTINATION" "share/robotic_hand/")
-ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "config" "DESTINATION" "share/robotic_hand/")
+# install(DIRECTORY "config" "DESTINATION" "share/robotic_hand/config")
+ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "config" "DESTINATION" "share/robotic_hand/config")
 
 # install(DIRECTORY "worlds/" "DESTINATION" "share/robotic_hand/worlds")
 ament_cmake_symlink_install_directory("/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand" DIRECTORY "worlds/" "DESTINATION" "share/robotic_hand/worlds")
