@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     agent.load_models()
 
-    episodes = 1000
+    episodes = 5
     scores = []
     right_comb = 0
     for i in range(episodes):
@@ -41,7 +41,7 @@ if __name__ == '__main__':
             if reward > -2/3:
                 right_comb_ctr += 1
         
-        #env.render(timeout=None)
+        env.render(timeout=None)
         scores.append(score)
         if right_comb_ctr == 5:
             right_comb += 1
