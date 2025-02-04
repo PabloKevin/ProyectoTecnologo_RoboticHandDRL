@@ -16,12 +16,7 @@ class JointPublisher(Node):
         msg.name = self.hand.joint_names
         msg.position = self.hand.joint_positions
         self.publisher.publish(msg)
-
-        # Example: Move the first joint
-        for action in [0.0, 1.0, 2.0]:
-            self.hand.fingers["pulgar"].action(action)
-            self.hand.fingers["indice"].action(action)
-            time.sleep(1)
+        
 
 
 class Finger():
@@ -59,15 +54,25 @@ class Hand():
         
 
 def main():
-    indice = Finger("indice", upper_lims=[-1.281, -1.305, -1.224])
-    pulgar = Finger("pulgar", upper_lims=[-1.569, -0.806], lower_lims=[0.0, 0.395])
+    pulgar = Finger("pulgar", upper_lims=[-1.289, -0.533], lower_lims=[0.0, 0.395])
+    indice = Finger("indice", upper_lims=[-1.281, -1.305, -0.880])
+    medio = Finger("medio", upper_lims=[-1.322, -1.403, 0.953])
+    anular = Finger("anular", upper_lims=[-1.305, -1.297, -1.065])
+    menique = Finger("menique", upper_lims=[-1.117, -1.297, -1.094])
 
-    left_hand = Hand(pulgar,indice)
+    left_hand = Hand(pulgar, indice, medio, anular, menique)
 
     rclpy.init()
     node = JointPublisher(left_hand)
     try:
-        rclpy.spin(node)
+        for action in [0.0, 1.0, 2.0]:
+            print(f"Moving fingers to position: {action}")
+            for finger in left_hand.fingers:
+                left_hand.fingers[finger].action(action)
+
+            node.publish_joint_states()  # Publish the new joint states
+            rclpy.spin_once(node)  # Ensure message is processed
+            time.sleep(1)
     except KeyboardInterrupt:
         pass  # Catch manual Ctrl+C to avoid calling shutdown twice
     finally:
