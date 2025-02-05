@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-from Env03.Full_Agent import Full_Agent_Pipe
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 import time
+import requests
+import json
+import numpy as np
+import os
+import cv2
 
 class JointPublisher(Node):
     def __init__(self, hand):
@@ -56,6 +60,41 @@ class Hand():
         for i, finger in enumerate(self.fingers):
             self.fingers[finger].action(combination[i])
 
+def get_observation_img():
+    # Directory containing images
+    selected_image_path = "Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/description/bw_Martillo01.jpg"
+
+    # Load the image
+    img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+    print(img)
+
+    # Convert pixels values from 255 to 1
+    img[img < 255/2] = 0  
+    img[img >=  255/2] = 1
+    #file = "Desarrollo/simulation/Env01/img.txt"
+    #np.savetxt(file, img, fmt="%d", delimiter=" ") 
+    
+    # Add a channel dimension to the image
+    img = np.expand_dims(img, axis=0)
+    return img
+
+def get_action():
+    """Sends observation to ML agent and returns received action."""
+    observation = get_observation_img()
+
+    API_URL = "http://127.0.0.1:8000/predict"  # Change if the ML server runs on another machine
+    try:
+        response = requests.post(API_URL, json={"observation": observation})
+        if response.status_code == 200:
+            action = response.json()["action"]
+            print(f"Sent observation: {observation}, Received action: {action}")
+            return action
+        else:
+            print(f"Error from server: {response.status_code}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Could not connect to agent: {e}")
+
 
 def main():
     rclpy.init()
@@ -68,18 +107,19 @@ def main():
 
     left_hand = Hand(pulgar, indice, medio, anular, menique)
     node = JointPublisher(left_hand)
-    Full_Agent = Full_Agent_Pipe()
 
     try:
         while True:  # Loop indefinitely until KeyboardInterrupt
             for _ in range(3):
-                combination = Full_Agent.pipe()
-                print(f"Moving fingers to:-> {combination}")
-                left_hand.action(combination)
+                combination = get_action()
+                print(combination)
+                #combination = Full_Agent.pipe()
+                #print(f"Moving fingers to:-> {combination}")
+                #left_hand.action(combination)
 
                 node.publish_joint_states()  # Publish the new joint states
                 rclpy.spin_once(node)  # Ensure message is processed
-                time.sleep(5)  # Wait for visualization update
+                time.sleep(1)  # Wait for visualization update
 
     except KeyboardInterrupt:
         print("\nStopping robot movement.")
