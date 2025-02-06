@@ -1,7 +1,6 @@
 from Full_Agent import Full_Agent_Pipe
 from fastapi import FastAPI
 import numpy as np
-import torch
 import uvicorn
 from pydantic import BaseModel
 
@@ -17,7 +16,7 @@ class ObservationRequest(BaseModel):
 @app.post("/predict")
 async def get_action(request: ObservationRequest):
     observation = np.array(request.observation)
-    action = Full_Agent.pipe(input_img=observation)  # Predict action
+    action = Full_Agent.pipe(input_img=observation, render=False)  # Predict action
     return {"action": action}
 
 if __name__ == "__main__":

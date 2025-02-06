@@ -60,30 +60,27 @@ class Hand():
         for i, finger in enumerate(self.fingers):
             self.fingers[finger].action(combination[i])
 
-def get_observation_img():
-    # Directory containing images
-    selected_image_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand/description/bw_Martillo01.jpg"
+def get_observation_img(img_of_interest, tool_name):
+    img_params={"img_of_interest": img_of_interest, "tool_name":tool_name}
+    """Sends image params and returns received image."""
+    API_URL = "http://127.0.0.1:8001/image"  # Change if the ML server runs on another machine
+    try:
+        response = requests.post(API_URL, json=img_params)
+        if response.status_code == 200:
+            image = response.json()["image"]
+            #print(f"Sent image_params: {img_params}, Received image: {image}")
+            return image
+        else:
+            print(f"Error from server: {response.status_code}")
 
-    # Load the image
-    img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+    except requests.exceptions.RequestException as e:
+        print(f"Could not connect to agent: {e}")
 
-    # Convert pixels values from 255 to 1
-    img[img < 255/2] = 0  
-    img[img >=  255/2] = 1
-    #file = "Desarrollo/simulation/Env01/img.txt"
-    #np.savetxt(file, img, fmt="%d", delimiter=" ") 
-    
-    # Add a channel dimension to the image
-    img = np.expand_dims(img, axis=0)
-    return img
-
-def get_action():
+def get_action(observation):
     """Sends observation to ML agent and returns received action."""
-    observation = get_observation_img()
-
     API_URL = "http://127.0.0.1:8000/predict"  # Change if the ML server runs on another machine
     try:
-        response = requests.post(API_URL, json={"observation": observation.tolist()})
+        response = requests.post(API_URL, json={"observation": observation}) #observation must be a list
         if response.status_code == 200:
             action = response.json()["action"]
             print(f"Sent observation: {observation}, Received action: {action}")
@@ -110,7 +107,9 @@ def main():
     try:
         #while True:  # Loop indefinitely until KeyboardInterrupt
             for _ in range(1):
-                action_recieved = get_action()
+                image_recieved = get_observation_img(img_of_interest= "all", tool_name=None)
+                print(image_recieved)
+                action_recieved = get_action(image_recieved)
                 combination = action_recieved["position"]
                 print(f"Moving fingers to:-> {combination}")
                 left_hand.action(combination)
