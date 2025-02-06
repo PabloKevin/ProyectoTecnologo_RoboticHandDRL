@@ -83,7 +83,7 @@ def get_action(observation):
         response = requests.post(API_URL, json={"observation": observation}) #observation must be a list
         if response.status_code == 200:
             action = response.json()["action"]
-            print(f"Sent observation: {observation}, Received action: {action}")
+            #print(f"Sent observation: {observation}, Received action: {action}")
             return action
         else:
             print(f"Error from server: {response.status_code}")
@@ -108,7 +108,7 @@ def main():
         #while True:  # Loop indefinitely until KeyboardInterrupt
             for _ in range(1):
                 image_recieved = get_observation_img(img_of_interest= "all", tool_name=None)
-                print(image_recieved)
+                #print(image_recieved)
                 action_recieved = get_action(image_recieved)
                 combination = action_recieved["position"]
                 print(f"Moving fingers to:-> {combination}")
@@ -116,16 +116,7 @@ def main():
 
                 node.publish_joint_states()  # Publish the new joint states
                 rclpy.spin_once(node)  # Ensure message is processed
-                time.sleep(5)  # Wait for visualization update
 
-                """zero = [0.0 for _ in range(5)]
-                print(f"Moving fingers to:-> {zero}")
-                left_hand.action(zero)
-
-                node.publish_joint_states()  # Publish the new joint states
-                rclpy.spin_once(node)  # Ensure message is processed
-                time.sleep(3)  # Wait for visualization update
-"""
     except KeyboardInterrupt:
         print("\nStopping robot movement.")
     finally:
