@@ -118,14 +118,14 @@ def main():
                 rclpy.spin_once(node)  # Ensure message is processed
                 time.sleep(5)  # Wait for visualization update
 
-                zero = [0.0 for _ in range(5)]
+                """zero = [0.0 for _ in range(5)]
                 print(f"Moving fingers to:-> {zero}")
                 left_hand.action(zero)
 
                 node.publish_joint_states()  # Publish the new joint states
                 rclpy.spin_once(node)  # Ensure message is processed
                 time.sleep(3)  # Wait for visualization update
-
+"""
     except KeyboardInterrupt:
         print("\nStopping robot movement.")
     finally:

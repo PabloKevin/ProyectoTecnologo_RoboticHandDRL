@@ -6,6 +6,7 @@ from pydantic import BaseModel
 import os
 import cv2
 import matplotlib.pyplot as plt
+import threading
 
 app = FastAPI()
 
@@ -18,7 +19,7 @@ class ImageGenerator():
             self.image_files = [f for f in os.listdir(images_dir)]
         else:
             self.image_files = [f for f in os.listdir(images_dir) if f in images_of_interest]
-        self.last_image = None
+        self.new_image = False
          
     def get_image(self, tool_name=None):
         if tool_name is not None:
@@ -44,19 +45,25 @@ class ImageGenerator():
         
         # Add a channel dimension to the image
         img = np.expand_dims(img, axis=0)
+        self.new_image = True
         self.last_image = img
         return img
     
-    def render(self, render_timeout=3):
-        plt.imshow(self.last_image.squeeze(), cmap='gray')
-        plt.title('Input Image')
-        plt.axis('off') 
-        if render_timeout is not None:
-            plt.show(block=False)
-            plt.pause(render_timeout)  # Show plot for x seconds
-            plt.close()  # Close the plot window
-        else:
-            plt.show()
+    def render(self, render_timeout=None):
+        while True:
+            if self.new_image is True:
+                self.new_image = False
+                while self.new_image == False:
+                    plt.imshow(self.last_image.squeeze(), cmap='gray')
+                    plt.title('Input Image')
+                    plt.axis('off') 
+                    if render_timeout is not None:
+                        plt.show(block=False)
+                        plt.pause(render_timeout)  # Show plot for x seconds
+                        plt.close()  # Close the plot window
+                    else:
+                        plt.show()
+                plt.close()
 
 
 # Define request structure
@@ -64,12 +71,27 @@ class ImageRequest(BaseModel):
     img_of_interest: str
     tool_name: str | None  # Allow None as a valid value
 
+imageGenerator = ImageGenerator()
+
 @app.post("/image")
 async def get_observation_img(request: ImageRequest):
     img_of_interest = request.img_of_interest
     tool_name = request.tool_name
-    image = ImageGenerator(images_of_interest=img_of_interest).get_image(tool_name=tool_name)  # Predict action
+    imageGenerator.images_of_interest = img_of_interest
+    image = imageGenerator.get_image(tool_name=tool_name)  # Predict action
     return {"image": image.tolist()}  # Ensure JSON serializable
 
-if __name__ == "__main__":
+def run_server():
     uvicorn.run(app, host="0.0.0.0", port=8001)  # Listen on all IPs, port 8000
+
+if __name__ == "__main__":
+    server_thread = threading.Thread(target=run_server)
+    plot_thread = threading.Thread(target=imageGenerator.render)
+
+
+    server_thread.start()
+    plot_thread.start()
+
+    
+    server_thread.join()
+    plot_thread.join()
