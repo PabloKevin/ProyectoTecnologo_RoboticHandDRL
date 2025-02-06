@@ -6,7 +6,7 @@ from networks import ActorNetwork, CriticNetwork, ObserverNetwork
 
 class Agent:
     def __init__(self, env, actor_learning_rate=0.003, critic_learning_rate=0.0008, tau=0.005, gamma=0.99, update_actor_interval=2, warmup=1000, 
-                 max_size=1000000, hidden_layers=[64,32], batch_size=64, noise=0.1):
+                 max_size=1000000, hidden_layers=[64,32], batch_size=64, noise=0.1, checkpoint_dir='Desarrollo/simulation/Env03/tmp/td3'):
 
         self.gamma = gamma
         self.tau = tau
@@ -29,25 +29,27 @@ class Agent:
         
         self.memory = ReplayBuffer(max_size, self.input_dims, self.n_actions)
 
+        self.checkpoint_dir = checkpoint_dir 
+
         # Create the networks
         self.actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=self.n_actions,
-                                  name='actor', learning_rate=actor_learning_rate)
+                                  name='actor', learning_rate=actor_learning_rate, checkpoint_dir=self.checkpoint_dir)
 
         self.critic_1 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
-                                      name='critic_1', learning_rate=critic_learning_rate)
+                                      name='critic_1', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
 
         self.critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers, 
-                                      name='critic_2', learning_rate=critic_learning_rate)
+                                      name='critic_2', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
 
         # Create the target networks
         self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=self.n_actions, 
-                                         name='target_actor', learning_rate=actor_learning_rate)
+                                         name='target_actor', learning_rate=actor_learning_rate, checkpoint_dir=self.checkpoint_dir)
 
         self.target_critic_1 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
-                                             name='target_critic_1', learning_rate=critic_learning_rate)
+                                             name='target_critic_1', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
 
         self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
-                                             name='target_critic_2', learning_rate=critic_learning_rate)
+                                             name='target_critic_2', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
         
         """# Initialize weights for all networks
         def initialize_weights(m):

@@ -5,6 +5,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from td3_torch import Agent
 from custom_hand_env import ToolManipulationEnv
+from networks import ObserverNetwork
 
 
 if __name__ == '__main__':
@@ -15,6 +16,8 @@ if __name__ == '__main__':
     #images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
     images_of_interest = "all"
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
+    observer = ObserverNetwork() # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+    observer.load_model()
 
     hidden_layers=[32,32] 
 
@@ -22,12 +25,12 @@ if __name__ == '__main__':
 
     agent.load_models()
 
-    episodes = 5
+    episodes = 1
     scores = []
     right_comb = 0
     for i in range(episodes):
         observation = env.reset()
-        tool = agent.observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
+        tool = observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
         observation = np.array([tool.item(), observation[1]]) # [tool, f_idx]
         done = False
         score = 0

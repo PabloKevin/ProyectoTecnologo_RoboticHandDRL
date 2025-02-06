@@ -6,8 +6,9 @@ import uvicorn
 from pydantic import BaseModel
 
 app = FastAPI()
-
-Full_Agent = Full_Agent_Pipe()
+# "Desarrollo/simulation/Env03/tmp/" # para usar en vsc
+# "tmp/" # para usar en linux terminal
+Full_Agent = Full_Agent_Pipe(checkpoint_dir="tmp/")
 
 # Define request structure
 class ObservationRequest(BaseModel):

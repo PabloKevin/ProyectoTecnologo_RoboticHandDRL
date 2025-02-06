@@ -62,11 +62,10 @@ class Hand():
 
 def get_observation_img():
     # Directory containing images
-    selected_image_path = "Desarrollo/simulation/ros2_robotic_hand_ws/install/robotic_hand/share/robotic_hand/description/bw_Martillo01.jpg"
+    selected_image_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand/description/bw_Martillo01.jpg"
 
     # Load the image
     img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
-    print(img)
 
     # Convert pixels values from 255 to 1
     img[img < 255/2] = 0  
@@ -84,7 +83,7 @@ def get_action():
 
     API_URL = "http://127.0.0.1:8000/predict"  # Change if the ML server runs on another machine
     try:
-        response = requests.post(API_URL, json={"observation": observation})
+        response = requests.post(API_URL, json={"observation": observation.tolist()})
         if response.status_code == 200:
             action = response.json()["action"]
             print(f"Sent observation: {observation}, Received action: {action}")
@@ -109,17 +108,24 @@ def main():
     node = JointPublisher(left_hand)
 
     try:
-        while True:  # Loop indefinitely until KeyboardInterrupt
-            for _ in range(3):
-                combination = get_action()
-                print(combination)
-                #combination = Full_Agent.pipe()
-                #print(f"Moving fingers to:-> {combination}")
-                #left_hand.action(combination)
+        #while True:  # Loop indefinitely until KeyboardInterrupt
+            for _ in range(1):
+                action_recieved = get_action()
+                combination = action_recieved["position"]
+                print(f"Moving fingers to:-> {combination}")
+                left_hand.action(combination)
 
                 node.publish_joint_states()  # Publish the new joint states
                 rclpy.spin_once(node)  # Ensure message is processed
-                time.sleep(1)  # Wait for visualization update
+                time.sleep(5)  # Wait for visualization update
+
+                zero = [0.0 for _ in range(5)]
+                print(f"Moving fingers to:-> {zero}")
+                left_hand.action(zero)
+
+                node.publish_joint_states()  # Publish the new joint states
+                rclpy.spin_once(node)  # Ensure message is processed
+                time.sleep(3)  # Wait for visualization update
 
     except KeyboardInterrupt:
         print("\nStopping robot movement.")
