@@ -94,7 +94,8 @@ class ToolManipulationEnv(gym.Env):
     
     def _get_initial_image(self):
         # Directory containing images
-        image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
+        #image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
+        image_dir = "./DataSets/B&W_Tools/"
         
         if self.images_of_interest == "all":
             # List all image files in the directory

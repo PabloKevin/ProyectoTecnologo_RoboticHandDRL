@@ -48,6 +48,27 @@ class ImageGenerator():
         self.image_queue.put(img)  # Add the new image to the queue
         return img
     
+    def test_image(self, path="DataSets/Pruebas/"):
+        images = [f for f in os.listdir(path)]
+        if not images:
+            raise FileNotFoundError("No images found matching the criteria.")
+
+        selected_image_path = os.path.join(path, np.random.choice(images))
+        img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+        if img is None:
+            raise FileNotFoundError(f"Image could not be loaded from path: {selected_image_path}")
+
+        #editor = DataSet_editor()
+        #img = editor.transform_image(img)
+
+        img[img < 255 / 2] = 0  
+        img[img >= 255 / 2] = 1
+        img = np.expand_dims(img, axis=0)
+
+        self.image_queue.put(img)  # Add the new image to the queue
+        print(selected_image_path)
+        return img
+    
     def check_for_new_image(self):
         # Check if there's a new image in the queue
         if not self.image_queue.empty():
@@ -79,7 +100,8 @@ async def get_observation_img(request: ImageRequest):
     img_of_interest = request.img_of_interest
     tool_name = request.tool_name
     imageGenerator.images_of_interest = img_of_interest
-    image = imageGenerator.get_image(tool_name=tool_name)  # Predict action
+    image = imageGenerator.get_image(tool_name=tool_name) 
+    #image = imageGenerator.test_image()
     return {"image": image.tolist()}  # Ensure JSON serializable
 
 def run_server():
@@ -94,4 +116,4 @@ if __name__ == "__main__":
     try:
         imageGenerator.root.mainloop()
     except KeyboardInterrupt:
-        print("\nShutting down gracefully.")
+        print("\nShutting down...")

@@ -26,6 +26,7 @@ class Full_Agent_Pipe():
             input_img = self.env.reset()[0] #image
         
         tool = self.observer(input_img).cpu().detach().numpy() # Takes the image and outputs a tool value
+        print("tool", tool)
 
         finger_actions= []
         for f_idx in range(5):
