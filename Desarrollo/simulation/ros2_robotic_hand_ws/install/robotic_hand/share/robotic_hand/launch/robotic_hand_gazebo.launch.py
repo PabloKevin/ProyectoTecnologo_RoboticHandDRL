@@ -1,0 +1,1 @@
+/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/ros2_robotic_hand_ws/src/robotic_hand/launch/robotic_hand_gazebo.launch.py
