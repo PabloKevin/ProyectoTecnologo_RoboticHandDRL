@@ -6,9 +6,9 @@ from segment_anything import sam_model_registry, SamPredictor
 
 
 
-def find_interesting_points(img, umbral=500, render=True): 
+def find_interesting_points(img, img_shape=(256, 256), umbral=500, render=True): 
     # Redimensionar la imagen a 256x256
-    img = cv2.resize(img, (256, 256), interpolation=cv2.INTER_AREA)
+    img = cv2.resize(img, (img_shape[0], img_shape[1]), interpolation=cv2.INTER_AREA)
     
     # Obtener el color del fondo desde la esquina superior izquierda
     color_fondo = img[0, 0]  # Esto retorna [B, G, R]
@@ -28,6 +28,7 @@ def find_interesting_points(img, umbral=500, render=True):
 
     # np.where(mask == 255) returns two arrays: (row_indices, col_indices)
     white_y, white_x = np.where(mascara == True)
+    white_y_bg, white_x_bg = np.where(mascara == False)
 
     if white_x.shape[0] == 0:
         return None
@@ -39,6 +40,8 @@ def find_interesting_points(img, umbral=500, render=True):
     coords = []
     for i in range(parts):
         coords.append(np.array(list((zip(splitted_x[i], splitted_y[i])))))
+
+    coords.append(np.array(list((zip(white_x_bg, white_y_bg)))))
 
     if render:
         cv2.imshow("First Mask", img_binaria)
@@ -54,10 +57,23 @@ def find_input_points(coords):
     #background = np.array([background_x, background[1]])
     input_points = []
     labels = [] #np.array(0)
-    for split in coords:
+    for split in coords[:-1]:
         random_idx = np.random.randint(0, split.shape[0])
         input_points.append(split[random_idx]) #.reshape(1, -1))
         labels.append(np.array(1))
+    
+    for _ in range(2):
+        for split in coords[:-1]:
+            random_idx = np.random.randint(0, split.shape[0])
+            input_points.append(split[random_idx]) #.reshape(1, -1))
+            labels.append(np.array(1))
+
+    for _ in range(5):
+        random_idx = np.random.randint(0, coords[-1].shape[0])
+        input_points.append(coords[-1][random_idx]) #.reshape(1, -1))
+        labels.append(np.array(0))
+
+
     input_points = np.array(input_points)
     labels = np.array(labels) #.reshape(3, 1)
     print(input_points.shape)
@@ -68,7 +84,7 @@ def find_input_points(coords):
 
 def find_mask(img):
     # Optionally resize to a fixed size
-    img = cv2.resize(img, (256, 256), interpolation=cv2.INTER_LINEAR)
+    img = cv2.resize(img, (640, 640), interpolation=cv2.INTER_LINEAR)
 
     # Set the image on the predictor
     predictor.set_image(img)
@@ -79,7 +95,7 @@ def find_mask(img):
     max_tries = 10
     min_mask_area = 1000      # skip masks that are too small
 
-    interesting_points = find_interesting_points(img)
+    interesting_points = find_interesting_points(img, img_shape=(640, 640))
 
     bw_mask = np.zeros((height, width), dtype=np.uint8)
 
@@ -115,7 +131,7 @@ def find_mask(img):
                 # We found a mask that is not too small nor too large
                 filtered_masks.append(mask)
         
-        if len(filtered_masks)>3:
+        if len(filtered_masks)>0:
             break
         print("masks",len(filtered_masks))
     # 5) If we found a mask, convert to white-on-black
@@ -139,9 +155,10 @@ sam = sam_model_registry["vit_b"](
 predictor = SamPredictor(sam)
 
 # 2) Loop over images
+#image_dir = "Desarrollo/simulation/Env03/DataSets/Herramientas_Complicadas"
 image_dir = "Desarrollo/simulation/Env03/DataSets/RawTools"
 image_files = os.listdir(image_dir)
-#image_files = ["empty.png"]
+#image_files = ["tornillo03.png"]
 for image_file in image_files:
     # 6) Show or save the mask
     img_path = os.path.join(image_dir, image_file)
