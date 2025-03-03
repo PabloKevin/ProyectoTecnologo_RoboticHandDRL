@@ -2,12 +2,13 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
-import time
+#import time
 import requests
-import json
+#import json
 import numpy as np
-import os
-import cv2
+#import os
+#import cv2
+from paho.mqtt import client as mqtt_client
 
 class JointPublisher(Node):
     def __init__(self, hand):
@@ -60,6 +61,43 @@ class Hand():
         for i, finger in enumerate(self.fingers):
             self.fingers[finger].action(combination[i])
 
+class MQTT_publisher():
+    def __init__(self, client_id, broker='localhost', port=1883):
+        self.broker = broker
+        self.port = port
+        self.client_id = client_id
+
+        self.client = self.connect_mqtt()
+        self.client.loop_start()
+    
+    def connect_mqtt(self):
+        def on_connect(client, userdata, flags, rc):
+            if rc == 0:
+                print("Connected to MQTT Broker!")
+            else:
+                print("Failed to connect, return code %d\n", rc)
+
+        client = mqtt_client.Client(self.client_id)
+        # client.username_pw_set(username, password)
+        client.on_connect = on_connect
+        client.connect(self.broker, self.port)
+        return client
+    
+    def publish(self, topic, msg):
+        result = self.client.publish(topic, msg)
+        # result: [0, 1]
+        status = result[0]
+        if status == 0:
+            print(f"Send `{msg}` to topic `{topic}`")
+        else:
+            print(f"Failed to send message to topic {topic}")
+
+    def stop_loop(self):
+        self.client.loop_stop()
+
+    def start_loop(self):
+        self.client.loop_start()
+
 def get_observation_img(img_of_interest, tool_name):
     img_params={"img_of_interest": img_of_interest, "tool_name":tool_name}
     """Sends image params and returns received image."""
@@ -104,6 +142,8 @@ def main():
     left_hand = Hand(pulgar, indice, medio, anular, menique)
     node = JointPublisher(left_hand)
 
+    agent_MQTT_pub = MQTT_publisher(client_id='agent_controller_publisher')
+
     try:
         #while True:  # Loop indefinitely until KeyboardInterrupt
             for _ in range(1):
@@ -112,6 +152,9 @@ def main():
                 action_recieved = get_action(image_recieved)
                 combination = action_recieved["position"]
                 print(f"Moving fingers to:-> {combination}")
+
+                agent_MQTT_pub.publish(topic="test", msg=str(combination))
+
                 left_hand.action(combination)
 
                 node.publish_joint_states()  # Publish the new joint states
