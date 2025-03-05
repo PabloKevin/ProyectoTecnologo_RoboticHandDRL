@@ -25,6 +25,8 @@ const char* password = "Kevin210608"; // Contraseña de tu red Wi-Fi
 
 // Dirección del broker MQTT
 const char* mqtt_server = "192.168.1.11"; // IP del broker (tu PC)
+char action_topic[] = "RoboticHand_ML/action";
+char logs_topic[] = "RoboticHand_ML/logs";
 
 // Configuración de MQTT
 WiFiClient espClient;
@@ -68,7 +70,7 @@ float* msg2f_array(String msg);
 void setup() {
   Serial.begin(115200);
   delay(5000);
-  Serial.println("Empezando");
+  Serial.println("Empezando setup");
 
   // Allocate one hardware timer (timer 0) for all PWM operations.
   // All servos will share timer 0.
@@ -147,6 +149,8 @@ void TaskControl_func(void *pvParameters) {
       
       writeDegrees(&Hand_1, Action[0], Action[1], Action[2], Action[3], Action[4]);
       moveFingers(&Hand_1, 0, 0.25); // void moveFingers(hand *h, bool openAgain, float TimeInSeconds)
+      snprintf(msg, 100, "Moviendo...");
+      client.publish(logs_topic, msg);
       ESTADO = 1; // Una vez completado el movimiento, volver a permitir nuevas acciones
     }
     vTaskDelay(10 / portTICK_PERIOD_MS); // Evitar consumir la CPU innecesariamente
@@ -263,9 +267,11 @@ float* msg2f_array(String msg) {
 void reconnect() {
     while (!client.connected()) {
         Serial.print("Intentando conectar al broker MQTT...");
-        if (client.connect("ESP8266Client")) {
+        if (client.connect("ESP32_RoboticHand")) {
             Serial.println("Conectado.");
-            client.subscribe("test"); // Subscribirse a mensajes de configuración (opcional)
+            client.subscribe(action_topic); // Subscribirse a mensajes de configuración (opcional)
+            snprintf(msg, 100, "Conectado al Broker con éxito.");
+            client.publish(logs_topic, msg);
         } else {
             Serial.print("Error de conexión, estado: ");
             Serial.println(client.state());

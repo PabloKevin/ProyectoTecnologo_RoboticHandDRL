@@ -153,7 +153,7 @@ def main():
                 combination = action_recieved["position"]
                 print(f"Moving fingers to:-> {combination}")
 
-                agent_MQTT_pub.publish(topic="test", msg=str(combination))
+                agent_MQTT_pub.publish(topic="RoboticHand_ML/action", msg=str(combination))
 
                 left_hand.action(combination)
 
