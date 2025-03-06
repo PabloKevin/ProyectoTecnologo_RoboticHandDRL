@@ -3,13 +3,18 @@ from custom_hand_env import ToolManipulationEnv
 import numpy as np
 from networks import ObserverNetwork
 import matplotlib.pyplot as plt
+from SAM import Segmentator
 
 class Full_Agent_Pipe():
-    def __init__(self, env=None, observer=None, td3_agent=None, checkpoint_dir="tmp/"):
+    def __init__(self, env=None, segmentator=None, observer=None, td3_agent=None, checkpoint_dir="tmp/"):
         if env is None:
             self.env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all")
         else:
             self.env = env
+        if segmentator is None:
+            self.segmentator = None
+        else:
+            self.segmentator = segmentator
         if observer is None:
             self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.observer.load_model()
