@@ -4,15 +4,17 @@ import random
 import numpy as np
 from segment_anything import sam_model_registry, SamPredictor
 import torch
+import matplotlib.pyplot as plt
 
 
 class Segmentator(): 
-    def __init__(self, checkpoint_dir="Desarrollo/simulation/Env03/models_params_weights/SAM/sam_vit_b_01ec64.pth"):
+    def __init__(self, checkpoint_dir="Desarrollo/simulation/Env03/models_params_weights/SAM/sam_vit_b_01ec64.pth", output_dims=(256, 256)):
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         self.sam = sam_model_registry["vit_b"](checkpoint=checkpoint_dir)
         self.sam.to(self.device)
         print(f"Created SAM Network on device: {self.device}")
         self.predictor = SamPredictor(self.sam)
+        self.output_dims = output_dims
 
 
     def find_interesting_points(self, img, umbral=500, img_shape=(640, 640), render=True): 
@@ -91,24 +93,25 @@ class Segmentator():
 
 
     # Predict mask for a given color image
-    def predict(self, img, resize_shape=(640, 640)):
+    def predict(self, img, internal_shape=(640, 640), render = False):
         # Optionally resize to a fixed size
-        img = cv2.resize(img, resize_shape, interpolation=cv2.INTER_LINEAR)
+        img = cv2.resize(img, internal_shape, interpolation=cv2.INTER_LINEAR)
 
         # Set the image on the predictor
         self.predictor.set_image(img)
 
-        height, width, _ = img.shape
+        height, width = internal_shape
         img_area = height * width
 
         max_tries = 10
         min_mask_area = 1000      # skip masks that are too small
 
-        interesting_points = self.find_interesting_points(img, img_shape=(640, 640))
+        interesting_points = self.find_interesting_points(img, img_shape=internal_shape, render=False)
 
         bw_mask = np.zeros((height, width), dtype=np.uint8)
 
         if interesting_points is None:
+            bw_mask = cv2.resize(bw_mask, self.output_dims, interpolation=cv2.INTER_NEAREST)
             return bw_mask
 
         filtered_masks = []
@@ -134,17 +137,25 @@ class Segmentator():
         
         if len(filtered_masks) > 0:
             for mask in filtered_masks:
-                bw_mask[mask] = 255
+                bw_mask[mask] = 1 # Es 1 para que sirva como input del observer, pero podría ser 255
         else:
             # No suitable mask was found within max tries
-            print(f"No mask found for {image_file} after {max_tries} random prompts.")
+            print(f"No mask found for the given image after {max_tries} random prompts.")
 
-        bw_mask = cv2.resize(bw_mask, (256, 256), interpolation=cv2.INTER_NEAREST)
+        bw_mask = cv2.resize(bw_mask, self.output_dims, interpolation=cv2.INTER_NEAREST)
+
+        if render:
+            plt.imshow(bw_mask.squeeze(), cmap='gray')
+            plt.title('Black and White Mask')
+            plt.axis('off') 
+            plt.show(block=False)
+            plt.pause(3)
+            plt.close()
 
         return bw_mask
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     # 2) Loop over images
     #image_dir = "Desarrollo/simulation/Env03/DataSets/Herramientas_Complicadas"
     image_dir = "Desarrollo/simulation/Env03/DataSets/RawTools"
@@ -162,5 +173,5 @@ if __name__ == "__main__":
             break
 
     cv2.destroyAllWindows()
-
+"""
 
