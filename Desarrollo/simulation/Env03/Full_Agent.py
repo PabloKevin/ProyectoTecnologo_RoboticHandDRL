@@ -36,8 +36,8 @@ class Full_Agent_Pipe():
             image_file = np.random.choice(image_files)
             img_path = os.path.join(image_dir, image_file)
             input_img = cv2.imread(img_path)
-        
-        bw_mask = self.segmentator.predict(input_img, render=True)
+
+        bw_mask = self.segmentator.predict(input_img, render=False)
         bw_mask = np.expand_dims(bw_mask, axis=0)
         
         tool = self.observer(bw_mask).cpu().detach().numpy() # Takes the image and outputs a tool value
@@ -64,7 +64,7 @@ class Full_Agent_Pipe():
                 plt.show()
 
         return action
-    
+   
 if __name__ == "__main__":
     Full_Agent = Full_Agent_Pipe()
 

@@ -14,7 +14,7 @@ from queue import Queue
 app = FastAPI()
 
 class ImageGenerator():
-    def __init__(self, images_of_interest='all', images_dir="DataSets/B&W_Tools/"):
+    def __init__(self, images_of_interest='all', images_dir="DataSets/RawTools/"):
         self.images_dir = images_dir
         self.image_files = [f for f in os.listdir(images_dir)] if images_of_interest == 'all' else [f for f in os.listdir(images_dir) if f in images_of_interest]
         self.image_queue = Queue()  # Queue to communicate between threads
@@ -29,23 +29,28 @@ class ImageGenerator():
         self.root.after(100, self.check_for_new_image)
 
     def get_image(self, tool_name=None):
-        images = [f for f in self.image_files if f.startswith(tool_name)] if tool_name else self.image_files
+        images = [f for f in self.image_files if f.startswith(tool_name)] if tool_name is not None else self.image_files
         if not images:
             raise FileNotFoundError("No images found matching the criteria.")
 
         selected_image_path = os.path.join(self.images_dir, np.random.choice(images))
-        img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+        #img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
+        img = cv2.imread(selected_image_path)
+        # Convert the image from BGR to RGB format
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        
         if img is None:
             raise FileNotFoundError(f"Image could not be loaded from path: {selected_image_path}")
 
-        editor = DataSet_editor()
+        """editor = DataSet_editor()
         img = editor.transform_image(img)
 
         img[img < 255 / 2] = 0  
         img[img >= 255 / 2] = 1
-        img = np.expand_dims(img, axis=0)
+        img = np.expand_dims(img, axis=0)"""
 
         self.image_queue.put(img)  # Add the new image to the queue
+        print(selected_image_path)
         return img
     
     def test_image(self, path="DataSets/Pruebas/"):
@@ -79,7 +84,8 @@ class ImageGenerator():
 
     def update_image(self, img_array):
         # Convert NumPy array to PIL Image
-        img = Image.fromarray((img_array.squeeze() * 255).astype(np.uint8))
+        #img = Image.fromarray((img_array.squeeze() * 255).astype(np.uint8))
+        img = Image.fromarray(img_array)
 
         img = ImageTk.PhotoImage(image=img)
 

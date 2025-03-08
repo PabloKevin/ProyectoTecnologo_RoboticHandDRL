@@ -7,7 +7,7 @@ from pydantic import BaseModel
 app = FastAPI()
 # "Desarrollo/simulation/Env03/tmp/" # para usar en vsc
 # "tmp/" # para usar en linux terminal
-Agent = Full_Agent_Pipe(checkpoint_dir="tmp/")
+Agent = Full_Agent_Pipe(checkpoint_dir="models_params_weights/")
 
 # Define request structure
 class ObservationRequest(BaseModel):
@@ -15,7 +15,8 @@ class ObservationRequest(BaseModel):
 
 @app.post("/predict")
 async def get_action(request: ObservationRequest):
-    observation = np.array(request.observation)
+    observation = np.array(request.observation, dtype=np.uint8)
+    print("Shape of incoming observation:", observation.shape)
     action = Agent.pipe(input_img=observation, render=False)  # Predict action
     return {"action": action}
 
