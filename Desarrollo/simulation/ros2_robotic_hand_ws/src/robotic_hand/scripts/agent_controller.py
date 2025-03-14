@@ -2,7 +2,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
-#import time
+import time
 import requests
 #import json
 import numpy as np
@@ -106,8 +106,9 @@ def get_observation_img(img_of_interest, tool_name):
         response = requests.post(API_URL, json=img_params)
         if response.status_code == 200:
             image = response.json()["image"]
+            error = response.json()["error"]
             #print(f"Sent image_params: {img_params}, Received image: {image}")
-            return image
+            return image, error
         else:
             print(f"Error from server: {response.status_code}")
 
@@ -143,12 +144,17 @@ def main():
     node = JointPublisher(left_hand)
 
     agent_MQTT_pub = MQTT_publisher(client_id='agent_controller_publisher')
+    time.sleep(1)  # Wait for the MQTT connection to be established
 
     try:
-        #while True:  # Loop indefinitely until KeyboardInterrupt
+        while True:  # Loop indefinitely until KeyboardInterrupt
             for _ in range(1):
-                image_recieved = get_observation_img(img_of_interest= "all", tool_name=None)
+                tool_in = input("Tool: ")
+                tool_in = None if tool_in == "random" else tool_in
+                image_recieved, error = get_observation_img(img_of_interest= "all", tool_name=tool_in)
                 #print(image_recieved)
+                if error:
+                    print(f"Herramienta no reconocida, revise sintaxis. Se utiliza imagen random en su lugar. Error: {error}")
                 action_recieved = get_action(image_recieved)
                 combination = action_recieved["position"]
                 print(f"Moving fingers to:-> {combination}")

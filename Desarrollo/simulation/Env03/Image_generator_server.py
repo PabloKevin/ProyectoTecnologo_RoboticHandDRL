@@ -30,8 +30,12 @@ class ImageGenerator():
 
     def get_image(self, tool_name=None):
         images = [f for f in self.image_files if f.startswith(tool_name)] if tool_name is not None else self.image_files
-        if not images:
-            raise FileNotFoundError("No images found matching the criteria.")
+        if len(images) == 0:
+            print("No images found matching the criteria.")
+            images = self.image_files
+            error = 1
+        else:
+            error = 0
 
         selected_image_path = os.path.join(self.images_dir, np.random.choice(images))
         #img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
@@ -51,7 +55,7 @@ class ImageGenerator():
 
         self.image_queue.put(img)  # Add the new image to the queue
         print(selected_image_path)
-        return img
+        return img, error
     
     def test_image(self, path="DataSets/Pruebas/"):
         images = [f for f in os.listdir(path)]
@@ -106,9 +110,10 @@ async def get_observation_img(request: ImageRequest):
     img_of_interest = request.img_of_interest
     tool_name = request.tool_name
     imageGenerator.images_of_interest = img_of_interest
-    image = imageGenerator.get_image(tool_name=tool_name) 
+    image, error = imageGenerator.get_image(tool_name=tool_name)
     #image = imageGenerator.test_image()
-    return {"image": image.tolist()}  # Ensure JSON serializable
+    return {"image": image.tolist(),
+            "error": error}  # Ensure JSON serializable
 
 def run_server():
     uvicorn.run(app, host="0.0.0.0", port=8001)
