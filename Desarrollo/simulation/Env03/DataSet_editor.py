@@ -176,7 +176,6 @@ class DataSet_editor:
         img = self.translate_image(img)
         return img
 
-
 #"""
 if __name__ == "__main__":
     editor = DataSet_editor()
