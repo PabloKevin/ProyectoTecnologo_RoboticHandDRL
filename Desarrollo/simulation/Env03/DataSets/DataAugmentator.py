@@ -95,9 +95,7 @@ class DataAugmentator:
         return translated_img
     
     def transform_image(self, img):
-        print("or: ", img.shape, "im: ", self.img_shape)
         if img.shape != self.img_shape:
-            print("here")
             img = cv2.resize(img, (self.img_shape[0],self.img_shape[1]), interpolation=cv2.INTER_LINEAR)
         img = self.scale_image(img, max_scale=1.1)
         img = self.rotate_image(img)
@@ -129,6 +127,6 @@ class DataAugmentator:
 
 #"""
 if __name__ == "__main__":
-    augmentator = DataAugmentator("RawTools_train", "TrainSet")
+    augmentator = DataAugmentator("RawTools_test", "TestSet")
 
-    augmentator.augmentateData(new_samples_per_image=3, images_list=["martillo01.png",], sobreescribir=True)
+    augmentator.augmentateData(new_samples_per_image=30, images_list="All", sobreescribir=False)
