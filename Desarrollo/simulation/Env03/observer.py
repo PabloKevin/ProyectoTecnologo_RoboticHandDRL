@@ -7,6 +7,7 @@ import numpy as np
 import cv2
 from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt
+from SAM_pipe import Segmentator
 
 
 class DynamicBatchGenerator:
@@ -77,19 +78,27 @@ class DynamicBatchGenerator:
         #img = np.expand_dims(img, axis=-1)
         return img
     
-    def get_label(self, image):
-        n_white_pixels = len(np.argwhere(image == 1))/1000
-
-        if n_white_pixels == 0:
+    def get_label(self, image_name):
+        if image_name.startswith("empty"):
+            return -1.0
+        elif image_name.startswith("tuerca"):
             return 0.0
-        elif n_white_pixels < 1.1:
-            return 1.0
-        elif n_white_pixels < 2.45:
-            return 2.0
-        elif n_white_pixels < 5.0:
-            return 3.0
-        elif n_white_pixels < 12:
-            return 4.0
+        elif image_name.startswith("tornillo"):
+            return 0.3
+        elif image_name.startswith("clavo"):
+            return 0.6
+        elif image_name.startswith("lapicera"):
+            return 10.0
+        if image_name.startswith("tenedor"):
+            return 10.3
+        elif image_name.startswith("cuchara"):
+            return 10.6
+        elif image_name.startswith("destornillador"):
+            return 20.0
+        elif image_name.startswith("martillo"):
+            return 20.3
+        elif image_name.startswith("pinza"):
+            return 20.6
 
 
 # Observer Network
@@ -141,7 +150,7 @@ class ObserverNetwork(nn.Module):
 
 
 class Trainer():
-    def __init__(self, batch_size = 32, image_shape = (256, 256, 1), epochs = 20, batches_per_epoch = 100, learning_rate = 0.001):
+    def __init__(self, batch_size = 32, image_shape = (256, 256, 1), epochs = 20, batches_per_epoch = 100, learning_rate = 0.001, checkpoint_dir="Desarrollo/simulation/Env03/models_params_weights/"):
         # Parameters
         self.batch_size = batch_size
         self.image_shape = image_shape
@@ -150,6 +159,9 @@ class Trainer():
         self.learning_rate = learning_rate
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         print(f"Using device: {self.device}")
+        # Initialize Segmentator Network
+        self.segmentator = Segmentator(checkpoint_dir=checkpoint_dir+"SAM/sam_vit_b_01ec64.pth")
+
         # Initialize Observer Network
         self.observer = ObserverNetwork(input_dims=self.image_shape, learning_rate=self.learning_rate)
         self.observer.to(self.device)

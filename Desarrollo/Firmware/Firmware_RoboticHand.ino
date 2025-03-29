@@ -20,11 +20,11 @@ int Action[5]; //grados de cierre para cada dedo
 bool OpenAgain = 0; //flag indicadora de si luego de cerrar dedos en un movimiento, se deben volver a abrir o no
 
 // Credenciales de red Wi-Fi
-const char* ssid = "Ykay-2.4GHz"; // Tu red Wi-Fi
-const char* password = "Kevin210608"; // Contraseña de tu red Wi-Fi
+const char* ssid = "La Baticueva "; // Tu red Wi-Fi
+const char* password = "45631242"; // Contraseña de tu red Wi-Fi
 
 // Dirección del broker MQTT
-const char* mqtt_server = "192.168.1.11"; // IP del broker (tu PC)
+const char* mqtt_server = "192.168.1.12"; // IP del broker (tu PC)
 char action_topic[] = "RoboticHand_ML/action";
 char logs_topic[] = "RoboticHand_ML/logs";
 
@@ -211,13 +211,20 @@ void callback(char* topic, byte* message, unsigned int length) {
 int* agentout2degrees(float* combination_output){
   //float* temp = combination_output;
   static int action[5];
+  static int finger_transform[5][3] = {
+    {0, 130, 165},
+    {0, 170, 180},
+    {0, 140, 180},
+    {0, 125, 180},
+    {0, 130, 180}
+  };
   for (int i = 0; i < 5; i++) {
       if (combination_output[i] < 0.45){
-        action[i] = 0;
+        action[i] = finger_transform[i][0];
       } else if (combination_output[i] < 1.3){
-        action[i] = 135;
+        action[i] = finger_transform[i][1];
       } else{
-        action[i] = 180;
+        action[i] = finger_transform[i][2];
       }
     }
   return action;
