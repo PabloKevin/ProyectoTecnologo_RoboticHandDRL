@@ -211,13 +211,22 @@ void callback(char* topic, byte* message, unsigned int length) {
 int* agentout2degrees(float* combination_output){
   //float* temp = combination_output;
   static int action[5];
+  //mano izquierda
   static int finger_transform[5][3] = {
     {0, 130, 165},
     {0, 170, 180},
     {0, 140, 180},
     {0, 125, 180},
     {0, 130, 180}
-  };
+  }; //*/
+  /* mano derecha 
+  static int finger_transform[5][3] = {
+    {0, 85, 105},
+    {0, 90, 180},
+    {0, 90, 180},
+    {0, 100, 180},
+    {0, 90, 170}
+  }; //*/
   for (int i = 0; i < 5; i++) {
       if (combination_output[i] < 0.45){
         action[i] = finger_transform[i][0];
