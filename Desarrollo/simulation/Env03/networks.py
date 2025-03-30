@@ -111,7 +111,8 @@ class ObserverNetwork(nn.Module):
         
 
     def forward(self, img):
-        img = torch.tensor(img, dtype=torch.float).to(self.device)
+        if not isinstance(img, torch.Tensor):
+            img = torch.tensor(img, dtype=torch.float).to(self.device)
         x = F.leaky_relu(self.conv1(img))
         x = F.leaky_relu(self.conv2(x))
         x = F.leaky_relu(self.conv3(x))

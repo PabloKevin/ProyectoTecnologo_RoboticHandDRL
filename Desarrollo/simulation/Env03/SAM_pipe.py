@@ -87,8 +87,8 @@ class Segmentator():
 
         input_points = np.array(input_points)
         labels = np.array(labels) #.reshape(3, 1)
-        print(input_points.shape)
-        print(labels)
+        #print(input_points.shape)
+        #print(labels)
         return input_points, labels
 
 
@@ -133,7 +133,7 @@ class Segmentator():
             
             if len(filtered_masks)>0:
                 break
-            print("masks",len(filtered_masks))
+            #print("masks",len(filtered_masks))
         
         if len(filtered_masks) > 0:
             for mask in filtered_masks:
