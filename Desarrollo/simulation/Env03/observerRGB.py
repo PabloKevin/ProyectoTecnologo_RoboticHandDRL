@@ -4,11 +4,13 @@ import cv2
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
+import torch.multiprocessing as mp
 import torch.nn.functional as F
 import torch.optim as optim
 from SAM_pipe import Segmentator
 import polars as pl
 from networks import ObserverNetwork
+import time
 
 
 class MyImageDataset(Dataset):
@@ -101,6 +103,8 @@ class MyImageDataset(Dataset):
 
 
 if __name__ == "__main__":
+    mp.set_start_method('spawn', force=True) # For multiptocessing with CUDA
+
     train_dataset_dir = "Desarrollo/simulation/Env03/DataSets/TrainSet"
     test_dataset_dir = "Desarrollo/simulation/Env03/DataSets/TestSet"
     checkpoint_dir="Desarrollo/simulation/Env03/models_params_weights/"
@@ -142,8 +146,9 @@ if __name__ == "__main__":
     # example: batch_size=32
 
     batch_size = 32
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    val_loader   = DataLoader(val_dataset,   batch_size=batch_size, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
+    val_loader   = DataLoader(val_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
+    test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
     # Now you can do, e.g., training with these loaders:
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
@@ -155,11 +160,15 @@ if __name__ == "__main__":
     criterion = nn.MSELoss()
     n_epochs = 2
 
+    start_time = time.time()
     for epoch in range(n_epochs):
+        start_epoch_time = time.time()
         observer.train()
         train_loss = 0.0
         for images, labels in train_loader:
             images, labels = images.to(device), labels.to(device)
+            print("label,", labels)
+            print("cantidad de imagenes:", len(train_loader))
             
             observer.optimizer.zero_grad()
             outputs = observer(images).squeeze()
@@ -170,9 +179,17 @@ if __name__ == "__main__":
             train_loss += loss.item()
 
         avg_train_loss = train_loss / len(train_loader)
+        end_train_time = time.time()
+        train_duration = (end_train_time - start_epoch_time)/60  # in minutes
         print(f"Epoch [{epoch+1}/{n_epochs}] - Train Loss: {avg_train_loss:.4f}")
+        print(f"Train duration: {train_duration:.2f} minutes")
 
-        # Optionally validate
+        if (epoch + 1) % 5 == 0 or epoch == n_epochs - 1:
+            observer.save_checkpoint()
+            print(f"Checkpoint saved for epoch {epoch + 1}")
+
+        # Validate
+        start_val_time = time.time()
         observer.eval()
         val_loss = 0.0
         with torch.no_grad():
@@ -182,6 +199,27 @@ if __name__ == "__main__":
                 loss_val = criterion(outputs_val, labels_val)
                 val_loss += loss_val.item()
         avg_val_loss = val_loss / len(val_loader)
+        end_val_time = time.time()
+        val_duration = (end_val_time - start_val_time)/60
         print(f"           Validation Loss: {avg_val_loss:.4f}")
-
+        print(f"Validation duration: {val_duration:.2f} minutes")
+        print(f"Epoch duration: {(train_duration + val_duration):.2f} minutes\n")
+    
     print("Finished training!")
+    print(f"Total training time: {(time.time() - start_time)/60:.2f} minutes")
+
+    observer.eval()
+    start_test_time = time.time()
+    with torch.no_grad():
+        for images_test, labels_test in test_loader:
+            images_test, labels_test = images_test.to(device), labels_test.to(device)
+            outputs_test = observer(images_test).squeeze()
+            loss_test = criterion(outputs_test, labels_test)
+            test_loss += loss_test.item()
+        avg_test_loss = test_loss / len(test_loader)
+
+        test_duration = (time.time() - start_test_time)/60
+        print(f"           Test Loss: {avg_test_loss:.4f}")
+        print(f"Test duration: {test_duration:.2f} minutes")
+
+    
