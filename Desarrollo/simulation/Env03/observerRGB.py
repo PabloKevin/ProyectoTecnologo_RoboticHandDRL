@@ -28,10 +28,7 @@ class MyImageDataset(Dataset):
         """
         super().__init__()
         self.image_dir = image_dir
-        if segmentator is None:
-            self.segmentator 
-        else:
-            self.segmentator = segmentator
+        self.segmentator = segmentator
         self.image_shape = segmentator.output_dims
         
         # Gather all valid image paths
