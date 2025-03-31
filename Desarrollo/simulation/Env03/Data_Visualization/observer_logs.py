@@ -1,6 +1,7 @@
 import polars as pl
 import matplotlib.pyplot as plt
 
+
 # 1. Leer el CSV con polars
 log_path = "Desarrollo/simulation/Env03/"
 log_name = "observer_logs.csv"
@@ -37,4 +38,3 @@ plt.legend()
 
 # 7. Mostrar la figura
 plt.show()
-

@@ -130,3 +130,12 @@ if __name__ == "__main__":
     augmentator = DataAugmentator("RawTools_test", "TestSet")
 
     augmentator.augmentateData(new_samples_per_image=30, images_list="All", sobreescribir=False)
+    
+    """
+    # Para nivelar la cantidad de empty images:
+    # Cargar la imagen
+    path = "Desarrollo/simulation/Env03/DataSets/TestSet_masks/"
+    img = cv2.imread(path+"empty_white_mask.png", cv2.IMREAD_GRAYSCALE)
+    # Guardar la imagen
+    for i in range(1,30):
+        cv2.imwrite(path+f"empty_white_mask{i}.png", img)"""
