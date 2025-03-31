@@ -27,7 +27,7 @@ plt.plot(range(len(df_val)), df_val["validation_loss"], label="Val Loss", color=
 
 # - Gráfica (punto) de test_loss (solo se define en epoch=-1)
 #   que forzamos a dibujar en epoch=20
-plt.scatter([19,39], df_test["test_loss"], marker="o", label="Test Loss", color="red")
+plt.scatter([(i+1)*20-1 for i in range(len(df_test))], df_test["test_loss"], marker="o", label="Test Loss", color="red")
 
 # 6. Personalizar ejes, título y leyenda
 plt.xlabel("Epoch")
@@ -37,3 +37,4 @@ plt.legend()
 
 # 7. Mostrar la figura
 plt.show()
+

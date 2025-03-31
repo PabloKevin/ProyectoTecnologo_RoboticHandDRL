@@ -99,10 +99,16 @@ class ObserverNetwork(nn.Module):
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=2, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=2, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
+        
+        # Dropout2d para intentar mejorar el overfitting
+        self.conv_dropout = nn.Dropout2d(p=0.4)
+        
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], output_dims)
         
+        self.dropout = nn.Dropout(p=0.4)        # Dropout en la parte fully-connected
+
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -116,6 +122,10 @@ class ObserverNetwork(nn.Module):
         x = F.leaky_relu(self.conv1(img))
         x = F.leaky_relu(self.conv2(x))
         x = F.leaky_relu(self.conv3(x))
+
+        # Apagar neuronas tras la 3ra capa conv
+        x = self.conv_dropout(x)
+
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
@@ -123,6 +133,10 @@ class ObserverNetwork(nn.Module):
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
             x = x.reshape(-1)  # Flatten the single image
         x = F.leaky_relu(self.fc1(x))
+
+        # Apagar neuronas en fully-connected
+        x = self.dropout(x)
+
         x = F.leaky_relu(self.fc2(x))
         tool_reg = F.leaky_relu(self.fc3(x))
             

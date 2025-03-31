@@ -21,6 +21,7 @@ class Full_Agent_Pipe():
         if observer is None:
             self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.observer.load_model()
+            self.observer.eval() #importante para apagar las capas de dropout.
         else:
             self.observer = observer
         if actor is None:

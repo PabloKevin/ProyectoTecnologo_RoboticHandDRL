@@ -106,7 +106,7 @@ if __name__ == "__main__":
     if log_df.is_empty():
         run = 0
     else:
-        run = log_df.select("run")[-1].item() + 1
+        run = log_df.select("run")[-2].item() + 1
 
 
     train_dataset_dir = "Desarrollo/simulation/Env03/DataSets/TrainSet_masks"
@@ -156,13 +156,17 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    observer = ObserverNetwork()
-    observer.load_model()
-    
+    conv_channels = [4, 8, 16]
+    hidden_layers = [32, 8]
+    learning_rate = 0.0008
+
+    observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate)
+    #observer.load_model()
+
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 20
+    n_epochs = 30
 
     start_time = time.time()
     for epoch in range(n_epochs):
@@ -206,7 +210,7 @@ if __name__ == "__main__":
         print(f"           Validation Loss: {avg_val_loss:.4f}")
         print(f"Validation duration: {val_duration:.2f} seconds")
         print(f"Epoch duration: {(train_duration + val_duration):.2f} seconds\n")
-        log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1\n")
+        log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1\n")
     
     print("Finished training!")
     print(f"Total training time: {(time.time() - start_time):.2f} seconds = {(time.time() - start_time)/60:.2f} minutes")
@@ -226,4 +230,4 @@ if __name__ == "__main__":
         print(f"           Test Loss: {avg_test_loss:.4f}")
         print(f"Test duration: {test_duration:.2f} seconds")
 
-    log_file.write(f"{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f}\n")
+    log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{conv_channels}","{hidden_layers}",{learning_rate}\n')
