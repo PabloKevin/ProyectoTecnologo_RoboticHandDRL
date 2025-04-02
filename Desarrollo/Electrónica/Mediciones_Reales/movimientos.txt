@@ -1,0 +1,74 @@
+(base) pablo_kevin@Apolo-Nitro-PK:~$ mosquitto_sub -h localhost -t RoboticHand_ML/logs
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Moviendo...
+Ángulos: [85, 90, 90, 100, 90]
+
+Moviendo...
+Ángulos: [105, 90, 90, 180, 170]
+
+Moviendo...
+Ángulos: [105, 90, 180, 180, 170]
+
+Moviendo...
+Ángulos: [0, 0, 0, 0, 0]
+
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Moviendo...
+Ángulos: [105, 90, 180, 180, 170]
+
+Conectado al Broker con éxito.
+Moviendo...
+Ángulos: [105, 180, 180, 180, 170]
+
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Moviendo...
+Ángulos: [85, 90, 90, 100, 90]
+
+Moviendo...
+Ángulos: [105, 90, 90, 180, 170]
+
+Moviendo...
+Ángulos: [85, 90, 90, 100, 90]
+
+Moviendo...
+Ángulos: [85, 90, 90, 100, 90]
+
+Moviendo...
+Ángulos: [105, 90, 180, 180, 170]
+
+Moviendo...
+Ángulos: [85, 90, 90, 100, 90]
+
+Moviendo...
+Ángulos: [0, 0, 0, 0, 0]
+
+Moviendo...
+Ángulos: [105, 90, 90, 180, 170]
+
+Moviendo...
+Ángulos: [105, 90, 180, 180, 170]
+
+Moviendo...
+Ángulos: [105, 90, 90, 180, 170]
+
+Conectado al Broker con éxito.
+Conectado al Broker con éxito.
+Moviendo...
+Ángulos: [0, 0, 0, 0, 0]
+
+Moviendo...
+Ángulos: [105, 180, 180, 180, 170]
+
+Conectado al Broker con éxito.
+

@@ -20,35 +20,34 @@ def __get_label_from_filename__(filename):
     if filename_lower.startswith("empty"):
         return -1.0
     elif filename_lower.startswith("tuerca"):
-        return 0.0
+        return 1.0
     elif filename_lower.startswith("tornillo"):
-        return 0.3
+        return 1.3
     elif filename_lower.startswith("clavo"):
-        return 0.6
+        return 1.6
     elif filename_lower.startswith("lapicera"):
-        return 10.0
+        return 3.0
     elif filename_lower.startswith("tenedor"):
-        return 10.3
+        return 3.3
     elif filename_lower.startswith("cuchara"):
-        return 10.6
+        return 3.6
     elif filename_lower.startswith("destornillador"):
-        return 20.0
+        return 5.0
     elif filename_lower.startswith("martillo"):
-        return 20.3
+        return 5.3
     elif filename_lower.startswith("pinza"):
-        return 20.6
+        return 5.6
     else:
         # Default or unknown label
-        return 99.9
+        return -1.0
         
 
 
 
-conv_channels = [4, 8, 16]
-hidden_layers = [32, 8]
-learning_rate = 0.0008
+conv_channels = [16, 32, 64]
+hidden_layers = [64, 8]
 
-observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate)
+observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers)
 observer.load_model()
 observer.eval()
 
@@ -73,7 +72,15 @@ df_test = pl.DataFrame({"file_name": image_files, "true_label": image_labels, "p
 #print(df_test.filter(pl.col("true_label")==0.3).head())
 #print(df_test["true_label"].unique().to_list())
 
+labels = []
+mean_pred_labels = []
+names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 for label in df_test["true_label"].unique().to_list():
     clase = df_test.filter(pl.col("true_label")==label)
     #print(clase.head())
-    print(f'true label = {label}    ;    mean predicted_label = {clase["predicted_label"].mean()}')
+    labels.append(label)
+    mean_pred_labels.append(clase["predicted_label"].mean())
+    #print(f'true label = {label}    ;    mean predicted_label = {clase["predicted_label"].mean()}')
+
+df_results = pl.DataFrame({"class_names": names, "true_label": labels, "mean_predicted_label": mean_pred_labels})
+print(df_results)

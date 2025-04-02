@@ -49,26 +49,26 @@ class MyImageDataset(Dataset):
         if filename_lower.startswith("empty"):
             return -1.0
         elif filename_lower.startswith("tuerca"):
-            return 0.0
+            return 1.0
         elif filename_lower.startswith("tornillo"):
-            return 0.3
+            return 1.3
         elif filename_lower.startswith("clavo"):
-            return 0.6
+            return 1.6
         elif filename_lower.startswith("lapicera"):
-            return 10.0
+            return 3.0
         elif filename_lower.startswith("tenedor"):
-            return 10.3
+            return 3.3
         elif filename_lower.startswith("cuchara"):
-            return 10.6
+            return 3.6
         elif filename_lower.startswith("destornillador"):
-            return 20.0
+            return 5.0
         elif filename_lower.startswith("martillo"):
-            return 20.3
+            return 5.3
         elif filename_lower.startswith("pinza"):
-            return 20.6
+            return 5.6
         else:
             # Default or unknown label
-            return 99.9
+            return -1.0
 
     def __getitem__(self, idx):
         """
@@ -124,13 +124,13 @@ if __name__ == "__main__":
     train_dataset.image_files = pl.Series("train_masks_dataset", list(train_files))
     val_dataset.image_files = pl.Series("val_masks_dataset", list(val_files))
 
-    print(f"Train dataset length: {len(train_dataset)}")
+    """print(f"Train dataset length: {len(train_dataset)}")
     print(f"Validation dataset length: {len(val_dataset)}")
     print(f"Test dataset length: {len(test_dataset)}")
 
     print(train_dataset.image_files.head(5))
     print(val_dataset.image_files.head(5))
-    print(test_dataset.image_files.head(5))
+    print(test_dataset.image_files.head(5))"""
 
     """    # Optional: Visualize a sample image and its label
     img1 = train_dataset[1][0]
@@ -156,17 +156,19 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    conv_channels = [4, 8, 16]
-    hidden_layers = [32, 8]
-    learning_rate = 0.0008
+    conv_channels = [16, 32, 64]
+    hidden_layers = [64, 8]
+    learning_rate = 0.001
+    dropout2d = 0.2
+    dropout = 0.2
 
-    observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate)
+    observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
     #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 30
+    n_epochs = 20
 
     start_time = time.time()
     for epoch in range(n_epochs):

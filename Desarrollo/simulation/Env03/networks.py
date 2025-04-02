@@ -88,7 +88,9 @@ class ActorNetwork(nn.Module):
 # Observer Network
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[64,8], name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001):
+    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[64,8], 
+                 name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001,
+                 dropout2d=0.3, dropout=0.3):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
         self.output_dims = output_dims
@@ -101,13 +103,13 @@ class ObserverNetwork(nn.Module):
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=2, padding=2)
         
         # Dropout2d para intentar mejorar el overfitting
-        self.conv_dropout = nn.Dropout2d(p=0.4)
+        self.conv_dropout = nn.Dropout2d(p=dropout2d)
         
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], output_dims)
         
-        self.dropout = nn.Dropout(p=0.4)        # Dropout en la parte fully-connected
+        self.dropout = nn.Dropout(p=dropout)        # Dropout en la parte fully-connected
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
