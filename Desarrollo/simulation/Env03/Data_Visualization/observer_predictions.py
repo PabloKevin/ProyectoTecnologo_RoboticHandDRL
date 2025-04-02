@@ -6,7 +6,7 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.join(current_dir, "..")
 sys.path.append(os.path.abspath(parent_dir))
 
-from networks import ObserverNetwork
+from observerRGB import ObserverNetwork
 import numpy as np
 import cv2
 import polars as pl
