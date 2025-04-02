@@ -20,11 +20,11 @@ int Action[5]; //grados de cierre para cada dedo
 bool OpenAgain = 0; //flag indicadora de si luego de cerrar dedos en un movimiento, se deben volver a abrir o no
 
 // Credenciales de red Wi-Fi
-const char* ssid = "La Baticueva "; // Tu red Wi-Fi
-const char* password = "45631242"; // Contraseña de tu red Wi-Fi
+const char* ssid = "PK"; //"La Baticueva "; // Tu red Wi-Fi
+const char* password = "delunoalocho"; //"45631242"; // Contraseña de tu red Wi-Fi
 
 // Dirección del broker MQTT
-const char* mqtt_server = "192.168.1.12"; // IP del broker (tu PC)
+const char* mqtt_server = "192.168.120.138"; //"192.168.1.12"; // IP del broker (tu PC)
 char action_topic[] = "RoboticHand_ML/action";
 char logs_topic[] = "RoboticHand_ML/logs";
 
@@ -149,7 +149,7 @@ void TaskControl_func(void *pvParameters) {
       
       writeDegrees(&Hand_1, Action[0], Action[1], Action[2], Action[3], Action[4]);
       moveFingers(&Hand_1, 0, 0.25); // void moveFingers(hand *h, bool openAgain, float TimeInSeconds)
-      snprintf(msg, 100, "Moviendo...");
+      snprintf(msg, 100, "Moviendo...\nÁngulos: [%i, %i, %i, %i, %i]\n", Action[0], Action[1], Action[2], Action[3], Action[4]);
       client.publish(logs_topic, msg);
       ESTADO = 1; // Una vez completado el movimiento, volver a permitir nuevas acciones
     }
@@ -191,13 +191,6 @@ void callback(char* topic, byte* message, unsigned int length) {
     }
     Serial.print("Mensaje: ");
     Serial.println(mensaje);
-    // Imprimir los valores para verificar
-    Serial.print("Action: [");
-    for (int i = 0; i < 5; i++) {
-      Serial.print(Action[i], 10);
-      Serial.print(", ");
-    }
-    Serial.print("]");
 
     float* combination_output = msg2f_array(mensaje);
     int* temp = agentout2degrees(combination_output);
@@ -205,21 +198,30 @@ void callback(char* topic, byte* message, unsigned int length) {
       Action[i] = temp[i];
     }
 
+    // Imprimir los valores para verificar.
+    /*
+    Serial.print("Action: [");
+    for (int i = 0; i < 5; i++) {
+      Serial.print(Action[i], 10);
+      Serial.print(", ");
+    }
+    Serial.print("]");*/
+
     ESTADO = 0;
 }
 
 int* agentout2degrees(float* combination_output){
   //float* temp = combination_output;
   static int action[5];
-  //mano izquierda
+  /* mano izquierda
   static int finger_transform[5][3] = {
     {0, 130, 165},
     {0, 170, 180},
     {0, 140, 180},
     {0, 125, 180},
     {0, 130, 180}
-  }; //*/
-  /* mano derecha 
+  }; */
+  /* mano derecha */
   static int finger_transform[5][3] = {
     {0, 85, 105},
     {0, 90, 180},
