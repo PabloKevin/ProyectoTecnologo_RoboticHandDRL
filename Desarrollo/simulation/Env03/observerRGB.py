@@ -130,7 +130,7 @@ class MyImageDataset(Dataset):
         """
         filename_lower = filename.lower()
         if filename_lower.startswith("empty"):
-            return -1.0
+            return 0.0
         elif filename_lower.startswith("tuerca"):
             return 1.0
         elif filename_lower.startswith("tornillo"):
@@ -138,17 +138,17 @@ class MyImageDataset(Dataset):
         elif filename_lower.startswith("clavo"):
             return 1.6
         elif filename_lower.startswith("lapicera"):
-            return 3.0
+            return 2.6
         elif filename_lower.startswith("tenedor"):
-            return 3.3
+            return 2.9
         elif filename_lower.startswith("cuchara"):
-            return 3.6
+            return 3.2 
         elif filename_lower.startswith("destornillador"):
-            return 5.0
+            return 4.2
         elif filename_lower.startswith("martillo"):
-            return 5.3
+            return 4.5
         elif filename_lower.startswith("pinza"):
-            return 5.6
+            return 4.8
         else:
             # Default or unknown label
             return -1.0
@@ -240,10 +240,10 @@ if __name__ == "__main__":
 
     
     conv_channels = [16, 32, 64]
-    hidden_layers = [64, 8]
-    learning_rate = 0.001
-    dropout2d = 0.2
-    dropout = 0.2
+    hidden_layers = [64, 64]
+    learning_rate = 0.0008
+    dropout2d = 0.3
+    dropout = 0.3
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
     #observer.load_model()

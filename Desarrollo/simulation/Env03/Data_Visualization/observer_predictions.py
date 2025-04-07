@@ -18,7 +18,7 @@ def __get_label_from_filename__(filename):
     """
     filename_lower = filename.lower()
     if filename_lower.startswith("empty"):
-        return -1.0
+        return 0.0
     elif filename_lower.startswith("tuerca"):
         return 1.0
     elif filename_lower.startswith("tornillo"):
@@ -26,17 +26,17 @@ def __get_label_from_filename__(filename):
     elif filename_lower.startswith("clavo"):
         return 1.6
     elif filename_lower.startswith("lapicera"):
-        return 3.0
+        return 2.6
     elif filename_lower.startswith("tenedor"):
-        return 3.3
+        return 2.9
     elif filename_lower.startswith("cuchara"):
-        return 3.6
+        return 3.2 
     elif filename_lower.startswith("destornillador"):
-        return 5.0
+        return 4.2
     elif filename_lower.startswith("martillo"):
-        return 5.3
+        return 4.5
     elif filename_lower.startswith("pinza"):
-        return 5.6
+        return 4.8
     else:
         # Default or unknown label
         return -1.0
@@ -45,7 +45,7 @@ def __get_label_from_filename__(filename):
 
 
 conv_channels = [16, 32, 64]
-hidden_layers = [64, 8]
+hidden_layers = [64, 64]
 
 observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers)
 observer.load_model()
@@ -79,8 +79,8 @@ len_class = []
 names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 for label in df_test["true_label"].unique().to_list():
     clase = df_test.filter(pl.col("true_label")==label)
-    if label == -1.0:
-        print(clase.head())
+    #if label == -1.0:
+        #print(clase.head())
     labels.append(label)
     mean_pred_labels.append(clase["predicted_label"].mean())
     std_pred_labels.append(clase["predicted_label"].std())
