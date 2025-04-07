@@ -45,7 +45,7 @@ def __get_label_from_filename__(filename):
 
 
 conv_channels = [16, 32, 64]
-hidden_layers = [64, 64]
+hidden_layers = [64, 32, 8]
 
 observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers)
 observer.load_model()

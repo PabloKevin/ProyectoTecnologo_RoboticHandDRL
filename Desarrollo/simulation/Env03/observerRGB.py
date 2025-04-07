@@ -39,7 +39,8 @@ class ObserverNetwork(nn.Module):
         # the spatial dimensions become (H/8) x (W/8)
         self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
-        self.fc3 = nn.Linear(hidden_layers[1], output_dims)
+        self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
+        self.fc4 = nn.Linear(hidden_layers[2], output_dims)
         
         self.dropout = nn.Dropout(p=dropout)        # Dropout en la parte fully-connected
 
@@ -81,9 +82,15 @@ class ObserverNetwork(nn.Module):
         x = self.dropout(x)
 
         x = F.leaky_relu(self.fc2(x))
+
+        x = self.dropout(x)
+
+        x = F.leaky_relu(self.fc3(x))
+
+        x = self.dropout(x)
         #tool_reg = F.leaky_relu(self.fc3(x))
         #tool_reg = torch.tanh(self.fc3(x))*3.5+2.5
-        tool_reg = self.fc3(x)
+        tool_reg = self.fc4(x)
             
         return tool_reg # Tool regresion
 
@@ -240,13 +247,13 @@ if __name__ == "__main__":
 
     
     conv_channels = [16, 32, 64]
-    hidden_layers = [64, 64]
-    learning_rate = 0.0008
-    dropout2d = 0.3
-    dropout = 0.3
+    hidden_layers = [64, 32, 8]
+    learning_rate = 0.0008*0.8
+    dropout2d = 0.1
+    dropout = 0.1
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
-    #observer.load_model()
+    observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
