@@ -82,7 +82,8 @@ class ObserverNetwork(nn.Module):
 
         x = F.leaky_relu(self.fc2(x))
         #tool_reg = F.leaky_relu(self.fc3(x))
-        tool_reg = torch.tanh(self.fc3(x))*3.5+2.5
+        #tool_reg = torch.tanh(self.fc3(x))*3.5+2.5
+        tool_reg = self.fc3(x)
             
         return tool_reg # Tool regresion
 

@@ -74,13 +74,19 @@ df_test = pl.DataFrame({"file_name": image_files, "true_label": image_labels, "p
 
 labels = []
 mean_pred_labels = []
+std_pred_labels = []
+len_class = []
 names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 for label in df_test["true_label"].unique().to_list():
     clase = df_test.filter(pl.col("true_label")==label)
-    #print(clase.head())
+    if label == -1.0:
+        print(clase.head())
     labels.append(label)
     mean_pred_labels.append(clase["predicted_label"].mean())
+    std_pred_labels.append(clase["predicted_label"].std())
+    len_class.append(clase.shape[0])
     #print(f'true label = {label}    ;    mean predicted_label = {clase["predicted_label"].mean()}')
 
-df_results = pl.DataFrame({"class_names": names, "true_label": labels, "mean_predicted_label": mean_pred_labels})
+df_results = pl.DataFrame({"class_names": names, "true_label": labels, "mean_predicted_label": mean_pred_labels, 
+                           "std_predicted_label": std_pred_labels, "len_class": len_class})
 print(df_results)
