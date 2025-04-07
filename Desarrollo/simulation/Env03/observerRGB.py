@@ -246,11 +246,11 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    conv_channels = [16, 32, 64]
-    hidden_layers = [64, 32, 8]
-    learning_rate = 0.0008*0.8
-    dropout2d = 0.1
-    dropout = 0.1
+    conv_channels = [8, 16, 32]
+    hidden_layers = [32, 8, 4]
+    learning_rate = 0.001
+    dropout2d = 0.2
+    dropout = 0.2
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
     observer.load_model()
@@ -258,7 +258,7 @@ if __name__ == "__main__":
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 20
+    n_epochs = 100
 
     start_time = time.time()
     for epoch in range(n_epochs):
@@ -303,23 +303,28 @@ if __name__ == "__main__":
         print(f"Validation duration: {val_duration:.2f} seconds")
         print(f"Epoch duration: {(train_duration + val_duration):.2f} seconds\n")
         log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1\n")
-    
+        
+        if (epoch + 1) % 10 == 0 or epoch == n_epochs - 1:
+            observer.eval()
+            start_test_time = time.time()
+            test_loss = 0.0
+            with torch.no_grad():
+                for images_test, labels_test in test_loader:
+                    images_test, labels_test = images_test.to(device), labels_test.to(device)
+                    outputs_test = observer(images_test).squeeze()
+                    loss_test = criterion(outputs_test, labels_test)
+                    test_loss += loss_test.item()
+                avg_test_loss = test_loss / len(test_loader)
+
+                test_duration = (time.time() - start_test_time)
+                print(f"           Test Loss: {avg_test_loss:.4f}")
+                print(f"Test duration: {test_duration:.2f} seconds")
+
+            log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{conv_channels}","{hidden_layers}",{learning_rate}\n')
+
+
+
     print("Finished training!")
     print(f"Total training time: {(time.time() - start_time):.2f} seconds = {(time.time() - start_time)/60:.2f} minutes")
 
-    observer.eval()
-    start_test_time = time.time()
-    test_loss = 0.0
-    with torch.no_grad():
-        for images_test, labels_test in test_loader:
-            images_test, labels_test = images_test.to(device), labels_test.to(device)
-            outputs_test = observer(images_test).squeeze()
-            loss_test = criterion(outputs_test, labels_test)
-            test_loss += loss_test.item()
-        avg_test_loss = test_loss / len(test_loader)
-
-        test_duration = (time.time() - start_test_time)
-        print(f"           Test Loss: {avg_test_loss:.4f}")
-        print(f"Test duration: {test_duration:.2f} seconds")
-
-    log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{conv_channels}","{hidden_layers}",{learning_rate}\n')
+    

@@ -17,10 +17,12 @@ df_val   = df_train_val.select("run", "epoch", "validation_loss")
 df_test  = df_test.select("run", "epoch", "test_loss", "conv_channels", "hidden_layers", "learning_rate")
 print(len(df_train))
 
-n_runs = 6
+n_runs = 2
 df_train = df_train.filter(pl.col("run")>=df_train["run"].max()-n_runs+1)
 df_val   = df_val.filter(pl.col("run")>=df_train["run"].max()-n_runs+1)  
 df_test  = df_test.filter(pl.col("run")>=df_train["run"].max()-n_runs+1)
+
+df_train = df_train.filter(pl.col("train_loss")<100)
 
 # 5. Graficar en una sola figura
 plt.figure()
@@ -33,7 +35,7 @@ plt.plot(range(len(df_val)), df_val["validation_loss"], label="Val Loss", color=
 
 # - Gráfica (punto) de test_loss (solo se define en epoch=-1)
 #   que forzamos a dibujar en epoch=20
-plt.scatter([(i+1)*20-1 for i in range(len(df_test))], df_test["test_loss"], marker="o", label="Test Loss", color="red")
+plt.scatter([(i+1)*10-1 for i in range(len(df_test))], df_test["test_loss"], marker="o", label="Test Loss", color="red")
 
 # 6. Personalizar ejes, título y leyenda
 plt.xlabel("Epoch")
