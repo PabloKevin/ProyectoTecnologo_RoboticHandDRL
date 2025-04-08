@@ -250,19 +250,19 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    conv_channels = [32, 64, 128]
-    hidden_layers = [256, 128, 64]
-    learning_rate = 0.001
-    dropout2d = 0.3
-    dropout = 0.3
+    conv_channels = [4, 8, 16]
+    hidden_layers = [16, 8, 4]
+    learning_rate = 0.0008*0.8
+    dropout2d = 0.0
+    dropout = 0.0
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
-    #observer.load_model()
+    observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 80
+    n_epochs = 30
 
     best_val_loss = float('inf')
     best_test_loss = float('inf')
