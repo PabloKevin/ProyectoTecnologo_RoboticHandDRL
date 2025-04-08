@@ -94,8 +94,12 @@ class ObserverNetwork(nn.Module):
             
         return tool_reg # Tool regresion
 
-    def save_checkpoint(self):
-        torch.save(self.state_dict(), self.checkpoint_file)
+    def save_checkpoint(self, checkpoint_file=None):
+        if checkpoint_file is None:
+            torch.save(self.state_dict(), self.checkpoint_file)
+        else:
+            torch.save(self.state_dict(), checkpoint_file)
+        
 
     def load_model(self):
         self.load_state_dict(torch.load(self.checkpoint_file))
@@ -246,20 +250,22 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    conv_channels = [8, 16, 32]
-    hidden_layers = [32, 8, 4]
+    conv_channels = [32, 64, 128]
+    hidden_layers = [256, 128, 64]
     learning_rate = 0.001
-    dropout2d = 0.2
-    dropout = 0.2
+    dropout2d = 0.3
+    dropout = 0.3
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
-    observer.load_model()
+    #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 100
+    n_epochs = 80
 
+    best_val_loss = float('inf')
+    best_test_loss = float('inf')
     start_time = time.time()
     for epoch in range(n_epochs):
         start_epoch_time = time.time()
@@ -282,7 +288,7 @@ if __name__ == "__main__":
         print(f"Epoch [{epoch+1}/{n_epochs}] - Train Loss: {avg_train_loss:.4f}")
         print(f"Train duration: {train_duration:.2f} seconds")
 
-        if (epoch + 1) % 5 == 0 or epoch == n_epochs - 1:
+        if ((epoch + 1) % 5 == 0 or epoch == n_epochs - 1) and avg_val_loss < best_val_loss:
             observer.save_checkpoint()
             print(f"------\nCheckpoint saved for epoch {epoch + 1}\n------")
 
@@ -322,7 +328,10 @@ if __name__ == "__main__":
 
             log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{conv_channels}","{hidden_layers}",{learning_rate}\n')
 
-
+            if avg_test_loss < best_test_loss:
+                best_test_loss = avg_test_loss
+                observer.save_checkpoint(checkpoint_file=os.path.join(observer.checkpoint_dir, observer.name+'_best_test'))
+                print(f"------\nBest test loss checkpoint saved\n------")
 
     print("Finished training!")
     print(f"Total training time: {(time.time() - start_time):.2f} seconds = {(time.time() - start_time)/60:.2f} minutes")
