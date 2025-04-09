@@ -50,11 +50,14 @@ def plot_confusion_matrix(y_true, y_pred, class_names, thresholds, model_name=""
 # Example usage
 if __name__ == "__main__":
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
-    model_name = "observer_best_test_small"
-    predictor = Predictor(model_weights_file=model_weight_dir+model_name)
+    model_name = "observer_best_test_big"
+    conv_channels = [32, 64, 128]
+    hidden_layers = [256, 128, 64]
+    predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
     df_test = predictor.df_test
     #thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
-    thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")]
+    #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
+    thresholds = [0.5, 2.599, 3.201, float("inf")] #big
     true_labels = get_class_from_reg(df_test["true_label"], thresholds)
     pred_labels = get_class_from_reg(df_test["predicted_label"], thresholds)
     class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
@@ -62,6 +65,12 @@ if __name__ == "__main__":
 
 
     plot_confusion_matrix(true_labels, pred_labels, class_names, thresholds, model_name)
-
-    plt.scatter(df_test["true_label"], df_test["predicted_label"])
-    plt.show()
+    
+"""    colors = []
+    for label in df_test["true_label"]:
+        for i,th in enumerate(thresholds):
+            if label < th:
+                colors.append(["red", "blue", "green", "gray"][i])
+                break
+    plt.scatter(df_test["predicted_label"], df_test["true_label"], color=colors)
+    plt.show()"""
