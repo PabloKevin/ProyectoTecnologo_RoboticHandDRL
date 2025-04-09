@@ -85,7 +85,7 @@ class ObserverNetwork(nn.Module):
 
         x = self.dropout(x)
 
-        x = F.leaky_relu(self.fc3(x))
+        x = F.sigmoid(self.fc3(x))
 
         x = self.dropout(x)
         #tool_reg = F.leaky_relu(self.fc3(x))
@@ -250,19 +250,19 @@ if __name__ == "__main__":
     # (Below is just an example snippet – adapt it to your ObserverNetwork code)
 
     
-    conv_channels = [4, 8, 16]
-    hidden_layers = [16, 8, 4]
-    learning_rate = 0.0008*0.8
-    dropout2d = 0.0
-    dropout = 0.0
+    conv_channels = [16, 32, 64]
+    hidden_layers = [64, 16, 8]
+    learning_rate = 0.0001
+    dropout2d = 0.2
+    dropout = 0.2
 
     observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
-    observer.load_model()
+    #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     criterion = nn.MSELoss()
-    n_epochs = 30
+    n_epochs = 80
 
     best_val_loss = float('inf')
     best_test_loss = float('inf')

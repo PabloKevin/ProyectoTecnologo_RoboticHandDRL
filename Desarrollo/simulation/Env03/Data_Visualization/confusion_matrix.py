@@ -29,15 +29,16 @@ def plot_confusion_matrix(y_true, y_pred, class_names, thresholds, model_name=""
     - class_names: List of class names
     """
     #plt.figure()
+    fig, ax = plt.subplots(figsize=(9, 9)) 
     cm = confusion_matrix(y_true, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
-    disp.plot(cmap=plt.cm.Reds)
+    disp.plot(cmap=plt.cm.Reds, ax=ax)
     plt.xticks(rotation=45)
     plt.title(f"Confusion Matrix\nmodel: {model_name}")
 
     info_text = f"thresholds: {thresholds}"
     plt.gcf().text(
-        0.65, 0.9, 
+        0.2, 0.04, 
         info_text,
         #transform=plt.gca().transAxes,        # Para usar coords relativas (0..1)
         fontsize=10,
@@ -50,10 +51,14 @@ def plot_confusion_matrix(y_true, y_pred, class_names, thresholds, model_name=""
 
 # Example usage
 if __name__ == "__main__":
-    model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
-    model_name = "observer_best_test_big"
-    conv_channels = [32, 64, 128]
-    hidden_layers = [256, 128, 64]
+    model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
+    model_name = "observer_best_test"
+    #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
+    #model_name = "observer_best_test_bsb"
+    #conv_channels = [32, 64, 128]
+    #hidden_layers = [256, 128, 64]
+    conv_channels = [16, 32, 64]
+    hidden_layers = [64, 16, 8]
     predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
     df_test = predictor.df_test
     #thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
@@ -75,4 +80,5 @@ if __name__ == "__main__":
                 colors.append(["red", "blue", "green", "gray"][i])
                 break
     plt.scatter(df_test["predicted_label"], df_test["true_label"], color=colors)
-    plt.show()"""
+    plt.show()
+"""
