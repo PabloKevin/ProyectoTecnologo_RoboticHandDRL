@@ -32,15 +32,16 @@ def plot_confusion_matrix(y_true, y_pred, class_names, thresholds, model_name=""
     cm = confusion_matrix(y_true, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
     disp.plot(cmap=plt.cm.Reds)
+    plt.xticks(rotation=45)
     plt.title(f"Confusion Matrix\nmodel: {model_name}")
 
     info_text = f"thresholds: {thresholds}"
     plt.gcf().text(
-        0.8, 0.02, 
+        0.65, 0.9, 
         info_text,
         #transform=plt.gca().transAxes,        # Para usar coords relativas (0..1)
         fontsize=10,
-        ha='center',
+        ha='left',
         #verticalalignment='top', 
         bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
     )
@@ -57,11 +58,12 @@ if __name__ == "__main__":
     df_test = predictor.df_test
     #thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
-    thresholds = [0.5, 2.599, 3.201, float("inf")] #big
+    #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
+    thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
     true_labels = get_class_from_reg(df_test["true_label"], thresholds)
     pred_labels = get_class_from_reg(df_test["predicted_label"], thresholds)
-    class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
-    #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+    #class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
+    class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 
 
     plot_confusion_matrix(true_labels, pred_labels, class_names, thresholds, model_name)
