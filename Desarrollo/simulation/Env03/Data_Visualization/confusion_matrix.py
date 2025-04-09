@@ -54,11 +54,11 @@ if __name__ == "__main__":
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
     model_name = "observer_best_test"
     #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
-    #model_name = "observer_best_test_bsb"
-    #conv_channels = [32, 64, 128]
-    #hidden_layers = [256, 128, 64]
+    #model_name = "observer_best_test_medium02"
     conv_channels = [16, 32, 64]
-    hidden_layers = [64, 16, 8]
+    hidden_layers = [32, 16, 8]
+    #conv_channels = [16, 32, 64]
+    #hidden_layers = [64, 16, 8]
     predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
     df_test = predictor.df_test
     #thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
