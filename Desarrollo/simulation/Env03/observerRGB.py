@@ -130,6 +130,20 @@ class MyImageDataset(Dataset):
             if f.lower().endswith(extensions):
                 self.image_files.append(f)
         self.image_files = pl.Series(name, self.image_files)
+        self.label_mapping = {
+                                "empty": 0.0,
+                                 "tuerca": 1.0,
+                                "tornillo": 1.3,
+                                "clavo": 1.6,
+                                "lapicera": 2.6,
+                                "tenedor": 2.9,
+                                "cuchara": 3.2,
+                                "destornillador": 4.2,
+                                "martillo": 4.5,
+                                "pinza": 4.8,
+                                "default": -1.0
+                            }
+
     
     def __len__(self):
         return len(self.image_files)
@@ -140,29 +154,10 @@ class MyImageDataset(Dataset):
         Customize this function as needed if your filenames differ.
         """
         filename_lower = filename.lower()
-        if filename_lower.startswith("empty"):
-            return 0.0
-        elif filename_lower.startswith("tuerca"):
-            return 1.0
-        elif filename_lower.startswith("tornillo"):
-            return 1.3
-        elif filename_lower.startswith("clavo"):
-            return 1.6
-        elif filename_lower.startswith("lapicera"):
-            return 2.6
-        elif filename_lower.startswith("tenedor"):
-            return 2.9
-        elif filename_lower.startswith("cuchara"):
-            return 3.2 
-        elif filename_lower.startswith("destornillador"):
-            return 4.2
-        elif filename_lower.startswith("martillo"):
-            return 4.5
-        elif filename_lower.startswith("pinza"):
-            return 4.8
-        else:
-            # Default or unknown label
-            return -1.0
+        for name, label in self.label_mapping.items():
+            if filename_lower.startswith(name):
+                return label
+        
 
     def __getitem__(self, idx):
         """
