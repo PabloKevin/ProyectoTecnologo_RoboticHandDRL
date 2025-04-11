@@ -9,10 +9,52 @@ import matplotlib.pyplot as plt
 
 
 class Model_Metrics():
-    def __init__(self, model=None, model_weights_file=None, conv_channels=None, hidden_layers=None):
+    def __init__(self, model_weight_dir=None, model_name=None, conv_channels=None, hidden_layers=None, thresholds=[0.5, 1.6+0.5, 3.2+0.5, float("inf")],
+                 class_names=["agarre0", "agarre1", "agarre2", "agarre3"]):
+        
+        self.model_weight_dir = model_weight_dir
+        self.model_name = model_name
+        self.conv_channels = conv_channels
+        self.hidden_layers = hidden_layers
+        
+        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+        self.df_test = self.predictor.df_test
+        
+        self.thresholds = thresholds 
+        self.class_names = class_names
+        
+        self.true_labels, self.pred_labels = self.pred_labels2classes()
+        self.binary_true_labels, self.binary_pred_labels = self.calculate_binary_labels()
 
+    def pred_labels2classes(self):
+        self.true_labels = self.get_class_from_reg(self.df_test["true_label"], self.thresholds)
+        self.pred_labels = self.get_class_from_reg(self.df_test["predicted_label"], self.thresholds)
+        return self.true_labels, self.pred_labels
 
-    def get_class_from_reg(reg, thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")]):
+    def calculate_binary_labels(self):
+        self.pred_labels2classes()
+        binary_true_labels = []
+        binary_pred_labels = []
+        for i in range(len(np.unique(true_labels))): #-1 por el default
+            true_lab = []
+            pred_lab = []
+            for j,label in enumerate(true_labels):
+                if label == i:
+                    true_lab.append(1)
+                else:
+                    true_lab.append(0)
+                if pred_labels[j] == i:
+                    pred_lab.append(1)
+                else:
+                    pred_lab.append(0)
+            binary_true_labels.append(true_lab)
+            binary_pred_labels.append(pred_lab)
+
+        self.binary_true_labels = binary_true_labels
+        self.binary_pred_labels = binary_pred_labels
+        return binary_true_labels, binary_pred_labels
+
+    def get_class_from_reg(self, reg, thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")]):
         """
         Convert a regression value to a class label.
         """
@@ -24,7 +66,7 @@ class Model_Metrics():
                     break
         return class_names
 
-    def plot_confusion_matrix(y_true, y_pred, class_names, thresholds, model_name=""):
+    def plot_confusion_matrix(self, y_true, y_pred, class_names, thresholds, model_name=""):
         """
         Plots a confusion matrix using the true labels and predictions.
 
@@ -51,10 +93,9 @@ class Model_Metrics():
             #verticalalignment='top', 
             bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
         )
-
         plt.show()
 
-    def plot_ROC_curve(y_true, y_pred, class_names, thresholds, model_name=""):
+    def plot_ROC_curve(self, y_true, y_pred, class_names, thresholds, model_name=""):
         # ROC Curve
         # Normalize your continuous prediction to 0–1 range for ROC
         pred_scores = np.abs(df_test["predicted_label"] - df_test["true_label"])
@@ -75,7 +116,7 @@ class Model_Metrics():
         plt.grid()
         plt.show()
 
-    def plot_PresicionRecall_curve():
+    def plot_PresicionRecall_curve(self):
         # Precision-Recall Curve
         precision, recall, _ = precision_recall_curve(bool_true_lables, pred_scores)
         average_precision = average_precision_score(bool_true_lables, pred_scores)
@@ -89,7 +130,7 @@ class Model_Metrics():
         plt.grid()
         plt.show()
 
-    def calculate_metrics():
+    def calculate_metrics(self):
         # Metrics Calculation
         f1 = f1_score(true_labels, pred_labels, average="macro")
         precision_val = precision_score(true_labels, pred_labels, average="macro")
@@ -106,18 +147,17 @@ if __name__ == "__main__":
     #model_name = "observer_best_test"
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
     model_name = "observer_best_test_medium02"
+
     conv_channels = [16, 32, 64]
     hidden_layers = [64, 16, 8]
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
-    predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
-    df_test = predictor.df_test
+
     thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
     #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
     #thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
-    true_labels = get_class_from_reg(df_test["true_label"], thresholds)
-    pred_labels = get_class_from_reg(df_test["predicted_label"], thresholds)
+
     class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
     #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 
@@ -136,22 +176,7 @@ if __name__ == "__main__":
     """
     
 
-    binary_true_labels = []
-    binary_pred_labels = []
-    for i in range(len(np.unique(true_labels))): #-1 por el default
-        true_lab = []
-        pred_lab = []
-        for j,label in enumerate(true_labels):
-            if label == i:
-                true_lab.append(1)
-            else:
-                true_lab.append(0)
-            if pred_labels[j] == i:
-                pred_lab.append(1)
-            else:
-                pred_lab.append(0)
-        binary_true_labels.append(true_lab)
-        binary_pred_labels.append(pred_lab)
+    
 
     
 
