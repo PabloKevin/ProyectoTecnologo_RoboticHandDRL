@@ -74,34 +74,32 @@ class Model_Metrics():
                     break
         return class_names
 
-    def plot_confusion_matrix(self):
-        """
-        Plots a confusion matrix using the true labels and predictions.
+    def plot_confusion_matrix(self, ax=None):
+        show = False
+        if ax is None:
+            fig, ax = plt.subplots(figsize=(9, 9)) 
+            show = True
 
-        Parameters:
-        - y_true: Ground truth labels
-        - y_pred: Predicted labels
-        - class_names: List of class names
-        """
-        #plt.figure()
-        fig, ax = plt.subplots(figsize=(9, 9)) 
         cm = confusion_matrix(self.true_labels, self.pred_labels)
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=self.class_names)
-        disp.plot(cmap=plt.cm.Reds, ax=ax)
-        plt.xticks(rotation=45)
-        plt.title(f"Confusion Matrix\nmodel: {self.model_name}")
+        disp.plot(cmap=plt.cm.Reds, ax=ax, colorbar=True)  # avoids creating new fig
 
-        info_text = f"thresholds: {self.thresholds}"
-        plt.gcf().text(
-            0.2, 0.04, 
-            info_text,
-            #transform=plt.gca().transAxes,        # Para usar coords relativas (0..1)
-            fontsize=10,
-            ha='left',
-            #verticalalignment='top', 
-            bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
-        )
-        plt.show()
+        ax.set_title(f"Confusion Matrix")
+        ax.set_xticklabels(self.class_names, rotation=45)
+
+        if show:
+            ax.set_title(f"Confusion Matrix\nmodel: {self.model_name}")
+            info_text = f"thresholds: {self.thresholds}"
+            ax.text(
+                0.5, -0.15, 
+                info_text,
+                transform=ax.transAxes,
+                fontsize=10,
+                ha='center',
+                bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
+            )
+            plt.show()
+
 
     def calculate_predScores(self):
         # Normalize your continuous prediction to 0–1 range for ROC
@@ -114,60 +112,80 @@ class Model_Metrics():
         self.bool_true_labels = np.array(self.true_labels) == np.array(self.pred_labels)
         return self.bool_true_labels
         
-    def plot_ROC_curve(self, first_update=False):
+
+    def plot_ROC_curve(self, ax=None, first_update=False):
         if first_update:
             self.calculate_predScores()
             self.calculate_bool_labels()
-        # ROC Curve
+
         fpr, tpr, _ = roc_curve(self.bool_true_labels, self.pred_scores)
         roc_auc = auc(fpr, tpr)
 
-        plt.figure(figsize=(10, 5))
-        plt.plot(fpr, tpr, lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
-        plt.plot([0, 1], [0, 1], linestyle='--', color='gray')
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate (Recall)')
-        plt.title('ROC Curve\nmodel: {self.model_name}')
-        plt.legend(loc='lower right')
-        plt.grid()
-        plt.show()
+        show = False
+        if ax is None:
+            fig, ax = plt.subplots()
+            show = True
 
-    def plot_PresicionRecall_curve(self, first_update=False):
+        ax.plot(fpr, tpr, lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+        ax.plot([0, 1], [0, 1], linestyle='--', color='gray')
+        ax.set_xlabel('False Positive Rate')
+        ax.set_ylabel('True Positive Rate (Recall)')
+        ax.set_title(f'ROC Curve')
+        ax.legend(loc='lower right')
+        ax.grid(True)
+        
+        if show:
+            ax.set_title(f'ROC Curve\nmodel: {self.model_name}')
+            plt.show()
+
+
+    def plot_PresicionRecall_curve(self, ax=None, first_update=False):
         if first_update:
             self.calculate_predScores()
             self.calculate_bool_labels()
 
-        # Precision-Recall Curve
         precision, recall, _ = precision_recall_curve(self.bool_true_labels, self.pred_scores)
         average_precision = average_precision_score(self.bool_true_labels, self.pred_scores)
 
-        plt.figure(figsize=(10, 5))
-        plt.plot(recall, precision, lw=2, label=f'PR curve (AP = {average_precision:.2f})')
-        plt.xlabel('Recall')
-        plt.ylabel('Precision')
-        plt.title('Precision-Recall Curve')
-        plt.legend(loc='lower left')
-        plt.grid()
-        plt.show()
+        show = False
+        if ax is None:
+            fig, ax = plt.subplots()
+            show = True
 
-    def plot_predicted_vs_true(self):
+        ax.plot(recall, precision, lw=2, label=f'PR curve (AP = {average_precision:.2f})')
+        ax.set_xlabel('Recall')
+        ax.set_ylabel('Precision')
+        ax.set_title('Precision-Recall Curve')
+        ax.legend(loc='lower left')
+        ax.grid(True)
+
+        if show:
+            plt.show()
+
+
+    def plot_predicted_vs_true(self, ax=None):
         colors = []
         for i in range(len(self.df_test["true_label"])):
-            colors.append(np.random.randint(0, 256, 3))
+            colors.append(np.random.randint(0, 256, 3)/255)
         
         dot_color = []
         for label in self.df_test["true_label"]:
             for i,th in enumerate(thresholds):
                 if label < th:
-                    dot_color.append(["red", "blue", "green", "gray"][i])
+                    dot_color.append(colors[i])
                     break
-        plt.scatter(self.df_test["predicted_label"], self.df_test["true_label"], color=dot_color, alpha=0.6)
-        plt.title(f"Predicted vs True Labels")
-        plt.xlabel('Predicted Labels')
-        plt.ylabel('True Labels')
-        plt.legend(loc='lower left')
-        plt.grid()
-        plt.show()
+        show = False
+        if ax is None:
+            fig, ax = plt.subplots()
+            show = True
+
+        ax.scatter(self.df_test["predicted_label"], self.df_test["true_label"], c=dot_color, alpha=0.6)
+        ax.set_title("Predicted vs True Labels")
+        ax.set_xlabel('Predicted Labels')
+        ax.set_ylabel('True Labels')
+        ax.grid(True)
+        if show:
+            plt.show()
 
     def calculate_metrics(self, first_update=False, show=True):
         if first_update:
@@ -188,12 +206,33 @@ class Model_Metrics():
 
         return self.f1, self.precision_val, self.recall_val, self.accuracy
     
+
     def show_model_performance(self):
-        self.plot_confusion_matrix()
-        self.plot_ROC_curve()
-        self.plot_PresicionRecall_curve()
-        self.plot_predicted_vs_true()
-        self.calculate_metrics()
+        fig, axs = plt.subplots(2, 2, figsize=(15, 15))
+        fig.subplots_adjust(top=0.8, hspace=1.5, wspace=0.3)
+
+        self.plot_confusion_matrix(ax=axs[0, 0])
+        self.plot_ROC_curve(ax=axs[0, 1])
+        self.plot_PresicionRecall_curve(ax=axs[1, 1])
+        self.plot_predicted_vs_true(ax=axs[1, 0])
+
+        # Add metrics text outside grid
+        metrics_text = (
+            "METRICS:\n"
+            f"F1-Score: {self.f1:.2f}\n"
+            f"Precision: {self.precision_val:.2f}\n"
+            f"Recall: {self.recall_val:.2f}\n"
+            f"Accuracy: {self.accuracy:.2f}"
+        )
+        fig.text(0.07, 0.51, metrics_text, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        
+        # Add figure-wide title
+        fig.text(0.07, 0.98, f'Model "{self.model_name}" Performance', 
+                 ha='left', va='top', fontsize=14, fontweight='bold')
+
+        plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=4.5, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+        plt.show()
+
 
 # Example usage
 if __name__ == "__main__":
