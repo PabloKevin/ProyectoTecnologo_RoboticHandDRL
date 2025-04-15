@@ -152,7 +152,7 @@ class Model_Metrics():
             fig, ax = plt.subplots()
             show = True
 
-        ax.plot(recall, precision, lw=2, label=f'PR curve (AP = {average_precision:.2f})')
+        ax.plot(recall, precision, color="orange", lw=2, label=f'PR curve (AP = {average_precision:.2f})')
         ax.set_xlabel('Recall')
         ax.set_ylabel('Precision')
         ax.set_title('Precision-Recall Curve')
@@ -165,12 +165,12 @@ class Model_Metrics():
 
     def plot_predicted_vs_true(self, ax=None):
         colors = []
-        for i in range(len(self.df_test["true_label"])):
+        for i in range(len(self.class_names)):
             colors.append(np.random.randint(0, 256, 3)/255)
         
         dot_color = []
         for label in self.df_test["true_label"]:
-            for i,th in enumerate(thresholds):
+            for i,th in enumerate(self.thresholds):
                 if label < th:
                     dot_color.append(colors[i])
                     break
@@ -179,11 +179,20 @@ class Model_Metrics():
             fig, ax = plt.subplots()
             show = True
 
-        ax.scatter(self.df_test["predicted_label"], self.df_test["true_label"], c=dot_color, alpha=0.6)
+        ax.scatter(self.df_test["predicted_label"], self.df_test["true_label"], c=dot_color, alpha=0.5)
         ax.set_title("Predicted vs True Labels")
         ax.set_xlabel('Predicted Labels')
         ax.set_ylabel('True Labels')
         ax.grid(True)
+
+        # Create legend handles (one per class)
+        legend_elements = [
+            plt.Line2D([0], [0], marker='o', color='w', label=self.class_names[i],
+                    markerfacecolor=clr, markersize=10)
+            for i, clr in enumerate(colors)
+        ]
+
+        ax.legend(handles=legend_elements, loc='best')
         if show:
             plt.show()
 
@@ -206,10 +215,18 @@ class Model_Metrics():
 
         return self.f1, self.precision_val, self.recall_val, self.accuracy
     
+    def update(self):
+        self.pred_labels2classes()
+        self.calculate_binary_labels()
+        self.calculate_predScores()
+        self.calculate_bool_labels()
+        self.calculate_metrics(show=False)
 
-    def show_model_performance(self):
-        fig, axs = plt.subplots(2, 2, figsize=(15, 15))
-        fig.subplots_adjust(top=0.8, hspace=1.5, wspace=0.3)
+    def show_model_performance(self, update=False):
+        if update:
+            self.update()
+        fig, axs = plt.subplots(2, 2, figsize=(15, 13))
+        #fig.subplots_adjust(top=0.8, hspace=1.5, wspace=0.3)
 
         self.plot_confusion_matrix(ax=axs[0, 0])
         self.plot_ROC_curve(ax=axs[0, 1])
@@ -224,13 +241,27 @@ class Model_Metrics():
             f"Recall: {self.recall_val:.2f}\n"
             f"Accuracy: {self.accuracy:.2f}"
         )
-        fig.text(0.07, 0.51, metrics_text, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         
         # Add figure-wide title
-        fig.text(0.07, 0.98, f'Model "{self.model_name}" Performance', 
+        fig.text(0.1, 0.98, f'Model "{self.model_name}" Performance', 
                  ha='left', va='top', fontsize=14, fontweight='bold')
 
-        plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=4.5, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+        plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+
+        # Draw separators
+        if len(self.class_names)==4:
+            fig.add_artist(plt.Line2D([0, 1], [0.46, 0.46], color='grey', linewidth=1, linestyle='--'))  # horizontal
+            fig.add_artist(plt.Line2D([0.508, 0.508], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
+            w_metrics, h_metrics = (0.09, 0.52) #metrics
+        elif len(self.class_names)==10:
+            fig.add_artist(plt.Line2D([0, 1], [0.447, 0.447], color='grey', linewidth=1, linestyle='--'))  # horizontal
+            fig.add_artist(plt.Line2D([0.525, 0.525], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
+            w_metrics, h_metrics = (0.11, 0.51) #metrics
+        else:
+            w_metrics, h_metrics = (0.09, 0.52) #metrics
+
+        fig.text(w_metrics, h_metrics, metrics_text, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+
         plt.show()
 
 
@@ -256,6 +287,10 @@ if __name__ == "__main__":
 
     observer_performance = Model_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, thresholds=thresholds, class_names=class_names)
     observer_performance.show_model_performance()
+
+    observer_performance.class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+    observer_performance.thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")]
+    observer_performance.show_model_performance(update=True)
 
     
 
