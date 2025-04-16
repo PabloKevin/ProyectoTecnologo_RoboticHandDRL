@@ -13,9 +13,14 @@ import time
 # Observer Network
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims = (256, 256, 1), output_dims = 1, conv_channels=[16, 32, 64], hidden_layers=[64,8], 
-                 name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer', learning_rate=0.001,
-                 dropout2d=0.3, dropout=0.3):
+    def __init__(self, 
+                 conv_channels=[16, 32, 64], 
+                 hidden_layers=[32, 16, 8], 
+                 learning_rate= 0.0008,
+                 dropout2d=0.1, 
+                 dropout=0.1, 
+                 input_dims = (256, 256, 1), output_dims = 1, 
+                 name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer'):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
         self.output_dims = output_dims
@@ -241,17 +246,7 @@ if __name__ == "__main__":
     val_loader   = DataLoader(val_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
-    # Now you can do, e.g., training with these loaders:
-    # (Below is just an example snippet – adapt it to your ObserverNetwork code)
-
-    
-    conv_channels = [16, 32, 64]
-    hidden_layers = [32, 16, 8]
-    learning_rate = 0.0008
-    dropout2d = 0.1
-    dropout = 0.1
-
-    observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers, learning_rate=learning_rate, dropout=dropout, dropout2d=dropout2d)
+    observer = ObserverNetwork()
     #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -322,7 +317,7 @@ if __name__ == "__main__":
                 print(f"           Test Loss: {avg_test_loss:.4f}")
                 print(f"Test duration: {test_duration:.2f} seconds")
 
-            log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{conv_channels}","{hidden_layers}",{learning_rate}\n')
+            log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{observer.conv_channels}","{observer.hidden_layers}",{observer.learning_rate}\n')
 
             if avg_test_loss < best_test_loss:
                 best_test_loss = avg_test_loss

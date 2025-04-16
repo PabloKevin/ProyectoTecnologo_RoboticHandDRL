@@ -9,16 +9,8 @@ import matplotlib.pyplot as plt
 
 
 class Model_Metrics():
-    def __init__(self, model_weight_dir=None, model_name=None, conv_channels=None, hidden_layers=None, thresholds=[0.5, 1.6+0.5, 3.2+0.5, float("inf")],
-                 class_names=["agarre0", "agarre1", "agarre2", "agarre3"]):
-        
-        self.model_weight_dir = model_weight_dir
-        self.model_name = model_name
-        self.conv_channels = conv_channels
-        self.hidden_layers = hidden_layers
-        
-        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
-        self.df_test = self.predictor.df_test
+    def __init__(self, df_test, thresholds=[0.5, 1.6+0.5, 3.2+0.5, float("inf")], class_names=["agarre0", "agarre1", "agarre2", "agarre3"]):
+        self.df_test = df_test
         
         self.thresholds = thresholds 
         self.class_names = class_names
@@ -264,7 +256,29 @@ class Model_Metrics():
 
         plt.show()
 
+class Observer_Metrics(Model_Metrics):
+    def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds, class_names):
+        self.model_weight_dir = model_weight_dir
+        self.model_name = model_name
+        self.conv_channels = conv_channels
+        self.hidden_layers = hidden_layers
+        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
 
+        super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
+
+class Actor_Predictions():
+    
+
+class Actor_Metrics(Model_Metrics):
+    def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds, class_names):
+        self.model_weight_dir = model_weight_dir
+        self.model_name = model_name
+        self.conv_channels = conv_channels
+        self.hidden_layers = hidden_layers
+        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+
+        super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
+        
 # Example usage
 if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
@@ -285,7 +299,7 @@ if __name__ == "__main__":
     class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
     #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 
-    observer_performance = Model_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, thresholds=thresholds, class_names=class_names)
+    observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, thresholds=thresholds, class_names=class_names)
     observer_performance.show_model_performance()
 
     observer_performance.class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
