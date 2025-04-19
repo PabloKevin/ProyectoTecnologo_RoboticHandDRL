@@ -267,7 +267,7 @@ class Observer_Metrics(Model_Metrics):
         super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
 
 class Actor_Predictions():
-    
+    pass
 
 class Actor_Metrics(Model_Metrics):
     def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds, class_names):

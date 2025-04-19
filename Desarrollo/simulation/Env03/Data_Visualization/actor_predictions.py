@@ -1,41 +1,35 @@
-import sys, os
-
-# Ruta del archivo actual
-current_dir = os.path.dirname(__file__)
-# Un nivel arriba (donde está networks.py)
-parent_dir = os.path.join(current_dir, "..")
-sys.path.append(os.path.abspath(parent_dir))
-
-from observerRGB import ObserverNetwork, MyImageDataset
+import os
+from observer_predictions import Predictor as Observer_Predictor
+from networks import ActorNetwork
 import numpy as np
 import cv2
 import polars as pl
 
 class Predictor():
-    def __init__(self, model=None, model_weights_file=None, conv_channels=None, hidden_layers=None):
+    def __init__(self, model=None, model_weights_dir=None, hidden_layers=None):
         if model is None:
-            if conv_channels is None or hidden_layers is None:
-                self.observer = ObserverNetwork()
+            if hidden_layers is None or model_weights_dir is None:
+                self.actor = ActorNetwork()
             else:
-                self.observer = ObserverNetwork(conv_channels=conv_channels, hidden_layers=hidden_layers)
-            self.observer.checkpoint_file = model_weights_file
-            self.observer.load_model()
-            self.observer.eval()
+                self.actor = ActorNetwork(checkpoint_dir=model_weights_dir + model, hidden_layers=hidden_layers)
         else:
-            self.observer = model
-            self.observer.eval()
+            self.actor = model
+        self.actor.load_checkpoint()
+        self.actor.eval()
 
-        # Gather all valid image paths
-        self.image_dir = "Desarrollo/simulation/Env03/DataSets/TestSet_masks/"
-        self.extensions = (".png")
+        self.observer_df_test = pl.read_csv("Desarrollo/simulation/Env03/Data_Visualization/observer_df_test.csv")
 
-        self.ds = MyImageDataset(self.image_dir)
+        self.df_test, self.df_results = self.calculate_results()
 
-        self.df_test = self.calculate_results()[0]
-        self.df_results = self.calculate_results()[1]
-
-    def update_observer_predictions(self, observer_predictor):
-        
+    def update_observer_predictions(self,
+                                    model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/",
+                                    model_name = "observer_best_test_medium02",
+                                    conv_channels = [16, 32, 64],
+                                    hidden_layers = [64, 16, 8]
+                                    ):
+        obs_predictor = Observer_Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+        obs_predictor.save_df_test()
+        print(f"Observer predictions updated with model: {model_name}")
 
 
     def calculate_results(self):
@@ -84,10 +78,9 @@ class Predictor():
 
 if __name__ == "__main__":
     # Load the model
-    model_weight_file = "Desarrollo/simulation/Env03/tmp/observer/observer_best_test"
+    #model_weight_file = "Desarrollo/simulation/Env03/tmp/observer/observer_best_test"
     #model_weight_file = "Desarrollo/simulation/Env03/tmp/observer_backup/observer_best_test_big"
-    conv_channels = [16, 32, 64]
-    hidden_layers = [64, 16, 8]
-    #conv_channels = None # For the last model trained.
-    predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_file)
+    #hidden_layers = [64, 16, 8]
+    predictor = Predictor()
     predictor.show_results()
+    #predictor.save_df_test()
