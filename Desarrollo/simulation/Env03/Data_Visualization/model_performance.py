@@ -307,25 +307,10 @@ class Actor_Metrics(Model_Metrics):
             for j in range(5):
                 value += np.abs(self.df_test["predicted_label"][i][j] - self.df_test["true_label"][i][j])
             pred_scores.append(value)
-        pred_scores = np.array(pred_scores)/len(self.df_test["predicted_label"])
+        pred_scores = np.array(pred_scores)/5
         pred_scores = 1 - (pred_scores / pred_scores.max())  # Closer to target class gets higher score
         self.pred_scores = pred_scores
         return self.pred_scores
-    
-    def dot_colors(self):
-        colors = []
-        for i in range(len(self.class_names)):
-            colors.append(np.random.randint(0, 256, 3)/255)
-        
-        dot_color = []
-        for label in self.true_labels:
-            for i,th in enumerate(range(len(self.class_names))):
-                if label == th:
-                    dot_color.append(colors[i])
-                    break
-        print(self.class_names)
-        print(dot_color)
-        return colors, dot_color
     
     def plot_confusion_matrix(self, ax=None):
         show = False
@@ -354,6 +339,10 @@ class Actor_Metrics(Model_Metrics):
                 bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
             )
             plt.show()
+
+    def calculate_bool_labels(self):
+        self.bool_true_labels = np.array(self.true_labels) == 2
+        return self.bool_true_labels
 
         
 # Example usage
@@ -395,7 +384,6 @@ if __name__ == "__main__":
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
     actor_performance.show_model_performance(predivted_vs_true=False)
-
     
 
    
