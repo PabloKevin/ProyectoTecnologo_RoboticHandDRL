@@ -4,6 +4,7 @@ from networks import ActorNetwork
 import numpy as np
 import cv2
 import polars as pl
+import torch as T
 
 class Predictor():
     def __init__(self, model=None, model_weights_dir=None, hidden_layers=None):
@@ -11,7 +12,7 @@ class Predictor():
             if hidden_layers is None or model_weights_dir is None:
                 self.actor = ActorNetwork()
             else:
-                self.actor = ActorNetwork(checkpoint_dir=model_weights_dir + model, hidden_layers=hidden_layers)
+                self.actor = ActorNetwork(checkpoint_dir=model_weights_dir, hidden_layers=hidden_layers)
         else:
             self.actor = model
         self.actor.load_checkpoint()
@@ -19,7 +20,7 @@ class Predictor():
 
         self.observer_df_test = pl.read_csv("Desarrollo/simulation/Env03/Data_Visualization/observer_df_test.csv")
 
-        self.df_test, self.df_results = self.calculate_results()
+        self.df_test = self.calculate_results()
 
     def update_observer_predictions(self,
                                     model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/",
@@ -28,59 +29,108 @@ class Predictor():
                                     hidden_layers = [64, 16, 8]
                                     ):
         obs_predictor = Observer_Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+        self.observer_df_test = obs_predictor.df_test
         obs_predictor.save_df_test()
         print(f"Observer predictions updated with model: {model_name}")
 
+    def label_from_filename(self, filename):
+        tools = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+        agarres = [[0,0,0,0,0], [1,1,2,2,2], [1,1,1,2,2], [1,1,1,1,1]]
+        for i, tool in enumerate(tools):
+            if filename.startswith(tool):
+                if i == 0:
+                    return agarres[0]
+                elif i <= 3:
+                    return agarres[1]
+                elif i <= 6:
+                    return agarres[2]
+                else:
+                    return agarres[3]
+                
+    def calculate_true_labels(self, filenames):
+        true_labels = []
+        for filename in filenames:
+            true_labels.append(self.label_from_filename(filename))
+
+        return true_labels
+
+    def predict(self, tool):
+        finger_actions= []
+        for f_idx in range(5):
+            observation = T.tensor(np.array([tool, float(f_idx)]), dtype=T.float).to(self.actor.device)
+            pred_action = self.actor(observation).item()
+            finger_actions.append(pred_action + 1) # pred_action (-1, 1) +1 -> (0,2) intervals and action spaces
+        return finger_actions
+    
+    def predAction_to_closeAction(self, predActions):
+        closeActions = []
+        for action in predActions:
+            f_action = []
+            for finger in action:
+                if finger < (1 - 1/3):
+                    f_action.append(0)
+                elif finger < (1 + 1/3):
+                    f_action.append(1)
+                else:
+                    f_action.append(2)
+            closeActions.append(f_action)
+        return closeActions
+
+    def actions_to_agarres(self, actions):
+        agarres_comb = [[0,0,0,0,0], [1,1,2,2,2], [1,1,1,2,2], [1,1,1,1,1]]
+        agarres = []
+        for action in actions:
+            end = 0
+            for i, agarre in enumerate(agarres_comb):
+                if agarre == action:
+                    agarres.append("agarre_"+str(i))
+                    end = 0
+                elif end == 3:
+                    agarres.append("agarre_indefinido")
+                    end = 0
+                else:
+                    end += 1
+        return agarres
 
     def calculate_results(self):
-        image_files = []
-        image_labels = []
-        predicted_labels = []
-        for f in os.listdir(self.image_dir):
-            if f.lower().endswith(self.extensions):
-                image_files.append(f)
-                label = self.ds.__get_label_from_filename__(f)
-                image_labels.append(label)
+        true_labels = self.calculate_true_labels(self.observer_df_test["file_name"])
 
-                img = cv2.imread(self.image_dir+f, cv2.IMREAD_GRAYSCALE)
-                img = np.expand_dims(img, axis=(0,1)) # se añade otra dimensión más para que no tire advertencia en el dropout2d que espera shape: N,C,H,W
-                predicted_label = self.observer(img)
-                predicted_labels.append(predicted_label.item())
-
-        df_test = pl.DataFrame({"file_name": image_files, "true_label": image_labels, "predicted_label": predicted_labels})
-        #print(df_test.filter(pl.col("true_label")==0.3).head())
-        #print(df_test["true_label"].unique().to_list())
-
-        labels = []
-        mean_pred_labels = []
-        std_pred_labels = []
-        len_class = []
-        names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
-        for label in df_test["true_label"].unique().to_list():
-            clase = df_test.filter(pl.col("true_label")==label)
-            #if label == -1.0:
-                #print(clase.head())
-            labels.append(label)
-            mean_pred_labels.append(clase["predicted_label"].mean())
-            std_pred_labels.append(clase["predicted_label"].std())
-            len_class.append(clase.shape[0])
-            #print(f'true label = {label}    ;    mean predicted_label = {clase["predicted_label"].mean()}')
-
-        self.df_test = df_test
-        self.df_results = pl.DataFrame({"class_names": names, "true_label": labels, "mean_predicted_label": mean_pred_labels, 
-                                "std_predicted_label": std_pred_labels, "len_class": len_class})
+        pred_labels = []
+        for tool in self.observer_df_test["predicted_label"]:
+            pred_labels.append(self.predict(tool))
         
-        return df_test, self.df_results
+        pred_close_labels = self.predAction_to_closeAction(pred_labels)
         
+        true_agarres = self.actions_to_agarres(true_labels)
+        pred_agarres = self.actions_to_agarres(pred_close_labels)
+
+        df_test = pl.DataFrame({"file_name": self.observer_df_test["file_name"], 
+                                "true_label": true_labels, 
+                                "predicted_label": pred_labels,
+                                "pred_close_labels": pred_close_labels,
+                                "true_agarres": true_agarres,
+                                "predicted_agarres": pred_agarres})
+
+        return df_test
+
+    def save_df_test(self):
+        df_flat = self.df_test.with_columns([
+            pl.col("true_label").map_elements(str).alias("true_label"),
+            pl.col("predicted_label").map_elements(str).alias("predicted_label"),
+            pl.col("pred_close_labels").map_elements(str).alias("pred_close_labels")
+        ])
+
+        df_flat.write_csv("Desarrollo/simulation/Env03/Data_Visualization/actor_df_test.csv", separator=";")
+
+        print("df_test saved to CSV file.")
         
-    def show_results(self):
-        print(self.df_results)
 
 if __name__ == "__main__":
     # Load the model
     #model_weight_file = "Desarrollo/simulation/Env03/tmp/observer/observer_best_test"
     #model_weight_file = "Desarrollo/simulation/Env03/tmp/observer_backup/observer_best_test_big"
     #hidden_layers = [64, 16, 8]
-    predictor = Predictor()
-    predictor.show_results()
+    predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env03/models_params_weights/td3", hidden_layers=[32,32])
+    #predictor.update_observer_predictions()
     #predictor.save_df_test()
+    print(predictor.df_test.head())
