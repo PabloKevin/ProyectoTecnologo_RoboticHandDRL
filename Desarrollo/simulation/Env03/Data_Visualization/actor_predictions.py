@@ -35,7 +35,7 @@ class Predictor():
 
     def label_from_filename(self, filename):
         tools = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
-        agarres = [[0,0,0,0,0], [1,1,2,2,2], [1,1,1,2,2], [1,1,1,1,1]]
+        agarres = [[0,0,0,0,0], [2,1,2,2,2], [2,1,1,2,2], [1,1,1,1,1]]
         for i, tool in enumerate(tools):
             if filename.startswith(tool):
                 if i == 0:
@@ -77,7 +77,7 @@ class Predictor():
         return closeActions
 
     def actions_to_agarres(self, actions):
-        agarres_comb = [[0,0,0,0,0], [1,1,2,2,2], [1,1,1,2,2], [1,1,1,1,1]]
+        agarres_comb = [[0,0,0,0,0], [2,1,2,2,2], [2,1,1,2,2], [1,1,1,1,1]]
         agarres = []
         for action in actions:
             end = 0
@@ -132,5 +132,5 @@ if __name__ == "__main__":
     #hidden_layers = [64, 16, 8]
     predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env03/models_params_weights/td3", hidden_layers=[32,32])
     #predictor.update_observer_predictions()
-    #predictor.save_df_test()
+    predictor.save_df_test()
     print(predictor.df_test.head())

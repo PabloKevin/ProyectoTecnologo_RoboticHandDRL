@@ -1,4 +1,5 @@
-from observer_predictions import Predictor
+from observer_predictions import Predictor as ObserverPredictor
+from actor_predictions import Predictor as ActorPredictor
 import numpy as np
 from sklearn.metrics import (confusion_matrix, ConfusionMatrixDisplay,
                              roc_curve, auc, precision_recall_curve,
@@ -77,6 +78,7 @@ class Model_Metrics():
         disp.plot(cmap=plt.cm.Reds, ax=ax, colorbar=True)  # avoids creating new fig
 
         ax.set_title(f"Confusion Matrix")
+
         ax.set_xticklabels(self.class_names, rotation=45)
 
         if show:
@@ -154,8 +156,7 @@ class Model_Metrics():
         if show:
             plt.show()
 
-
-    def plot_predicted_vs_true(self, ax=None):
+    def dot_colors(self):
         colors = []
         for i in range(len(self.class_names)):
             colors.append(np.random.randint(0, 256, 3)/255)
@@ -166,6 +167,11 @@ class Model_Metrics():
                 if label < th:
                     dot_color.append(colors[i])
                     break
+        return colors, dot_color
+
+    def plot_predicted_vs_true(self, ax=None):
+        colors, dot_color = self.dot_colors()
+        
         show = False
         if ax is None:
             fig, ax = plt.subplots()
@@ -214,16 +220,19 @@ class Model_Metrics():
         self.calculate_bool_labels()
         self.calculate_metrics(show=False)
 
-    def show_model_performance(self, update=False):
+    def show_model_performance(self, update=False, confusion_matrix=True, ROC_curve=True, PrecisionRecall_curve=True, predivted_vs_true=True):
         if update:
             self.update()
         fig, axs = plt.subplots(2, 2, figsize=(15, 13))
         #fig.subplots_adjust(top=0.8, hspace=1.5, wspace=0.3)
-
-        self.plot_confusion_matrix(ax=axs[0, 0])
-        self.plot_ROC_curve(ax=axs[0, 1])
-        self.plot_PresicionRecall_curve(ax=axs[1, 1])
-        self.plot_predicted_vs_true(ax=axs[1, 0])
+        if confusion_matrix:
+            self.plot_confusion_matrix(ax=axs[0, 0])
+        if ROC_curve:
+            self.plot_ROC_curve(ax=axs[0, 1])
+        if PrecisionRecall_curve:
+            self.plot_PresicionRecall_curve(ax=axs[1, 1])
+        if predivted_vs_true:
+            self.plot_predicted_vs_true(ax=axs[1, 0])
 
         # Add metrics text outside grid
         metrics_text = (
@@ -262,25 +271,95 @@ class Observer_Metrics(Model_Metrics):
         self.model_name = model_name
         self.conv_channels = conv_channels
         self.hidden_layers = hidden_layers
-        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+        self.predictor = ObserverPredictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
 
         super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
-
-class Actor_Predictions():
-    pass
 
 class Actor_Metrics(Model_Metrics):
-    def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds, class_names):
+    def __init__(self, model_weight_dir, model_name, hidden_layers, class_names):
         self.model_weight_dir = model_weight_dir
         self.model_name = model_name
-        self.conv_channels = conv_channels
         self.hidden_layers = hidden_layers
-        self.predictor = Predictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
+        self.predictor = ActorPredictor(hidden_layers=hidden_layers, model_weights_dir=model_weight_dir)
 
-        super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
+        super().__init__(df_test=self.predictor.df_test, class_names=class_names)
+
+    def pred_labels2classes(self):
+        self.true_labels = self.get_class_from_reg(self.df_test["true_agarres"])
+        self.pred_labels = self.get_class_from_reg(self.df_test["predicted_agarres"])
+        return self.true_labels, self.pred_labels
+    
+    def get_class_from_reg(self, agarres):
+        agarres_lab = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
+        class_names = []
+        for a in agarres:
+            for i, agarre in enumerate(agarres_lab):
+                if a == agarre:
+                    class_names.append(i)
+                    break
+        return class_names
+    
+    def calculate_predScores(self):
+        # Normalize your continuous prediction to 0–1 range for ROC
+        pred_scores = []
+        for i in range(len(self.df_test["predicted_label"])):
+            value = 0
+            for j in range(5):
+                value += np.abs(self.df_test["predicted_label"][i][j] - self.df_test["true_label"][i][j])
+            pred_scores.append(value)
+        pred_scores = np.array(pred_scores)/len(self.df_test["predicted_label"])
+        pred_scores = 1 - (pred_scores / pred_scores.max())  # Closer to target class gets higher score
+        self.pred_scores = pred_scores
+        return self.pred_scores
+    
+    def dot_colors(self):
+        colors = []
+        for i in range(len(self.class_names)):
+            colors.append(np.random.randint(0, 256, 3)/255)
+        
+        dot_color = []
+        for label in self.true_labels:
+            for i,th in enumerate(range(len(self.class_names))):
+                if label == th:
+                    dot_color.append(colors[i])
+                    break
+        print(self.class_names)
+        print(dot_color)
+        return colors, dot_color
+    
+    def plot_confusion_matrix(self, ax=None):
+        show = False
+        if ax is None:
+            fig, ax = plt.subplots(figsize=(9, 9)) 
+            show = True
+        
+        all_labels = list(range(len(self.class_names)))  # [0, 1, 2, 3, 4] for 5 classes
+        cm = confusion_matrix(self.true_labels, self.pred_labels, labels=all_labels)
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=self.class_names)
+        disp.plot(cmap=plt.cm.Reds, ax=ax, colorbar=True)  # avoids creating new fig
+
+        ax.set_title(f"Confusion Matrix")
+
+        ax.set_xticklabels(self.class_names, rotation=45)
+
+        if show:
+            ax.set_title(f"Confusion Matrix\nmodel: {self.model_name}")
+            info_text = f"thresholds: {self.thresholds}"
+            ax.text(
+                0.5, -0.15, 
+                info_text,
+                transform=ax.transAxes,
+                fontsize=10,
+                ha='center',
+                bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
+            )
+            plt.show()
+
         
 # Example usage
 if __name__ == "__main__":
+    """# OBSERVER PERFORMANCE
+
     #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
     #model_name = "observer_best_test"
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
@@ -304,11 +383,18 @@ if __name__ == "__main__":
 
     observer_performance.class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
     observer_performance.thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")]
-    observer_performance.show_model_performance(update=True)
+    observer_performance.show_model_performance(update=True)"""
 
-    
 
-    
+    # ACTOR PERFORMANCE
+
+    model_weight_dir = "Desarrollo/simulation/Env03/models_params_weights/td3"
+    model_name = "Actor_Best_Model"
+    hidden_layers = [32,32]
+    class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
+
+    actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
+    actor_performance.show_model_performance(predivted_vs_true=False)
 
     
 
