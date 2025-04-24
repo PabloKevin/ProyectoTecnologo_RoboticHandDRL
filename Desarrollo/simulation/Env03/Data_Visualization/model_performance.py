@@ -10,16 +10,19 @@ import matplotlib.pyplot as plt
 
 
 class Model_Metrics():
-    def __init__(self, df_test, thresholds=[0.5, 1.6+0.5, 3.2+0.5, float("inf")], class_names=["agarre0", "agarre1", "agarre2", "agarre3"]):
+    def __init__(self, df_test, thresholds_list=[0.5, 1.6+0.5, 3.2+0.5, float("inf")], class_names_list=["agarre0", "agarre1", "agarre2", "agarre3"]):
         self.df_test = df_test
         
-        self.thresholds = thresholds 
-        self.class_names = class_names
+        self.thresholds_list = thresholds_list 
+        self.class_names_list = class_names_list
+
+        self.thresholds = self.thresholds_list[0]
+        self.class_names = self.class_names_list[0]
         
         self.true_labels, self.pred_labels = self.pred_labels2classes()
-        self.binary_true_labels, self.binary_pred_labels = self.calculate_binary_labels()
-        self.pred_scores = self.calculate_predScores()
-        self.bool_true_labels = self.calculate_bool_labels()
+        #self.binary_true_labels, self.binary_pred_labels = self.calculate_binary_labels()
+        #self.pred_scores = self.calculate_predScores()
+        #self.bool_true_labels = self.calculate_bool_labels()
 
         self.f1, self.precision_val, self.recall_val, self.accuracy = self.calculate_metrics(show=False)
 
@@ -27,30 +30,6 @@ class Model_Metrics():
         self.true_labels = self.get_class_from_reg(self.df_test["true_label"], self.thresholds)
         self.pred_labels = self.get_class_from_reg(self.df_test["predicted_label"], self.thresholds)
         return self.true_labels, self.pred_labels
-
-    def calculate_binary_labels(self, first_update=False):
-        if first_update:
-            self.pred_labels2classes()
-        binary_true_labels = []
-        binary_pred_labels = []
-        for i in range(len(np.unique(self.true_labels))): #-1 por el default
-            true_lab = []
-            pred_lab = []
-            for j,label in enumerate(self.true_labels):
-                if label == i:
-                    true_lab.append(1)
-                else:
-                    true_lab.append(0)
-                if self.pred_labels[j] == i:
-                    pred_lab.append(1)
-                else:
-                    pred_lab.append(0)
-            binary_true_labels.append(true_lab)
-            binary_pred_labels.append(pred_lab)
-
-        self.binary_true_labels = binary_true_labels
-        self.binary_pred_labels = binary_pred_labels
-        return binary_true_labels, binary_pred_labels
 
     def get_class_from_reg(self, reg, thresholds=None):
         """
@@ -92,68 +71,6 @@ class Model_Metrics():
                 ha='center',
                 bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
             )
-            plt.show()
-
-
-    def calculate_predScores(self):
-        # Normalize your continuous prediction to 0–1 range for ROC
-        pred_scores = np.abs(self.df_test["predicted_label"] - self.df_test["true_label"])
-        pred_scores = 1 - (pred_scores / pred_scores.max())  # Closer to target class gets higher score
-        self.pred_scores = pred_scores
-        return self.pred_scores
-    
-    def calculate_bool_labels(self):
-        self.bool_true_labels = np.array(self.true_labels) == np.array(self.pred_labels)
-        return self.bool_true_labels
-        
-
-    def plot_ROC_curve(self, ax=None, first_update=False):
-        if first_update:
-            self.calculate_predScores()
-            self.calculate_bool_labels()
-
-        fpr, tpr, _ = roc_curve(self.bool_true_labels, self.pred_scores)
-        roc_auc = auc(fpr, tpr)
-
-        show = False
-        if ax is None:
-            fig, ax = plt.subplots()
-            show = True
-
-        ax.plot(fpr, tpr, lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
-        ax.plot([0, 1], [0, 1], linestyle='--', color='gray')
-        ax.set_xlabel('False Positive Rate')
-        ax.set_ylabel('True Positive Rate (Recall)')
-        ax.set_title(f'ROC Curve')
-        ax.legend(loc='lower right')
-        ax.grid(True)
-        
-        if show:
-            ax.set_title(f'ROC Curve\nmodel: {self.model_name}')
-            plt.show()
-
-
-    def plot_PresicionRecall_curve(self, ax=None, first_update=False):
-        if first_update:
-            self.calculate_predScores()
-            self.calculate_bool_labels()
-
-        precision, recall, _ = precision_recall_curve(self.bool_true_labels, self.pred_scores)
-        average_precision = average_precision_score(self.bool_true_labels, self.pred_scores)
-
-        show = False
-        if ax is None:
-            fig, ax = plt.subplots()
-            show = True
-
-        ax.plot(recall, precision, color="orange", lw=2, label=f'PR curve (AP = {average_precision:.2f})')
-        ax.set_xlabel('Recall')
-        ax.set_ylabel('Precision')
-        ax.set_title('Precision-Recall Curve')
-        ax.legend(loc='lower left')
-        ax.grid(True)
-
-        if show:
             plt.show()
 
     def dot_colors(self):
@@ -215,65 +132,70 @@ class Model_Metrics():
     
     def update(self):
         self.pred_labels2classes()
-        self.calculate_binary_labels()
-        self.calculate_predScores()
-        self.calculate_bool_labels()
+        #self.calculate_binary_labels()
+        #self.calculate_predScores()
+        #self.calculate_bool_labels()
         self.calculate_metrics(show=False)
 
-    def show_model_performance(self, update=False, confusion_matrix=True, ROC_curve=True, PrecisionRecall_curve=True, predivted_vs_true=True):
-        if update:
-            self.update()
-        fig, axs = plt.subplots(2, 2, figsize=(15, 13))
-        #fig.subplots_adjust(top=0.8, hspace=1.5, wspace=0.3)
-        if confusion_matrix:
-            self.plot_confusion_matrix(ax=axs[0, 0])
-        if ROC_curve:
-            self.plot_ROC_curve(ax=axs[0, 1])
-        if PrecisionRecall_curve:
-            self.plot_PresicionRecall_curve(ax=axs[1, 1])
-        if predivted_vs_true:
-            self.plot_predicted_vs_true(ax=axs[1, 0])
-
-        # Add metrics text outside grid
-        metrics_text = (
-            "METRICS:\n"
-            f"F1-Score: {self.f1:.2f}\n"
-            f"Precision: {self.precision_val:.2f}\n"
-            f"Recall: {self.recall_val:.2f}\n"
-            f"Accuracy: {self.accuracy:.2f}"
-        )
-        
-        # Add figure-wide title
-        fig.text(0.1, 0.98, f'Model "{self.model_name}" Performance', 
-                 ha='left', va='top', fontsize=14, fontweight='bold')
-
-        plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
-
-        # Draw separators
-        if len(self.class_names)==4:
-            fig.add_artist(plt.Line2D([0, 1], [0.46, 0.46], color='grey', linewidth=1, linestyle='--'))  # horizontal
-            fig.add_artist(plt.Line2D([0.508, 0.508], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
-            w_metrics, h_metrics = (0.09, 0.52) #metrics
-        elif len(self.class_names)==10:
-            fig.add_artist(plt.Line2D([0, 1], [0.447, 0.447], color='grey', linewidth=1, linestyle='--'))  # horizontal
-            fig.add_artist(plt.Line2D([0.525, 0.525], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
-            w_metrics, h_metrics = (0.11, 0.51) #metrics
-        else:
-            w_metrics, h_metrics = (0.09, 0.52) #metrics
-
-        fig.text(w_metrics, h_metrics, metrics_text, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
-
-        plt.show()
-
 class Observer_Metrics(Model_Metrics):
-    def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds, class_names):
+    def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds_list, class_names_list):
         self.model_weight_dir = model_weight_dir
         self.model_name = model_name
         self.conv_channels = conv_channels
         self.hidden_layers = hidden_layers
         self.predictor = ObserverPredictor(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weights_file=model_weight_dir+model_name)
 
-        super().__init__(df_test=self.predictor.df_test, thresholds=thresholds, class_names=class_names)
+        super().__init__(df_test=self.predictor.df_test, thresholds_list=thresholds_list, class_names_list=class_names_list)
+
+    def show_model_performance(self, update=False):
+        if update:
+            self.update()
+        fig, axs = plt.subplots(2, 2, figsize=(15, 13))
+        
+        self.plot_confusion_matrix(ax=axs[0, 0])
+        self.plot_predicted_vs_true(ax=axs[1, 0])
+        
+        metrics_text_0 = (
+            "METRICS:\n"
+            f"F1-Score: {self.f1:.2f}\n"
+            f"Precision: {self.precision_val:.2f}\n"
+            f"Recall: {self.recall_val:.2f}\n"
+            f"Accuracy: {self.accuracy:.2f}"
+        )
+        fig.text(0.10, 0.56, metrics_text_0, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+
+        #thresholds text
+        fig.text(0.15, 0.475, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+
+        self.thresholds = self.thresholds_list[1]
+        self.class_names = self.class_names_list[1]
+        self.update()
+        self.plot_confusion_matrix(ax=axs[0, 1])
+        self.plot_predicted_vs_true(ax=axs[1, 1])
+
+        metrics_text_1 = (
+            "METRICS:\n"
+            f"F1-Score: {self.f1:.2f}\n"
+            f"Precision: {self.precision_val:.2f}\n"
+            f"Recall: {self.recall_val:.2f}\n"
+            f"Accuracy: {self.accuracy:.2f}"
+        )
+        fig.text(0.58, 0.56, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+
+        #thresholds text
+        fig.text(0.58, 0.475, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        
+        # Add figure-wide title
+        fig.text(0.1, 0.98, f'Model "{self.model_name}" Performance', 
+                 ha='left', va='top', fontsize=14, fontweight='bold')
+
+        plt.tight_layout(rect=[0, 0.01, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+
+        # Draw separators
+        fig.add_artist(plt.Line2D([0, 1], [0.445, 0.445], color='grey', linewidth=1, linestyle='--'))  # horizontal
+        fig.add_artist(plt.Line2D([0.525, 0.525], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
+
+        plt.show()
 
 class Actor_Metrics(Model_Metrics):
     def __init__(self, model_weight_dir, model_name, hidden_layers, class_names):
@@ -282,7 +204,7 @@ class Actor_Metrics(Model_Metrics):
         self.hidden_layers = hidden_layers
         self.predictor = ActorPredictor(hidden_layers=hidden_layers, model_weights_dir=model_weight_dir)
 
-        super().__init__(df_test=self.predictor.df_test, class_names=class_names)
+        super().__init__(df_test=self.predictor.df_test, class_names_list=[class_names])
 
     def pred_labels2classes(self):
         self.true_labels = self.get_class_from_reg(self.df_test["true_agarres"])
@@ -299,23 +221,10 @@ class Actor_Metrics(Model_Metrics):
                     break
         return class_names
     
-    def calculate_predScores(self):
-        # Normalize your continuous prediction to 0–1 range for ROC
-        pred_scores = []
-        for i in range(len(self.df_test["predicted_label"])):
-            value = 0
-            for j in range(5):
-                value += np.abs(self.df_test["predicted_label"][i][j] - self.df_test["true_label"][i][j])
-            pred_scores.append(value)
-        pred_scores = np.array(pred_scores)/5
-        pred_scores = 1 - (pred_scores / pred_scores.max())  # Closer to target class gets higher score
-        self.pred_scores = pred_scores
-        return self.pred_scores
-    
     def plot_confusion_matrix(self, ax=None):
         show = False
         if ax is None:
-            fig, ax = plt.subplots(figsize=(9, 9)) 
+            fig, ax = plt.subplots(figsize=(12, 8)) 
             show = True
         
         all_labels = list(range(len(self.class_names)))  # [0, 1, 2, 3, 4] for 5 classes
@@ -329,25 +238,15 @@ class Actor_Metrics(Model_Metrics):
 
         if show:
             ax.set_title(f"Confusion Matrix\nmodel: {self.model_name}")
-            info_text = f"thresholds: {self.thresholds}"
-            ax.text(
-                0.5, -0.15, 
-                info_text,
-                transform=ax.transAxes,
-                fontsize=10,
-                ha='center',
-                bbox=dict(facecolor='white', alpha=0.8, boxstyle='round')
-            )
+            plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
             plt.show()
 
-    def calculate_bool_labels(self):
-        self.bool_true_labels = np.array(self.true_labels) == 2
-        return self.bool_true_labels
-
+    def show_model_performance(self):
+        self.plot_confusion_matrix()
         
 # Example usage
 if __name__ == "__main__":
-    """# OBSERVER PERFORMANCE
+    # OBSERVER PERFORMANCE
 
     #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
     #model_name = "observer_best_test"
@@ -359,20 +258,21 @@ if __name__ == "__main__":
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
-    thresholds = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
+    thresholds_1 = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
     #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
     #thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
 
-    class_names = ["agarre0", "agarre1", "agarre2", "agarre3"]
+    class_names_0 = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+    class_names_1 = ["agarre0", "agarre1", "agarre2", "agarre3"]
+    thresholds_0 = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")]
+    thresholds_list = [thresholds_0,thresholds_1]
+    class_names_list = [class_names_0, class_names_1]
     #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
 
-    observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, thresholds=thresholds, class_names=class_names)
+    observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
+                                            model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
     observer_performance.show_model_performance()
-
-    observer_performance.class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
-    observer_performance.thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")]
-    observer_performance.show_model_performance(update=True)"""
 
 
     # ACTOR PERFORMANCE
@@ -383,7 +283,7 @@ if __name__ == "__main__":
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
-    actor_performance.show_model_performance(predivted_vs_true=False)
+    actor_performance.show_model_performance()
     
 
    
