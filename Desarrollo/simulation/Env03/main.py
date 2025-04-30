@@ -13,7 +13,7 @@ if __name__ == '__main__':
     #images_of_interest = "all"
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
 
-    load_models = False
+    load_models = True
     actor_learning_rate = 0.003 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
     batch_size = 128 #128
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         best_score = 0
 
         directory_path = "Desarrollo/simulation/Env03/logs_txt/"
-        version = "e4"
+        version = "e5"
         file_name = f"experiment_log_{experiment}_{version}.txt"
 
         while os.path.exists(directory_path + file_name):
@@ -57,14 +57,12 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
-            tool = agent.observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
-            observation = np.array([tool.item(), observation[1]]) # [tool, f_idx]
+            tool, f_idx = observation
             done = False
             score = 0
             while not done:
                 action = agent.choose_action(observation) 
                 next_observation, reward, done, info = env.step(action)
-                next_observation = np.array([tool.item(), next_observation[1]]) # [tool, f_idx]
                 score += reward
                 agent.remember(observation, action, reward, next_observation, done)
                 agent.learn()

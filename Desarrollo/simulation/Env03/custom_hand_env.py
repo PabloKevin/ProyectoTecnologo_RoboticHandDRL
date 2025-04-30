@@ -5,6 +5,7 @@ import os
 import cv2
 from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
+from observerRGB import ObserverNetwork, MyImageDataset
 
 class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all"):
@@ -13,6 +14,14 @@ class ToolManipulationEnv(gym.Env):
         self.image_shape = image_shape
         self.n_fingers = n_fingers
         self.images_of_interest = images_of_interest
+        self.train_dataset_dir = "Desarrollo/simulation/Env03/DataSets/TrainSet_masks"
+
+        self.train_dataset = MyImageDataset(self.train_dataset_dir, name="full_train_masks_dataset")
+        self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer_backup', name="observer_best_test_medium02",
+                                        conv_channels = [16, 32, 64], hidden_layers = [64, 16, 8])
+        self.observer.checkpoint_file = os.path.join(self.observer.checkpoint_dir, self.observer.name)
+        self.observer.load_model()
+        self.observer.eval()
 
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
                                          [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
@@ -30,6 +39,8 @@ class ToolManipulationEnv(gym.Env):
         
         self.state = {
             'image': np.zeros(self.image_shape, dtype=np.uint8),
+            'label': 0.0,
+            'tool': 0.0,
             'f_idx': 0.0,
             'finger_state': 0.0,
             'finger_states': np.zeros(5, dtype=np.uint8),
@@ -43,14 +54,15 @@ class ToolManipulationEnv(gym.Env):
 
     def reset(self):
         # Reset the environment to an initial state
-        self.state['image'] = self._get_initial_image()
+        self.state['image'], self.state['label'] = self._get_initial_image()
+        self.state['tool'] = self._get_tool(self.state['image'])
         self.state['f_idx'] = 0.0
         self.state['finger_state'] = 0.0
         self.state['finger_states'] = np.zeros(5, dtype=np.float64)
-        self.state['best_combination'] = self._calculate_best_combination(self.state['image'])
+        self.state['best_combination'] = self._calculate_best_combination(self.state['label'])
         self.done = False
         self.reward = 0
-        observation = (self.state['image'], self.state['f_idx'])
+        observation = np.array([self.state['tool'].item(), self.state['f_idx']])
 
         return observation
     
@@ -68,7 +80,7 @@ class ToolManipulationEnv(gym.Env):
         else:
             self.done = False
 
-        next_observation = (self.state['image'], self.state['f_idx'])
+        next_observation = (self.state['tool'].item(), self.state['f_idx'])
         info = {} # no le he encontrado utilidad, pero podría ser util.
         
         return next_observation, self.reward, self.done, info
@@ -93,47 +105,22 @@ class ToolManipulationEnv(gym.Env):
             plt.show()
     
     def _get_initial_image(self):
-        # Directory containing images
-        #image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
-        image_dir = "./DataSets/B&W_Tools/"
-        
-        if self.images_of_interest == "all":
-            # List all image files in the directory
-            image_files = [f for f in os.listdir(image_dir)]
-        else:
-            image_files = [f for f in os.listdir(image_dir) if f in self.images_of_interest]
-
-        # Select an random image
-        num_images = len(image_files)
-        random_index = np.random.randint(0, num_images)
-        selected_image_path = os.path.join(image_dir, image_files[random_index])
-        
-        # Load the image
-        img = cv2.imread(selected_image_path, cv2.IMREAD_GRAYSCALE)
-        # Transform the image so there is a "different" image for each episode
-        editor = DataSet_editor()
-        img = editor.transform_image(img)
-
-        # Convert pixels values from 255 to 1
-        img[img < 255/2] = 0  
-        img[img >=  255/2] = 1
-        #file = "Desarrollo/simulation/Env01/img.txt"
-        #np.savetxt(file, img, fmt="%d", delimiter=" ") 
-        
-        # Add a channel dimension to the image
-        img = np.expand_dims(img, axis=0)
-        return img
+        idx = np.random.randint(0, len(self.train_dataset.image_files))
+        return self.train_dataset.__getitem__(idx)
     
-    def _calculate_best_combination(self, img):
-        n_white_pixels = len(np.argwhere(img == 1))
-        if n_white_pixels/1000 > 0.0 and n_white_pixels/1000 < 1.1:
-            best_combination = self.combinations_of_interest[0]
-        elif n_white_pixels/1000 >= 1.1 and n_white_pixels/1000 < 2.6: #2.45
-            best_combination = self.combinations_of_interest[1]
-        elif n_white_pixels/1000 >= 2.45 and n_white_pixels/1000 < 12.0:
-            best_combination = self.combinations_of_interest[2]
-        elif n_white_pixels == 0:
+    def _get_tool(self, img):
+        img = img.to(self.observer.device)
+        return self.observer(img).cpu().detach().numpy() # Takes the image and outputs a tool value
+    
+    def _calculate_best_combination(self, label):
+        if label == 0.0:
             best_combination = self.combinations_of_interest[3]
+        elif label < 1.7:
+            best_combination = self.combinations_of_interest[0]
+        elif label < 3.3:
+            best_combination = self.combinations_of_interest[1]
+        else:
+            best_combination = self.combinations_of_interest[2]
         return best_combination
 
     def _calculate_reward(self, state, action):

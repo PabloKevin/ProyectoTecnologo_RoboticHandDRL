@@ -4,10 +4,10 @@ import os
 import math
 
 # Directory containing the log files
-directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env02/logs_txt/"
+directory_path = "/home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env03/logs_txt/"
 
 # Get the list of files in the directory
-log_files = [file for file in os.listdir(directory_path) if file.endswith("e0.txt")]
+log_files = [file for file in os.listdir(directory_path) if file.endswith("e5.txt")]
 
 # Function to parse the log file
 def parse_log(file_path):
@@ -54,7 +54,7 @@ for fig_idx in range(math.ceil(len(log_files) / files_per_figure)):
     
     # Create the figure and axes
     fig, axes = plt.subplots(rows, cols, figsize=(17, 10), constrained_layout=False)
-    axes = axes.flatten() if rows > 1 else [axes]
+    axes = axes.flatten() if rows > 1 else axes
     
     # Loop through the files for the current figure
     for idx, file_name in enumerate(current_files):

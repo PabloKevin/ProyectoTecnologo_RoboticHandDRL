@@ -272,13 +272,13 @@ if __name__ == "__main__":
 
     observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                             model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
-    observer_performance.show_model_performance()
+    #observer_performance.show_model_performance()
 
 
     # ACTOR PERFORMANCE
 
-    model_weight_dir = "Desarrollo/simulation/Env03/models_params_weights/td3"
-    model_name = "Actor_Best_Model"
+    model_weight_dir = "Desarrollo/simulation/Env03/tmp/td3"
+    model_name = "Actor_Last_Trained_Model"
     hidden_layers = [32,32]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
