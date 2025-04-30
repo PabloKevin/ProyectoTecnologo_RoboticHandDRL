@@ -106,7 +106,17 @@ class ToolManipulationEnv(gym.Env):
     
     def _get_initial_image(self):
         idx = np.random.randint(0, len(self.train_dataset.image_files))
-        return self.train_dataset.__getitem__(idx)
+        
+        if self.images_of_interest == "all":
+            return self.train_dataset.__getitem__(idx)
+        else:
+            img, label = self.train_dataset.__getitem__(idx)
+            key = next((k for k,v in self.train_dataset.label_mapping.items() if v == label), None)
+            while key not in self.images_of_interest:
+                idx = np.random.randint(0, len(self.train_dataset.image_files))
+                img, label = self.train_dataset.__getitem__(idx)
+                key = next((k for k,v in self.train_dataset.label_mapping.items() if v == label), None)
+            return img, label
     
     def _get_tool(self, img):
         img = img.to(self.observer.device)

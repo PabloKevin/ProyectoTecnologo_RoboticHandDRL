@@ -137,7 +137,7 @@ class MyImageDataset(Dataset):
         self.image_files = pl.Series(name, self.image_files)
         self.label_mapping = {
                                 "empty": 0.0,
-                                 "tuerca": 1.0,
+                                "tuerca": 1.0,
                                 "tornillo": 1.3,
                                 "clavo": 1.6,
                                 "lapicera": 2.6,

@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 from collections import Counter
 import math
 
-image_dir = "Desarrollo/simulation/Env03/DataSets/B&W_Tools/"
-tools_of_interest = [f for f in os.listdir(image_dir)]
-#tools_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg"]
+
+tools_of_interest = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+#tools_of_interest = ["empty", "tuerca"]
 
 # Action combinations to check
 combinations = {
@@ -25,7 +25,7 @@ weird_combinations = {name: [] for name in tools_of_interest}
 for j, tool_name in enumerate(tools_of_interest):
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=[tool_name])
 
-    hidden_layers=[32,32] 
+    hidden_layers=[64,32] 
 
     agent = Agent(env=env, hidden_layers=hidden_layers, noise=0.0) 
 
@@ -35,15 +35,13 @@ for j, tool_name in enumerate(tools_of_interest):
 
     for i in range(episodes):
         observation = env.reset()
-        tool = agent.observer(observation[0]).cpu().detach().numpy() # Takes the image and outputs a tool value
-        observation = np.array([tool.item(), observation[1]]) # [tool, f_idx]
+        tool, f_idx = observation
         done = False
         score = 0
         right_comb_ctr = 0
         while not done:
             action = agent.choose_action(observation, validation=True) 
             next_observation, reward, done, info = env.step(action)
-            next_observation = np.array([tool.item(), next_observation[1]]) # [tool, f_idx]
             score += reward
             observation = next_observation
 
