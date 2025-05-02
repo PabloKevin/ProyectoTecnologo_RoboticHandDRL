@@ -249,24 +249,24 @@ class Actor_Metrics(Model_Metrics):
 if __name__ == "__main__":
     # OBSERVER PERFORMANCE
 
-    #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
-    #model_name = "observer_best_test"
-    model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
-    model_name = "observer_best_test_medium02"
+    model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer/"
+    model_name = "observer_best_test"
+    #model_weight_dir = "Desarrollo/simulation/Env03/tmp/observer_backup/"
+    #model_name = "observer_best_test_medium02"
 
     conv_channels = [16, 32, 64]
-    hidden_layers = [64, 16, 8]
+    hidden_layers = [64, 32, 8]
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
-    thresholds_1 = [0.5, 1.6+0.5, 3.2+0.5, float("inf")] # ideal 
+    thresholds_1 = [1.5, 5.1, 8.7, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
     #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
     #thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
 
     class_names_0 = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
     class_names_1 = ["agarre0", "agarre1", "agarre2", "agarre3"]
-    thresholds_0 = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")]
+    thresholds_0 = [1.5, 3.15, 3.45, 5.1, 6.75, 7.05, 8.7, 10.35, 10.65, float("inf")]
     thresholds_list = [thresholds_0,thresholds_1]
     class_names_list = [class_names_0, class_names_1]
     #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
@@ -280,7 +280,7 @@ if __name__ == "__main__":
 
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/td3"
     model_name = "Actor_Last_Trained_Model"
-    hidden_layers = [256,128]
+    hidden_layers = [128,64]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)

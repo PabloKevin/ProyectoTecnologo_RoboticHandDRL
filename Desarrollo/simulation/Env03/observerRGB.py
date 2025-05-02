@@ -15,15 +15,20 @@ class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
-                 hidden_layers=[32, 16, 8], 
+                 hidden_layers=[64, 32, 8], 
                  learning_rate= 0.0008,
-                 dropout2d=0.1, 
-                 dropout=0.1, 
+                 dropout2d=0.3, 
+                 dropout=0.3, 
                  input_dims = (256, 256, 1), output_dims = 1, 
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer'):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
         self.output_dims = output_dims
+        self.conv_channels = conv_channels
+        self.hidden_layers = hidden_layers
+        self.learning_rate = learning_rate
+        self.dropout2d = dropout2d
+        self.dropout = dropout
         self.checkpoint_dir = checkpoint_dir
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_supervised')
@@ -137,15 +142,15 @@ class MyImageDataset(Dataset):
         self.image_files = pl.Series(name, self.image_files)
         self.label_mapping = {
                                 "empty": 0.0,
-                                "tuerca": 1.0,
-                                "tornillo": 1.3,
-                                "clavo": 1.6,
-                                "lapicera": 2.6,
-                                "tenedor": 2.9,
-                                "cuchara": 3.2,
-                                "destornillador": 4.2,
-                                "martillo": 4.5,
-                                "pinza": 4.8,
+                                "tuerca": 3.6,
+                                "tornillo": 3.3,
+                                "clavo": 3.0,
+                                "lapicera": 7.2,
+                                "tenedor": 6.9,
+                                "cuchara": 6.6,
+                                "destornillador": 10.8,
+                                "martillo": 10.2,
+                                "pinza": 10.5,
                                 "default": -1.0
                             }
 
