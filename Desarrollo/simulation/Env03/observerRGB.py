@@ -142,15 +142,15 @@ class MyImageDataset(Dataset):
         self.image_files = pl.Series(name, self.image_files)
         self.label_mapping = {
                                 "empty": 0.0,
-                                "tuerca": 3.6,
-                                "tornillo": 3.3,
+                                "tuerca": 1.0,
+                                "tornillo": 2.0,
                                 "clavo": 3.0,
-                                "lapicera": 7.2,
-                                "tenedor": 6.9,
-                                "cuchara": 6.6,
-                                "destornillador": 10.8,
-                                "martillo": 10.2,
-                                "pinza": 10.5,
+                                "lapicera": 4.0,
+                                "tenedor": 5.0,
+                                "cuchara": 6.0,
+                                "destornillador": 7.0,
+                                "martillo": 8.0,
+                                "pinza": 9.0,
                                 "default": -1.0
                             }
 

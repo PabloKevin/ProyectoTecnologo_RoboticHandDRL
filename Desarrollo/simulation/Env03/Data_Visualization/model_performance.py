@@ -259,14 +259,14 @@ if __name__ == "__main__":
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
-    thresholds_1 = [1.5, 5.1, 8.7, float("inf")] # ideal 
+    thresholds_1 = [0.5, 3.5, 6.5, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
     #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
     #thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
 
     class_names_0 = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
     class_names_1 = ["agarre0", "agarre1", "agarre2", "agarre3"]
-    thresholds_0 = [1.5, 3.15, 3.45, 5.1, 6.75, 7.05, 8.7, 10.35, 10.65, float("inf")]
+    thresholds_0 = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, float("inf")]
     thresholds_list = [thresholds_0,thresholds_1]
     class_names_list = [class_names_0, class_names_1]
     #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]

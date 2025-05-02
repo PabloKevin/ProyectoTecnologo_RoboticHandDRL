@@ -41,13 +41,14 @@ if __name__ == "__main__":
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
     observer = ObserverNetwork()
-    #observer.load_model()
+    observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test")
+    observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     #criterion = nn.MSELoss()
     criterion = nn.SmoothL1Loss()
-    n_epochs = 200
+    n_epochs = 100
 
     best_val_loss = float('inf')
     best_test_loss = float('inf')
