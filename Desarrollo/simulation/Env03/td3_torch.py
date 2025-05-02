@@ -3,6 +3,7 @@ import torch.nn.functional as F
 import numpy as np
 from buffer import ReplayBuffer
 from networks import ActorNetwork, CriticNetwork, ObserverNetwork
+from torch.optim.lr_scheduler import StepLR
 
 class Agent:
     def __init__(self, env, actor_learning_rate=0.003, critic_learning_rate=0.0008, tau=0.005, gamma=0.99, update_actor_interval=2, warmup=1000, 
@@ -40,6 +41,16 @@ class Agent:
 
         self.critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers, 
                                       name='critic_2', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
+        
+        self.actor_scheduler = StepLR(self.actor.optimizer,
+                                      step_size=4000,   # cada 1500 episodios
+                                      gamma=0.8)       # factor de decaimiento
+        self.critic1_scheduler = StepLR(self.critic_1.optimizer,
+                                       step_size=4000,
+                                       gamma=0.8)
+        self.critic2_scheduler = StepLR(self.critic_2.optimizer,
+                                       step_size=4000,
+                                       gamma=0.8)
 
         # Create the target networks
         self.target_actor = ActorNetwork(input_dims=self.input_dims, hidden_layers=hidden_layers, n_actions=self.n_actions, 
@@ -50,6 +61,16 @@ class Agent:
 
         self.target_critic_2 = CriticNetwork(input_dims = self.input_dims + self.n_actions, hidden_layers=hidden_layers,
                                              name='target_critic_2', learning_rate=critic_learning_rate, checkpoint_dir=self.checkpoint_dir)
+        
+        self.target_actor_scheduler = StepLR(self.target_actor.optimizer,
+                                      step_size=4000,   # cada 1500 episodios
+                                      gamma=0.8)       # factor de decaimiento
+        self.target_critic1_scheduler = StepLR(self.target_critic_1.optimizer,
+                                       step_size=4000,
+                                       gamma=0.8)
+        self.target_critic2_scheduler = StepLR(self.target_critic_2.optimizer,
+                                       step_size=4000,
+                                       gamma=0.8)
         
         """# Initialize weights for all networks
         def initialize_weights(m):

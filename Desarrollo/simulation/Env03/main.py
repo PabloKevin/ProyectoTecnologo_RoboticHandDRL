@@ -14,11 +14,11 @@ if __name__ == '__main__':
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
 
     load_models = False
-    actor_learning_rate = 0.003 #0.001    1.0
-    critic_learning_rate = 0.0008 #0.001   0.001
+    actor_learning_rate = 0.001 #0.001    1.0
+    critic_learning_rate = 0.0001 #0.001   0.001
     batch_size = 128 #128
 
-    hidden_layers=[64,32] #256
+    hidden_layers=[256,128] #256
     warmup = 1200 * 5
     episodes = 10000 #10000
     env.reward_weights["reward_alpha"] = 1
@@ -77,6 +77,13 @@ if __name__ == '__main__':
             if i % 10 == 0:
                 agent.save_models()
 
+            agent.actor_scheduler.step()
+            agent.critic1_scheduler.step()
+            agent.critic2_scheduler.step()
+            agent.target_actor_scheduler.step()
+            agent.target_critic1_scheduler.step()
+            agent.target_critic2_scheduler.step()
+        
         # Close the log file
         log_file.close()
 

@@ -23,9 +23,9 @@ combination_counts_per_tool = [{name: 0 for name in combinations.keys()} for _ i
 weird_combinations = {name: [] for name in tools_of_interest}
 
 for j, tool_name in enumerate(tools_of_interest):
-    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=[tool_name])
+    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=[tool_name], dataset_dir="Desarrollo/simulation/Env03/DataSets/TestSet_masks")
 
-    hidden_layers=[64,32] 
+    hidden_layers=[256,128] 
 
     agent = Agent(env=env, hidden_layers=hidden_layers, noise=0.0) 
 

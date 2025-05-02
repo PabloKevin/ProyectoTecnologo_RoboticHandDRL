@@ -243,6 +243,7 @@ class Actor_Metrics(Model_Metrics):
 
     def show_model_performance(self):
         self.plot_confusion_matrix()
+        self.calculate_metrics(show=True)
         
 # Example usage
 if __name__ == "__main__":
@@ -272,14 +273,14 @@ if __name__ == "__main__":
 
     observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                             model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
-    #observer_performance.show_model_performance()
+    observer_performance.show_model_performance()
 
 
     # ACTOR PERFORMANCE
 
     model_weight_dir = "Desarrollo/simulation/Env03/tmp/td3"
     model_name = "Actor_Last_Trained_Model"
-    hidden_layers = [64,32]
+    hidden_layers = [256,128]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
