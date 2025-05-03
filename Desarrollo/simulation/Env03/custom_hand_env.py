@@ -17,8 +17,8 @@ class ToolManipulationEnv(gym.Env):
         self.dataset_dir = dataset_dir
 
         self.train_dataset = MyImageDataset(self.dataset_dir, name="full_train_masks_dataset")
-        self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer_backup', name="observer_best_test_medium02",
-                                        conv_channels = [16, 32, 64], hidden_layers = [64, 16, 8])
+        self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env03/tmp/observer_backup', name="observer_best_test", #"observer_best_test_medium02"
+                                        conv_channels = [16, 32, 64], hidden_layers = [64, 32, 8])
         self.observer.checkpoint_file = os.path.join(self.observer.checkpoint_dir, self.observer.name)
         self.observer.load_model()
         self.observer.eval()
@@ -125,9 +125,9 @@ class ToolManipulationEnv(gym.Env):
     def _calculate_best_combination(self, label):
         if label == 0.0:
             best_combination = self.combinations_of_interest[3]
-        elif label < 1.7:
+        elif label < 3.5:
             best_combination = self.combinations_of_interest[0]
-        elif label < 3.3:
+        elif label < 6.5:
             best_combination = self.combinations_of_interest[1]
         else:
             best_combination = self.combinations_of_interest[2]
