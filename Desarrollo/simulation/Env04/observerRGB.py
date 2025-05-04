@@ -38,9 +38,12 @@ class ObserverNetwork(nn.Module):
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=1, padding=2)
         
         # Pooling layers
-        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
+        """self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
+        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
+        self.pool2 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
+        self.pool3 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
@@ -258,7 +261,7 @@ if __name__ == "__main__":
     # Example training loop
     #criterion = nn.MSELoss()
     criterion = nn.SmoothL1Loss()
-    n_epochs = 100
+    n_epochs = 50
 
     best_val_loss = float('inf')
     best_test_loss = float('inf')
