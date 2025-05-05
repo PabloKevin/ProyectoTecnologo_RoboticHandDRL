@@ -254,8 +254,8 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
     #model_name = "observer_best_test_medium02"
 
-    conv_channels = [4, 8]
-    hidden_layers = [32, 16, 8]
+    conv_channels = [4, 8, 16]
+    hidden_layers = [32, 16, 16]
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
