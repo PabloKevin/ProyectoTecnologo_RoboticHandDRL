@@ -26,7 +26,7 @@ class Agent:
         #self.observer.load_model()
         
         #self.input_dims = self.observer.output_dims + 1 # +1 = f_idx (finger index)
-        self.input_dims = 2 # observer_output (1) + f_idx (1)
+        self.input_dims = 11 # observer_output (1) + f_idx (1)
         
         self.memory = ReplayBuffer(max_size, self.input_dims, self.n_actions)
 

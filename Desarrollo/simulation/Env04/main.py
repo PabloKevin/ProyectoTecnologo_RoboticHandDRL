@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
         for i in range(episodes):
             observation = env.reset()
-            tool, f_idx = observation
+            tool = observation[:-1]
             done = False
             score = 0
             while not done:
