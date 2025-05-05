@@ -14,12 +14,12 @@ import time
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
     def __init__(self, 
-                 conv_channels=[16, 32, 64], 
-                 hidden_layers=[64, 32, 8], 
+                 conv_channels=[4, 8], 
+                 hidden_layers=[64, 32, 16], 
                  learning_rate= 0.0008,
-                 dropout2d=0.3, 
+                 dropout2d=0.2, 
                  dropout=0.3, 
-                 input_dims = (256, 256, 1), output_dims = 1, 
+                 input_dims = (256, 256, 1), output_dims = 10, 
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
@@ -35,22 +35,20 @@ class ObserverNetwork(nn.Module):
 
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=1, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=1, padding=2)
-        self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=1, padding=2)
         
         # Pooling layers
         """self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
-        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
-        self.pool2 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
-        self.pool3 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
+        self.pool1 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
+        self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
 
         # After three times pooling by factor of 2, 
         # the spatial dimensions become (H/8) x (W/8)
-        self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
+        self.fc1 = nn.Linear(conv_channels[1] * (input_dims[0] // 4) * (input_dims[1] // 4), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], output_dims)
@@ -77,8 +75,8 @@ class ObserverNetwork(nn.Module):
         x = self.pool2(x)
 
         # Convolution block 3
-        x = F.leaky_relu(self.conv3(x))
-        x = self.pool3(x)
+        #x = F.leaky_relu(self.conv3(x))
+        #x = self.pool3(x)
 
         # Apagar neuronas tras la 3ra capa conv
         x = self.conv_dropout(x)
@@ -86,8 +84,10 @@ class ObserverNetwork(nn.Module):
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
+            #x = x[:, [0, 4, 6, 9, 22, 25, 30, 31], :, :] # Just interesting features maps
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
+            #x = x[[0, 4, 6, 9, 22, 25, 30, 31], :, :] # Just interesting features maps
             x = x.reshape(-1)  # Flatten the single image
         x = F.leaky_relu(self.fc1(x))
 
@@ -103,9 +103,9 @@ class ObserverNetwork(nn.Module):
         x = self.dropout(x)
         #tool_reg = F.leaky_relu(self.fc3(x))
         #tool_reg = torch.tanh(self.fc3(x))*3.5+2.5
-        tool_reg = self.fc4(x)
+        logits = self.fc4(x)
             
-        return tool_reg # Tool regresion
+        return logits # Tool regresion
 
     def save_checkpoint(self, checkpoint_file=None):
         if checkpoint_file is None:
@@ -144,17 +144,17 @@ class MyImageDataset(Dataset):
                 self.image_files.append(f)
         self.image_files = pl.Series(name, self.image_files)
         self.label_mapping = {
-                                "empty": 0.0,
-                                "tuerca": 1.0,
-                                "tornillo": 2.0,
-                                "clavo": 3.0,
-                                "lapicera": 4.0,
-                                "tenedor": 5.0,
-                                "cuchara": 6.0,
-                                "destornillador": 7.0,
-                                "martillo": 8.0,
-                                "pinza": 9.0,
-                                "default": -1.0
+                                "empty": 0,
+                                "tuerca": 1,
+                                "tornillo": 2,
+                                "clavo": 3,
+                                "lapicera": 4,
+                                "tenedor": 5,
+                                "cuchara": 6,
+                                "destornillador": 7,
+                                "martillo": 8,
+                                "pinza": 9,
+                                "default": -1
                             }
 
     
@@ -191,7 +191,7 @@ class MyImageDataset(Dataset):
         
         # Convert everything into torch tensors
         img_tensor = torch.tensor(img, dtype=torch.float)  # (1, H, W)
-        label_tensor = torch.tensor(label, dtype=torch.float)
+        label_tensor = torch.tensor(label, dtype=torch.long)
 
         return img_tensor, label_tensor
 
@@ -249,7 +249,7 @@ if __name__ == "__main__":
     # Create DataLoaders for batching
     # example: batch_size=32
 
-    batch_size = 32
+    batch_size = 64 #32
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
     val_loader   = DataLoader(val_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
@@ -260,7 +260,9 @@ if __name__ == "__main__":
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop
     #criterion = nn.MSELoss()
-    criterion = nn.SmoothL1Loss()
+    #criterion = nn.SmoothL1Loss()
+    criterion = nn.CrossEntropyLoss()
+
     n_epochs = 50
 
     best_val_loss = float('inf')

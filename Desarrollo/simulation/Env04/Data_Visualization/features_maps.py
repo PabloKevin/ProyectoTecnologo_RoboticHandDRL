@@ -18,8 +18,8 @@ from observerRGB import MyImageDataset
 # Observer Network
 class ObserverNetwork(nn.Module):
     def __init__(self, 
-                 conv_channels=[16, 32, 64], 
-                 hidden_layers=[64, 32, 8], 
+                 conv_channels=[2,4], 
+                 hidden_layers=[32, 16, 8], 
                  learning_rate= 0.0008,
                  dropout2d=0.3, 
                  dropout=0.3, 
@@ -40,19 +40,17 @@ class ObserverNetwork(nn.Module):
 
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=1, padding=2)
         self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=1, padding=2)
-        self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=1, padding=2)
         
         # Pooling layers
-        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
+        self.pool2 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
 
         # After three times pooling by factor of 2, 
         # the spatial dimensions become (H/8) x (W/8)
-        self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
+        self.fc1 = nn.Linear(4 * (input_dims[0] // 4) * (input_dims[1] // 4), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], output_dims)
@@ -78,15 +76,9 @@ class ObserverNetwork(nn.Module):
         x = F.leaky_relu(x)
         x = self.pool2(x)
         features_maps_2 = x
-        x = self.conv3(x)
-        x = F.leaky_relu(x)
-        x = self.pool3(x)
-        features_maps_3 = x
-
         
         self.features_maps[0] = features_maps_1.cpu().detach().numpy()
         self.features_maps[1] = features_maps_2.cpu().detach().numpy()
-        self.features_maps[2] = features_maps_3.cpu().detach().numpy()
 
         # Apagar neuronas tras la 3ra capa conv
         x = self.conv_dropout(x)
@@ -94,8 +86,10 @@ class ObserverNetwork(nn.Module):
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
+            #x = x[:, [0, 4, 6, 9, 22, 25, 30, 31], :, :]
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
+            #x = x[[0, 4, 6, 9, 22, 25, 30, 31], :, :]
             x = x.reshape(-1)  # Flatten the single image
         x = F.leaky_relu(self.fc1(x))
 
@@ -163,7 +157,8 @@ for _ in range(1):
     img = get_random_image(train_dataset)
     observer(img)
 
-    plot_feature_maps(observer.features_maps[0], ncols=4)
-    print("shape:", observer.features_maps[2].shape)
-    plot_feature_maps(observer.features_maps[1], ncols=8)
-    plot_feature_maps(observer.features_maps[2], ncols=16)
+    plot_feature_maps(observer.features_maps[0], ncols=1)
+    print("shape:", observer.features_maps[1].shape)
+    plot_feature_maps(observer.features_maps[1], ncols=2)
+    #plot_feature_maps(observer.features_maps[1][[0, 4, 6, 9, 22, 25, 30, 31], :, :], ncols=4)
+    

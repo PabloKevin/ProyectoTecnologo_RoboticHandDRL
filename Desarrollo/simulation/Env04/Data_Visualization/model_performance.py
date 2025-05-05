@@ -254,11 +254,12 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
     #model_name = "observer_best_test_medium02"
 
-    conv_channels = [16, 32, 64]
-    hidden_layers = [64, 32, 8]
+    conv_channels = [4, 8]
+    hidden_layers = [32, 16, 8]
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
+    #thresholds_1 = [0.05, 0.35, 0.65, float("inf")] # ideal 
     thresholds_1 = [0.5, 3.5, 6.5, float("inf")] # ideal 
     #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
     #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
