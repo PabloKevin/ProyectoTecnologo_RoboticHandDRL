@@ -18,7 +18,7 @@ class ToolManipulationEnv(gym.Env):
 
         self.train_dataset = MyImageDataset(self.dataset_dir, name="full_train_masks_dataset")
         self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer_backup', name="observer_best_test_logits_best2", #"observer_best_test_medium02"
-                                        conv_channels = [4, 8, 16], hidden_layers = [32, 16, 16])
+                                        conv_channels = [16, 32, 64], hidden_layers = [64, 32, 16])
         self.observer.checkpoint_file = os.path.join(self.observer.checkpoint_dir, self.observer.name)
         self.observer.load_model()
         self.observer.eval()
