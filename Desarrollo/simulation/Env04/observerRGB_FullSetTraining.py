@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     observer = ObserverNetwork()
     observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test")
-    observer.load_model()
+    #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop

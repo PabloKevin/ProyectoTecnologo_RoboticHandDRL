@@ -15,10 +15,10 @@ class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
-                 hidden_layers=[64, 8, 16], 
+                 hidden_layers=[64, 32, 16], 
                  learning_rate= 0.0008,
-                 dropout2d=0.15, 
-                 dropout=0.2, 
+                 dropout2d=0.2, 
+                 dropout=0.25, 
                  input_dims = (256, 256, 1), output_dims = 10, 
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()

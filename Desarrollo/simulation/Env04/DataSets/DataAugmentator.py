@@ -137,5 +137,5 @@ if __name__ == "__main__":
     path = "Desarrollo/simulation/Env04/DataSets/TrainSet_masks/"
     img = cv2.imread(path+"empty_white_mask.png", cv2.IMREAD_GRAYSCALE)
     # Guardar la imagen
-    for i in range(31,60):
+    for i in range(30,60):
         cv2.imwrite(path+f"empty_white_mask{i}.png", img)

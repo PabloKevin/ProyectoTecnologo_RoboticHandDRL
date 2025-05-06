@@ -255,7 +255,7 @@ if __name__ == "__main__":
     #model_name = "observer_best_test_medium02"
 
     conv_channels = [16, 32, 64]
-    hidden_layers = [64, 8, 16]
+    hidden_layers = [64, 32, 16]
     #conv_channels = [16, 32, 64]
     #hidden_layers = [64, 16, 8]
 
