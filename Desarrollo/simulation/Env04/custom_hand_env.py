@@ -6,6 +6,8 @@ import cv2
 from DataSet_editor import DataSet_editor
 import matplotlib.pyplot as plt 
 from observerRGB import ObserverNetwork, MyImageDataset
+import torch
+import torch.nn.functional as F
 
 class ToolManipulationEnv(gym.Env):
     def __init__(self, image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all", dataset_dir="Desarrollo/simulation/Env04/DataSets/TrainSet_masks"):
@@ -119,7 +121,10 @@ class ToolManipulationEnv(gym.Env):
     
     def _get_tool(self, img):
         img = img.to(self.observer.device)
-        return self.observer(img).cpu().detach().numpy() # Takes the image and outputs a tool value
+        with torch.no_grad():
+            logits = self.observer(img)           # (B,10)
+            probs  = F.softmax(logits, dim=-1)        # (B,10) if you need actual probs
+        return probs.cpu().detach().numpy() # Takes the image and outputs a tool value
     
     def _calculate_best_combination(self, label):
         if label == 0.0:
