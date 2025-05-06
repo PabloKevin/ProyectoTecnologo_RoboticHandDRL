@@ -5,12 +5,17 @@ import numpy as np
 import cv2
 import polars as pl
 import torch as T
+import json
 
 class Predictor():
     def __init__(self, model=None, model_weights_dir=None, hidden_layers=None):
         if model is None:
-            if hidden_layers is None or model_weights_dir is None:
+            if hidden_layers is None and model_weights_dir is None:
                 self.actor = ActorNetwork()
+            elif model_weights_dir is None:
+                self.actor = ActorNetwork(hidden_layers=hidden_layers)
+            elif hidden_layers is None:
+                self.actor = ActorNetwork(checkpoint_dir=model_weights_dir)
             else:
                 self.actor = ActorNetwork(checkpoint_dir=model_weights_dir, hidden_layers=hidden_layers)
         else:
@@ -57,7 +62,7 @@ class Predictor():
     def predict(self, tool):
         finger_actions= []
         for f_idx in range(5):
-            observation = T.tensor(np.array([tool, float(f_idx)]), dtype=T.float).to(self.actor.device)
+            observation = T.tensor(np.concatenate([tool, np.array([f_idx])]), dtype=T.float).to(self.actor.device)
             pred_action = self.actor(observation).item()
             finger_actions.append(pred_action + 1) # pred_action (-1, 1) +1 -> (0,2) intervals and action spaces
         return finger_actions
@@ -96,7 +101,8 @@ class Predictor():
         true_labels = self.calculate_true_labels(self.observer_df_test["file_name"])
 
         pred_labels = []
-        for tool in self.observer_df_test["predicted_label"]:
+        for tool in self.observer_df_test["logits"]:
+            tool = np.array(json.loads(tool)).squeeze()
             pred_labels.append(self.predict(tool))
         
         pred_close_labels = self.predAction_to_closeAction(pred_labels)
@@ -130,7 +136,7 @@ if __name__ == "__main__":
     #model_weight_file = "Desarrollo/simulation/Env04/tmp/observer/observer_best_test"
     #model_weight_file = "Desarrollo/simulation/Env04/tmp/observer_backup/observer_best_test_big"
     #hidden_layers = [64, 16, 8]
-    predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env04/models_params_weights/td3", hidden_layers=[32,32])
+    predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env04/tmp/td3", hidden_layers=[128,64])
     #predictor.update_observer_predictions()
     predictor.save_df_test()
     print(predictor.df_test.head())

@@ -47,7 +47,7 @@ class CriticNetwork(nn.Module):
 # Actor Network
 class ActorNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims=2, n_actions=1, hidden_layers=[64,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', learning_rate=0.001):
+    def __init__(self, input_dims=11, n_actions=1, hidden_layers=[64,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', learning_rate=0.001):
         super(ActorNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
         self.checkpoint_dir = checkpoint_dir

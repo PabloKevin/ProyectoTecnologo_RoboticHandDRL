@@ -15,12 +15,12 @@ if __name__ == '__main__':
 
     load_models = False
     actor_learning_rate = 0.001 #0.001    1.0
-    critic_learning_rate = 0.0001 #0.001   0.001
-    batch_size = 32 #128
+    critic_learning_rate = 0.0008 #0.001   0.001
+    batch_size = 64 #128
 
-    hidden_layers=[128,64] #256
+    hidden_layers=[256,128] #256
     warmup = 1200 * 5
-    episodes = 7000 #10000
+    episodes = 15000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     max_size = 100000  # Adjust this value based on memory capacity

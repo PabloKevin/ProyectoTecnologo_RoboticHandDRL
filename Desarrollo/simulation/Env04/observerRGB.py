@@ -14,11 +14,11 @@ import time
 class ObserverNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
     def __init__(self, 
-                 conv_channels=[4, 8, 16], 
-                 hidden_layers=[32, 16, 16], 
-                 learning_rate= 0.0001,
-                 dropout2d=0.3, 
-                 dropout=0.3, 
+                 conv_channels=[16, 32, 64], 
+                 hidden_layers=[64, 8, 16], 
+                 learning_rate= 0.001,
+                 dropout2d=0.1, 
+                 dropout=0.1, 
                  input_dims = (256, 256, 1), output_dims = 10, 
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
@@ -33,15 +33,15 @@ class ObserverNetwork(nn.Module):
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_supervised')
 
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=1, padding=2)
-        self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=1, padding=2)
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=8, stride=1, padding=2)
+        self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=6, stride=1, padding=2)
         self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=1, padding=2)
         
         # Pooling layers
         """self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
-        self.pool1 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
+        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
         self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
         self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
 
@@ -257,7 +257,7 @@ if __name__ == "__main__":
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
     observer = ObserverNetwork()
-    observer.load_model()
+    #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # Example training loop

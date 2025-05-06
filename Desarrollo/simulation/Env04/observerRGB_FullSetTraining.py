@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # Create DataLoaders for batching
     # example: batch_size=32
 
-    batch_size = 32
+    batch_size = 128
     train_loader = DataLoader(full_train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
