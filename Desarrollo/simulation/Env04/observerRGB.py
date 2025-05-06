@@ -16,9 +16,9 @@ class ObserverNetwork(nn.Module):
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
                  hidden_layers=[64, 8, 16], 
-                 learning_rate= 0.001,
-                 dropout2d=0.1, 
-                 dropout=0.1, 
+                 learning_rate= 0.0008,
+                 dropout2d=0.15, 
+                 dropout=0.2, 
                  input_dims = (256, 256, 1), output_dims = 10, 
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
@@ -41,16 +41,16 @@ class ObserverNetwork(nn.Module):
         """self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
-        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
-        self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
-        self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
+        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
+        self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
+        self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 16, input_dims[1] // 16))
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
 
         # After three times pooling by factor of 2, 
         # the spatial dimensions become (H/8) x (W/8)
-        self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 8) * (input_dims[1] // 8), hidden_layers[0])
+        self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 16) * (input_dims[1] // 16), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], output_dims)
@@ -313,7 +313,7 @@ if __name__ == "__main__":
         print(f"Epoch duration: {(train_duration + val_duration):.2f} seconds\n")
         log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1\n")
         
-        if (epoch + 1) % 10 == 0 or epoch == n_epochs - 1:
+        if (epoch + 1) % 3 == 0 or epoch == n_epochs - 1:
             observer.eval()
             start_test_time = time.time()
             test_loss = 0.0

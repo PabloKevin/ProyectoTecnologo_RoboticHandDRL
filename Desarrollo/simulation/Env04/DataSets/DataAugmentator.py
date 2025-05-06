@@ -5,10 +5,10 @@ import os
 class DataAugmentator:
     def __init__(self, in_image_path, out_image_path, img_shape=(640,640,3)):
         # Directorio de imágenes originales
-        self.directorio_imagenes = "Desarrollo/simulation/Env03/DataSets/"+in_image_path
+        self.directorio_imagenes = "Desarrollo/simulation/Env04/DataSets/"+in_image_path
 
         # Directorio para guardar las imágenes procesadas
-        self.directorio_salida = "Desarrollo/simulation/Env03/DataSets/"+out_image_path
+        self.directorio_salida = "Desarrollo/simulation/Env04/DataSets/"+out_image_path
 
         self.img_shape = img_shape
         # Asegurarse de que el directorio de salida existe y crearlo si no existe
@@ -129,13 +129,13 @@ class DataAugmentator:
 if __name__ == "__main__":
     augmentator = DataAugmentator("RawTools_test", "TestSet")
 
-    augmentator.augmentateData(new_samples_per_image=30, images_list="All", sobreescribir=False)
+    #augmentator.augmentateData(new_samples_per_image=30, images_list="All", sobreescribir=False)
     
-    """
+    
     # Para nivelar la cantidad de empty images:
     # Cargar la imagen
-    path = "Desarrollo/simulation/Env03/DataSets/TestSet_masks/"
+    path = "Desarrollo/simulation/Env04/DataSets/TrainSet_masks/"
     img = cv2.imread(path+"empty_white_mask.png", cv2.IMREAD_GRAYSCALE)
     # Guardar la imagen
-    for i in range(1,30):
-        cv2.imwrite(path+f"empty_white_mask{i}.png", img)"""
+    for i in range(31,60):
+        cv2.imwrite(path+f"empty_white_mask{i}.png", img)

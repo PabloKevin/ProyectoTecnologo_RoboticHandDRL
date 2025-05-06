@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # Create DataLoaders for batching
     # example: batch_size=32
 
-    batch_size = 128
+    batch_size = 64
     train_loader = DataLoader(full_train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         print(f"Epoch duration: {(train_duration + val_duration):.2f} seconds\n")
         log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1\n")
         """
-        if (epoch + 1) % 5 == 0 or epoch == n_epochs - 1:
+        if (epoch + 1) % 3 == 0 or epoch == n_epochs - 1:
             observer.eval()
             start_test_time = time.time()
             test_loss = 0.0
