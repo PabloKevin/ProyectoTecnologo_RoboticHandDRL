@@ -11,16 +11,16 @@ if __name__ == '__main__':
 
     #images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg", "bw_lapicera02"]
     images_of_interest = "all"
-    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest)
+    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest, dataset_name="TestSet_masks")
 
-    load_models = False
+    load_models = True
     actor_learning_rate = 0.001 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
     batch_size = 64 #128
 
-    hidden_layers=[256,128] #256
+    hidden_layers=[64,32,16] #256
     warmup = 1200 * 5
-    episodes = 15000 #10000
+    episodes = 5000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     max_size = 100000  # Adjust this value based on memory capacity
@@ -61,7 +61,10 @@ if __name__ == '__main__':
             done = False
             score = 0
             while not done:
-                action = agent.choose_action(observation) 
+                if load_models:
+                    action = agent.choose_action(observation, validation=True) 
+                else:
+                    action = agent.choose_action(observation) 
                 next_observation, reward, done, info = env.step(action)
                 score += reward
                 agent.remember(observation, action, reward, next_observation, done)

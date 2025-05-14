@@ -10,7 +10,7 @@ class CriticNetwork(nn.Module):
     # Actualiza el Q-value en función del estado y la acción tomada. Controla qué tan bien la ActorNetwork está accionando. 
     # Actualiza el Q-value en función del estado y la acción tomada, actualiza la política.
     # Dado que es un single-step episode, predice solamente el Q-value inmediato para la acción tomada.
-    def __init__(self, input_dims,  hidden_layers=[64,32], name='critic', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', 
+    def __init__(self, input_dims,  hidden_layers=[64,32,32], name='critic', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', 
                  learning_rate=0.001):
         super(CriticNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
@@ -20,7 +20,8 @@ class CriticNetwork(nn.Module):
 
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
-        self.fc3 = nn.Linear(hidden_layers[1], 1)
+        self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
+        self.fc4 = nn.Linear(hidden_layers[2], 1)
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
 
@@ -33,7 +34,8 @@ class CriticNetwork(nn.Module):
         input = torch.cat([state, action], dim=1)
         x = F.leaky_relu(self.fc1(input))
         x = F.leaky_relu(self.fc2(x))
-        q_value = self.fc3(x)
+        x = F.leaky_relu(self.fc3(x))
+        q_value = self.fc4(x)
 
         return q_value
 
@@ -47,7 +49,7 @@ class CriticNetwork(nn.Module):
 # Actor Network
 class ActorNetwork(nn.Module):
     # Devuelve la acción a tomar en función del estado
-    def __init__(self, input_dims=11, n_actions=1, hidden_layers=[64,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', learning_rate=0.001):
+    def __init__(self, input_dims=11, n_actions=1, hidden_layers=[64,32,32], name='actor', checkpoint_dir='Desarrollo/simulation/Env04/tmp/td3', learning_rate=0.001):
         super(ActorNetwork, self).__init__()
         self.input_dims = input_dims # check if this is necessary
         self.checkpoint_dir = checkpoint_dir
@@ -58,7 +60,8 @@ class ActorNetwork(nn.Module):
         
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
-        self.fc3 = nn.Linear(hidden_layers[1], n_actions)
+        self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
+        self.fc4 = nn.Linear(hidden_layers[2], n_actions)
         
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
@@ -70,9 +73,10 @@ class ActorNetwork(nn.Module):
     def forward(self, state):
         x = F.leaky_relu(self.fc1(state))
         x = F.leaky_relu(self.fc2(x))
+        x = F.leaky_relu(self.fc3(x))
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
-        action = torch.tanh(self.fc3(x)) # output between (-1,1)
+        action = torch.tanh(self.fc4(x)) # output between (-1,1)
             
         return action
 

@@ -10,13 +10,13 @@ import torch
 import torch.nn.functional as F
 
 class ToolManipulationEnv(gym.Env):
-    def __init__(self, image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all", dataset_dir="Desarrollo/simulation/Env04/DataSets/TrainSet_masks"):
+    def __init__(self, image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all", dataset_dir="Desarrollo/simulation/Env04/DataSets/", dataset_name="TrainSet_masks"):
         super(ToolManipulationEnv, self).__init__()
         
         self.image_shape = image_shape
         self.n_fingers = n_fingers
         self.images_of_interest = images_of_interest
-        self.dataset_dir = dataset_dir
+        self.dataset_dir = dataset_dir + dataset_name
 
         self.train_dataset = MyImageDataset(self.dataset_dir, name="full_train_masks_dataset")
         self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer_backup', name="observer_best_test_logits_best2", #"observer_best_test_medium02"
@@ -123,8 +123,8 @@ class ToolManipulationEnv(gym.Env):
         img = img.to(self.observer.device)
         with torch.no_grad():
             logits = self.observer(img)           # (B,10)
-            probs  = F.softmax(logits, dim=-1)        # (B,10) if you need actual probs
-        return probs.cpu().detach().numpy() # Takes the image and outputs a tool value
+            #probs  = F.softmax(logits, dim=-1)        # (B,10) if you need actual probs
+        return logits.cpu().detach().numpy() # Takes the image and outputs a tool value
     
     def _calculate_best_combination(self, label):
         if label == 0.0:
