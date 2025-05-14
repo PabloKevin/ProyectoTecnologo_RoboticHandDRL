@@ -19,7 +19,7 @@ class ObserverNetwork(nn.Module):
                  learning_rate= 0.0008,
                  dropout2d=0.2, 
                  dropout=0.25, 
-                 input_dims = (256, 256, 1), output_dims = 10, 
+                 input_dims = (256, 256, 1), output_dims = 10,  
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
@@ -43,7 +43,7 @@ class ObserverNetwork(nn.Module):
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
         self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
         self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
-        self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 16, input_dims[1] // 16))
+        self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 16, input_dims[1] // 16)) 
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
