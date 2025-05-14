@@ -7,33 +7,34 @@ from SAM_pipe import Segmentator
 import os
 import cv2
 import torch as T
+import torch.nn.functional as F
 
 class Full_Agent_Pipe():
     def __init__(self, env=None, segmentator=None, observer=None, actor=None, checkpoint_dir="Desarrollo/simulation/Env04/models_params_weights/"): 
-        if env is None:
+        """if env is None:
             self.env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest="all")
         else:
-            self.env = env
+            self.env = env"""
         if segmentator is None:
             self.segmentator = Segmentator(checkpoint_dir=checkpoint_dir+"SAM/sam_vit_b_01ec64.pth") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto.
         else:
             self.segmentator = segmentator
         if observer is None:
-            self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+            self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer", name="observer_best_test_logits_2") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.observer.load_model()
             self.observer.eval() #importante para apagar las capas de dropout.
         else:
             self.observer = observer
         if actor is None:
-            self.actor = ActorNetwork(checkpoint_dir=checkpoint_dir+"td3", hidden_layers=[32,32]) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+            self.actor = ActorNetwork(checkpoint_dir=checkpoint_dir+"td3", hidden_layers=[256,128]) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.actor.load_checkpoint()
             self.actor.eval() # no estoy seguro si es necesario, pero es estándar.
         else:
             self.actor = actor
 
-    def pipe(self, input_img=None, render=True, render_timeout=3):
+    def pipe(self, input_img=None, dataset_name="RawTools", render=True, render_timeout=3):
         if input_img is None:
-            image_dir = "Desarrollo/simulation/Env04/DataSets/RawTools"
+            image_dir = "Desarrollo/simulation/Env04/DataSets/" + dataset_name
             image_files = os.listdir(image_dir)
             image_file = np.random.choice(image_files)
             img_path = os.path.join(image_dir, image_file)
@@ -42,12 +43,14 @@ class Full_Agent_Pipe():
         bw_mask = self.segmentator.predict(input_img, render=True)
         bw_mask = np.expand_dims(bw_mask, axis=0)
         
-        tool = self.observer(bw_mask).cpu().detach().numpy() # Takes the image and outputs a tool value
+        logits = self.observer(bw_mask) # Takes the image and outputs a tool value
+        probs  = F.softmax(logits, dim=-1).cpu().detach().numpy() 
+        tool = np.argmax(probs) # tool value
         print("tool", tool)
 
         finger_actions= []
         for f_idx in range(5):
-            observation = T.tensor(np.array([tool.item(), float(f_idx)]), dtype=T.float).to(self.actor.device)
+            observation = T.tensor(np.append(probs, float(f_idx)), dtype=T.float).to(self.actor.device)
             pred_action = self.actor(observation).item()
             finger_actions.append(pred_action + 1) # pred_action (-1, 1) +1 -> (0,2) intervals and action spaces
 
@@ -70,8 +73,8 @@ class Full_Agent_Pipe():
 if __name__ == "__main__":
     Full_Agent = Full_Agent_Pipe()
 
-    for _ in range(3):
-        action = Full_Agent.pipe()
+    for _ in range(1):
+        action = Full_Agent.pipe(dataset_name="RawTools_test")
         print(action)
 
 

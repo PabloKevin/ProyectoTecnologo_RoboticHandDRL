@@ -10,7 +10,7 @@ gnome-terminal --tab --title="ROS RViz" -- bash -ic "
 
 gnome-terminal --tab --title="Image Generator" -- bash -ic "
   echo '=== Image Generator Terminal ===';
-  cd Desarrollo/simulation/Env03/;
+  cd Desarrollo/simulation/Env04/;
   conda activate RoboticHand_ML;
   python3 Image_generator_server.py;
   exec bash
@@ -18,7 +18,7 @@ gnome-terminal --tab --title="Image Generator" -- bash -ic "
 
 gnome-terminal --tab --title="Agent Server" -- bash -ic "
   echo '=== Agent Server Terminal ===';
-  cd Desarrollo/simulation/Env03/;
+  cd Desarrollo/simulation/Env04/;
   conda activate RoboticHand_ML;
   python3 Agent_server.py;
   exec bash
