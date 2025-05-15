@@ -16,9 +16,9 @@ class ToolManipulationEnv(gym.Env):
         self.image_shape = image_shape
         self.n_fingers = n_fingers
         self.images_of_interest = images_of_interest
-        self.dataset_dir = dataset_dir + dataset_name
-
-        self.train_dataset = MyImageDataset(self.dataset_dir, name="full_train_masks_dataset")
+        self.datasets = []
+        for dataset in dataset_name:
+            self.datasets.append(MyImageDataset(dataset_dir+dataset, name=dataset))
         self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer_backup', name="observer_best_test_logits_best2", #"observer_best_test_medium02"
                                         conv_channels = [16, 32, 64], hidden_layers = [64, 32, 16])
         self.observer.checkpoint_file = os.path.join(self.observer.checkpoint_dir, self.observer.name)
@@ -106,17 +106,19 @@ class ToolManipulationEnv(gym.Env):
             plt.show()
     
     def _get_initial_image(self):
-        idx = np.random.randint(0, len(self.train_dataset.image_files))
+        ds = np.random.randint(0, len(self.datasets))
+        idx = np.random.randint(0, len(self.datasets[ds].image_files))
         
         if self.images_of_interest == "all":
-            return self.train_dataset.__getitem__(idx)
+            return self.datasets[ds].__getitem__(idx)
         else:
-            img, label = self.train_dataset.__getitem__(idx)
-            key = next((k for k,v in self.train_dataset.label_mapping.items() if v == label), None)
+            img, label = self.datasets[ds].__getitem__(idx)
+            key = next((k for k,v in self.datasets[ds].label_mapping.items() if v == label), None)
             while key not in self.images_of_interest:
-                idx = np.random.randint(0, len(self.train_dataset.image_files))
-                img, label = self.train_dataset.__getitem__(idx)
-                key = next((k for k,v in self.train_dataset.label_mapping.items() if v == label), None)
+                idx = np.random.randint(0, len(self.datasets[ds].image_files))
+                img, label = self.datasets[ds].__getitem__(idx)
+                key = next((k for k,v in self.datasets[ds].label_mapping.items() if v == label), None)
+            #print("img_label:", label)
             return img, label
     
     def _get_tool(self, img):

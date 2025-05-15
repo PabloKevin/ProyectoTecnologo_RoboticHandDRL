@@ -26,7 +26,7 @@ class Full_Agent_Pipe():
         else:
             self.observer = observer
         if actor is None:
-            self.actor = ActorNetwork(checkpoint_dir=checkpoint_dir+"td3", hidden_layers=[256,128]) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+            self.actor = ActorNetwork(checkpoint_dir=checkpoint_dir+"td3", hidden_layers=[64,32,16]) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.actor.load_checkpoint()
             self.actor.eval() # no estoy seguro si es necesario, pero es estándar.
         else:
