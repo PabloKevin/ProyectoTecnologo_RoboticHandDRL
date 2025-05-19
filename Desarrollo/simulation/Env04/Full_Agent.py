@@ -40,9 +40,9 @@ class Full_Agent_Pipe():
             img_path = os.path.join(image_dir, image_file)
             input_img = cv2.imread(img_path)
 
-        bw_mask = self.segmentator.predict(input_img, render=True)
+        bw_mask = self.segmentator.predict(input_img, render=False)
         bw_mask = np.expand_dims(bw_mask, axis=0)
-        
+        print("bw_mask", bw_mask.shape)
         logits = self.observer(bw_mask) # Takes the image and outputs a tool value
         probs  = F.softmax(logits, dim=-1).cpu().detach().numpy() 
         tool = np.argmax(probs) # tool value
@@ -68,7 +68,7 @@ class Full_Agent_Pipe():
             else:
                 plt.show()
 
-        return action
+        return action, bw_mask
    
 if __name__ == "__main__":
     Full_Agent = Full_Agent_Pipe()
