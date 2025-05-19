@@ -50,7 +50,7 @@ class Full_Agent_Pipe():
 
         finger_actions= []
         for f_idx in range(5):
-            observation = T.tensor(np.append(probs, float(f_idx)), dtype=T.float).to(self.actor.device)
+            observation = T.tensor(np.append(logits.cpu().detach().numpy(), float(f_idx)), dtype=T.float).to(self.actor.device)
             pred_action = self.actor(observation).item()
             finger_actions.append(pred_action + 1) # pred_action (-1, 1) +1 -> (0,2) intervals and action spaces
 

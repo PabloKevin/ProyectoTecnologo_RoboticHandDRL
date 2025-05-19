@@ -72,7 +72,8 @@ class Predictor():
         for action in predActions:
             f_action = []
             for finger in action:
-                if finger < (1 - 1/3):
+                if finger < (1 - 2/3):  
+                #if finger < (1 - 1/3):
                     f_action.append(0)
                 elif finger < (1 + 1/3):
                     f_action.append(1)

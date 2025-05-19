@@ -14,7 +14,7 @@ if __name__ == '__main__':
     #images_of_interest = ["lapicera"]
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest, dataset_name=["TrainSet_masks","TestSet_masks"])
 
-    load_models = True
+    load_models = False
     actor_learning_rate = 0.001 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
     batch_size = 64 #128

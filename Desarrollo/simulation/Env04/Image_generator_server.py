@@ -14,7 +14,7 @@ from queue import Queue
 app = FastAPI()
 
 class ImageGenerator():
-    def __init__(self, images_of_interest='all', images_dir="DataSets/RawTools/"):
+    def __init__(self, images_of_interest='all', images_dir="DataSets/TestSet/"): #"DataSets/RawTools/"
         self.images_dir = images_dir
         self.image_files = [f for f in os.listdir(images_dir)] if images_of_interest == 'all' else [f for f in os.listdir(images_dir) if f in images_of_interest]
         self.image_queue = Queue()  # Queue to communicate between threads

@@ -26,7 +26,7 @@ class ToolManipulationEnv(gym.Env):
         self.observer.eval()
 
         self.combinations_of_interest = [[2, 1, 2, 2, 2], # Thumb closed, index half, others closed,
-                                         [2, 1, 1, 2, 2], # Thumb closed, index and middle half, others open
+                                         [2, 0.67, 1, 2, 2], # Thumb closed, index and middle half, others open
                                          [1, 1, 1, 1, 1], # All fingers half closed
                                          [0, 0, 0, 0, 0]  # All fingers opened
         ]
