@@ -17,11 +17,11 @@ if __name__ == '__main__':
     load_models = False
     actor_learning_rate = 0.001 #0.001    1.0
     critic_learning_rate = 0.0008 #0.001   0.001
-    batch_size = 64 #128
+    batch_size = 128 #128
 
-    hidden_layers=[64,32,16] #256
+    hidden_layers=[32,16,8,4] #256
     warmup = 1200 * 5
-    episodes = 15000 #10000
+    episodes = 6000 #10000
     env.reward_weights["reward_alpha"] = 1
 
     max_size = 100000  # Adjust this value based on memory capacity
@@ -90,21 +90,6 @@ if __name__ == '__main__':
         
         # Close the log file
         log_file.close()
-
-        """# Hiperparámetros a buscar:
-        actor_learning_rate *= 0.8
-        critic_learning_rate *= 0.8
-        
-        if experiment % 2 == 0:
-            env.reward_weights["reward_alpha"] *= 2
-            actor_learning_rate = 0.001 # quizá probar también con 0.01
-            critic_learning_rate = 0.001
-
-        if experiment % 6 == 0:
-            #conv_channels=[16, 32, 64], hidden_size=256
-            actor_learning_rate = 0.001 # quizá probar también con 0.01
-            critic_learning_rate = 0.001
-            env.reward_weights["reward_alpha"] = 1"""
 
         
         

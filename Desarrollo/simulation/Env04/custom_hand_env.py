@@ -143,6 +143,12 @@ class ToolManipulationEnv(gym.Env):
         action = action + 1 # Porque la salida está en (-1,1) y así pasamos a (0,2)
         self.reward = - np.power(abs(action - state['best_combination'][int(state['f_idx'])])+1,2)
         
+        if self.reward > 2/3:
+            self.wrong_action_cntr += 1
+            self.reward += self.wrong_action_cntr * self.reward * 0.25
+        else:
+            self.wrong_action_cntr = 0
+        
         
         
         """# reward for each finger so as to motivate the combinations

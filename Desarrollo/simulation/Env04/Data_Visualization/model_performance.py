@@ -279,10 +279,10 @@ if __name__ == "__main__":
 
     # ACTOR PERFORMANCE
 
-    #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
-    model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
+    model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
+    #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
     model_name = "Actor_Last_Trained_Model"
-    hidden_layers = [64,32,16]
+    hidden_layers = [32,16,8,4]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
