@@ -1,0 +1,14251 @@
+file_name;true_label;predicted_label;pred_close_labels;true_agarres;predicted_agarres
+empty_white_mask10.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tornillo05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.900971
+	1.998275
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.175143
+	0.824902
+	0.965435
+	1.241951
+	1.581006
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+destornillador06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.959327
+	0.954257
+	0.95254
+	0.953286
+	1.070697
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+clavo03_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999963
+	0.941525
+	1.157666
+	1.875347
+	1.999374
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+cuchara06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999071
+	0.870668
+	1.022415
+	1.805561
+	1.998825
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996233
+	1.094726
+	1.120634
+	1.778514
+	1.989958
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.132795
+	1.11139
+	1.112347
+	1.116655
+	1.474668
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca09_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.964531
+	1.999955
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994834
+	1.999995
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989793
+	0.917427
+	0.936363
+	1.499838
+	1.981735
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995318
+	0.996365
+	1.108888
+	1.92584
+	1.998912
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.305175
+	0.862118
+	1.003786
+	1.295306
+	1.642632
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+pinza_grande06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999997
+	1.060676
+	1.415082
+	1.947918
+	1.999633
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_3;agarre_1
+tornillo06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.878121
+	1.990783
+	1.999999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.084781
+	1.083799
+	1.077756
+	1.075374
+	1.611474
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.951606
+	0.955205
+	0.958213
+	1.672323
+	1.987941
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+clavo03_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999991
+	1.001875
+	1.303908
+	1.974019
+	1.999917
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+martillo06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.930619
+	0.921512
+	0.918783
+	0.919548
+	0.92086
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.84163
+	0.950121
+	0.947447
+	1.416517
+	1.94682
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999156
+	0.987733
+	1.043484
+	1.823886
+	1.994325
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.978235
+	0.988742
+	0.999107
+	1.865311
+	1.997799
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998622
+	0.935216
+	1.014604
+	1.921726
+	1.998217
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.872172
+	0.942556
+	0.946948
+	1.356599
+	1.948992
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.943603
+	1.999717
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.992966
+	0.85276
+	0.92063
+	1.075144
+	1.400812
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca09_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996882
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998522
+	0.965468
+	1.098079
+	1.847615
+	1.997896
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.194863
+	1.200241
+	1.197596
+	1.189464
+	1.185529
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.544851
+	0.930089
+	1.077822
+	1.413417
+	1.783311
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tornillo06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.981022
+	1.999965
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998491
+	1.999011
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.932284
+	1.159397
+	1.171833
+	1.550221
+	1.922342
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.979127
+	1.999284
+	1.999973
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.590375
+	1.060991
+	1.068434
+	1.629699
+	1.980948
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.903827
+	0.890094
+	0.886467
+	0.927922
+	1.147379
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+empty_white_mask24.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+empty_white_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+pinza_grande06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.720655
+	1.464623
+	1.654374
+	1.893403
+	1.967636
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+tuerca08_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.984768
+	1.891951
+	1.999561
+	1.999999
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99993
+	1.076322
+	1.08274
+	1.883673
+	1.998653
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.916613
+	0.906917
+	0.908192
+	0.911513
+	0.915374
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99072
+	1.99999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.949807
+	1.056177
+	1.066933
+	1.694747
+	1.993397
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.992673
+	0.986846
+	0.981014
+	0.984574
+	0.984945
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999976
+	1.016814
+	1.247474
+	1.93739
+	1.998914
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997843
+	0.963135
+	1.130382
+	1.456263
+	1.96691
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask13.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tenedor06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998585
+	0.952516
+	1.011215
+	1.866139
+	1.999113
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.347586
+	1.265261
+	1.259068
+	1.336809
+	1.827966
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.998321
+	0.945258
+	0.942785
+	0.999649
+	1.541355
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+cuchara06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.986904
+	0.983819
+	1.006087
+	1.890976
+	1.998636
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.074658
+	1.069053
+	1.068539
+	1.068941
+	1.062342
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+clavo03_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998993
+	0.921872
+	0.930427
+	1.29147
+	1.959408
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992782
+	1.999985
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999984
+	0.975313
+	1.304034
+	1.98661
+	1.999959
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.990273
+	1.148238
+	1.172135
+	1.702087
+	1.953167
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.060616
+	1.05564
+	1.052867
+	1.048931
+	1.055025
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993993
+	0.960091
+	0.988906
+	1.91817
+	1.999296
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996692
+	0.966123
+	0.982374
+	1.854735
+	1.997695
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.946269
+	0.933233
+	0.93823
+	0.981182
+	1.631759
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca07_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.984962
+	1.999979
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.030962
+	1.027539
+	1.023252
+	1.018971
+	1.021598
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.207671
+	1.208631
+	1.205533
+	1.204735
+	1.199571
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca07_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.982233
+	1.99997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.985156
+	0.904342
+	0.910104
+	1.081541
+	1.408104
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+clavo03_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997357
+	0.958784
+	0.99836
+	1.862624
+	1.999134
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tenedor05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.984823
+	1.105336
+	1.134741
+	1.749265
+	1.962247
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.979406
+	0.971951
+	0.969525
+	0.97034
+	0.976796
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tenedor05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.460842
+	1.036778
+	1.039954
+	1.6696
+	1.975615
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.98191
+	0.974224
+	0.973783
+	0.982328
+	1.401608
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca09_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994591
+	1.999994
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99902
+	0.945636
+	1.031109
+	1.844089
+	1.999194
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997617
+	0.961027
+	0.990458
+	1.828763
+	1.999047
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.977396
+	0.963169
+	0.95527
+	1.020556
+	1.343751
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+clavo03_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998258
+	0.936588
+	0.942024
+	1.803778
+	1.996841
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+lapicera06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998811
+	0.911546
+	0.929553
+	1.767905
+	1.997579
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.999436
+	0.99285
+	0.987827
+	0.985566
+	1.426668
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.9993
+	0.897245
+	1.279677
+	1.940471
+	1.998855
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.813495
+	0.96724
+	0.967804
+	1.476145
+	1.967808
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.311166
+	0.953488
+	1.523637
+	1.984047
+	1.999898
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.776911
+	1.057827
+	1.063528
+	1.5797
+	1.974698
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.968057
+	1.999739
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.008972
+	1.003119
+	1.000033
+	0.999227
+	1.006317
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.95663
+	0.95189
+	0.950474
+	0.952365
+	0.963536
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.618481
+	1.136464
+	1.134273
+	1.503373
+	1.867743
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca09_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993149
+	1.99999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.86202
+	1.01308
+	1.016277
+	1.746123
+	1.990728
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993911
+	0.954297
+	0.992416
+	1.833214
+	1.997169
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.148649
+	1.143653
+	1.140714
+	1.142363
+	1.151152
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.98521
+	1.999985
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.984454
+	0.983151
+	0.985978
+	0.993047
+	1.345598
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.030794
+	1.017887
+	1.01879
+	1.53716
+	1.948827
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+pinza_grande05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999248
+	1.06228
+	1.29595
+	1.649966
+	1.978013
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca08_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997116
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.930107
+	1.998967
+	1.999988
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.101701
+	1.098783
+	1.093466
+	1.259652
+	1.790567
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994834
+	0.999677
+	0.998656
+	1.472407
+	1.970143
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999838
+	0.981424
+	1.151109
+	1.63207
+	1.99447
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca07_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992117
+	1.999982
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999963
+	0.959012
+	1.162392
+	1.853342
+	1.999271
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+destornillador06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.418756
+	1.105889
+	1.123496
+	1.695597
+	1.94623
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99949
+	0.984553
+	1.217996
+	1.92678
+	1.999129
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+lapicera05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.140192
+	1.912212
+	1.999531
+	1.999999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+martillo05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.000875
+	1.002207
+	1.000783
+	0.997322
+	1.001105
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+martillo05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.361964
+	1.365698
+	1.362851
+	1.361371
+	1.35763
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+tenedor06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.008776
+	0.994931
+	0.991504
+	1.391337
+	1.865226
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+pinza_grande06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.965569
+	0.836921
+	0.89862
+	1.073133
+	1.404153
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+cuchara06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.060274
+	0.937787
+	0.936824
+	1.288997
+	1.917501
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+cuchara05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.465313
+	1.977207
+	1.999869
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_2;agarre_indefinido
+clavo03_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999625
+	0.916955
+	1.061724
+	1.896458
+	1.999387
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tuerca09_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.951931
+	1.999869
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.127293
+	1.662111
+	1.968306
+	1.999624
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+tornillo05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.931015
+	1.999784
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.937262
+	0.933999
+	0.937124
+	0.935126
+	0.929797
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989947
+	1.118632
+	1.190542
+	1.854801
+	1.990822
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+empty_white_mask18.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+cuchara05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991168
+	0.989444
+	1.129938
+	1.440437
+	1.924782
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.071335
+	1.048493
+	1.055374
+	1.622153
+	1.964938
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+tornillo06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.595015
+	1.477306
+	1.975833
+	1.999853
+	1.999999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.981421
+	0.961411
+	0.959912
+	1.343715
+	1.915545
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998137
+	1.153621
+	1.231805
+	1.924384
+	1.998388
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.873052
+	1.997712
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.99426
+	0.929474
+	0.926511
+	1.019265
+	1.742865
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.817173
+	1.161702
+	1.156043
+	1.210359
+	1.845268
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+martillo06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.953342
+	0.930746
+	0.939032
+	1.41998
+	1.952368
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999998
+	1.02343
+	1.553164
+	1.994928
+	1.999989
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+lapicera06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99923
+	0.904328
+	0.920064
+	1.621241
+	1.993495
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.844502
+	1.992897
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997665
+	1.999998
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999689
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.950017
+	1.999899
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.012581
+	1.006754
+	1.00071
+	1.001525
+	1.008671
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.066579
+	0.948038
+	0.949462
+	1.411701
+	1.951342
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+martillo05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.915717
+	0.908457
+	0.909901
+	0.910706
+	0.910119
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989384
+	0.925758
+	0.914223
+	1.359518
+	1.940669
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.04498
+	1.042562
+	1.042678
+	1.048557
+	1.117124
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca07_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999904
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.924685
+	1.999511
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.152144
+	1.148158
+	1.147376
+	1.14955
+	1.147074
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994383
+	0.954714
+	0.965063
+	1.856307
+	1.996861
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999693
+	0.977424
+	1.264142
+	1.97451
+	1.999807
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca09_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998286
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.967222
+	1.99991
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999993
+	1.251994
+	1.65401
+	1.918454
+	1.995327
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+lapicera05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995302
+	1.014474
+	1.023121
+	1.802041
+	1.997075
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.273516
+	1.271542
+	1.271363
+	1.275478
+	1.439676
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995726
+	0.956467
+	1.105775
+	1.948427
+	1.999018
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.067213
+	1.062291
+	1.058387
+	1.070215
+	1.531499
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.596763
+	0.971672
+	0.982053
+	1.725586
+	1.993174
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.915074
+	0.912127
+	1.066085
+	1.39459
+	1.842788
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.970412
+	0.965552
+	0.969152
+	0.972517
+	0.96822
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.852324
+	1.967448
+	1.999989
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.866426
+	0.774564
+	0.848149
+	0.931183
+	1.192751
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.51374
+	1.092459
+	1.094366
+	1.257908
+	1.882516
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.859162
+	1.99687
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997561
+	0.955194
+	1.005026
+	1.895102
+	1.999239
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca09_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996617
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.986857
+	0.983763
+	1.026961
+	1.327485
+	1.867543
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+pinza_grande06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999363
+	1.856479
+	1.951758
+	1.989111
+	1.998965
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.978927
+	0.948646
+	0.965736
+	1.815636
+	1.996072
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999951
+	0.920412
+	1.178586
+	1.95492
+	1.999794
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.019443
+	1.012543
+	1.007473
+	1.00714
+	1.01849
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.151003
+	1.145648
+	1.145335
+	1.451263
+	1.862927
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.661124
+	0.892945
+	0.939215
+	1.133307
+	1.611712
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.983648
+	1.996664
+	1.999999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.975313
+	1.160867
+	1.178517
+	1.635434
+	1.926756
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca07_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997008
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.02914
+	1.029056
+	1.025591
+	1.040683
+	1.530081
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.904872
+	1.996924
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.982763
+	0.972941
+	0.967622
+	1.235584
+	1.872429
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca08_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.981207
+	1.999949
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.924761
+	1.031786
+	1.031658
+	1.618959
+	1.978193
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.888056
+	0.870705
+	0.86919
+	0.907573
+	1.207028
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca07_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.977607
+	1.99994
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.07405
+	1.043278
+	1.045021
+	1.579258
+	1.963668
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+lapicera06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.000197
+	0.859879
+	0.852212
+	0.865897
+	1.248307
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+martillo06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.955006
+	0.949398
+	0.947191
+	0.949192
+	0.957612
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999482
+	1.016111
+	1.039937
+	1.854193
+	1.99798
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tornillo05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.911443
+	1.998271
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99766
+	1.123935
+	1.15333
+	1.72967
+	1.963502
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.935689
+	0.921488
+	0.923477
+	0.921993
+	1.316587
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+lapicera05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999827
+	0.906929
+	0.972263
+	1.691924
+	1.997052
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999975
+	0.941046
+	1.242581
+	1.972039
+	1.999862
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997507
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996881
+	1.056251
+	1.073681
+	1.821388
+	1.991466
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+destornillador06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.862212
+	1.001927
+	1.010211
+	1.772038
+	1.990723
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998212
+	0.955107
+	0.991228
+	1.834806
+	1.998905
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca09_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.955083
+	1.999911
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.939282
+	1.999497
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.198442
+	1.19571
+	1.19348
+	1.19516
+	1.194937
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+martillo06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.087567
+	1.083261
+	1.076395
+	1.086112
+	1.60072
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.453527
+	1.879523
+	1.997509
+	1.999964
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.919409
+	1.999638
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.986525
+	1.999985
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.024391
+	1.018318
+	1.01897
+	1.019879
+	1.015665
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.949941
+	1.148176
+	1.291548
+	1.719808
+	1.927895
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca09_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.944857
+	1.999879
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.951867
+	1.999789
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.384648
+	1.00212
+	1.003504
+	1.655864
+	1.981602
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.75437
+	0.977762
+	0.979199
+	1.686787
+	1.986714
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+cuchara05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.056012
+	1.049723
+	1.045939
+	1.046307
+	1.084721
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+tenedor05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997079
+	0.986449
+	1.134337
+	1.95213
+	1.999329
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.984767
+	0.898661
+	0.897271
+	1.101653
+	1.590752
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99538
+	0.964448
+	0.984109
+	1.879289
+	1.998365
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.202788
+	1.198028
+	1.194137
+	1.191718
+	1.197673
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tornillo06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.959011
+	1.999888
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99969
+	0.923361
+	0.970287
+	1.842018
+	1.998259
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+destornillador06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.11505
+	0.937593
+	0.937725
+	1.260266
+	1.901807
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+martillo06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.879693
+	0.880392
+	0.882864
+	0.883206
+	0.878153
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999535
+	0.906544
+	1.342961
+	1.982805
+	1.999951
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+lapicera05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994696
+	0.946331
+	0.953758
+	1.795361
+	1.995444
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.803229
+	1.98009
+	1.999997
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.919348
+	1.972205
+	1.99999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997267
+	0.978332
+	0.991141
+	1.798261
+	1.99677
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.101371
+	1.096313
+	1.092656
+	1.08925
+	1.091648
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.881692
+	1.948532
+	1.999957
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999997
+	1.434449
+	1.968025
+	1.999856
+	1.999999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.927509
+	0.923549
+	0.926042
+	0.92348
+	0.918718
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.427367
+	1.129034
+	1.129707
+	1.287639
+	1.826744
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.923976
+	0.96981
+	0.961713
+	1.564971
+	1.969941
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+clavo03_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999925
+	0.876708
+	1.239576
+	1.970046
+	1.999877
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+cuchara06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.968756
+	1.009744
+	1.012095
+	1.659712
+	1.980154
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.929162
+	0.923262
+	0.918069
+	0.91951
+	0.925128
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999994
+	0.994521
+	1.382117
+	1.993999
+	1.999989
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+empty_white_mask17.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+cuchara06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999448
+	0.990736
+	1.026547
+	1.8375
+	1.997288
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+clavo03_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.74393
+	1.944777
+	1.996237
+	1.999859
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999706
+	0.944772
+	1.194634
+	1.889192
+	1.997942
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask2.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tornillo05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.951197
+	0.937713
+	0.936202
+	0.957421
+	1.209611
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_1;agarre_3
+destornillador05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994783
+	0.87429
+	0.773601
+	1.63847
+	1.993361
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+lapicera05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.890634
+	0.876068
+	0.867034
+	0.886884
+	1.033779
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+martillo06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.016275
+	1.010415
+	1.007538
+	1.011213
+	1.017444
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.791271
+	0.930927
+	0.937266
+	1.210755
+	1.848968
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.948229
+	0.962698
+	0.974688
+	1.77231
+	1.995289
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.973514
+	1.99994
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.455462
+	1.002012
+	1.004666
+	1.697725
+	1.987699
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.894639
+	1.997767
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.194919
+	1.190638
+	1.185852
+	1.181954
+	1.181219
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tenedor05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999145
+	1.064368
+	1.073857
+	1.669915
+	1.979329
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995449
+	1.012355
+	1.025819
+	1.73445
+	1.989637
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca09_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989056
+	1.999983
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.004854
+	0.999461
+	0.999453
+	1.000851
+	1.012304
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tornillo05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.924353
+	1.999199
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.961563
+	1.052765
+	1.052432
+	1.575009
+	1.922162
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.039254
+	1.039793
+	1.034064
+	1.126079
+	1.663999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99944
+	1.005852
+	1.116654
+	1.948372
+	1.999399
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask4.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+destornillador05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.186242
+	1.111546
+	1.125063
+	1.606278
+	1.909569
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+tuerca08_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.936045
+	1.999439
+	1.999994
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.956075
+	1.999852
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99172
+	1.999989
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999841
+	0.867698
+	1.154238
+	1.946467
+	1.999655
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tenedor06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996791
+	1.024206
+	1.036577
+	1.859045
+	1.996382
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999329
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.900546
+	1.995064
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999745
+	0.888225
+	1.14069
+	1.944954
+	1.999699
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+pinza_grande05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.232582
+	1.23487
+	1.230419
+	1.234421
+	1.695484
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tornillo06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.847136
+	1.53931
+	1.983383
+	1.99991
+	1.999999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.870004
+	1.98986
+	1.999998
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.013104
+	1.005557
+	1.000863
+	1.015137
+	1.641498
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca09_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996246
+	1.999997
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.595856
+	1.030507
+	1.029187
+	1.482839
+	1.870403
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.05222
+	1.049904
+	1.045127
+	1.040323
+	1.158808
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca07_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989398
+	1.999987
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.952168
+	1.999724
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.982244
+	0.976537
+	0.972007
+	0.974942
+	0.987993
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_1;agarre_3
+lapicera05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.03842
+	1.033229
+	1.034658
+	1.558511
+	1.945633
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+destornillador06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.966864
+	0.952385
+	0.951569
+	0.979079
+	1.606056
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997285
+	0.892156
+	1.007948
+	1.844623
+	1.997584
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99985
+	0.881152
+	1.303501
+	1.968076
+	1.999886
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999934
+	1.070978
+	0.869844
+	1.584267
+	1.992208
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.985492
+	0.91729
+	0.925603
+	1.345633
+	1.960726
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.00335
+	0.992852
+	0.989737
+	1.135335
+	1.772105
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.990525
+	0.980894
+	0.991902
+	1.761492
+	1.994499
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.961501
+	0.973444
+	0.984833
+	1.796114
+	1.994969
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.955911
+	0.98996
+	0.995637
+	1.797376
+	1.992924
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.971929
+	0.96806
+	0.969139
+	0.96997
+	1.08485
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+empty_white_mask16.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tuerca07_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997782
+	1.999998
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.147535
+	1.109908
+	1.107648
+	1.245792
+	1.801995
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.948288
+	0.96454
+	0.973796
+	1.605833
+	1.982476
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.087029
+	1.08102
+	1.076836
+	1.07955
+	1.084438
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+clavo03_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.356128
+	1.096798
+	1.100909
+	1.485922
+	1.932126
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+pinza_grande06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.052488
+	0.901883
+	0.91945
+	1.100616
+	1.493795
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca07_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999417
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.990529
+	1.999986
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.672459
+	0.916644
+	0.942344
+	1.243441
+	1.797742
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+martillo05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.101985
+	1.100235
+	1.097333
+	1.101041
+	1.097688
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca08_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.94088
+	1.916513
+	1.999784
+	1.999999
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999741
+	1.057719
+	1.063085
+	1.642094
+	1.984549
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.963368
+	0.91064
+	0.980841
+	1.332874
+	1.933377
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tornillo05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.862219
+	1.996193
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994932
+	1.20129
+	1.22571
+	1.802566
+	1.977845
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande05_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.049219
+	1.045537
+	1.042315
+	1.038329
+	1.046519
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.964478
+	1.999863
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.970292
+	1.9999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992578
+	1.035751
+	1.040952
+	1.680781
+	1.979881
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994476
+	1.174513
+	1.186428
+	1.557409
+	1.932603
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask7.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+clavo03_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.044334
+	1.554478
+	1.993539
+	1.999983
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+destornillador05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993181
+	1.057264
+	1.068627
+	1.681797
+	1.977857
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+empty_white_mask9.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+cuchara05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.233898
+	1.054563
+	1.05285
+	1.526474
+	1.869371
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+tuerca09_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989139
+	1.999987
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.381872
+	1.034733
+	1.036153
+	1.497434
+	1.865377
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994132
+	1.999995
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.301179
+	1.810443
+	1.994553
+	1.999937
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+pinza_grande06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.968507
+	0.824883
+	0.896742
+	1.083532
+	1.412576
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera05_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.983315
+	0.968942
+	0.976842
+	1.757989
+	1.994111
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999967
+	0.88487
+	1.327702
+	1.950028
+	1.999118
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.972102
+	1.015748
+	1.025174
+	1.705601
+	1.987692
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995094
+	1.999994
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.983737
+	1.015049
+	1.016454
+	1.749684
+	1.994727
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+cuchara06_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989229
+	1.04528
+	1.046373
+	1.627844
+	1.979289
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999673
+	0.863649
+	1.262072
+	1.966095
+	1.999865
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.395548
+	1.241091
+	1.240553
+	1.249593
+	1.81381
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.578163
+	1.219257
+	1.901341
+	1.999169
+	1.999995
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+tenedor05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997377
+	1.019471
+	1.023114
+	1.677922
+	1.990978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.097088
+	1.099339
+	1.101281
+	1.115184
+	1.651071
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca08_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.949263
+	1.945921
+	1.999946
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989321
+	1.999907
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989259
+	1.034058
+	1.043448
+	1.708541
+	1.988053
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask12.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tornillo06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.987011
+	1.994474
+	1.999999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.827623
+	1.948388
+	1.999968
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.968449
+	0.961934
+	0.961358
+	0.981639
+	1.46148
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+destornillador05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999967
+	0.974609
+	1.206443
+	1.922058
+	1.999649
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999684
+	1.088461
+	1.169025
+	1.95311
+	1.999456
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.970078
+	1.033486
+	1.0414
+	1.676785
+	1.97136
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994845
+	1.028598
+	1.034232
+	1.708716
+	1.979658
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999152
+	1.077017
+	1.24575
+	1.951321
+	1.999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.033195
+	1.031422
+	1.025439
+	1.220722
+	1.740368
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+destornillador06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.929718
+	0.92311
+	0.926993
+	0.92571
+	0.964323
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998244
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999977
+	0.97225
+	1.20327
+	1.894352
+	1.999497
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tuerca09_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.933757
+	1.999753
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993525
+	0.977683
+	0.988565
+	1.890558
+	1.997995
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tornillo06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.861388
+	1.992272
+	1.999999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993523
+	1.99999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.934517
+	1.969837
+	1.999989
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.834967
+	1.821622
+	1.998866
+	1.999996
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask8.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+destornillador05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.014762
+	1.016181
+	1.015613
+	1.305179
+	1.927632
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+pinza_grande05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995279
+	0.922717
+	0.974593
+	1.751852
+	1.997004
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.992512
+	0.984606
+	0.980396
+	0.978837
+	0.985229
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.991523
+	0.985648
+	0.982224
+	0.977404
+	0.975926
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+martillo06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.957611
+	0.954043
+	0.956545
+	0.954265
+	0.948528
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca07_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999831
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask25.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tuerca08_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999012
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.099228
+	1.095767
+	1.091669
+	1.087233
+	1.086922
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991989
+	0.974259
+	0.985082
+	1.814859
+	1.995125
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.024021
+	1.02303
+	1.021311
+	1.025176
+	1.255917
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+empty_white_mask27.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tuerca08_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99766
+	1.999998
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997556
+	0.932166
+	0.956054
+	1.740437
+	1.99592
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tuerca07_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.98727
+	1.999981
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+clavo03_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999997
+	1.033686
+	1.394336
+	1.968179
+	1.999901
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+lapicera05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.961285
+	0.955597
+	0.952139
+	0.954487
+	0.964966
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+tenedor05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.928325
+	1.077726
+	1.086026
+	1.610041
+	1.978699
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.836747
+	1.953205
+	1.999977
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.9983
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.800303
+	1.858457
+	1.999431
+	1.999997
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande06_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.843341
+	0.938662
+	1.039662
+	1.331414
+	1.677391
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+destornillador06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.016874
+	1.01042
+	1.009431
+	1.014133
+	1.195129
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+clavo03_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992488
+	0.961406
+	0.969907
+	1.849658
+	1.998394
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+destornillador05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.661311
+	0.95196
+	0.951479
+	1.325895
+	1.910184
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+pinza_grande05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.95264
+	0.962553
+	1.080237
+	1.406418
+	1.84262
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+lapicera06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.975587
+	0.954301
+	0.952042
+	0.957392
+	1.431943
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.913393
+	1.999475
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.967828
+	0.964809
+	0.99044
+	1.837139
+	1.998366
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.932513
+	1.037379
+	1.043306
+	1.613565
+	1.978936
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+empty_white_mask26.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+lapicera05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995413
+	0.973123
+	0.984838
+	1.875665
+	1.998114
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999836
+	0.852888
+	1.139994
+	1.94771
+	1.999713
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+lapicera06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995323
+	0.94955
+	0.957194
+	1.833045
+	1.996016
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992456
+	1.02961
+	1.046249
+	1.765856
+	1.985658
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991764
+	0.955498
+	0.971817
+	1.783436
+	1.995254
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+pinza_grande05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.119657
+	1.116308
+	1.112914
+	1.108848
+	1.109538
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999561
+	0.903738
+	0.909039
+	1.503926
+	1.988622
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.95112
+	0.830231
+	0.89426
+	0.980643
+	1.307841
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+empty_white_mask6.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tenedor06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.012786
+	1.005898
+	1.002062
+	0.999297
+	1.012666
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+pinza_grande05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.047613
+	1.043532
+	1.040893
+	1.037367
+	1.038233
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca09_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998732
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.179175
+	1.013128
+	1.015035
+	1.71341
+	1.991171
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996844
+	0.97278
+	1.003717
+	1.838944
+	1.998396
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca07_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998392
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.051563
+	1.044924
+	1.038375
+	1.039407
+	1.045912
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+clavo03_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999997
+	1.024729
+	1.403637
+	1.989096
+	1.999973
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+tuerca07_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998333
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.856674
+	0.978671
+	0.988226
+	1.768561
+	1.994157
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999433
+	0.972592
+	1.442951
+	1.99451
+	1.999985
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+lapicera06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999169
+	0.918128
+	0.950971
+	1.761864
+	1.996714
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca08_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998184
+	1.999998
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.014736
+	1.009488
+	1.00583
+	1.425417
+	1.912906
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+clavo03_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993862
+	0.976678
+	0.984682
+	1.828707
+	1.994856
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+clavo03_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999635
+	0.859491
+	1.229214
+	1.966577
+	1.999882
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tenedor05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999958
+	0.958365
+	1.188226
+	1.916551
+	1.997765
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask19.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+cuchara05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996782
+	0.963381
+	0.979589
+	1.794723
+	1.996169
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca08_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.988904
+	1.999974
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.975219
+	0.974221
+	0.972122
+	1.001868
+	1.512971
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tenedor06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.007159
+	0.995602
+	0.989554
+	1.003108
+	1.6574
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.917649
+	1.710466
+	1.995596
+	1.999983
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.790602
+	1.968404
+	1.999993
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.738368
+	1.993955
+	1.999976
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.9197
+	1.999267
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.951688
+	1.931696
+	1.999877
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.86508
+	1.029855
+	1.041423
+	1.542764
+	1.98405
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.649697
+	1.560368
+	1.984841
+	1.999913
+	1.999999
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca09_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99282
+	1.999993
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask22.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tenedor06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999604
+	1.156342
+	1.187114
+	1.914319
+	1.998166
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.970664
+	0.966473
+	0.960948
+	0.965987
+	1.204211
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca08_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.966417
+	1.999937
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.092325
+	0.942077
+	0.942202
+	1.254876
+	1.897629
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+martillo06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.881295
+	0.877533
+	0.867818
+	0.865417
+	0.865136
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998639
+	0.932389
+	1.271269
+	1.924737
+	1.999171
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.004028
+	0.93766
+	0.937795
+	1.304944
+	1.912771
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999114
+	0.979105
+	1.062807
+	1.846139
+	1.996379
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999998
+	1.035502
+	1.375793
+	1.949742
+	1.999784
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+tornillo05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.865529
+	1.996765
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996903
+	0.905055
+	0.89193
+	1.268294
+	1.947886
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+pinza_grande06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999697
+	1.032996
+	1.193431
+	1.554226
+	1.980776
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+clavo03_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999153
+	1.013763
+	1.074346
+	1.914064
+	1.998406
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+tuerca08_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999746
+	1.855694
+	1.998747
+	1.999996
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.066304
+	1.063022
+	1.058587
+	1.053805
+	1.135206
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.088075
+	1.586062
+	1.981263
+	1.999894
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+tuerca07_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999092
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.99968
+	1.999999
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999935
+	0.981445
+	1.137608
+	1.902506
+	1.997091
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.945813
+	1.628779
+	1.832649
+	1.953281
+	1.988434
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+empty_white_mask1.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+martillo05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.007352
+	1.005872
+	1.006441
+	1.087493
+	1.809034
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+lapicera06_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.98143
+	0.914658
+	0.90966
+	1.285074
+	1.9235
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+destornillador06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999981
+	0.978689
+	1.380373
+	1.993884
+	1.999988
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_3;agarre_1
+tornillo06_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.94094
+	1.999272
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999247
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.901372
+	1.999128
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask15.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+cuchara05_21_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.973843
+	0.953774
+	0.953253
+	1.015514
+	1.355944
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo05_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.834107
+	1.977005
+	1.999996
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.741833
+	1.938235
+	1.99997
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask21.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tornillo06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.874921
+	1.80806
+	1.998594
+	1.999995
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.157989
+	1.153765
+	1.153474
+	1.15346
+	1.15233
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+cuchara06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991308
+	1.007964
+	1.016688
+	1.846016
+	1.997901
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999923
+	0.972281
+	1.086618
+	1.660815
+	1.99525
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.032021
+	1.379281
+	1.96794
+	1.999896
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+tenedor06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.989066
+	0.956361
+	0.954707
+	1.216533
+	1.71169
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+martillo06_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.937662
+	0.933678
+	0.935162
+	0.933665
+	0.929008
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.954709
+	0.937266
+	0.935288
+	0.938229
+	1.410943
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tornillo06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.753608
+	1.950048
+	1.999975
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999916
+	0.955838
+	1.051547
+	1.821346
+	1.994342
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.031917
+	1.02387
+	1.018233
+	1.19072
+	1.757489
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+empty_white_mask5.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tornillo06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.927848
+	1.999147
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995683
+	1.999996
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.927245
+	0.912431
+	0.91735
+	0.980613
+	1.714267
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991594
+	0.927049
+	0.944168
+	1.601036
+	1.989952
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara06_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.724817
+	1.087737
+	1.083918
+	1.499306
+	1.865311
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.980094
+	1.192794
+	1.192982
+	1.509323
+	1.955851
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+cuchara05_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.163182
+	1.813873
+	1.996512
+	1.999985
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+tuerca09_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.984777
+	1.999981
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996298
+	1.014154
+	1.018551
+	1.693366
+	1.991685
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.508474
+	0.951505
+	0.951526
+	1.223877
+	1.826308
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca09_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.940632
+	1.999763
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_29_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995481
+	1.999994
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask23.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+lapicera05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.497288
+	0.971935
+	0.968456
+	1.450446
+	1.929315
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991024
+	1.110335
+	1.276581
+	1.925822
+	1.997039
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999741
+	1.013872
+	1.059106
+	1.874893
+	1.998285
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo05_9_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.769161
+	1.959398
+	1.999989
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997212
+	1.005766
+	1.023855
+	1.838048
+	1.997128
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.090963
+	1.09816
+	1.095987
+	1.43788
+	1.886349
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99507
+	0.954841
+	0.963388
+	1.849159
+	1.998463
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.040998
+	1.018864
+	1.022509
+	1.654446
+	1.979475
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+tornillo05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.906206
+	1.999199
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.993614
+	0.988835
+	0.984558
+	0.983592
+	1.014198
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.993211
+	0.967642
+	0.977336
+	1.814693
+	1.997909
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+empty_white_mask11.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+pinza_grande06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.999987
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_3;agarre_indefinido
+clavo03_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.001532
+	0.982578
+	0.978384
+	1.20701
+	1.685778
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_1;agarre_indefinido
+clavo03_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.987985
+	0.904621
+	0.898937
+	1.335865
+	1.961844
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+pinza_grande06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.96642
+	1.070517
+	1.235566
+	1.607201
+	1.905054
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.023496
+	0.970004
+	0.97308
+	1.432409
+	1.933784
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+cuchara06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995434
+	1.03337
+	1.035648
+	1.667079
+	1.97907
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.145176
+	1.144179
+	1.14362
+	1.139501
+	1.151565
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tornillo05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.966803
+	1.999936
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tenedor05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99649
+	1.045495
+	1.063822
+	1.830845
+	1.990285
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.982741
+	0.973338
+	0.973737
+	1.011226
+	1.721052
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_2;agarre_indefinido
+tenedor06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.976897
+	0.977687
+	0.987
+	1.769899
+	1.993321
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.206634
+	1.204698
+	1.201525
+	1.20359
+	1.198698
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+destornillador06_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.058359
+	1.042144
+	1.038111
+	1.249538
+	1.901706
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca07_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997575
+	1.999998
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999807
+	0.905478
+	0.967516
+	1.846895
+	1.998486
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tenedor06_26_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.953457
+	1.132839
+	1.148783
+	1.586088
+	1.950843
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera06_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999938
+	0.923654
+	1.134268
+	1.900272
+	1.999463
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca09_12_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995875
+	1.999996
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera05_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998501
+	0.952238
+	1.014492
+	1.862451
+	1.999154
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador05_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.845754
+	1.023563
+	1.028546
+	1.769514
+	1.991506
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+destornillador06_10_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.029884
+	1.023638
+	1.018511
+	1.028914
+	1.62386
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+destornillador05_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994977
+	1.018451
+	1.023358
+	1.703644
+	1.988611
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+martillo05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.080489
+	1.080018
+	1.080517
+	1.090391
+	1.476135
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tuerca08_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.998909
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca08_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.981798
+	1.999978
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.029376
+	1.03364
+	1.030898
+	1.27705
+	1.91268
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.023373
+	1.014444
+	1.009637
+	1.347033
+	1.801971
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+tenedor05_4_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.97192
+	0.967195
+	0.965752
+	0.971746
+	1.19273
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+tuerca08_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.992271
+	1.999991
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.592018
+	1.304354
+	1.944009
+	1.999643
+	1.999998
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+tuerca07_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999316
+	2.0
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tuerca07_24_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.988099
+	1.999976
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+empty_white_mask20.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+destornillador06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.064746
+	1.068175
+	1.065926
+	1.512482
+	1.923702
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+pinza_grande05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.959632
+	0.954035
+	0.951674
+	0.955824
+	0.965365
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999788
+	0.965158
+	1.139027
+	1.630869
+	1.994608
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador06_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.983883
+	0.911167
+	0.936101
+	1.118057
+	1.772188
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+tornillo05_14_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.894967
+	1.998364
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+destornillador05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.991694
+	0.971485
+	1.040091
+	1.895866
+	1.998086
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca07_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.989764
+	1.999988
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999172
+	0.965802
+	1.100132
+	1.873125
+	1.997878
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.97367
+	0.969217
+	0.967546
+	0.972905
+	1.174638
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tuerca08_7_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99459
+	1.999993
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.96288
+	0.957174
+	0.960295
+	0.960806
+	0.95677
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.833303
+	0.773855
+	0.780289
+	0.903866
+	1.296645
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera06_22_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999945
+	0.91671
+	1.118675
+	1.87402
+	1.999295
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tuerca08_0_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	2.0
+	1.882451
+	1.998757
+	1.999995
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.978091
+	0.974967
+	0.983746
+	1.813881
+	1.994419
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_28_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.041824
+	1.391345
+	1.914537
+	1.99927
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+cuchara05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999709
+	0.877929
+	1.07151
+	1.907472
+	1.999438
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999999
+	1.102458
+	1.503061
+	1.945855
+	1.999202
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_2;agarre_1
+clavo03_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.68023
+	1.329652
+	1.334823
+	1.506883
+	1.884864
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";agarre_1;agarre_1
+lapicera06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999606
+	0.863058
+	1.157003
+	1.928217
+	1.999672
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+destornillador05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.996113
+	1.02162
+	1.021287
+	1.687438
+	1.989853
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+cuchara06_15_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999451
+	1.066915
+	1.067891
+	1.747238
+	1.990636
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+clavo03_5_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.981709
+	1.055612
+	1.063987
+	1.654951
+	1.97311
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_1;agarre_2
+cuchara06_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994969
+	0.947542
+	1.020355
+	1.906198
+	1.999192
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tenedor05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.990415
+	1.032973
+	1.052695
+	1.799291
+	1.990052
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask28.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+tenedor05_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999505
+	1.011703
+	1.01728
+	1.789917
+	1.992603
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+martillo05_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.918004
+	0.914906
+	0.919213
+	0.91899
+	0.914036
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+pinza_grande06_16_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.012349
+	1.012234
+	1.011781
+	1.015319
+	1.289075
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tornillo05_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.798943
+	1.982299
+	1.999998
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+pinza_grande05_3_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.069452
+	1.066708
+	1.061483
+	1.058696
+	1.168754
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+lapicera05_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.995215
+	0.923765
+	0.92699
+	1.735066
+	1.993522
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask3.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+destornillador06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.994776
+	0.970029
+	0.983853
+	1.862716
+	1.998151
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_2
+tuerca07_25_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.99895
+	1.999999
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+martillo06_13_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.060299
+	1.031202
+	1.029024
+	1.459251
+	1.87814
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_3;agarre_indefinido
+lapicera06_27_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.999797
+	0.850407
+	1.230077
+	1.962755
+	1.999847
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_8_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.948412
+	1.162064
+	1.162856
+	1.377227
+	1.931544
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+lapicera05_11_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.997987
+	0.958097
+	0.997889
+	1.847878
+	1.999027
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+pinza_grande05_1_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.875219
+	0.867711
+	0.866923
+	0.874763
+	1.04713
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_3;agarre_3
+tenedor05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.918998
+	0.915393
+	0.916163
+	0.916206
+	0.91395
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";agarre_2;agarre_3
+empty_white_mask29.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+destornillador06_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	1
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.970736
+	0.95988
+	0.959556
+	0.967546
+	1.564023
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	1
+	2
+]";agarre_3;agarre_indefinido
+cuchara05_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.95798
+	1.06423
+	1.069985
+	1.627319
+	1.955462
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_19_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.942393
+	1.999616
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+tornillo05_17_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.790047
+	1.962867
+	1.999986
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+cuchara05_18_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.752402
+	0.990866
+	0.991954
+	1.548097
+	1.956233
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+tornillo06_2_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.842874
+	1.920846
+	1.999883
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
+lapicera06_23_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.677739
+	0.970887
+	0.971679
+	1.649545
+	1.985817
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+empty_white_mask14.png;"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";"shape: (5,)
+Series: '' [f64]
+[
+	0.176227
+	0.146638
+	0.143558
+	0.14326
+	0.24978
+]";"shape: (5,)
+Series: '' [i64]
+[
+	0
+	0
+	0
+	0
+	0
+]";agarre_0;agarre_0
+lapicera05_6_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.975248
+	0.920119
+	1.003715
+	1.941037
+	1.999493
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_2
+cuchara05_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	1
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.05048
+	0.983244
+	0.980935
+	1.365829
+	1.863979
+]";"shape: (5,)
+Series: '' [i64]
+[
+	1
+	1
+	1
+	2
+	2
+]";agarre_2;agarre_indefinido
+tornillo06_20_mask.png;"shape: (5,)
+Series: '' [i64]
+[
+	2
+	1
+	2
+	2
+	2
+]";"shape: (5,)
+Series: '' [f64]
+[
+	1.905691
+	1.998633
+	2.0
+	2.0
+	2.0
+]";"shape: (5,)
+Series: '' [i64]
+[
+	2
+	2
+	2
+	2
+	2
+]";agarre_1;agarre_indefinido
