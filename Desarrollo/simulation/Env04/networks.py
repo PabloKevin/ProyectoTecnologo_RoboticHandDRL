@@ -21,7 +21,7 @@ class CriticNetwork(nn.Module):
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
-        self.fc5 = nn.Linear(hidden_layers[2], 1)
+        self.fc4 = nn.Linear(hidden_layers[2], 1)
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
 
@@ -61,7 +61,7 @@ class ActorNetwork(nn.Module):
         self.fc1 = nn.Linear(input_dims, hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
-        self.fc5 = nn.Linear(hidden_layers[2], n_actions)
+        self.fc4 = nn.Linear(hidden_layers[2], n_actions)
         
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
