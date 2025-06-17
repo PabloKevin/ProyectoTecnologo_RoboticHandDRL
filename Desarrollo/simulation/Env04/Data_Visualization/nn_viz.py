@@ -9,6 +9,8 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 import networkx as nx
+import numpy as np
+from matplotlib import cm
 from networks import CriticNetwork, ActorNetwork
 
 def visualizar_red(modelo: nn.Module):
@@ -17,26 +19,27 @@ def visualizar_red(modelo: nn.Module):
     nodo_id = 0
     nodos_por_capa = []
 
-    # Paso 1: determinar cantidad de nodos por capa
+    # Paso 1: identificar capas lineales
     capas_lineales = [m for m in modelo.modules() if isinstance(m, nn.Linear)]
-    sizes = []
-    for i, capa in enumerate(capas_lineales):
-        sizes.append(capa.in_features if i == 0 else capa.out_features)
-    sizes.append(capas_lineales[-1].out_features)  # última capa
 
+    # Paso 2: cantidad de nodos por capa (sin nodo de salida adicional)
+    sizes = [capas_lineales[0].in_features] + [c.out_features for c in capas_lineales]
+
+    # Paso 3: crear nodos y posiciones centradas
     for i, cant in enumerate(sizes):
         nodos = []
-        # calcular desplazamiento vertical para centrar
         offset = (max(sizes) - cant) / 2
         for j in range(cant):
             G.add_node(nodo_id)
-            posiciones[nodo_id] = (i, -j - offset)  # centrado vertical
+            posiciones[nodo_id] = (i, -j - offset)
             nodos.append(nodo_id)
             nodo_id += 1
         nodos_por_capa.append(nodos)
 
-    # Paso 3: crear edges con pesos reales
+    # Paso 4: crear aristas con color y alpha según pesos
+    min_alpha = 0.1
     max_peso = max(p.weight.abs().max().item() for p in capas_lineales)
+
     for idx, capa in enumerate(capas_lineales):
         pesos = capa.weight.data
         origen = nodos_por_capa[idx]
@@ -45,15 +48,41 @@ def visualizar_red(modelo: nn.Module):
             for i, n_in in enumerate(origen):
                 w = pesos[j, i].item()
                 color = 'red' if w > 0 else 'blue'
-                min_alpha = 0.2  # valor mínimo de opacidad
                 alpha = min_alpha + (1 - min_alpha) * (abs(w) / max_peso)
                 G.add_edge(n_in, n_out, color=color, alpha=alpha)
 
-    # Paso 4: dibujar
-    # Dibujar nodos
-    nx.draw_networkx_nodes(G, pos=posiciones, node_size=100, node_color="#66a3c7", edgecolors='black')
+    # Paso 5: calcular colores de nodos por suma de pesos salientes
+    node_colors = {}
+    max_salida_total = max(
+        capa.weight.data.sum(dim=0).abs().max().item()
+        for capa in capas_lineales
+    )
 
-    # Dibujar aristas una por una con su color y alpha
+    for idx, capa in enumerate(capas_lineales):
+        pesos = capa.weight.data
+        for i, node_id in enumerate(nodos_por_capa[idx]):
+            suma = pesos[:, i].sum().item()  # salientes desde esta neurona
+            alpha = min_alpha + (1 - min_alpha) * abs(suma) / max_salida_total
+            color_map = cm.Reds if suma > 0 else cm.Blues
+            rgba = color_map(alpha)
+            hex_color = "#{:02x}{:02x}{:02x}".format(
+                int(rgba[0]*255), int(rgba[1]*255), int(rgba[2]*255)
+            )
+            node_colors[node_id] = hex_color
+
+    # Última capa (sin salidas): color neutro
+    for node_id in nodos_por_capa[-1]:
+        node_colors[node_id] = "#cccccc"
+
+    # Paso 6: dibujar nodos y conexiones
+    nx.draw_networkx_nodes(
+        G,
+        pos=posiciones,
+        node_size=100,
+        node_color=[node_colors.get(n, "#cccccc") for n in G.nodes()],
+        edgecolors='black'
+    )
+
     for u, v in G.edges():
         color = G[u][v]['color']
         alpha = G[u][v]['alpha']
@@ -66,13 +95,12 @@ def visualizar_red(modelo: nn.Module):
             width=1
         )
 
-    # Opcional: agregar título y quitar ejes
-    plt.title("Red neuronal con pesos reales (color = signo, opacidad = magnitud)")
+    plt.title("Red neuronal con pesos reales\nColor de nodo: suma de pesos salientes | Aristas: peso (signo y magnitud)")
     plt.axis('off')
     plt.show()
 
-# 🧠 EJEMPLO DE USO:
-# from tu_archivo import CriticNetwork  # o ObserverNetwork
-modelo = ActorNetwork(hidden_layers=[64,32,16])
-modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))  # si ya lo entrenaste
+# 🧠 USO
+modelo = ActorNetwork(hidden_layers=[64, 32, 16])
+modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
+modelo.eval()
 visualizar_red(modelo)
