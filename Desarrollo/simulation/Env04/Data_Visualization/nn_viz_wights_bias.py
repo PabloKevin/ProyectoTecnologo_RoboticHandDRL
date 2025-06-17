@@ -143,7 +143,7 @@ def visualizar_red(modelo: nn.Module, name, act_func):
     x_max = espaciado_horizontal * (len(sizes) - 1) + 10
     y_max = (max_nodes - 1) / 2 * espaciado_vertical +10
 
-    plt.title(f"Visualización de la arquitectura y pesos de la red neuronal {name}")
+    plt.title(f"Visualización de la arquitectura y pesos de la red neuronal {name}", fontsize=16)
 
     # Aristas: peso (color)
     red_line = Line2D([0], [0], color='red', lw=2, label='Peso positivo')
@@ -179,7 +179,8 @@ def visualizar_red(modelo: nn.Module, name, act_func):
         handles=[red_line, blue_line, node_red, node_blue, node_green, node_grey, opacity_note],
         loc='upper right',            # posición base de referencia
         bbox_to_anchor=(1, 0.98), # coordenadas X e Y relativas al gráfico
-        frameon=True
+        frameon=True,
+        fontsize=12,
     )
 
     nodos = [len(n) for n in nodos_por_capa]
@@ -201,7 +202,7 @@ def visualizar_red(modelo: nn.Module, name, act_func):
             t,
             ha='center',
             va='top',
-            fontsize=10
+            fontsize=12
         )
 
     plt.xlim(-10, x_max)
