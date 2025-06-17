@@ -17,7 +17,7 @@ import numpy as np
 from matplotlib import cm
 from networks import CriticNetwork, ActorNetwork
 
-def visualizar_red(modelo: nn.Module, name):
+def visualizar_red(modelo: nn.Module, name, act_func):
     G = nx.DiGraph()
     posiciones = {}
     nodo_id = 0
@@ -68,26 +68,39 @@ def visualizar_red(modelo: nn.Module, name):
 
     # Paso 5: calcular colores de nodos por suma de pesos salientes
     node_colors = {}
-    max_salida_total = max(
-        capa.weight.data.sum(dim=0).abs().max().item()
-        for capa in capas_lineales
-    )
+    min_alpha = 0.2
+
+    # 1. Capa de entrada: color por suma de pesos salientes
+    pesos_entrada = capas_lineales[0].weight.data
+    max_salida_entrada = pesos_entrada.sum(dim=0).abs().max().item()
+
+    for i, node_id in enumerate(nodos_por_capa[0]):
+        suma = pesos_entrada[:, i].sum().item()
+        alpha = min_alpha + (1 - min_alpha) * abs(suma) / max_salida_entrada
+        color_map = cm.Reds if suma > 0 else cm.Blues
+        rgba = color_map(alpha)
+        hex_color = "#{:02x}{:02x}{:02x}".format(
+            int(rgba[0]*255), int(rgba[1]*255), int(rgba[2]*255)
+        )
+        node_colors[node_id] = hex_color
+
+    # 2. Resto de las capas: color por bias
+    # Recorremos capas ocultas + salida
+    max_bias = max(c.bias.abs().max().item() for c in capas_lineales)
 
     for idx, capa in enumerate(capas_lineales):
-        pesos = capa.weight.data
-        for i, node_id in enumerate(nodos_por_capa[idx]):
-            suma = pesos[:, i].sum().item()  # salientes desde esta neurona
-            alpha = min_alpha + (1 - min_alpha) * abs(suma) / max_salida_total
-            color_map = cm.Reds if suma > 0 else cm.Blues
+        bias = capa.bias.data
+        destino = nodos_por_capa[idx + 1]
+        for i, node_id in enumerate(destino):
+            b = bias[i].item()
+            alpha = min_alpha + (1 - min_alpha) * abs(b) / max_bias
+            color_map = cm.Greens if b > 0 else cm.Greys
             rgba = color_map(alpha)
             hex_color = "#{:02x}{:02x}{:02x}".format(
                 int(rgba[0]*255), int(rgba[1]*255), int(rgba[2]*255)
             )
             node_colors[node_id] = hex_color
 
-    # Última capa (sin salidas): color neutro
-    for node_id in nodos_por_capa[-1]:
-        node_colors[node_id] = "#cccccc"
 
     # Paso 6: dibujar nodos y conexiones
     nx.draw_networkx_nodes(
@@ -137,15 +150,33 @@ def visualizar_red(modelo: nn.Module, name):
     blue_line = Line2D([0], [0], color='blue', lw=2, label='Peso negativo')
 
     # Nodos: suma de pesos salientes
-    node_red = mpatches.Circle((0, 0), radius=6, facecolor=cm.Reds(0.8), edgecolor='black', label='Nodo: pesos salientes positivos')
-    node_blue = mpatches.Circle((0, 0), radius=6, facecolor=cm.Blues(0.8), edgecolor='black', label='Nodo: pesos salientes negativos')
+    node_red = Line2D([0], [0], marker='o', color='w',
+                  markerfacecolor=cm.Reds(0.8),
+                  markeredgecolor='black',
+                  markersize=10,
+                  label='Nodo: suma pesos salientes es positiva')
+    node_blue = Line2D([0], [0], marker='o', color='w',
+                   markerfacecolor=cm.Blues(0.8),
+                   markeredgecolor='black',
+                   markersize=10,
+                   label='Nodo: suma pesos salientes es negativa')
+    node_green = Line2D([0], [0], marker='o', color='w',
+                   markerfacecolor=cm.Greens(0.8),
+                   markeredgecolor='black',
+                   markersize=10,
+                   label='Nodo: bias positivos')
+    node_grey = Line2D([0], [0], marker='o', color='w',
+                   markerfacecolor=cm.Greys(0.8),
+                   markeredgecolor='black',
+                   markersize=10,
+                   label='Nodo: bias negativos')
 
     # Texto explicativo sin símbolo
-    opacity_note = Line2D([0], [0], color='none', label='Opacidad ∝ magnitud del peso')
+    opacity_note = Line2D([0], [0], color='none', label='Opacidad ∝ magnitud')
 
     # Mostrar la leyenda
     plt.legend(
-        handles=[red_line, blue_line, node_red, node_blue, opacity_note],
+        handles=[red_line, blue_line, node_red, node_blue, node_green, node_grey, opacity_note],
         loc='upper right',            # posición base de referencia
         bbox_to_anchor=(1, 0.98), # coordenadas X e Y relativas al gráfico
         frameon=True
@@ -153,17 +184,21 @@ def visualizar_red(modelo: nn.Module, name):
 
     nodos = [len(n) for n in nodos_por_capa]
 
+    y_layers = [20,3,20,30,40]
     for i, n in enumerate(nodos):
         if i==0:
-            t = f"Input Layer"
+            t = f"Input Layer ∈ ℝ^{n}"
         elif i == len(nodos) - 1:
-            t = f"Output Layer"
+            try:
+                t = f"Output Layer ∈ ℝ^{n} + {act_func[i-1]}"
+            except:
+                t = f"Output Layer ∈ ℝ^{n}"
         else:
-            t = f"Hidden Layer"
+            t = f"Hidden Layer ∈ ℝ^{n} + {act_func[i-1]}"
         plt.text(
             x_max/4*i,
-            -y_max+3,  # Espaciado vertical hacia abajo
-            t+f"∈ ℝ^{n}",
+            -y_max+y_layers[i],  # Espaciado vertical hacia abajo
+            t,
             ha='center',
             va='top',
             fontsize=10
@@ -178,11 +213,12 @@ def visualizar_red(modelo: nn.Module, name):
 
 
 # USO
-#modelo = ActorNetwork(hidden_layers=[64, 32, 16])
-#modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
+modelo = ActorNetwork(hidden_layers=[64, 32, 16])
+modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
 
-modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
-modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/critic_1_td3"))
+#modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
+#modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/critic_1_td3"))
 
 modelo.eval()
-visualizar_red(modelo, name="Critic TD3")
+visualizar_red(modelo, name="Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU", "tanh"])
+#visualizar_red(modelo, name="Critic TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])

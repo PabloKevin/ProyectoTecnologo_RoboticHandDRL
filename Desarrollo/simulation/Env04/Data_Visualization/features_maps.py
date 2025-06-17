@@ -18,8 +18,8 @@ from observerRGB import MyImageDataset
 # Observer Network
 class ObserverNetwork(nn.Module):
     def __init__(self, 
-                 conv_channels=[2,4], 
-                 hidden_layers=[32, 16, 8], 
+                 conv_channels=[16, 32, 64], 
+                 hidden_layers=[64, 32, 16], 
                  learning_rate= 0.0008,
                  dropout2d=0.3, 
                  dropout=0.3, 
@@ -109,8 +109,8 @@ class ObserverNetwork(nn.Module):
             
         return tool_reg # Tool regresion
     
-    def save_checkpoint(self):
-        torch.save(self.state_dict(), self.checkpoint_file)
+    #def save_checkpoint(self):
+    #    torch.save(self.state_dict(), self.checkpoint_file)
 
     def load_model(self):
         self.load_state_dict(torch.load(self.checkpoint_file))
@@ -148,8 +148,10 @@ def get_random_image(train_dataset):
         
 train_dataset = MyImageDataset("Desarrollo/simulation/Env04/DataSets/TrainSet_masks", name="full_train_masks_dataset")
 
-observer = ObserverNetwork(checkpoint_dir="Desarrollo/simulation/Env04/tmp/observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
-observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test")
+#observer = ObserverNetwork(checkpoint_dir="Desarrollo/simulation/Env04/tmp/observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+#observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test")
+observer = ObserverNetwork(checkpoint_dir="Desarrollo/simulation/Env04/models_params_weights/observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test_logits_best2")
 observer.load_model()
 observer.eval()
 
