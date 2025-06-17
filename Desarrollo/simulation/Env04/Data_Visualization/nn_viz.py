@@ -4,6 +4,10 @@ current_dir = os.path.dirname(__file__)
 # Un nivel arriba (donde está networks.py)
 parent_dir = os.path.join(current_dir, "..")
 sys.path.append(os.path.abspath(parent_dir))
+from matplotlib.patches import PathPatch
+from matplotlib.path import Path
+import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 
 import torch
 import torch.nn as nn
@@ -26,15 +30,26 @@ def visualizar_red(modelo: nn.Module):
     sizes = [capas_lineales[0].in_features] + [c.out_features for c in capas_lineales]
 
     # Paso 3: crear nodos y posiciones centradas
+    espaciado_vertical = 2.0
+    espaciado_horizontal = 45.0
+
+    max_nodes = max(sizes)
+
+    posiciones = {}
+    nodo_id = 0
+    nodos_por_capa = []
+
     for i, cant in enumerate(sizes):
         nodos = []
-        offset = (max(sizes) - cant) / 2
         for j in range(cant):
+            x = i * espaciado_horizontal
+            y = - (j - (cant - 1) / 2) * espaciado_vertical
+            posiciones[nodo_id] = (x, y)
             G.add_node(nodo_id)
-            posiciones[nodo_id] = (i, -j - offset)
             nodos.append(nodo_id)
             nodo_id += 1
         nodos_por_capa.append(nodos)
+
 
     # Paso 4: crear aristas con color y alpha según pesos
     min_alpha = 0.1
@@ -83,21 +98,77 @@ def visualizar_red(modelo: nn.Module):
         edgecolors='black'
     )
 
+    # Dibujar conexiones con curvas Bézier
+    ax = plt.gca()
     for u, v in G.edges():
+        x1, y1 = posiciones[u]
+        x2, y2 = posiciones[v]
         color = G[u][v]['color']
         alpha = G[u][v]['alpha']
-        nx.draw_networkx_edges(
-            G,
-            pos=posiciones,
-            edgelist=[(u, v)],
-            edge_color=color,
-            alpha=alpha,
-            width=1
+
+        # Calcular puntos de control para una curva Bézier de grado 3 (curva en "S")
+        dx = (x2 - x1) * 0.4  # ajuste de curvatura horizontal
+        control1 = (x1 + dx, y1)
+        control2 = (x2 - dx, y2)
+
+        # Crear el Path de la curva Bézier
+        vertices = [ (x1, y1), control1, control2, (x2, y2) ]
+        codes = [Path.MOVETO, Path.CURVE4, Path.CURVE4, Path.CURVE4]
+        path = Path(vertices, codes)
+
+        # Dibujar la curva
+        patch = PathPatch(
+            path,
+            facecolor='none',
+            edgecolor=color,
+            lw=0.5,
+            alpha=alpha
+        )
+        ax.add_patch(patch)
+
+    # Calcular límites manuales
+    x_max = espaciado_horizontal * (len(sizes) - 1) + 10
+    y_max = (max_nodes - 1) / 2 * espaciado_vertical +10
+
+    plt.title("Visualización de red Actor")
+
+    # Aristas: peso (color)
+    red_line = Line2D([0], [0], color='red', lw=2, label='Peso positivo')
+    blue_line = Line2D([0], [0], color='blue', lw=2, label='Peso negativo')
+
+    # Nodos: suma de pesos salientes
+    node_red = mpatches.Circle((0, 0), radius=6, facecolor=cm.Reds(0.8), edgecolor='black', label='Nodo: pesos salientes positivos')
+    node_blue = mpatches.Circle((0, 0), radius=6, facecolor=cm.Blues(0.8), edgecolor='black', label='Nodo: pesos salientes negativos')
+
+    # Texto explicativo sin símbolo
+    opacity_note = Line2D([0], [0], color='none', label='Opacidad ∝ magnitud del peso')
+
+    # Mostrar la leyenda
+    plt.legend(
+        handles=[red_line, blue_line, node_red, node_blue, opacity_note],
+        loc='upper right',            # posición base de referencia
+        bbox_to_anchor=(1, 0.98), # coordenadas X e Y relativas al gráfico
+        frameon=True
+    )
+
+
+    for i, n in enumerate([11,64,32,16,1]):
+        plt.text(
+            x_max/4*i,
+            -y_max+3,  # Espaciado vertical hacia abajo
+            f"Hidden Layer ∈ ℝ^{n}",
+            ha='center',
+            va='top',
+            fontsize=10
         )
 
-    plt.title("Red neuronal con pesos reales\nColor de nodo: suma de pesos salientes | Aristas: peso (signo y magnitud)")
+    plt.xlim(-10, x_max)
+    plt.ylim(-y_max, y_max)
     plt.axis('off')
+    plt.gca().set_aspect('equal', adjustable='box')  # asegura relación 1:1 real
+    plt.tight_layout()
     plt.show()
+
 
 # 🧠 USO
 modelo = ActorNetwork(hidden_layers=[64, 32, 16])
