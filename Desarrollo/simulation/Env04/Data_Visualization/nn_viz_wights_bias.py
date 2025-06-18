@@ -17,6 +17,110 @@ import numpy as np
 from matplotlib import cm
 from networks import CriticNetwork, ActorNetwork
 
+def anotar_inputs(ax, posiciones, input_dims, x=0, ancho=2.0, curvatura=3.0):
+    """
+    Dibuja una llave tipo { más curvada, desde y1 a y2 en la posición x.
+    - `ancho` es cuánto sobresale horizontalmente
+    - `curvatura` determina lo "curvada" que se ve
+    """
+    y1 = posiciones[0][1]
+    y2 = posiciones[9][1]
+    mid = (y1 + y2) / 2
+    dis = abs(y2 - y1)
+
+    verts = [
+        (x + ancho, y2),            # inicio arriba derecha
+        (x, y2+dis*0.1),            # inicio arriba derecha
+        (x-curvatura*0.1, mid),        # curva arriba
+        (x, y1-dis*0.1),            # inicio arriba derecha
+        (x + ancho, y1)             # final abajo derecha
+    ]
+    codes = [
+        Path.MOVETO,
+        Path.CURVE3,
+        Path.CURVE3,
+        Path.CURVE3,
+        Path.CURVE3
+    ]
+
+    path = Path(verts, codes)
+    patch = PathPatch(path, lw=2, edgecolor='black', facecolor='none')
+    ax.add_patch(patch)
+
+    h = [mid, posiciones[10][1], posiciones[11][1]] if input_dims==12 else [mid, posiciones[10][1]]
+    for j in h:
+        ax.annotate(
+            '',                      # sin texto
+            xy=(x-curvatura*1.3, j),       # punta de la flecha
+            xytext=(x+curvatura*0.7, j),   # base de la flecha
+            fontsize=12,
+            arrowprops=dict(
+                arrowstyle='->',
+                color='black',
+                lw=2
+            )
+        )
+
+    ax.annotate(
+            '',                      # sin texto
+            xy=(posiciones[-1][0]+8, posiciones[-1][1]),       # punta de la flecha
+            xytext=(posiciones[-1][0]+2, posiciones[-1][1]),   # base de la flecha
+            fontsize=12,
+            arrowprops=dict(
+                arrowstyle='->',
+                color='black',
+                lw=2
+            )
+        )
+
+    plt.text(
+        -14,
+        mid+2.0,  # Espaciado vertical hacia abajo
+        "logits",
+        ha='center',
+        va='top',
+        fontsize=12
+    )
+
+    plt.text(
+        -19,
+        posiciones[10][1]+2.5,  # Espaciado vertical hacia abajo
+        "finger index",
+        ha='center',
+        va='top',
+        fontsize=12
+    )
+
+    if input_dims==12: 
+        plt.text(
+            -13,
+            posiciones[11][1]+1.5,  # Espaciado vertical hacia abajo
+            "state",
+            ha='center',
+            va='top',
+            fontsize=12
+        )
+        plt.text(
+            posiciones[-1][0]+14.5,
+            posiciones[-1][1]+1.8,  # Espaciado vertical hacia abajo
+            "Q-value",
+            ha='center',
+            va='top',
+            fontsize=12
+        )
+    elif input_dims==11:
+        plt.text(
+            posiciones[-1][0]+18,
+            posiciones[-1][1]+1.8,  # Espaciado vertical hacia abajo
+            "finger action",
+            ha='center',
+            va='top',
+            fontsize=12
+        )
+
+
+
+
 def visualizar_red(modelo: nn.Module, name, act_func):
     G = nx.DiGraph()
     posiciones = {}
@@ -183,13 +287,11 @@ def visualizar_red(modelo: nn.Module, name, act_func):
         fontsize=12,
     )
 
-    nodos = [len(n) for n in nodos_por_capa]
-
     y_layers = [20,3,20,30,40]
-    for i, n in enumerate(nodos):
+    for i, n in enumerate(sizes):
         if i==0:
             t = f"Input Layer ∈ ℝ^{n}"
-        elif i == len(nodos) - 1:
+        elif i == len(sizes) - 1:
             try:
                 t = f"Output Layer ∈ ℝ^{n} + {act_func[i-1]}"
             except:
@@ -205,21 +307,24 @@ def visualizar_red(modelo: nn.Module, name, act_func):
             fontsize=12
         )
 
+    anotar_inputs(ax, list(posiciones.values()), input_dims=sizes[0], x=-5)
+
     plt.xlim(-10, x_max)
     plt.ylim(-y_max, y_max)
     plt.axis('off')
     plt.gca().set_aspect('equal', adjustable='box')  # asegura relación 1:1 real
-    plt.tight_layout()
+    #plt.tight_layout()
     plt.show()
+
 
 
 # USO
 modelo = ActorNetwork(hidden_layers=[64, 32, 16])
-modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
+#modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/target_actor_td3"))
 
 #modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
-#modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/critic_1_td3"))
+modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
 
 modelo.eval()
-visualizar_red(modelo, name="Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU", "tanh"])
-#visualizar_red(modelo, name="Critic TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])
+#visualizar_red(modelo, name="Target Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU", "tanh"])
+visualizar_red(modelo, name="Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])
