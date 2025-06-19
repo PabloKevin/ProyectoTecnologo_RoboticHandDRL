@@ -323,8 +323,8 @@ modelo = ActorNetwork(hidden_layers=[64, 32, 16])
 #modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/target_actor_td3"))
 
 #modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
-modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/actor_td3"))
+modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/tmp/td3/actor_td3"))
 
 modelo.eval()
 #visualizar_red(modelo, name="Target Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU", "tanh"])
-visualizar_red(modelo, name="Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])
+visualizar_red(modelo, name="Actor TD3 501 episodes", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])

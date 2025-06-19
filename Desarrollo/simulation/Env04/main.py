@@ -19,7 +19,7 @@ if __name__ == '__main__':
     critic_learning_rate = 0.0008 #0.001   0.001
     batch_size = 128 #128
 
-    hidden_layers=[32,16,8,4] #256
+    hidden_layers=[64,32,16] #256
     warmup = 1200 * 5
     episodes = 6000 #10000
     env.reward_weights["reward_alpha"] = 1
