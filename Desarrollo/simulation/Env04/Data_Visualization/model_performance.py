@@ -117,9 +117,9 @@ class Model_Metrics():
             self.calculate_bool_labels()
 
         # Metrics Calculation
-        self.f1 = f1_score(self.true_labels, self.pred_labels, average="macro")
-        self.precision_val = precision_score(self.true_labels, self.pred_labels, average="macro")
-        self.recall_val = recall_score(self.true_labels, self.pred_labels, average="macro")
+        self.f1 = f1_score(self.true_labels, self.pred_labels, average="weighted")
+        self.precision_val = precision_score(self.true_labels, self.pred_labels, average="weighted")
+        self.recall_val = recall_score(self.true_labels, self.pred_labels, average="weighted")
         self.accuracy = np.mean(np.array(self.true_labels) == np.array(self.pred_labels))
 
         if show:
@@ -251,11 +251,12 @@ if __name__ == "__main__":
 
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer/"
     #model_name = "observer_best_test"
-    model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
-    model_name = "observer_best_test_logits_best2"
+    #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
+    #model_name = "observer_best_test_logits_best2"
 
-    #model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/"
-    #model_name = "observer_final_v1"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v4/"
+    model_name = "observer_final_v1"
+    #model_name = "observer_epoch_30"
 
     conv_channels = [16, 32, 64]
     hidden_layers = [64, 32, 16]

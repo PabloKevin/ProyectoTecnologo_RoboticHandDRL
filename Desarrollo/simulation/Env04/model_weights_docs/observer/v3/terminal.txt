@@ -1,0 +1,1205 @@
+(RoboticHand_ML) (base) pablo_kevin@Apolo-Nitro-PK:~/ProyectoTecnologo_RoboticHandDRL$ /home/pablo_kevin/miniconda3/envs/RoboticHand_ML/bin/python /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env04/observerRGB_docs.py
+Created Observer Network on device: cuda:0
+Epoch [1/100] - Train Loss: 2.2970
+Train duration: 3.47 seconds
+------
+Checkpoint saved for epoch 1
+------
+           Validation Loss: 2.2942
+Validation duration: 2.67 seconds
+Epoch duration: 6.14 seconds
+
+           Test Loss: 2.2993
+F1-score: 0.0033
+Test duration: 2.79 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [2/100] - Train Loss: 2.2967
+Train duration: 3.31 seconds
+           Validation Loss: 2.2928
+Validation duration: 2.75 seconds
+Epoch duration: 6.06 seconds
+
+Epoch [3/100] - Train Loss: 2.2919
+Train duration: 3.25 seconds
+           Validation Loss: 2.2897
+Validation duration: 2.71 seconds
+Epoch duration: 5.96 seconds
+
+           Test Loss: 2.2960
+F1-score: 0.0033
+Test duration: 2.74 seconds
+Epoch [4/100] - Train Loss: 2.2902
+Train duration: 3.30 seconds
+           Validation Loss: 2.2782
+Validation duration: 2.71 seconds
+Epoch duration: 6.01 seconds
+
+Epoch [5/100] - Train Loss: 2.2816
+Train duration: 3.49 seconds
+------
+Checkpoint saved for epoch 5
+------
+           Validation Loss: 2.2601
+Validation duration: 2.89 seconds
+Epoch duration: 6.39 seconds
+
+Epoch [6/100] - Train Loss: 2.2658
+Train duration: 3.69 seconds
+           Validation Loss: 2.2250
+Validation duration: 3.07 seconds
+Epoch duration: 6.76 seconds
+
+           Test Loss: 2.2585
+F1-score: 0.0036
+Test duration: 3.03 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [7/100] - Train Loss: 2.2625
+Train duration: 3.37 seconds
+           Validation Loss: 2.1887
+Validation duration: 3.02 seconds
+Epoch duration: 6.39 seconds
+
+Epoch [8/100] - Train Loss: 2.2330
+Train duration: 4.04 seconds
+           Validation Loss: 2.1468
+Validation duration: 2.95 seconds
+Epoch duration: 6.99 seconds
+
+Epoch [9/100] - Train Loss: 2.1688
+Train duration: 3.67 seconds
+           Validation Loss: 2.0324
+Validation duration: 2.91 seconds
+Epoch duration: 6.58 seconds
+
+           Test Loss: 2.1101
+F1-score: 0.1716
+Test duration: 3.08 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [10/100] - Train Loss: 2.1484
+Train duration: 3.50 seconds
+------
+Checkpoint saved for epoch 10
+------
+           Validation Loss: 1.9840
+Validation duration: 3.00 seconds
+Epoch duration: 6.50 seconds
+
+Epoch [11/100] - Train Loss: 2.0602
+Train duration: 3.64 seconds
+           Validation Loss: 1.9149
+Validation duration: 2.78 seconds
+Epoch duration: 6.42 seconds
+
+Epoch [12/100] - Train Loss: 2.0227
+Train duration: 3.49 seconds
+           Validation Loss: 1.8837
+Validation duration: 2.86 seconds
+Epoch duration: 6.36 seconds
+
+           Test Loss: 1.9816
+F1-score: 0.0787
+Test duration: 3.02 seconds
+Epoch [13/100] - Train Loss: 2.0037
+Train duration: 3.68 seconds
+           Validation Loss: 1.8577
+Validation duration: 3.00 seconds
+Epoch duration: 6.68 seconds
+
+Epoch [14/100] - Train Loss: 1.9881
+Train duration: 3.51 seconds
+           Validation Loss: 1.8177
+Validation duration: 2.77 seconds
+Epoch duration: 6.28 seconds
+
+Epoch [15/100] - Train Loss: 1.9531
+Train duration: 3.52 seconds
+------
+Checkpoint saved for epoch 15
+------
+           Validation Loss: 1.7823
+Validation duration: 3.00 seconds
+Epoch duration: 6.52 seconds
+
+           Test Loss: 1.8600
+F1-score: 0.1058
+Test duration: 2.93 seconds
+Epoch [16/100] - Train Loss: 1.8704
+Train duration: 3.66 seconds
+           Validation Loss: 1.7354
+Validation duration: 2.97 seconds
+Epoch duration: 6.63 seconds
+
+Epoch [17/100] - Train Loss: 1.9242
+Train duration: 3.43 seconds
+           Validation Loss: 1.7665
+Validation duration: 2.92 seconds
+Epoch duration: 6.35 seconds
+
+Epoch [18/100] - Train Loss: 1.8984
+Train duration: 3.62 seconds
+           Validation Loss: 1.7541
+Validation duration: 2.99 seconds
+Epoch duration: 6.60 seconds
+
+           Test Loss: 1.8095
+F1-score: 0.1114
+Test duration: 3.13 seconds
+Epoch [19/100] - Train Loss: 1.8760
+Train duration: 3.47 seconds
+           Validation Loss: 1.6780
+Validation duration: 2.92 seconds
+Epoch duration: 6.39 seconds
+
+Epoch [20/100] - Train Loss: 1.8178
+Train duration: 3.53 seconds
+------
+Checkpoint saved for epoch 20
+------
+           Validation Loss: 1.6385
+Validation duration: 2.91 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [21/100] - Train Loss: 1.8256
+Train duration: 3.62 seconds
+           Validation Loss: 1.5999
+Validation duration: 2.72 seconds
+Epoch duration: 6.34 seconds
+
+           Test Loss: 1.6797
+F1-score: 0.3018
+Test duration: 2.95 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [22/100] - Train Loss: 1.8097
+Train duration: 3.62 seconds
+           Validation Loss: 1.5851
+Validation duration: 2.96 seconds
+Epoch duration: 6.57 seconds
+
+Epoch [23/100] - Train Loss: 1.8162
+Train duration: 3.58 seconds
+           Validation Loss: 1.5529
+Validation duration: 2.94 seconds
+Epoch duration: 6.52 seconds
+
+Epoch [24/100] - Train Loss: 1.7862
+Train duration: 3.56 seconds
+           Validation Loss: 1.5314
+Validation duration: 2.91 seconds
+Epoch duration: 6.48 seconds
+
+           Test Loss: 1.6070
+F1-score: 0.4278
+Test duration: 3.01 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [25/100] - Train Loss: 1.7857
+Train duration: 3.56 seconds
+------
+Checkpoint saved for epoch 25
+------
+           Validation Loss: 1.5187
+Validation duration: 2.89 seconds
+Epoch duration: 6.45 seconds
+
+Epoch [26/100] - Train Loss: 1.7566
+Train duration: 3.48 seconds
+           Validation Loss: 1.5250
+Validation duration: 2.98 seconds
+Epoch duration: 6.46 seconds
+
+Epoch [27/100] - Train Loss: 1.7529
+Train duration: 3.53 seconds
+           Validation Loss: 1.4740
+Validation duration: 2.88 seconds
+Epoch duration: 6.41 seconds
+
+           Test Loss: 1.5268
+F1-score: 0.4732
+Test duration: 3.05 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [28/100] - Train Loss: 1.7183
+Train duration: 3.61 seconds
+           Validation Loss: 1.4449
+Validation duration: 2.96 seconds
+Epoch duration: 6.57 seconds
+
+Epoch [29/100] - Train Loss: 1.7172
+Train duration: 3.63 seconds
+           Validation Loss: 1.4478
+Validation duration: 2.92 seconds
+Epoch duration: 6.55 seconds
+
+Epoch [30/100] - Train Loss: 1.7160
+Train duration: 3.61 seconds
+------
+Checkpoint saved for epoch 30
+------
+           Validation Loss: 1.4187
+Validation duration: 2.91 seconds
+Epoch duration: 6.52 seconds
+
+           Test Loss: 1.4568
+F1-score: 0.5396
+Test duration: 3.12 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [31/100] - Train Loss: 1.6842
+Train duration: 3.48 seconds
+           Validation Loss: 1.3894
+Validation duration: 2.87 seconds
+Epoch duration: 6.35 seconds
+
+Epoch [32/100] - Train Loss: 1.5822
+Train duration: 3.60 seconds
+           Validation Loss: 1.3566
+Validation duration: 2.84 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [33/100] - Train Loss: 1.6428
+Train duration: 3.55 seconds
+           Validation Loss: 1.3282
+Validation duration: 2.99 seconds
+Epoch duration: 6.53 seconds
+
+           Test Loss: 1.3807
+F1-score: 0.4514
+Test duration: 3.20 seconds
+Epoch [34/100] - Train Loss: 1.6846
+Train duration: 3.56 seconds
+           Validation Loss: 1.3625
+Validation duration: 2.84 seconds
+Epoch duration: 6.40 seconds
+
+Epoch [35/100] - Train Loss: 1.6493
+Train duration: 3.46 seconds
+------
+Checkpoint saved for epoch 35
+------
+           Validation Loss: 1.3392
+Validation duration: 2.94 seconds
+Epoch duration: 6.40 seconds
+
+Epoch [36/100] - Train Loss: 1.6124
+Train duration: 3.57 seconds
+           Validation Loss: 1.2998
+Validation duration: 2.94 seconds
+Epoch duration: 6.51 seconds
+
+           Test Loss: 1.3485
+F1-score: 0.6719
+Test duration: 3.09 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [37/100] - Train Loss: 1.6090
+Train duration: 3.61 seconds
+           Validation Loss: 1.2985
+Validation duration: 2.84 seconds
+Epoch duration: 6.45 seconds
+
+Epoch [38/100] - Train Loss: 1.5740
+Train duration: 3.57 seconds
+           Validation Loss: 1.2654
+Validation duration: 2.87 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [39/100] - Train Loss: 1.5801
+Train duration: 3.60 seconds
+           Validation Loss: 1.3029
+Validation duration: 2.97 seconds
+Epoch duration: 6.56 seconds
+
+           Test Loss: 1.3641
+F1-score: 0.5681
+Test duration: 3.05 seconds
+Epoch [40/100] - Train Loss: 1.5806
+Train duration: 3.35 seconds
+------
+Checkpoint saved for epoch 40
+------
+           Validation Loss: 1.2652
+Validation duration: 2.91 seconds
+Epoch duration: 6.25 seconds
+
+Epoch [41/100] - Train Loss: 1.5411
+Train duration: 3.57 seconds
+           Validation Loss: 1.2655
+Validation duration: 2.89 seconds
+Epoch duration: 6.46 seconds
+
+Epoch [42/100] - Train Loss: 1.5860
+Train duration: 3.58 seconds
+           Validation Loss: 1.2797
+Validation duration: 2.82 seconds
+Epoch duration: 6.39 seconds
+
+           Test Loss: 1.3295
+F1-score: 0.5036
+Test duration: 3.07 seconds
+Epoch [43/100] - Train Loss: 1.5473
+Train duration: 3.47 seconds
+           Validation Loss: 1.2554
+Validation duration: 2.96 seconds
+Epoch duration: 6.42 seconds
+
+Epoch [44/100] - Train Loss: 1.5607
+Train duration: 3.53 seconds
+           Validation Loss: 1.2293
+Validation duration: 2.86 seconds
+Epoch duration: 6.38 seconds
+
+Epoch [45/100] - Train Loss: 1.4689
+Train duration: 3.56 seconds
+------
+Checkpoint saved for epoch 45
+------
+           Validation Loss: 1.1999
+Validation duration: 2.97 seconds
+Epoch duration: 6.52 seconds
+
+           Test Loss: 1.2522
+F1-score: 0.6956
+Test duration: 3.00 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [46/100] - Train Loss: 1.5059
+Train duration: 3.41 seconds
+           Validation Loss: 1.2079
+Validation duration: 2.80 seconds
+Epoch duration: 6.21 seconds
+
+Epoch [47/100] - Train Loss: 1.4666
+Train duration: 3.33 seconds
+           Validation Loss: 1.1979
+Validation duration: 2.87 seconds
+Epoch duration: 6.20 seconds
+
+Epoch [48/100] - Train Loss: 1.4407
+Train duration: 3.44 seconds
+           Validation Loss: 1.1758
+Validation duration: 2.97 seconds
+Epoch duration: 6.42 seconds
+
+           Test Loss: 1.2479
+F1-score: 0.7526
+Test duration: 3.06 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [49/100] - Train Loss: 1.4843
+Train duration: 3.54 seconds
+           Validation Loss: 1.1769
+Validation duration: 2.92 seconds
+Epoch duration: 6.47 seconds
+
+Epoch [50/100] - Train Loss: 1.5069
+Train duration: 3.51 seconds
+------
+Checkpoint saved for epoch 50
+------
+           Validation Loss: 1.1874
+Validation duration: 2.91 seconds
+Epoch duration: 6.43 seconds
+
+Epoch [51/100] - Train Loss: 1.4710
+Train duration: 3.54 seconds
+           Validation Loss: 1.1554
+Validation duration: 2.89 seconds
+Epoch duration: 6.43 seconds
+
+           Test Loss: 1.2283
+F1-score: 0.6637
+Test duration: 3.01 seconds
+Epoch [52/100] - Train Loss: 1.4668
+Train duration: 3.59 seconds
+           Validation Loss: 1.1408
+Validation duration: 2.89 seconds
+Epoch duration: 6.48 seconds
+
+Epoch [53/100] - Train Loss: 1.4781
+Train duration: 3.47 seconds
+           Validation Loss: 1.1622
+Validation duration: 2.87 seconds
+Epoch duration: 6.34 seconds
+
+Epoch [54/100] - Train Loss: 1.4503
+Train duration: 3.51 seconds
+           Validation Loss: 1.1473
+Validation duration: 2.95 seconds
+Epoch duration: 6.46 seconds
+
+           Test Loss: 1.2140
+F1-score: 0.6171
+Test duration: 2.99 seconds
+Epoch [55/100] - Train Loss: 1.4450
+Train duration: 3.55 seconds
+------
+Checkpoint saved for epoch 55
+------
+           Validation Loss: 1.1336
+Validation duration: 3.04 seconds
+Epoch duration: 6.60 seconds
+
+Epoch [56/100] - Train Loss: 1.4242
+Train duration: 3.52 seconds
+           Validation Loss: 1.1263
+Validation duration: 2.95 seconds
+Epoch duration: 6.47 seconds
+
+Epoch [57/100] - Train Loss: 1.4272
+Train duration: 3.46 seconds
+           Validation Loss: 1.1109
+Validation duration: 2.91 seconds
+Epoch duration: 6.37 seconds
+
+           Test Loss: 1.1820
+F1-score: 0.7292
+Test duration: 3.06 seconds
+Epoch [58/100] - Train Loss: 1.4044
+Train duration: 3.34 seconds
+           Validation Loss: 1.1291
+Validation duration: 2.98 seconds
+Epoch duration: 6.32 seconds
+
+Epoch [59/100] - Train Loss: 1.4394
+Train duration: 3.30 seconds
+           Validation Loss: 1.1022
+Validation duration: 2.84 seconds
+Epoch duration: 6.13 seconds
+
+Epoch [60/100] - Train Loss: 1.4170
+Train duration: 3.57 seconds
+------
+Checkpoint saved for epoch 60
+------
+           Validation Loss: 1.1206
+Validation duration: 2.97 seconds
+Epoch duration: 6.53 seconds
+
+           Test Loss: 1.1797
+F1-score: 0.6860
+Test duration: 3.03 seconds
+Epoch [61/100] - Train Loss: 1.3944
+Train duration: 3.43 seconds
+           Validation Loss: 1.1128
+Validation duration: 2.84 seconds
+Epoch duration: 6.27 seconds
+
+Epoch [62/100] - Train Loss: 1.3953
+Train duration: 3.53 seconds
+           Validation Loss: 1.1163
+Validation duration: 2.89 seconds
+Epoch duration: 6.42 seconds
+
+Epoch [63/100] - Train Loss: 1.3497
+Train duration: 3.50 seconds
+           Validation Loss: 1.0741
+Validation duration: 2.83 seconds
+Epoch duration: 6.32 seconds
+
+           Test Loss: 1.1755
+F1-score: 0.5944
+Test duration: 2.99 seconds
+Epoch [64/100] - Train Loss: 1.3824
+Train duration: 3.46 seconds
+           Validation Loss: 1.0731
+Validation duration: 2.79 seconds
+Epoch duration: 6.24 seconds
+
+Epoch [65/100] - Train Loss: 1.3291
+Train duration: 3.61 seconds
+------
+Checkpoint saved for epoch 65
+------
+           Validation Loss: 1.0583
+Validation duration: 2.83 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [66/100] - Train Loss: 1.3188
+Train duration: 3.51 seconds
+           Validation Loss: 1.0791
+Validation duration: 2.77 seconds
+Epoch duration: 6.28 seconds
+
+           Test Loss: 1.1540
+F1-score: 0.7264
+Test duration: 3.01 seconds
+Epoch [67/100] - Train Loss: 1.3492
+Train duration: 3.60 seconds
+           Validation Loss: 1.0493
+Validation duration: 2.77 seconds
+Epoch duration: 6.37 seconds
+
+Epoch [68/100] - Train Loss: 1.2949
+Train duration: 3.38 seconds
+           Validation Loss: 1.0449
+Validation duration: 2.80 seconds
+Epoch duration: 6.18 seconds
+
+Epoch [69/100] - Train Loss: 1.3160
+Train duration: 3.59 seconds
+           Validation Loss: 1.0214
+Validation duration: 2.81 seconds
+Epoch duration: 6.40 seconds
+
+           Test Loss: 1.1260
+F1-score: 0.7221
+Test duration: 2.96 seconds
+Epoch [70/100] - Train Loss: 1.3234
+Train duration: 3.40 seconds
+------
+Checkpoint saved for epoch 70
+------
+           Validation Loss: 1.0624
+Validation duration: 2.93 seconds
+Epoch duration: 6.33 seconds
+
+Epoch [71/100] - Train Loss: 1.2726
+Train duration: 3.52 seconds
+           Validation Loss: 1.0429
+Validation duration: 3.01 seconds
+Epoch duration: 6.53 seconds
+
+Epoch [72/100] - Train Loss: 1.3266
+Train duration: 3.52 seconds
+           Validation Loss: 1.0150
+Validation duration: 2.80 seconds
+Epoch duration: 6.31 seconds
+
+           Test Loss: 1.1165
+F1-score: 0.7429
+Test duration: 3.03 seconds
+Epoch [73/100] - Train Loss: 1.3105
+Train duration: 3.46 seconds
+           Validation Loss: 1.0632
+Validation duration: 2.80 seconds
+Epoch duration: 6.26 seconds
+
+Epoch [74/100] - Train Loss: 1.2489
+Train duration: 3.57 seconds
+           Validation Loss: 1.0025
+Validation duration: 2.97 seconds
+Epoch duration: 6.54 seconds
+
+Epoch [75/100] - Train Loss: 1.2643
+Train duration: 3.52 seconds
+------
+Checkpoint saved for epoch 75
+------
+           Validation Loss: 1.0322
+Validation duration: 2.97 seconds
+Epoch duration: 6.49 seconds
+
+           Test Loss: 1.0961
+F1-score: 0.7375
+Test duration: 3.04 seconds
+Epoch [76/100] - Train Loss: 1.2840
+Train duration: 3.61 seconds
+           Validation Loss: 1.0400
+Validation duration: 2.88 seconds
+Epoch duration: 6.49 seconds
+
+Epoch [77/100] - Train Loss: 1.2623
+Train duration: 3.42 seconds
+           Validation Loss: 1.0261
+Validation duration: 2.87 seconds
+Epoch duration: 6.29 seconds
+
+Epoch [78/100] - Train Loss: 1.2602
+Train duration: 3.47 seconds
+           Validation Loss: 1.0257
+Validation duration: 2.85 seconds
+Epoch duration: 6.32 seconds
+
+           Test Loss: 1.1297
+F1-score: 0.7673
+Test duration: 3.16 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [79/100] - Train Loss: 1.2470
+Train duration: 3.44 seconds
+           Validation Loss: 1.0260
+Validation duration: 3.01 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [80/100] - Train Loss: 1.2667
+Train duration: 3.50 seconds
+------
+Checkpoint saved for epoch 80
+------
+           Validation Loss: 1.0255
+Validation duration: 3.06 seconds
+Epoch duration: 6.56 seconds
+
+Epoch [81/100] - Train Loss: 1.2729
+Train duration: 3.58 seconds
+           Validation Loss: 1.0123
+Validation duration: 2.86 seconds
+Epoch duration: 6.44 seconds
+
+           Test Loss: 1.0614
+F1-score: 0.7778
+Test duration: 3.16 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [82/100] - Train Loss: 1.2680
+Train duration: 3.42 seconds
+           Validation Loss: 1.0287
+Validation duration: 2.86 seconds
+Epoch duration: 6.28 seconds
+
+Epoch [83/100] - Train Loss: 1.2183
+Train duration: 3.46 seconds
+           Validation Loss: 1.0254
+Validation duration: 2.82 seconds
+Epoch duration: 6.28 seconds
+
+Epoch [84/100] - Train Loss: 1.2293
+Train duration: 3.39 seconds
+           Validation Loss: 1.0170
+Validation duration: 3.03 seconds
+Epoch duration: 6.42 seconds
+
+           Test Loss: 1.0763
+F1-score: 0.7513
+Test duration: 2.99 seconds
+Epoch [85/100] - Train Loss: 1.2500
+Train duration: 3.56 seconds
+------
+Checkpoint saved for epoch 85
+------
+           Validation Loss: 1.0139
+Validation duration: 2.88 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [86/100] - Train Loss: 1.1832
+Train duration: 3.52 seconds
+           Validation Loss: 0.9832
+Validation duration: 2.87 seconds
+Epoch duration: 6.38 seconds
+
+Epoch [87/100] - Train Loss: 1.1487
+Train duration: 3.33 seconds
+           Validation Loss: 0.9777
+Validation duration: 2.90 seconds
+Epoch duration: 6.23 seconds
+
+           Test Loss: 1.0959
+F1-score: 0.6361
+Test duration: 3.11 seconds
+Epoch [88/100] - Train Loss: 1.2294
+Train duration: 3.55 seconds
+           Validation Loss: 0.9888
+Validation duration: 2.94 seconds
+Epoch duration: 6.49 seconds
+
+Epoch [89/100] - Train Loss: 1.1800
+Train duration: 3.63 seconds
+           Validation Loss: 0.9901
+Validation duration: 2.87 seconds
+Epoch duration: 6.50 seconds
+
+Epoch [90/100] - Train Loss: 1.1716
+Train duration: 3.58 seconds
+------
+Checkpoint saved for epoch 90
+------
+           Validation Loss: 1.0076
+Validation duration: 3.10 seconds
+Epoch duration: 6.68 seconds
+
+           Test Loss: 1.0523
+F1-score: 0.7214
+Test duration: 2.97 seconds
+Epoch [91/100] - Train Loss: 1.1965
+Train duration: 3.51 seconds
+           Validation Loss: 1.0068
+Validation duration: 2.88 seconds
+Epoch duration: 6.39 seconds
+
+Epoch [92/100] - Train Loss: 1.1616
+Train duration: 3.61 seconds
+           Validation Loss: 0.9731
+Validation duration: 2.93 seconds
+Epoch duration: 6.54 seconds
+
+Epoch [93/100] - Train Loss: 1.1630
+Train duration: 3.56 seconds
+           Validation Loss: 0.9867
+Validation duration: 2.99 seconds
+Epoch duration: 6.54 seconds
+
+           Test Loss: 1.0972
+F1-score: 0.6250
+Test duration: 2.98 seconds
+Epoch [94/100] - Train Loss: 1.1349
+Train duration: 3.47 seconds
+           Validation Loss: 0.9581
+Validation duration: 3.02 seconds
+Epoch duration: 6.50 seconds
+
+Epoch [95/100] - Train Loss: 1.1491
+Train duration: 3.62 seconds
+------
+Checkpoint saved for epoch 95
+------
+           Validation Loss: 0.9702
+Validation duration: 2.94 seconds
+Epoch duration: 6.56 seconds
+
+Epoch [96/100] - Train Loss: 1.1814
+Train duration: 3.64 seconds
+           Validation Loss: 0.9533
+Validation duration: 2.79 seconds
+Epoch duration: 6.42 seconds
+
+           Test Loss: 1.0513
+F1-score: 0.6861
+Test duration: 2.96 seconds
+Epoch [97/100] - Train Loss: 1.1466
+Train duration: 3.37 seconds
+           Validation Loss: 0.9728
+Validation duration: 2.84 seconds
+Epoch duration: 6.20 seconds
+
+Epoch [98/100] - Train Loss: 1.1521
+Train duration: 3.36 seconds
+           Validation Loss: 0.9568
+Validation duration: 2.79 seconds
+Epoch duration: 6.15 seconds
+
+Epoch [99/100] - Train Loss: 1.1132
+Train duration: 3.39 seconds
+           Validation Loss: 0.9553
+Validation duration: 2.97 seconds
+Epoch duration: 6.36 seconds
+
+           Test Loss: 1.0270
+F1-score: 0.7403
+Test duration: 2.99 seconds
+Epoch [100/100] - Train Loss: 1.1179
+Train duration: 3.47 seconds
+------
+Checkpoint saved for epoch 100
+------
+           Validation Loss: 0.9578
+Validation duration: 3.05 seconds
+Epoch duration: 6.52 seconds
+
+           Test Loss: 1.0215
+F1-score: 0.7403
+Test duration: 3.14 seconds
+Finished training!
+Total training time: 747.64 seconds = 12.46 minutes
+
+(RoboticHand_ML) (base) pablo_kevin@Apolo-Nitro-PK:~/ProyectoTecnologo_RoboticHandDRL$ /home/pablo_kevin/miniconda3/envs/RoboticHand_ML/bin/python /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env04/observerRGB_docs.py
+Created Observer Network on device: cuda:0
+Successfully loaded observer model
+Epoch [101/150] - Train Loss: 1.0719
+Train duration: 3.46 seconds
+           Validation Loss: 0.9437
+Validation duration: 2.61 seconds
+Epoch duration: 6.06 seconds
+
+Epoch [102/150] - Train Loss: 1.1157
+Train duration: 3.30 seconds
+           Validation Loss: 0.9384
+Validation duration: 2.62 seconds
+Epoch duration: 5.93 seconds
+
+           Test Loss: 1.0457
+F1-score: 0.6875
+Test duration: 2.74 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [103/150] - Train Loss: 1.1136
+Train duration: 3.20 seconds
+           Validation Loss: 0.9634
+Validation duration: 2.68 seconds
+Epoch duration: 5.87 seconds
+
+Epoch [104/150] - Train Loss: 1.0563
+Train duration: 3.25 seconds
+           Validation Loss: 0.9647
+Validation duration: 2.51 seconds
+Epoch duration: 5.76 seconds
+
+Epoch [105/150] - Train Loss: 1.1226
+Train duration: 3.32 seconds
+------
+Checkpoint saved for epoch 105
+------
+           Validation Loss: 0.9608
+Validation duration: 2.65 seconds
+Epoch duration: 5.97 seconds
+
+           Test Loss: 1.0345
+F1-score: 0.6361
+Test duration: 3.33 seconds
+Epoch [106/150] - Train Loss: 1.0548
+Train duration: 3.61 seconds
+           Validation Loss: 0.9569
+Validation duration: 2.95 seconds
+Epoch duration: 6.56 seconds
+
+Epoch [107/150] - Train Loss: 1.0963
+Train duration: 3.54 seconds
+           Validation Loss: 0.9544
+Validation duration: 3.01 seconds
+Epoch duration: 6.54 seconds
+
+Epoch [108/150] - Train Loss: 1.0747
+Train duration: 3.42 seconds
+           Validation Loss: 0.9446
+Validation duration: 3.11 seconds
+Epoch duration: 6.53 seconds
+
+           Test Loss: 1.0024
+F1-score: 0.7778
+Test duration: 3.22 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [109/150] - Train Loss: 1.0512
+Train duration: 3.73 seconds
+           Validation Loss: 0.9502
+Validation duration: 3.02 seconds
+Epoch duration: 6.75 seconds
+
+Epoch [110/150] - Train Loss: 1.0599
+Train duration: 3.40 seconds
+------
+Checkpoint saved for epoch 110
+------
+           Validation Loss: 0.9689
+Validation duration: 2.85 seconds
+Epoch duration: 6.25 seconds
+
+Epoch [111/150] - Train Loss: 1.0347
+Train duration: 3.49 seconds
+           Validation Loss: 0.9621
+Validation duration: 3.07 seconds
+Epoch duration: 6.56 seconds
+
+           Test Loss: 1.0189
+F1-score: 0.7000
+Test duration: 3.17 seconds
+Epoch [112/150] - Train Loss: 1.0460
+Train duration: 3.51 seconds
+           Validation Loss: 0.9618
+Validation duration: 2.84 seconds
+Epoch duration: 6.35 seconds
+
+Epoch [113/150] - Train Loss: 1.0573
+Train duration: 3.59 seconds
+           Validation Loss: 0.9218
+Validation duration: 2.86 seconds
+Epoch duration: 6.45 seconds
+
+Epoch [114/150] - Train Loss: 1.0504
+Train duration: 3.47 seconds
+           Validation Loss: 0.9123
+Validation duration: 2.77 seconds
+Epoch duration: 6.24 seconds
+
+           Test Loss: 1.0323
+F1-score: 0.6639
+Test duration: 2.97 seconds
+Epoch [115/150] - Train Loss: 1.0528
+Train duration: 3.53 seconds
+------
+Checkpoint saved for epoch 115
+------
+           Validation Loss: 0.9289
+Validation duration: 2.97 seconds
+Epoch duration: 6.50 seconds
+
+Epoch [116/150] - Train Loss: 1.0181
+Train duration: 3.52 seconds
+           Validation Loss: 0.9432
+Validation duration: 2.77 seconds
+Epoch duration: 6.29 seconds
+
+Epoch [117/150] - Train Loss: 1.0216
+Train duration: 3.45 seconds
+           Validation Loss: 0.9217
+Validation duration: 2.97 seconds
+Epoch duration: 6.42 seconds
+
+           Test Loss: 1.0149
+F1-score: 0.6806
+Test duration: 3.25 seconds
+Epoch [118/150] - Train Loss: 1.0114
+Train duration: 3.73 seconds
+           Validation Loss: 0.9275
+Validation duration: 2.84 seconds
+Epoch duration: 6.57 seconds
+
+Epoch [119/150] - Train Loss: 1.0482
+Train duration: 3.78 seconds
+           Validation Loss: 0.9386
+Validation duration: 2.99 seconds
+Epoch duration: 6.77 seconds
+
+Epoch [120/150] - Train Loss: 1.0372
+Train duration: 3.47 seconds
+------
+Checkpoint saved for epoch 120
+------
+           Validation Loss: 0.9355
+Validation duration: 3.00 seconds
+Epoch duration: 6.47 seconds
+
+           Test Loss: 0.9938
+F1-score: 0.7806
+Test duration: 3.07 seconds
+------
+Best test loss checkpoint saved
+------
+Epoch [121/150] - Train Loss: 0.9985
+Train duration: 3.60 seconds
+           Validation Loss: 0.9355
+Validation duration: 2.89 seconds
+Epoch duration: 6.49 seconds
+
+Epoch [122/150] - Train Loss: 0.9469
+Train duration: 3.61 seconds
+           Validation Loss: 0.9552
+Validation duration: 2.96 seconds
+Epoch duration: 6.58 seconds
+
+Epoch [123/150] - Train Loss: 0.9634
+Train duration: 3.49 seconds
+           Validation Loss: 0.9539
+Validation duration: 2.87 seconds
+Epoch duration: 6.35 seconds
+
+           Test Loss: 1.0193
+F1-score: 0.7278
+Test duration: 3.01 seconds
+Epoch [124/150] - Train Loss: 0.9323
+Train duration: 3.57 seconds
+           Validation Loss: 0.9627
+Validation duration: 2.94 seconds
+Epoch duration: 6.51 seconds
+
+Epoch [125/150] - Train Loss: 0.9640
+Train duration: 3.52 seconds
+------
+Checkpoint saved for epoch 125
+------
+           Validation Loss: 0.9667
+Validation duration: 2.88 seconds
+Epoch duration: 6.40 seconds
+
+Epoch [126/150] - Train Loss: 0.9973
+Train duration: 3.63 seconds
+           Validation Loss: 0.9599
+Validation duration: 2.79 seconds
+Epoch duration: 6.42 seconds
+
+           Test Loss: 1.0030
+F1-score: 0.7264
+Test duration: 3.01 seconds
+Epoch [127/150] - Train Loss: 1.0047
+Train duration: 3.41 seconds
+           Validation Loss: 0.9492
+Validation duration: 2.78 seconds
+Epoch duration: 6.19 seconds
+
+Epoch [128/150] - Train Loss: 1.0479
+Train duration: 3.57 seconds
+           Validation Loss: 0.9853
+Validation duration: 2.91 seconds
+Epoch duration: 6.48 seconds
+
+Epoch [129/150] - Train Loss: 1.0170
+Train duration: 3.59 seconds
+           Validation Loss: 0.9333
+Validation duration: 2.76 seconds
+Epoch duration: 6.35 seconds
+
+           Test Loss: 1.0003
+F1-score: 0.7264
+Test duration: 3.17 seconds
+Epoch [130/150] - Train Loss: 0.9708
+Train duration: 3.40 seconds
+------
+Checkpoint saved for epoch 130
+------
+           Validation Loss: 0.9417
+Validation duration: 3.08 seconds
+Epoch duration: 6.48 seconds
+
+Epoch [131/150] - Train Loss: 1.0302
+Train duration: 3.55 seconds
+           Validation Loss: 0.9427
+Validation duration: 2.98 seconds
+Epoch duration: 6.53 seconds
+
+Epoch [132/150] - Train Loss: 0.9437
+Train duration: 3.57 seconds
+           Validation Loss: 0.9563
+Validation duration: 2.82 seconds
+Epoch duration: 6.39 seconds
+
+           Test Loss: 0.9871
+F1-score: 0.7415
+Test duration: 3.08 seconds
+Epoch [133/150] - Train Loss: 0.9329
+Train duration: 3.55 seconds
+           Validation Loss: 0.9632
+Validation duration: 2.79 seconds
+Epoch duration: 6.34 seconds
+
+Epoch [134/150] - Train Loss: 0.9542
+Train duration: 3.50 seconds
+           Validation Loss: 0.9432
+Validation duration: 2.86 seconds
+Epoch duration: 6.36 seconds
+
+Epoch [135/150] - Train Loss: 0.9774
+Train duration: 3.41 seconds
+------
+Checkpoint saved for epoch 135
+------
+           Validation Loss: 0.9572
+Validation duration: 2.82 seconds
+Epoch duration: 6.23 seconds
+
+           Test Loss: 0.9857
+F1-score: 0.7403
+Test duration: 3.00 seconds
+Epoch [136/150] - Train Loss: 0.9549
+Train duration: 3.69 seconds
+           Validation Loss: 0.9316
+Validation duration: 2.80 seconds
+Epoch duration: 6.48 seconds
+
+Epoch [137/150] - Train Loss: 0.9297
+Train duration: 3.63 seconds
+           Validation Loss: 0.9281
+Validation duration: 2.82 seconds
+Epoch duration: 6.45 seconds
+
+Epoch [138/150] - Train Loss: 0.9465
+Train duration: 3.35 seconds
+           Validation Loss: 0.9365
+Validation duration: 2.90 seconds
+Epoch duration: 6.25 seconds
+
+           Test Loss: 0.9936
+F1-score: 0.7750
+Test duration: 3.18 seconds
+Epoch [139/150] - Train Loss: 0.8876
+Train duration: 3.50 seconds
+           Validation Loss: 0.9714
+Validation duration: 2.92 seconds
+Epoch duration: 6.42 seconds
+
+Epoch [140/150] - Train Loss: 0.9289
+Train duration: 3.47 seconds
+------
+Checkpoint saved for epoch 140
+------
+           Validation Loss: 0.9482
+Validation duration: 3.03 seconds
+Epoch duration: 6.50 seconds
+
+Epoch [141/150] - Train Loss: 0.8904
+Train duration: 3.39 seconds
+           Validation Loss: 0.9763
+Validation duration: 2.88 seconds
+Epoch duration: 6.27 seconds
+
+           Test Loss: 0.9877
+F1-score: 0.6961
+Test duration: 3.03 seconds
+Epoch [142/150] - Train Loss: 0.9890
+Train duration: 3.55 seconds
+           Validation Loss: 0.9728
+Validation duration: 2.80 seconds
+Epoch duration: 6.35 seconds
+
+Epoch [143/150] - Train Loss: 0.8740
+Train duration: 3.70 seconds
+           Validation Loss: 0.9718
+Validation duration: 2.89 seconds
+Epoch duration: 6.59 seconds
+
+Epoch [144/150] - Train Loss: 0.8844
+Train duration: 3.66 seconds
+           Validation Loss: 0.9461
+Validation duration: 3.16 seconds
+Epoch duration: 6.81 seconds
+
+           Test Loss: 0.9755
+F1-score: 0.7639
+Test duration: 3.10 seconds
+Epoch [145/150] - Train Loss: 0.8849
+Train duration: 3.46 seconds
+------
+Checkpoint saved for epoch 145
+------
+           Validation Loss: 0.9588
+Validation duration: 2.98 seconds
+Epoch duration: 6.43 seconds
+
+Epoch [146/150] - Train Loss: 0.8974
+Train duration: 3.57 seconds
+           Validation Loss: 0.9503
+Validation duration: 2.87 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [147/150] - Train Loss: 0.8850
+Train duration: 3.54 seconds
+           Validation Loss: 0.9375
+Validation duration: 2.79 seconds
+Epoch duration: 6.33 seconds
+
+           Test Loss: 0.9834
+F1-score: 0.7429
+Test duration: 3.08 seconds
+Epoch [148/150] - Train Loss: 0.9230
+Train duration: 3.53 seconds
+           Validation Loss: 0.9656
+Validation duration: 2.88 seconds
+Epoch duration: 6.41 seconds
+
+Epoch [149/150] - Train Loss: 0.9075
+Train duration: 3.50 seconds
+           Validation Loss: 0.9790
+Validation duration: 2.93 seconds
+Epoch duration: 6.44 seconds
+
+Epoch [150/150] - Train Loss: 0.8681
+Train duration: 3.71 seconds
+------
+Checkpoint saved for epoch 150
+------
+           Validation Loss: 0.9771
+Validation duration: 2.95 seconds
+Epoch duration: 6.65 seconds
+
+           Test Loss: 1.0373
+F1-score: 0.6336
+Test duration: 2.99 seconds
+Finished training!
+Total training time: 372.25 seconds = 6.20 minutes
+

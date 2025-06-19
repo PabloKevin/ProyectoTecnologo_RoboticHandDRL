@@ -9,6 +9,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 import polars as pl
 import time
+from sklearn.metrics import f1_score
 
 # Observer Network
 class ObserverNetwork(nn.Module):
@@ -16,9 +17,9 @@ class ObserverNetwork(nn.Module):
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
                  hidden_layers=[64, 32, 16], 
-                 learning_rate= 0.0008,
-                 dropout2d=0.2, 
-                 dropout=0.25, 
+                 learning_rate= 0.0003,
+                 dropout2d=0.20, 
+                 dropout=0.30, 
                  input_dims = (256, 256, 1), output_dims = 10,  
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
@@ -197,13 +198,24 @@ class MyImageDataset(Dataset):
 
         return img_tensor, label_tensor
 
+def get_class_from_reg(reg, thresholds=[0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, float("inf")]):
+        """
+        Convert a regression value to a class label.
+        """
+        class_names = []
+        for r in reg:
+            for i, threshold in enumerate(thresholds):
+                if r < threshold:
+                    class_names.append(i)
+                    break
+        return class_names
 
 if __name__ == "__main__":
     mp.set_start_method('spawn', force=True) # For multiptocessing with CUDA
 
     # logs file
     log_path = "Desarrollo/simulation/Env04/"
-    log_name = "observer_logs.csv"
+    log_name = "observer_logs02.csv"
     log_file = open(log_path+log_name, "a")
 
     log_df = pl.read_csv(log_path+log_name)
@@ -257,7 +269,8 @@ if __name__ == "__main__":
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
     #observer = ObserverNetwork()
-    observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/observer')
+    observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/observer/v4')
+    #observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_epoch_100")
     #observer.load_model()
 
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -270,8 +283,9 @@ if __name__ == "__main__":
 
     best_val_loss = float('inf')
     best_test_loss = float('inf')
+    best_test_f1 = 0.0
     start_time = time.time()
-    for epoch in range(n_epochs):
+    for epoch in range(0,n_epochs):
         start_epoch_time = time.time()
         observer.train()
         train_loss = 0.0
@@ -312,9 +326,9 @@ if __name__ == "__main__":
         print(f"           Validation Loss: {avg_val_loss:.4f}")
         print(f"Validation duration: {val_duration:.2f} seconds")
         print(f"Epoch duration: {(train_duration + val_duration):.2f} seconds\n")
-        log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1\n")
+        log_file.write(f"{run},{epoch+1},{avg_train_loss:.4f},{train_duration:.2f},{avg_val_loss:.4f},{val_duration:.2f},{(train_duration + val_duration):.2f},-1,-1,-1,-1,-1,-1\n")
         
-        if (epoch + 1) % 3 == 0 or epoch == n_epochs - 1:
+        if epoch==0 or (epoch + 1) % 3 == 0 or epoch == n_epochs - 1:
             observer.eval()
             start_test_time = time.time()
             test_loss = 0.0
@@ -326,14 +340,20 @@ if __name__ == "__main__":
                     test_loss += loss_test.item()
                 avg_test_loss = test_loss / len(test_loader)
 
+                probs  = F.softmax(outputs_test, dim=1) 
+                pred_labels = torch.argmax(probs, dim=1).cpu().numpy()
+                #pred_labels = get_class_from_reg(outputs_test.cpu().numpy().argmax())
+                f1 = f1_score(labels_test.cpu().numpy(), pred_labels, average="weighted")
+
                 test_duration = (time.time() - start_test_time)
                 print(f"           Test Loss: {avg_test_loss:.4f}")
+                print(f"F1-score: {f1:.4f}")
                 print(f"Test duration: {test_duration:.2f} seconds")
+                
+            log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{observer.conv_channels}","{observer.hidden_layers}",{observer.learning_rate},{f1:.4f}\n')
 
-            log_file.write(f'{run},-1,{avg_train_loss:.4f},-1,{avg_val_loss:.4f},-1,-1,{avg_test_loss:.4f},{test_duration:.2f},"{observer.conv_channels}","{observer.hidden_layers}",{observer.learning_rate}\n')
-
-            if avg_test_loss < best_test_loss:
-                best_test_loss = avg_test_loss
+            if f1 > best_test_f1:
+                best_test_f1 = f1
                 observer.save_checkpoint(checkpoint_file=os.path.join(observer.checkpoint_dir, observer.name+'_final_v1'))
                 print(f"------\nBest test loss checkpoint saved\n------")
 
