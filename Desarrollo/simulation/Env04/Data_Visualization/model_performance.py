@@ -198,11 +198,11 @@ class Observer_Metrics(Model_Metrics):
         plt.show()
 
 class Actor_Metrics(Model_Metrics):
-    def __init__(self, model_weight_dir, model_name, hidden_layers, class_names):
+    def __init__(self, model_weight_dir, model_name, hidden_layers, class_names, file_name=None):
         self.model_weight_dir = model_weight_dir
         self.model_name = model_name
         self.hidden_layers = hidden_layers
-        self.predictor = ActorPredictor(hidden_layers=hidden_layers, model_weights_dir=model_weight_dir)
+        self.predictor = ActorPredictor(hidden_layers=hidden_layers, model_weights_dir=model_weight_dir, file_name=file_name)
 
         super().__init__(df_test=self.predictor.df_test, class_names_list=[class_names])
 
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     #model_name = "observer_best_test_logits_best2"
 
     model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
-    model_name = "observer_final_v1"
+    model_name = "observer_final_v7"
     #model_name = "observer_epoch_90"
 
     conv_channels = [16, 32, 64]
@@ -278,18 +278,20 @@ if __name__ == "__main__":
 
     observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                             model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
-    observer_performance.show_model_performance()
+    #observer_performance.show_model_performance()
 
 
     # ACTOR PERFORMANCE
 
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
-    model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
-    model_name = "Actor_Last_Trained_Model"
+    #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
+    #model_name = "Actor_Last_Trained_Model"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
+    model_name = "actor_episode_12000"
     hidden_layers = [64,32,16]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
-    actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names)
+    actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names, file_name=model_name)
     actor_performance.show_model_performance()
     
 

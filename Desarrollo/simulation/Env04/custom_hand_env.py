@@ -19,7 +19,7 @@ class ToolManipulationEnv(gym.Env):
         self.datasets = []
         for dataset in dataset_name:
             self.datasets.append(MyImageDataset(dataset_dir+dataset, name=dataset))
-        self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer_backup', name="observer_best_test_logits_best2", #"observer_best_test_medium02"
+        self.observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/observer/v7', name="observer_final_v7", #"observer_best_test_medium02"
                                         conv_channels = [16, 32, 64], hidden_layers = [64, 32, 16])
         self.observer.checkpoint_file = os.path.join(self.observer.checkpoint_dir, self.observer.name)
         self.observer.load_model()

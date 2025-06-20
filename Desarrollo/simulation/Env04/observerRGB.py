@@ -16,7 +16,7 @@ class ObserverNetwork(nn.Module):
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
                  hidden_layers=[64, 32, 16], 
-                 learning_rate= 0.0005,
+                 learning_rate= 0.0002,
                  dropout2d=0.25, 
                  dropout=0.25, 
                  input_dims = (256, 256, 1), output_dims = 10,  

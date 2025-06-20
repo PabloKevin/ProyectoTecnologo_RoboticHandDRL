@@ -8,7 +8,7 @@ import torch as T
 import json
 
 class Predictor():
-    def __init__(self, model=None, model_weights_dir=None, hidden_layers=None):
+    def __init__(self, model=None, model_weights_dir=None, hidden_layers=None, file_name=None):
         if model is None:
             if hidden_layers is None and model_weights_dir is None:
                 self.actor = ActorNetwork()
@@ -20,6 +20,8 @@ class Predictor():
                 self.actor = ActorNetwork(checkpoint_dir=model_weights_dir, hidden_layers=hidden_layers)
         else:
             self.actor = model
+        if file_name is not None:
+            self.actor.checkpoint_file = os.path.join(model_weights_dir, file_name)
         self.actor.load_checkpoint()
         self.actor.eval()
 
@@ -137,7 +139,8 @@ if __name__ == "__main__":
     #model_weight_file = "Desarrollo/simulation/Env04/tmp/observer/observer_best_test"
     #model_weight_file = "Desarrollo/simulation/Env04/tmp/observer_backup/observer_best_test_big"
     #hidden_layers = [64, 16, 8]
-    predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env04/tmp/td3", hidden_layers=[128,64])
+    #predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env04/tmp/td3", hidden_layers=[128,64])
+    predictor = Predictor(model_weights_dir="Desarrollo/simulation/Env04/model_weights_docs/td3", file_name="actor_episode_6000", hidden_layers=[64,32,16])
     #predictor.update_observer_predictions()
     predictor.save_df_test()
     print(predictor.df_test.head())
