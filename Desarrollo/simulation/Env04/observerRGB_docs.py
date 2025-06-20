@@ -49,12 +49,12 @@ if __name__ == "__main__":
     # Create DataLoaders for batching
     # example: batch_size=32
 
-    batch_size = 64 #32
+    batch_size = 256 #256 #32
     train_loader = DataLoader(full_train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
     test_loader   = DataLoader(test_dataset,   batch_size=batch_size, shuffle=False, num_workers=8)
 
     #observer = ObserverNetwork()
-    observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/observer/v5')
+    observer = ObserverNetwork(checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/observer/v9')
     #observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_epoch_100")
     #observer.load_model()
 

@@ -1,0 +1,803 @@
+(RoboticHand_ML) (base) pablo_kevin@Apolo-Nitro-PK:~/ProyectoTecnologo_RoboticHandDRL$ /home/pablo_kevin/miniconda3/envs/RoboticHand_ML/bin/python /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env04/observerRGB_docs.py
+Created Observer Network on device: cuda:0
+Epoch [1/100] - Train Loss: 2.3064
+Train duration: 3.86 seconds
+------
+Checkpoint saved for epoch 1
+------
+Epoch [2/100] - Train Loss: 2.2986
+Train duration: 3.72 seconds
+Epoch [3/100] - Train Loss: 2.2868
+Train duration: 3.81 seconds
+           Test Loss: 2.2992
+F1-score: 0.0117
+Test duration: 3.43 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [4/100] - Train Loss: 2.2644
+Train duration: 3.79 seconds
+Epoch [5/100] - Train Loss: 2.2504
+Train duration: 3.77 seconds
+------
+Checkpoint saved for epoch 5
+------
+Epoch [6/100] - Train Loss: 2.2337
+Train duration: 4.04 seconds
+           Test Loss: 2.2437
+F1-score: 0.0117
+Test duration: 2.85 seconds
+Epoch [7/100] - Train Loss: 2.2030
+Train duration: 3.53 seconds
+Epoch [8/100] - Train Loss: 2.2179
+Train duration: 3.73 seconds
+Epoch [9/100] - Train Loss: 2.2079
+Train duration: 3.78 seconds
+           Test Loss: 2.2027
+F1-score: 0.1101
+Test duration: 3.00 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [10/100] - Train Loss: 2.1733
+Train duration: 3.64 seconds
+------
+Checkpoint saved for epoch 10
+------
+Epoch [11/100] - Train Loss: 2.1249
+Train duration: 3.63 seconds
+Epoch [12/100] - Train Loss: 2.1212
+Train duration: 4.02 seconds
+           Test Loss: 2.0846
+F1-score: 0.1718
+Test duration: 3.17 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [13/100] - Train Loss: 2.0446
+Train duration: 3.77 seconds
+Epoch [14/100] - Train Loss: 2.0335
+Train duration: 3.66 seconds
+Epoch [15/100] - Train Loss: 2.0124
+Train duration: 3.59 seconds
+------
+Checkpoint saved for epoch 15
+------
+           Test Loss: 1.9388
+F1-score: 0.1917
+Test duration: 3.00 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [16/100] - Train Loss: 2.0233
+Train duration: 3.68 seconds
+Epoch [17/100] - Train Loss: 1.9838
+Train duration: 3.87 seconds
+Epoch [18/100] - Train Loss: 1.9776
+Train duration: 4.03 seconds
+           Test Loss: 1.8722
+F1-score: 0.1794
+Test duration: 3.22 seconds
+Epoch [19/100] - Train Loss: 1.9227
+Train duration: 3.88 seconds
+Epoch [20/100] - Train Loss: 1.8821
+Train duration: 3.94 seconds
+------
+Checkpoint saved for epoch 20
+------
+Epoch [21/100] - Train Loss: 1.8819
+Train duration: 3.90 seconds
+           Test Loss: 1.7515
+F1-score: 0.2199
+Test duration: 3.22 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [22/100] - Train Loss: 1.8579
+Train duration: 3.57 seconds
+Epoch [23/100] - Train Loss: 1.8678
+Train duration: 3.68 seconds
+Epoch [24/100] - Train Loss: 1.8231
+Train duration: 3.55 seconds
+           Test Loss: 1.6845
+F1-score: 0.2788
+Test duration: 3.07 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [25/100] - Train Loss: 1.8115
+Train duration: 3.90 seconds
+------
+Checkpoint saved for epoch 25
+------
+Epoch [26/100] - Train Loss: 1.7808
+Train duration: 3.59 seconds
+Epoch [27/100] - Train Loss: 1.7522
+Train duration: 3.95 seconds
+           Test Loss: 1.6157
+F1-score: 0.3475
+Test duration: 3.14 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [28/100] - Train Loss: 1.7708
+Train duration: 3.76 seconds
+Epoch [29/100] - Train Loss: 1.7143
+Train duration: 3.56 seconds
+Epoch [30/100] - Train Loss: 1.7312
+Train duration: 3.80 seconds
+------
+Checkpoint saved for epoch 30
+------
+           Test Loss: 1.5488
+F1-score: 0.4627
+Test duration: 3.05 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [31/100] - Train Loss: 1.6661
+Train duration: 3.63 seconds
+Epoch [32/100] - Train Loss: 1.7065
+Train duration: 3.70 seconds
+Epoch [33/100] - Train Loss: 1.6331
+Train duration: 3.82 seconds
+           Test Loss: 1.4578
+F1-score: 0.4366
+Test duration: 3.11 seconds
+Epoch [34/100] - Train Loss: 1.6691
+Train duration: 3.65 seconds
+Epoch [35/100] - Train Loss: 1.6069
+Train duration: 3.84 seconds
+------
+Checkpoint saved for epoch 35
+------
+Epoch [36/100] - Train Loss: 1.6119
+Train duration: 3.90 seconds
+           Test Loss: 1.3924
+F1-score: 0.4850
+Test duration: 3.26 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [37/100] - Train Loss: 1.6091
+Train duration: 3.78 seconds
+Epoch [38/100] - Train Loss: 1.5790
+Train duration: 4.00 seconds
+Epoch [39/100] - Train Loss: 1.5661
+Train duration: 3.78 seconds
+           Test Loss: 1.3658
+F1-score: 0.4985
+Test duration: 3.14 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [40/100] - Train Loss: 1.6115
+Train duration: 4.06 seconds
+------
+Checkpoint saved for epoch 40
+------
+Epoch [41/100] - Train Loss: 1.5274
+Train duration: 3.68 seconds
+Epoch [42/100] - Train Loss: 1.5379
+Train duration: 3.60 seconds
+           Test Loss: 1.2991
+F1-score: 0.5273
+Test duration: 3.00 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [43/100] - Train Loss: 1.5176
+Train duration: 3.66 seconds
+Epoch [44/100] - Train Loss: 1.5010
+Train duration: 3.62 seconds
+Epoch [45/100] - Train Loss: 1.5004
+Train duration: 3.62 seconds
+------
+Checkpoint saved for epoch 45
+------
+           Test Loss: 1.2609
+F1-score: 0.5402
+Test duration: 3.21 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [46/100] - Train Loss: 1.4987
+Train duration: 3.59 seconds
+Epoch [47/100] - Train Loss: 1.4865
+Train duration: 3.80 seconds
+Epoch [48/100] - Train Loss: 1.4590
+Train duration: 3.83 seconds
+           Test Loss: 1.2572
+F1-score: 0.5564
+Test duration: 3.07 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [49/100] - Train Loss: 1.4426
+Train duration: 4.05 seconds
+Epoch [50/100] - Train Loss: 1.4493
+Train duration: 4.08 seconds
+------
+Checkpoint saved for epoch 50
+------
+Epoch [51/100] - Train Loss: 1.4425
+Train duration: 3.91 seconds
+           Test Loss: 1.2169
+F1-score: 0.5386
+Test duration: 3.13 seconds
+Epoch [52/100] - Train Loss: 1.3803
+Train duration: 3.88 seconds
+Epoch [53/100] - Train Loss: 1.4140
+Train duration: 3.64 seconds
+Epoch [54/100] - Train Loss: 1.4032
+Train duration: 3.75 seconds
+           Test Loss: 1.1825
+F1-score: 0.5531
+Test duration: 2.83 seconds
+Epoch [55/100] - Train Loss: 1.3593
+Train duration: 3.71 seconds
+------
+Checkpoint saved for epoch 55
+------
+Epoch [56/100] - Train Loss: 1.4222
+Train duration: 3.70 seconds
+Epoch [57/100] - Train Loss: 1.3004
+Train duration: 3.73 seconds
+           Test Loss: 1.1437
+F1-score: 0.5418
+Test duration: 3.23 seconds
+Epoch [58/100] - Train Loss: 1.3414
+Train duration: 3.60 seconds
+Epoch [59/100] - Train Loss: 1.3068
+Train duration: 3.57 seconds
+Epoch [60/100] - Train Loss: 1.2899
+Train duration: 3.84 seconds
+------
+Checkpoint saved for epoch 60
+------
+           Test Loss: 1.1077
+F1-score: 0.5616
+Test duration: 2.86 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [61/100] - Train Loss: 1.3084
+Train duration: 3.52 seconds
+Epoch [62/100] - Train Loss: 1.2962
+Train duration: 3.58 seconds
+Epoch [63/100] - Train Loss: 1.2429
+Train duration: 3.64 seconds
+           Test Loss: 1.0892
+F1-score: 0.5749
+Test duration: 3.09 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [64/100] - Train Loss: 1.2535
+Train duration: 3.67 seconds
+Epoch [65/100] - Train Loss: 1.2510
+Train duration: 3.58 seconds
+------
+Checkpoint saved for epoch 65
+------
+Epoch [66/100] - Train Loss: 1.2431
+Train duration: 3.68 seconds
+           Test Loss: 1.0637
+F1-score: 0.6191
+Test duration: 2.98 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [67/100] - Train Loss: 1.2659
+Train duration: 3.96 seconds
+Epoch [68/100] - Train Loss: 1.2564
+Train duration: 3.55 seconds
+Epoch [69/100] - Train Loss: 1.2736
+Train duration: 3.65 seconds
+           Test Loss: 1.0656
+F1-score: 0.5535
+Test duration: 3.13 seconds
+Epoch [70/100] - Train Loss: 1.1571
+Train duration: 4.02 seconds
+------
+Checkpoint saved for epoch 70
+------
+Epoch [71/100] - Train Loss: 1.1878
+Train duration: 3.59 seconds
+Epoch [72/100] - Train Loss: 1.2020
+Train duration: 3.60 seconds
+           Test Loss: 1.0159
+F1-score: 0.5856
+Test duration: 3.22 seconds
+Epoch [73/100] - Train Loss: 1.2039
+Train duration: 3.91 seconds
+Epoch [74/100] - Train Loss: 1.1422
+Train duration: 3.68 seconds
+Epoch [75/100] - Train Loss: 1.1959
+Train duration: 3.74 seconds
+------
+Checkpoint saved for epoch 75
+------
+           Test Loss: 1.0065
+F1-score: 0.5876
+Test duration: 3.20 seconds
+Epoch [76/100] - Train Loss: 1.2005
+Train duration: 3.60 seconds
+Epoch [77/100] - Train Loss: 1.1544
+Train duration: 3.58 seconds
+Epoch [78/100] - Train Loss: 1.1494
+Train duration: 3.66 seconds
+           Test Loss: 0.9972
+F1-score: 0.6671
+Test duration: 3.06 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [79/100] - Train Loss: 1.0730
+Train duration: 3.82 seconds
+Epoch [80/100] - Train Loss: 1.1610
+Train duration: 3.76 seconds
+------
+Checkpoint saved for epoch 80
+------
+Epoch [81/100] - Train Loss: 1.1052
+Train duration: 3.70 seconds
+           Test Loss: 0.9767
+F1-score: 0.6314
+Test duration: 3.04 seconds
+Epoch [82/100] - Train Loss: 1.0968
+Train duration: 3.61 seconds
+Epoch [83/100] - Train Loss: 1.0718
+Train duration: 3.76 seconds
+Epoch [84/100] - Train Loss: 1.0723
+Train duration: 3.87 seconds
+           Test Loss: 0.9683
+F1-score: 0.5881
+Test duration: 2.98 seconds
+Epoch [85/100] - Train Loss: 1.1180
+Train duration: 3.64 seconds
+------
+Checkpoint saved for epoch 85
+------
+Epoch [86/100] - Train Loss: 1.0856
+Train duration: 3.59 seconds
+Epoch [87/100] - Train Loss: 1.0714
+Train duration: 3.63 seconds
+           Test Loss: 0.9882
+F1-score: 0.6364
+Test duration: 2.86 seconds
+Epoch [88/100] - Train Loss: 1.0752
+Train duration: 3.76 seconds
+Epoch [89/100] - Train Loss: 1.0218
+Train duration: 3.70 seconds
+Epoch [90/100] - Train Loss: 1.0264
+Train duration: 3.61 seconds
+------
+Checkpoint saved for epoch 90
+------
+           Test Loss: 0.9815
+F1-score: 0.6133
+Test duration: 2.99 seconds
+Epoch [91/100] - Train Loss: 0.9552
+Train duration: 4.00 seconds
+Epoch [92/100] - Train Loss: 0.9664
+Train duration: 3.75 seconds
+Epoch [93/100] - Train Loss: 0.9864
+Train duration: 3.62 seconds
+           Test Loss: 0.9534
+F1-score: 0.6702
+Test duration: 3.14 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [94/100] - Train Loss: 1.0292
+Train duration: 3.71 seconds
+Epoch [95/100] - Train Loss: 1.0086
+Train duration: 3.70 seconds
+------
+Checkpoint saved for epoch 95
+------
+Epoch [96/100] - Train Loss: 0.9737
+Train duration: 3.84 seconds
+           Test Loss: 0.9388
+F1-score: 0.6645
+Test duration: 3.06 seconds
+Epoch [97/100] - Train Loss: 0.9607
+Train duration: 3.63 seconds
+Epoch [98/100] - Train Loss: 0.9103
+Train duration: 3.68 seconds
+Epoch [99/100] - Train Loss: 0.9588
+Train duration: 3.62 seconds
+           Test Loss: 0.9440
+F1-score: 0.6372
+Test duration: 3.05 seconds
+Epoch [100/100] - Train Loss: 0.9076
+Train duration: 3.63 seconds
+------
+Checkpoint saved for epoch 100
+------
+           Test Loss: 0.9304
+F1-score: 0.6590
+Test duration: 2.95 seconds
+Finished training!
+Total training time: 478.93 seconds = 7.98 minutes
+
+(RoboticHand_ML) (base) pablo_kevin@Apolo-Nitro-PK:~/ProyectoTecnologo_RoboticHandDRL$ /home/pablo_kevin/miniconda3/envs/RoboticHand_ML/bin/python /home/pablo_kevin/ProyectoTecnologo_RoboticHandDRL/Desarrollo/simulation/Env04/observerRGB_docs.py
+Created Observer Network on device: cuda:0
+Successfully loaded observer model
+Epoch [101/200] - Train Loss: 0.9559
+Train duration: 3.76 seconds
+Epoch [102/200] - Train Loss: 0.8982
+Train duration: 3.66 seconds
+           Test Loss: 0.9215
+F1-score: 0.6667
+Test duration: 3.04 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [103/200] - Train Loss: 0.8954
+Train duration: 3.97 seconds
+Epoch [104/200] - Train Loss: 0.9226
+Train duration: 3.72 seconds
+Epoch [105/200] - Train Loss: 0.9310
+Train duration: 3.66 seconds
+------
+Checkpoint saved for epoch 105
+------
+           Test Loss: 0.9232
+F1-score: 0.7112
+Test duration: 2.89 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [106/200] - Train Loss: 0.9172
+Train duration: 3.58 seconds
+Epoch [107/200] - Train Loss: 0.9399
+Train duration: 3.61 seconds
+Epoch [108/200] - Train Loss: 0.9222
+Train duration: 3.92 seconds
+           Test Loss: 0.9236
+F1-score: 0.6962
+Test duration: 2.87 seconds
+Epoch [109/200] - Train Loss: 0.8968
+Train duration: 3.74 seconds
+Epoch [110/200] - Train Loss: 0.8047
+Train duration: 3.98 seconds
+------
+Checkpoint saved for epoch 110
+------
+Epoch [111/200] - Train Loss: 0.8751
+Train duration: 4.05 seconds
+           Test Loss: 0.9277
+F1-score: 0.6870
+Test duration: 3.04 seconds
+Epoch [112/200] - Train Loss: 0.8632
+Train duration: 3.92 seconds
+Epoch [113/200] - Train Loss: 0.8800
+Train duration: 3.78 seconds
+Epoch [114/200] - Train Loss: 0.9043
+Train duration: 3.81 seconds
+           Test Loss: 0.9203
+F1-score: 0.7514
+Test duration: 2.86 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [115/200] - Train Loss: 0.8318
+Train duration: 3.89 seconds
+------
+Checkpoint saved for epoch 115
+------
+Epoch [116/200] - Train Loss: 0.8541
+Train duration: 3.69 seconds
+Epoch [117/200] - Train Loss: 0.8013
+Train duration: 3.54 seconds
+           Test Loss: 0.9179
+F1-score: 0.7354
+Test duration: 3.09 seconds
+Epoch [118/200] - Train Loss: 0.8172
+Train duration: 3.55 seconds
+Epoch [119/200] - Train Loss: 0.8597
+Train duration: 3.97 seconds
+Epoch [120/200] - Train Loss: 0.8173
+Train duration: 3.57 seconds
+------
+Checkpoint saved for epoch 120
+------
+           Test Loss: 0.9176
+F1-score: 0.6903
+Test duration: 3.03 seconds
+Epoch [121/200] - Train Loss: 0.8310
+Train duration: 3.90 seconds
+Epoch [122/200] - Train Loss: 0.7752
+Train duration: 3.51 seconds
+Epoch [123/200] - Train Loss: 0.8092
+Train duration: 3.58 seconds
+           Test Loss: 0.8951
+F1-score: 0.7098
+Test duration: 2.91 seconds
+Epoch [124/200] - Train Loss: 0.7469
+Train duration: 3.58 seconds
+Epoch [125/200] - Train Loss: 0.7930
+Train duration: 3.65 seconds
+------
+Checkpoint saved for epoch 125
+------
+Epoch [126/200] - Train Loss: 0.7680
+Train duration: 3.84 seconds
+           Test Loss: 0.9166
+F1-score: 0.7274
+Test duration: 3.24 seconds
+Epoch [127/200] - Train Loss: 0.7597
+Train duration: 3.65 seconds
+Epoch [128/200] - Train Loss: 0.8115
+Train duration: 3.65 seconds
+Epoch [129/200] - Train Loss: 0.8067
+Train duration: 3.88 seconds
+           Test Loss: 0.8985
+F1-score: 0.7037
+Test duration: 3.04 seconds
+Epoch [130/200] - Train Loss: 0.7775
+Train duration: 3.75 seconds
+------
+Checkpoint saved for epoch 130
+------
+Epoch [131/200] - Train Loss: 0.7493
+Train duration: 3.68 seconds
+Epoch [132/200] - Train Loss: 0.7873
+Train duration: 3.67 seconds
+           Test Loss: 0.8970
+F1-score: 0.7213
+Test duration: 3.19 seconds
+Epoch [133/200] - Train Loss: 0.7585
+Train duration: 3.66 seconds
+Epoch [134/200] - Train Loss: 0.7519
+Train duration: 3.79 seconds
+Epoch [135/200] - Train Loss: 0.6974
+Train duration: 3.89 seconds
+------
+Checkpoint saved for epoch 135
+------
+           Test Loss: 0.9352
+F1-score: 0.6252
+Test duration: 3.14 seconds
+Epoch [136/200] - Train Loss: 0.6867
+Train duration: 3.78 seconds
+Epoch [137/200] - Train Loss: 0.7681
+Train duration: 3.94 seconds
+Epoch [138/200] - Train Loss: 0.7218
+Train duration: 3.69 seconds
+           Test Loss: 0.9087
+F1-score: 0.7224
+Test duration: 3.17 seconds
+Epoch [139/200] - Train Loss: 0.7139
+Train duration: 3.76 seconds
+Epoch [140/200] - Train Loss: 0.7130
+Train duration: 3.82 seconds
+------
+Checkpoint saved for epoch 140
+------
+Epoch [141/200] - Train Loss: 0.6624
+Train duration: 3.61 seconds
+           Test Loss: 0.8985
+F1-score: 0.7056
+Test duration: 2.98 seconds
+Epoch [142/200] - Train Loss: 0.7446
+Train duration: 3.93 seconds
+Epoch [143/200] - Train Loss: 0.6565
+Train duration: 3.86 seconds
+Epoch [144/200] - Train Loss: 0.6608
+Train duration: 3.64 seconds
+           Test Loss: 0.9113
+F1-score: 0.7038
+Test duration: 3.10 seconds
+Epoch [145/200] - Train Loss: 0.7240
+Train duration: 3.83 seconds
+------
+Checkpoint saved for epoch 145
+------
+Epoch [146/200] - Train Loss: 0.6842
+Train duration: 3.82 seconds
+Epoch [147/200] - Train Loss: 0.7024
+Train duration: 3.67 seconds
+           Test Loss: 0.8996
+F1-score: 0.7818
+Test duration: 2.86 seconds
+------
+Best F1-score checkpoint saved
+------
+Epoch [148/200] - Train Loss: 0.6754
+Train duration: 3.71 seconds
+Epoch [149/200] - Train Loss: 0.6865
+Train duration: 3.68 seconds
+Epoch [150/200] - Train Loss: 0.6352
+Train duration: 3.63 seconds
+------
+Checkpoint saved for epoch 150
+------
+           Test Loss: 0.9007
+F1-score: 0.7532
+Test duration: 2.85 seconds
+Epoch [151/200] - Train Loss: 0.6595
+Train duration: 3.99 seconds
+Epoch [152/200] - Train Loss: 0.6318
+Train duration: 3.77 seconds
+Epoch [153/200] - Train Loss: 0.5921
+Train duration: 3.55 seconds
+           Test Loss: 0.9080
+F1-score: 0.7294
+Test duration: 2.98 seconds
+Epoch [154/200] - Train Loss: 0.6429
+Train duration: 3.85 seconds
+Epoch [155/200] - Train Loss: 0.6364
+Train duration: 3.67 seconds
+------
+Checkpoint saved for epoch 155
+------
+Epoch [156/200] - Train Loss: 0.6508
+Train duration: 3.75 seconds
+           Test Loss: 0.9145
+F1-score: 0.6930
+Test duration: 3.10 seconds
+Epoch [157/200] - Train Loss: 0.6720
+Train duration: 3.58 seconds
+Epoch [158/200] - Train Loss: 0.6256
+Train duration: 3.78 seconds
+Epoch [159/200] - Train Loss: 0.6172
+Train duration: 3.55 seconds
+           Test Loss: 0.8955
+F1-score: 0.7547
+Test duration: 2.88 seconds
+Epoch [160/200] - Train Loss: 0.6548
+Train duration: 3.66 seconds
+------
+Checkpoint saved for epoch 160
+------
+Epoch [161/200] - Train Loss: 0.6001
+Train duration: 3.85 seconds
+Epoch [162/200] - Train Loss: 0.5962
+Train duration: 3.59 seconds
+           Test Loss: 0.9186
+F1-score: 0.7183
+Test duration: 2.85 seconds
+Epoch [163/200] - Train Loss: 0.5739
+Train duration: 3.59 seconds
+Epoch [164/200] - Train Loss: 0.5743
+Train duration: 3.89 seconds
+Epoch [165/200] - Train Loss: 0.5943
+Train duration: 3.71 seconds
+------
+Checkpoint saved for epoch 165
+------
+           Test Loss: 0.9258
+F1-score: 0.7176
+Test duration: 2.90 seconds
+Epoch [166/200] - Train Loss: 0.6046
+Train duration: 3.65 seconds
+Epoch [167/200] - Train Loss: 0.5773
+Train duration: 3.66 seconds
+Epoch [168/200] - Train Loss: 0.5832
+Train duration: 3.76 seconds
+           Test Loss: 0.9506
+F1-score: 0.7428
+Test duration: 3.02 seconds
+Epoch [169/200] - Train Loss: 0.6166
+Train duration: 3.63 seconds
+Epoch [170/200] - Train Loss: 0.5624
+Train duration: 3.52 seconds
+------
+Checkpoint saved for epoch 170
+------
+Epoch [171/200] - Train Loss: 0.5972
+Train duration: 3.61 seconds
+           Test Loss: 0.9274
+F1-score: 0.7485
+Test duration: 2.86 seconds
+Epoch [172/200] - Train Loss: 0.5999
+Train duration: 3.78 seconds
+Epoch [173/200] - Train Loss: 0.5432
+Train duration: 3.96 seconds
+Epoch [174/200] - Train Loss: 0.5824
+Train duration: 3.67 seconds
+           Test Loss: 0.9049
+F1-score: 0.7453
+Test duration: 3.11 seconds
+Epoch [175/200] - Train Loss: 0.5958
+Train duration: 3.61 seconds
+------
+Checkpoint saved for epoch 175
+------
+Epoch [176/200] - Train Loss: 0.5876
+Train duration: 3.55 seconds
+Epoch [177/200] - Train Loss: 0.5908
+Train duration: 3.58 seconds
+           Test Loss: 0.9099
+F1-score: 0.7473
+Test duration: 2.93 seconds
+Epoch [178/200] - Train Loss: 0.6220
+Train duration: 3.52 seconds
+Epoch [179/200] - Train Loss: 0.5121
+Train duration: 3.61 seconds
+Epoch [180/200] - Train Loss: 0.5409
+Train duration: 3.59 seconds
+------
+Checkpoint saved for epoch 180
+------
+           Test Loss: 0.9455
+F1-score: 0.7728
+Test duration: 2.86 seconds
+Epoch [181/200] - Train Loss: 0.5479
+Train duration: 3.62 seconds
+Epoch [182/200] - Train Loss: 0.5658
+Train duration: 3.78 seconds
+Epoch [183/200] - Train Loss: 0.5453
+Train duration: 3.75 seconds
+           Test Loss: 0.9261
+F1-score: 0.7539
+Test duration: 2.89 seconds
+Epoch [184/200] - Train Loss: 0.5389
+Train duration: 3.62 seconds
+Epoch [185/200] - Train Loss: 0.5851
+Train duration: 3.59 seconds
+------
+Checkpoint saved for epoch 185
+------
+Epoch [186/200] - Train Loss: 0.5369
+Train duration: 3.72 seconds
+           Test Loss: 0.9383
+F1-score: 0.7628
+Test duration: 2.93 seconds
+Epoch [187/200] - Train Loss: 0.5083
+Train duration: 3.83 seconds
+Epoch [188/200] - Train Loss: 0.5031
+Train duration: 4.02 seconds
+Epoch [189/200] - Train Loss: 0.5092
+Train duration: 3.57 seconds
+           Test Loss: 1.0446
+F1-score: 0.7224
+Test duration: 3.14 seconds
+Epoch [190/200] - Train Loss: 0.5290
+Train duration: 3.74 seconds
+------
+Checkpoint saved for epoch 190
+------
+Epoch [191/200] - Train Loss: 0.5180
+Train duration: 3.59 seconds
+Epoch [192/200] - Train Loss: 0.5291
+Train duration: 3.58 seconds
+           Test Loss: 0.9528
+F1-score: 0.7589
+Test duration: 2.95 seconds
+Epoch [193/200] - Train Loss: 0.4909
+Train duration: 3.63 seconds
+Epoch [194/200] - Train Loss: 0.5364
+Train duration: 3.55 seconds
+Epoch [195/200] - Train Loss: 0.5023
+Train duration: 3.61 seconds
+------
+Checkpoint saved for epoch 195
+------
+           Test Loss: 0.9850
+F1-score: 0.7586
+Test duration: 3.00 seconds
+Epoch [196/200] - Train Loss: 0.4994
+Train duration: 3.94 seconds
+Epoch [197/200] - Train Loss: 0.5022
+Train duration: 3.60 seconds
+Epoch [198/200] - Train Loss: 0.5012
+Train duration: 3.81 seconds
+           Test Loss: 0.9737
+F1-score: 0.7122
+Test duration: 2.97 seconds
+Epoch [199/200] - Train Loss: 0.4768
+Train duration: 3.74 seconds
+Epoch [200/200] - Train Loss: 0.4898
+Train duration: 3.71 seconds
+------
+Checkpoint saved for epoch 200
+------
+           Test Loss: 1.0206
+F1-score: 0.7094
+Test duration: 2.90 seconds
+Finished training!
+Total training time: 473.56 seconds = 7.89 minutes

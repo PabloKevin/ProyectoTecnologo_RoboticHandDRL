@@ -254,9 +254,9 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
     #model_name = "observer_best_test_logits_best2"
 
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v5/"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
     model_name = "observer_final_v1"
-    #model_name = "observer_epoch_30"
+    #model_name = "observer_epoch_90"
 
     conv_channels = [16, 32, 64]
     hidden_layers = [64, 32, 16]
