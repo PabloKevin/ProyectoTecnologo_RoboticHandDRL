@@ -288,7 +288,7 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
     #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
     #model_name = "Actor_Last_Trained_Model"
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset"
     model_name = "actor_episode_25000"
     hidden_layers = [64,32,16]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]

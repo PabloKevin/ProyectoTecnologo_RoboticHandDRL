@@ -12,7 +12,7 @@ if __name__ == '__main__':
     #images_of_interest = ["bw_Martillo01.jpg", "empty.png", "bw_Lapicera01.png", "bw_destornillador01.jpg", "bw_tornillo01.jpg", "bw_lapicera02"]
     images_of_interest = "all"
     #images_of_interest = ["lapicera"]
-    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest, dataset_name=["TrainSet_masks","TestSet_masks"]) #
+    env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest, dataset_name=["TrainSet_masks"]) #,"TestSet_masks"
 
     load_models = False
     actor_learning_rate = 0.0008 #0.001    1.0
@@ -25,11 +25,11 @@ if __name__ == '__main__':
     env.reward_weights["reward_alpha"] = 1
 
     max_size = 1000000  # Adjust this value based on memory capacity
-    checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset'
+    checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset'
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate,
                   tau=0.002, env=env, hidden_layers=hidden_layers, 
-                  batch_size=batch_size, warmup=warmup, max_size=max_size, checkpoint_dir=checkpoint_dir, gamma=0.85) 
+                  batch_size=batch_size, warmup=warmup, max_size=max_size, checkpoint_dir=checkpoint_dir, gamma=0.85, noise=0.15) 
     agent.train()
 
     writer = SummaryWriter("Desarrollo/simulation/Env04/logs")

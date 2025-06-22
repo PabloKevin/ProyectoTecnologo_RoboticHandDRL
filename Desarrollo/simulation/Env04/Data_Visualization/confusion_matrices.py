@@ -3,6 +3,7 @@ from actor_predictions import Predictor as ActorPredictor
 from model_performance import Model_Metrics, Actor_Metrics
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 class Observer_Metrics(Model_Metrics):
     def __init__(self, model_weight_dir, model_name, conv_channels, hidden_layers, thresholds_list, class_names_list):
@@ -14,7 +15,7 @@ class Observer_Metrics(Model_Metrics):
 
         super().__init__(df_test=self.predictor.df_test, thresholds_list=thresholds_list, class_names_list=class_names_list)
 
-    def show_model_performance(self, update=False, save_path=None):
+    def show_model_performance(self, update=False, save_path=None, show=True):
         if update:
             self.update()
         #fig, axs = plt.subplots(2, 2, figsize=(15, 13))
@@ -52,44 +53,31 @@ class Observer_Metrics(Model_Metrics):
                         dpi=300,
                         bbox_inches='tight')
 
-        plt.show()
+        if show:
+            plt.show()
 
 
 # Example usage
 if __name__ == "__main__":
     # OBSERVER PERFORMANCE
-
-    #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer/"
-    #model_name = "observer_best_test"
-    #model_weight_dir = "Desarrollo/simulation/Env04/tmp/observer_backup/"
-    #model_name = "observer_best_test_logits_best2"
-
     model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
-    model_name = "observer_final_v7"
-    #model_name = "observer_epoch_90"
+    for model_name in os.listdir(model_weight_dir):
+        
+        #model_name = "observer_final_v7"
+        #model_name = "observer_epoch_90"
 
-    conv_channels = [16, 32, 64]
-    hidden_layers = [64, 32, 16]
-    #conv_channels = [16, 32, 64]
-    #hidden_layers = [64, 16, 8]
+        conv_channels = [16, 32, 64]
+        hidden_layers = [64, 32, 16]
 
-    #thresholds_1 = [0.05, 0.35, 0.65, float("inf")] # ideal 
-    thresholds_1 = [0.5, 3.5, 6.5, float("inf")] # ideal 
-    #thresholds = [0.9, 2.19+(2.57-2.19)/2, 3.201, float("inf")] #small
-    #thresholds = [0.5, 2.599, 3.201, float("inf")] #big
-    #thresholds = [0.5, 1.15, 1.45, 2.1, 2.75, 3.05, 3.7, 4.35, 4.65, float("inf")] # 10 classes
+        class_names_0 = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
+        thresholds_0 = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, float("inf")]
+        thresholds_list = [thresholds_0]
+        class_names_list = [class_names_0]
 
-    class_names_0 = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
-    class_names_1 = ["agarre0", "agarre1", "agarre2", "agarre3"]
-    thresholds_0 = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, float("inf")]
-    thresholds_list = [thresholds_0,thresholds_1]
-    class_names_list = [class_names_0, class_names_1]
-    #class_names = ["empty", "tuerca", "tornillo", "clavo", "lapicera", "tenedor", "cuchara", "destornillador", "martillo", "pinza"]
-
-    observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
-                                            model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
-    save_dir = "Desarrollo/Documentacion/observer/confusion_matrices/"
-    observer_performance.show_model_performance(save_path=save_dir + model_name)
+        observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
+                                                model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
+        save_dir = "Desarrollo/Documentacion/observer/confusion_matrices/"
+        observer_performance.show_model_performance(save_path=save_dir + model_name, show=False)
 
 
     """# ACTOR PERFORMANCE
