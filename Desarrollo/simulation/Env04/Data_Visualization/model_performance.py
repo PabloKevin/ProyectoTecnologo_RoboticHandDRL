@@ -256,7 +256,7 @@ class Actor_Metrics(Model_Metrics):
         )
         fig.text(0.855, 0.938, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         #title text
-        fig.text(0.30, 0.98, f'Model Performance: {model_name}', 
+        fig.text(0.20, 0.98, f'Model Performance: {model_name}', 
                  ha='left', va='top', fontsize=14, fontweight='bold')
         
         plt.tight_layout(rect=[0, 0.01, 1, 0.9], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics

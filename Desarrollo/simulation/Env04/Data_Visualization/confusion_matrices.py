@@ -57,15 +57,8 @@ class Observer_Metrics(Model_Metrics):
             plt.show()
 
 
-# Example usage
-if __name__ == "__main__":
-    # OBSERVER PERFORMANCE
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
+def save_observer_performance(model_weight_dir):
     for model_name in os.listdir(model_weight_dir):
-        
-        #model_name = "observer_final_v7"
-        #model_name = "observer_epoch_90"
-
         conv_channels = [16, 32, 64]
         hidden_layers = [64, 32, 16]
 
@@ -78,19 +71,44 @@ if __name__ == "__main__":
                                                 model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
         save_dir = "Desarrollo/Documentacion/observer/confusion_matrices/"
         name, _, epoch = model_name.split("_")
-        observer_performance.show_model_performance(f'"{name}" - Epoch: {epoch}',save_path=save_dir + model_name, show=False)
+        observer_performance.show_model_performance(f'"{name}" - Epochs: {epoch}',save_path=save_dir + model_name, show=False)
 
+def save_td3_performance(model_weight_dir, nn_type, datasets):
+    file_dirs = []
+    for model_name in os.listdir(model_weight_dir):
+        if nn_type in model_name[:len(nn_type)]:
+            file_dirs.append(model_name)
+    
+    for model_name in file_dirs:
+        hidden_layers = [64,32,16]
+        class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
+        actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names, file_name=model_name)
 
-    """# ACTOR PERFORMANCE
+        split = model_name.split("_")
+        if len(split) == 3:
+            name, _, episode = split
+        elif len(split) == 4:
+            name = split[0]+"_"+split[1]
+            episode = split[-1]
 
-    #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
-    #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
-    #model_name = "Actor_Last_Trained_Model"
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v1_fullset"
-    model_name = "actor_episode_12000"
-    hidden_layers = [64,32,16]
-    class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
+        save_dir = f"Desarrollo/Documentacion/{name}/{datasets}/confusion_matrices/"
 
-    actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names, file_name=model_name)
-    actor_performance.show_model_performance()"""
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
+        actor_performance.show_model_performance(f'"{name}_{datasets}" - Episodes: {episode}',save_path=save_dir + model_name, show=False)
+
+# Example usage
+if __name__ == "__main__":
+    # OBSERVER PERFORMANCE
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
+    #save_observer_performance(model_weight_dir)
+
+    # ACTOR PERFORMANCE
+    #model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
+    #save_td3_performance(model_weight_dir, nn_type="actor", datasets="full_set")
+
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset"
+    save_td3_performance(model_weight_dir, nn_type="actor", datasets="train_set")
+    
     
