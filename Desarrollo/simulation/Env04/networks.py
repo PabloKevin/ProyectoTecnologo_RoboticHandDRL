@@ -22,6 +22,8 @@ class CriticNetwork(nn.Module):
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], 1)
+        # Dropout para intentar mejorar el overfitting
+        self.dropout = nn.Dropout(p=0.0)
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
 
@@ -33,8 +35,11 @@ class CriticNetwork(nn.Module):
     def forward(self, state, action):
         input = torch.cat([state, action], dim=1)
         x = F.leaky_relu(self.fc1(input))
+        #x = self.dropout(x)
         x = F.leaky_relu(self.fc2(x))
-        x = F.leaky_relu(self.fc3(x))
+        x = self.dropout(x)
+        x = F.relu(self.fc3(x))
+        #x = self.dropout(x)
         q_value = self.fc4(x)
 
         return q_value
@@ -62,6 +67,8 @@ class ActorNetwork(nn.Module):
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], n_actions)
+        # Dropout para intentar mejorar el overfitting
+        self.dropout = nn.Dropout(p=0.0)
         
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
@@ -72,8 +79,11 @@ class ActorNetwork(nn.Module):
 
     def forward(self, state):
         x = F.leaky_relu(self.fc1(state))
+        #x = self.dropout(x)  
         x = F.leaky_relu(self.fc2(x))
-        x = F.leaky_relu(self.fc3(x))
+        x = self.dropout(x)
+        x = F.relu(self.fc3(x))
+        #x = self.dropout(x)
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         action = torch.tanh(self.fc4(x)) # output between (-1,1)

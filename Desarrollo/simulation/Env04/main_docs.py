@@ -15,21 +15,21 @@ if __name__ == '__main__':
     env = ToolManipulationEnv(image_shape=(256, 256, 1), n_fingers=1, images_of_interest=images_of_interest, dataset_name=["TrainSet_masks","TestSet_masks"]) #
 
     load_models = False
-    actor_learning_rate = 0.0001 #0.001    1.0
-    critic_learning_rate = 0.00008 #0.001   0.001
+    actor_learning_rate = 0.0008 #0.001    1.0
+    critic_learning_rate = 0.0001 #0.001   0.001
     batch_size = 512 #128
 
     hidden_layers=[64,32,16] #256
     warmup = 1500 * 5
-    episodes = 15000 #10000
-    env.reward_weights["reward_alpha"] = 1.5
+    episodes = 25000 #10000
+    env.reward_weights["reward_alpha"] = 1
 
     max_size = 1000000  # Adjust this value based on memory capacity
     checkpoint_dir='Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset'
 
     agent = Agent(actor_learning_rate=actor_learning_rate, critic_learning_rate=critic_learning_rate,
-                  tau=0.0008, env=env, hidden_layers=hidden_layers, 
-                  batch_size=batch_size, warmup=warmup, max_size=max_size, checkpoint_dir=checkpoint_dir) 
+                  tau=0.002, env=env, hidden_layers=hidden_layers, 
+                  batch_size=batch_size, warmup=warmup, max_size=max_size, checkpoint_dir=checkpoint_dir, gamma=0.85) 
     agent.train()
 
     writer = SummaryWriter("Desarrollo/simulation/Env04/logs")
@@ -79,7 +79,7 @@ if __name__ == '__main__':
             log_file.write(f"Episode: {i}; Tool: {tool}; Score: {score}; Action: {env.complete_action()}\n")
             print(f"Episode: {i}; Score: {score}; Tool: {tool}; Action: {env.complete_action()}")
 
-            if i % 300 == 0:
+            if i % 500 == 0:
                 agent.actor.checkpoint_file = os.path.join(checkpoint_dir, agent.actor.name+'_episode_'+str(i))
                 agent.critic_1.checkpoint_file = os.path.join(checkpoint_dir, agent.critic_1.name+'_episode_'+str(i))
                 agent.critic_2.checkpoint_file = os.path.join(checkpoint_dir, agent.critic_2.name+'_episode_'+str(i))

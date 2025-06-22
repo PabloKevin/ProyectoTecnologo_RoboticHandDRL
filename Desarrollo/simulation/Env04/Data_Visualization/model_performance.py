@@ -150,10 +150,12 @@ class Observer_Metrics(Model_Metrics):
     def show_model_performance(self, update=False):
         if update:
             self.update()
-        fig, axs = plt.subplots(2, 2, figsize=(15, 13))
+        #fig, axs = plt.subplots(2, 2, figsize=(15, 13))
+        fig, axs = plt.subplots(1, 2, figsize=(15, 6))
         
-        self.plot_confusion_matrix(ax=axs[0, 0])
-        self.plot_predicted_vs_true(ax=axs[1, 0])
+        self.plot_confusion_matrix(ax=axs[0])
+        #self.plot_confusion_matrix(ax=axs[0, 0])
+        #self.plot_predicted_vs_true(ax=axs[1, 0])
         
         metrics_text_0 = (
             "METRICS:\n"
@@ -162,16 +164,16 @@ class Observer_Metrics(Model_Metrics):
             f"Recall: {self.recall_val:.2f}\n"
             f"Accuracy: {self.accuracy:.2f}"
         )
-        fig.text(0.10, 0.56, metrics_text_0, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        fig.text(0.05, 0.1, metrics_text_0, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
 
         #thresholds text
-        fig.text(0.15, 0.475, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        fig.text(0.4, 0.1, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
 
         self.thresholds = self.thresholds_list[1]
         self.class_names = self.class_names_list[1]
         self.update()
-        self.plot_confusion_matrix(ax=axs[0, 1])
-        self.plot_predicted_vs_true(ax=axs[1, 1])
+        self.plot_confusion_matrix(ax=axs[1])
+        #self.plot_predicted_vs_true(ax=axs[1, 1])
 
         metrics_text_1 = (
             "METRICS:\n"
@@ -180,10 +182,10 @@ class Observer_Metrics(Model_Metrics):
             f"Recall: {self.recall_val:.2f}\n"
             f"Accuracy: {self.accuracy:.2f}"
         )
-        fig.text(0.58, 0.56, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        fig.text(0.58, 0.1, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
 
         #thresholds text
-        fig.text(0.58, 0.475, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        fig.text(0.7, 0.1, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         
         # Add figure-wide title
         fig.text(0.1, 0.98, f'Model "{self.model_name}" Performance', 
@@ -192,8 +194,8 @@ class Observer_Metrics(Model_Metrics):
         plt.tight_layout(rect=[0, 0.01, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
 
         # Draw separators
-        fig.add_artist(plt.Line2D([0, 1], [0.445, 0.445], color='grey', linewidth=1, linestyle='--'))  # horizontal
-        fig.add_artist(plt.Line2D([0.525, 0.525], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
+        #fig.add_artist(plt.Line2D([0, 1], [0.445, 0.445], color='grey', linewidth=1, linestyle='--'))  # horizontal
+        fig.add_artist(plt.Line2D([0.5, 0.5], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
 
         plt.show()
 
@@ -287,7 +289,7 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
     #model_name = "Actor_Last_Trained_Model"
     model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
-    model_name = "actor_episode_12000"
+    model_name = "actor_episode_25000"
     hidden_layers = [64,32,16]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
