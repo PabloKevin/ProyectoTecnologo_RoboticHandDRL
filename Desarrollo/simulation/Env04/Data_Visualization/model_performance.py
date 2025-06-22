@@ -147,7 +147,7 @@ class Observer_Metrics(Model_Metrics):
 
         super().__init__(df_test=self.predictor.df_test, thresholds_list=thresholds_list, class_names_list=class_names_list)
 
-    def show_model_performance(self, update=False):
+    def show_model_performance(self, model_name, update=False):
         if update:
             self.update()
         #fig, axs = plt.subplots(2, 2, figsize=(15, 13))
@@ -188,7 +188,7 @@ class Observer_Metrics(Model_Metrics):
         fig.text(0.7, 0.1, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         
         # Add figure-wide title
-        fig.text(0.1, 0.98, f'Model "{self.model_name}" Performance', 
+        fig.text(0.1, 0.98, f'Model Performance: {model_name}', 
                  ha='left', va='top', fontsize=14, fontweight='bold')
 
         plt.tight_layout(rect=[0, 0.01, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
@@ -243,9 +243,32 @@ class Actor_Metrics(Model_Metrics):
             plt.tight_layout(rect=[0, 0.01, 1, 0.955], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
             plt.show()
 
-    def show_model_performance(self):
-        self.plot_confusion_matrix()
+    def show_model_performance(self, model_name, show=True, save_path=None):
+        fig, axs = plt.subplots(1, 1, figsize=(12, 10))
+        self.plot_confusion_matrix(ax=axs)
         self.calculate_metrics(show=True)
+        metrics_text_1 = (
+            "METRICS:\n"
+            f"F1-Score: {self.f1:.2f}\n"
+            f"Precision: {self.precision_val:.2f}\n"
+            f"Recall: {self.recall_val:.2f}\n"
+            f"Accuracy: {self.accuracy:.2f}"
+        )
+        fig.text(0.855, 0.938, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        #title text
+        fig.text(0.30, 0.98, f'Model Performance: {model_name}', 
+                 ha='left', va='top', fontsize=14, fontweight='bold')
+        
+        plt.tight_layout(rect=[0, 0.01, 1, 0.9], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+        
+        if save_path is not None:
+            fig.savefig(save_path,
+                        dpi=300,
+                        bbox_inches='tight')
+
+        if show:
+            plt.show()
+
         
 # Example usage
 if __name__ == "__main__":
@@ -257,8 +280,8 @@ if __name__ == "__main__":
     #model_name = "observer_best_test_logits_best2"
 
     model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
-    model_name = "observer_final_v7"
-    #model_name = "observer_epoch_90"
+    #model_name = "observer_final_v7"
+    model_name = "observer_epoch_90"
 
     conv_channels = [16, 32, 64]
     hidden_layers = [64, 32, 16]
@@ -280,7 +303,8 @@ if __name__ == "__main__":
 
     observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                             model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
-    #observer_performance.show_model_performance()
+    name, _, epoch = model_name.split("_")
+    observer_performance.show_model_performance(f'"{name}" - Epoch: {epoch}')
 
 
     # ACTOR PERFORMANCE
@@ -288,13 +312,13 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
     #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
     #model_name = "Actor_Last_Trained_Model"
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
     model_name = "actor_episode_25000"
     hidden_layers = [64,32,16]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names, file_name=model_name)
-    actor_performance.show_model_performance()
+    #actor_performance.show_model_performance(model_name)
     
 
    

@@ -15,7 +15,7 @@ class Observer_Metrics(Model_Metrics):
 
         super().__init__(df_test=self.predictor.df_test, thresholds_list=thresholds_list, class_names_list=class_names_list)
 
-    def show_model_performance(self, update=False, save_path=None, show=True):
+    def show_model_performance(self, model_name, update=False, save_path=None, show=True):
         if update:
             self.update()
         #fig, axs = plt.subplots(2, 2, figsize=(15, 13))
@@ -42,7 +42,7 @@ class Observer_Metrics(Model_Metrics):
         fig.text(0.54, 0.92, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         
         # Add figure-wide title
-        fig.text(0.35, 0.98, f'Model "{self.model_name}" Performance', 
+        fig.text(0.35, 0.98, f'Model Performance: {model_name}', 
                  ha='left', va='top', fontsize=14, fontweight='bold')
         
         #plt.tight_layout(rect=[0, 0.01, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
@@ -77,7 +77,8 @@ if __name__ == "__main__":
         observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                                 model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
         save_dir = "Desarrollo/Documentacion/observer/confusion_matrices/"
-        observer_performance.show_model_performance(save_path=save_dir + model_name, show=False)
+        name, _, epoch = model_name.split("_")
+        observer_performance.show_model_performance(f'"{name}" - Epoch: {epoch}',save_path=save_dir + model_name, show=False)
 
 
     """# ACTOR PERFORMANCE

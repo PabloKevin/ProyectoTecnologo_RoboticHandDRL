@@ -23,7 +23,7 @@ class CriticNetwork(nn.Module):
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], 1)
         # Dropout para intentar mejorar el overfitting
-        self.dropout = nn.Dropout(p=0.25)
+        self.dropout = nn.Dropout(p=0.0)
 
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
 
@@ -68,7 +68,7 @@ class ActorNetwork(nn.Module):
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], n_actions)
         # Dropout para intentar mejorar el overfitting
-        self.dropout = nn.Dropout(p=0.25)
+        self.dropout = nn.Dropout(p=0.0)
         
         self.optimizer = optim.AdamW(self.parameters(), lr=learning_rate)
         
