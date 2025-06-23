@@ -121,8 +121,9 @@ def anotar_inputs(ax, posiciones, input_dims, x=0, ancho=2.0, curvatura=3.0):
 
 
 
-def visualizar_red(modelo: nn.Module, name, act_func):
+def visualizar_red(modelo: nn.Module, name, act_func, save_path=None, show=True):
     G = nx.DiGraph()
+    plt.figure(figsize=(16, 9))
     posiciones = {}
     nodo_id = 0
     nodos_por_capa = []
@@ -308,23 +309,45 @@ def visualizar_red(modelo: nn.Module, name, act_func):
         )
 
     anotar_inputs(ax, list(posiciones.values()), input_dims=sizes[0], x=-5)
-
+    
     plt.xlim(-10, x_max)
     plt.ylim(-y_max, y_max)
     plt.axis('off')
     plt.gca().set_aspect('equal', adjustable='box')  # asegura relación 1:1 real
     #plt.tight_layout()
-    plt.show()
+    if save_path is not None:
+        plt.savefig(save_path,
+                    dpi=300,
+                    bbox_inches='tight')
+    if show:
+        plt.show()
 
 
+def save_nn_arch(nn_type, model_weight_dir, version, save_path):
+    if "actor" in nn_type:
+        modelo = ActorNetwork(hidden_layers=[64, 32, 16])
+    elif "critic" in nn_type:
+        modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
+    else:
+        raise ValueError("nn_type debe ser 'actor' o 'critic'")
 
-# USO
-modelo = ActorNetwork(hidden_layers=[64, 32, 16])
-#modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/models_params_weights/td3/target_actor_td3"))
+    file_dirs = []
+    for model_name in os.listdir(model_weight_dir+version):
+        if nn_type in model_name[:len(nn_type)]:
+            file_dirs.append(model_name)
+    
+    for model_name in file_dirs:
+        modelo.load_state_dict(torch.load(model_weight_dir + version + model_name))
 
-#modelo = CriticNetwork(input_dims=12, hidden_layers=[64, 32, 16])
-modelo.load_state_dict(torch.load("Desarrollo/simulation/Env04/tmp/td3/actor_td3"))
+        modelo.eval()
+        save_dir = save_path + version + nn_type +"/"+ model_name + ".png"
+        episode = int(model_name.split("_")[-1])
 
-modelo.eval()
-#visualizar_red(modelo, name="Target Actor TD3", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU", "tanh"])
-visualizar_red(modelo, name="Actor TD3 501 episodes", act_func=["leaky_ReLU", "leaky_ReLU", "leaky_ReLU"])
+        visualizar_red(modelo, name=f': "{nn_type}" - Episodes: {episode}', act_func=["leaky_ReLU", "leaky_ReLU", "ReLU"],
+                    save_path=save_dir, show=False)
+
+if __name__ == "__main__":
+    for nn_type in ["actor", "critic_1", "critic_2", "target_actor", "target_critic_1", "target_critic_2"]:
+        save_nn_arch(nn_type=nn_type, model_weight_dir="Desarrollo/simulation/Env04/model_weights_docs/td3", 
+                     version="/v2_trainset/", save_path="Desarrollo/Documentacion/nn_arch")
+    

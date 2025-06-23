@@ -1,7 +1,7 @@
 import os
 import cv2
 
-def images_to_video(image_dir: str, output_path: str, fps: int = 1):
+def images_to_video(image_dir: str, output_path: str, fps: int = 30, duration: list = [1, 0.5, 0.2], threshold_files: list = [16, 25]):
     # 1) Listar y ordenar nombres de imagen
     files = os.listdir(image_dir)
 
@@ -28,16 +28,42 @@ def images_to_video(image_dir: str, output_path: str, fps: int = 1):
     writer = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
     # 4) Añadir cada imagen al video
-    for fname in files:
+    for i, fname in enumerate(files):
         path = os.path.join(image_dir, fname)
         img = cv2.imread(path)
-        writer.write(img)
+
+        for j, th in enumerate(threshold_files):
+            if i < th:
+                time = duration[j]
+                break
+            elif i >= threshold_files[-1]:
+                time = duration[-1]
+
+        n_frames = int(time * fps)
+        for _ in range(n_frames):
+            writer.write(img)
+
 
     # 5) Liberar recursos
     writer.release()
     print(f"Video guardado en {output_path}")
 
 if __name__ == "__main__":
-    carpeta = "Desarrollo/Documentacion/actor/train_set/confusion_matrices"
-    salida  = "Desarrollo/Documentacion/videos/actor_trainset_confusion_matrices.mp4"
-    images_to_video(carpeta, salida, fps=1)  # 1 fps → 1s por imagen
+    # nn architecture videos
+    """
+    for version in ["v2_trainset", "v2_fullset"]:
+        for nn in ["actor", "critic_1", "critic_2", "target_actor", "target_critic_1", "target_critic_2"]:
+            carpeta = f"Desarrollo/Documentacion/nn_arch/{version}/{nn}/"
+            salida  = f"Desarrollo/Documentacion/videos/nn_arch_trinset/{nn}_{version[3:]}_nn_arch_.mp4"
+            images_to_video(carpeta, salida, fps=5, duration=[0.8, 0.4, 0.2], threshold_files=[16,25])  """
+    
+    # td3 confusion matrices videos
+    """for version in ["train_set", "full_set"]:
+        carpeta = f"Desarrollo/Documentacion/actor/{version}/confusion_matrices/"
+        salida  = f"Desarrollo/Documentacion/videos/actor_{version}_confusion_matrices.mp4"
+        images_to_video(carpeta, salida, fps=5, duration=[0.8, 0.4, 0.2], threshold_files=[16,25])"""
+
+    # observer confusion matrices video
+    carpeta = f"Desarrollo/Documentacion/observer/confusion_matrices/"
+    salida  = f"Desarrollo/Documentacion/videos/observer_confusion_matrices.mp4"
+    images_to_video(carpeta, salida, fps=5, duration=[0.8, 0.4], threshold_files=[16])
