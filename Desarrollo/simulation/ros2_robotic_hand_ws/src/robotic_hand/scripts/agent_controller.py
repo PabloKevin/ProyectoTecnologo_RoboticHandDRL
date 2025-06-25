@@ -176,8 +176,14 @@ def main():
     time.sleep(1)  # Wait for MQTT connection
 
     try:
-        while True:
-            tool_in = input("Tool: ")
+        #while True:
+        tools_dict = {"agarre_0": ["empty"],
+                      "agarre_1": ["tuerca", "tornillo", "clavo"],
+                      "agarre_2": ["lapicera", "tenedor", "cuchara"],
+                      "agarre_3": ["destornillador", "martillo", "pinza"]}
+        for i in range(4): # Simular empty + 3 iteraciones
+            #tool_in = input("Tool: ")
+            tool_in = np.random.choice(list(tools_dict.values())[i]) # Simular input
             tool_in = None if tool_in == "random" else tool_in
             image_received, error = get_observation_img("all", tool_in)
             if error:
@@ -189,6 +195,8 @@ def main():
             agent_MQTT_pub.publish(topic="RoboticHand_ML/action", msg=str(combination))
             left_hand.action(combination)
             node.publish_joint_states()
+            
+            time.sleep(1) # simular delay entre iteraciones
 
     except KeyboardInterrupt:
         print("\nStopping robot movement.")

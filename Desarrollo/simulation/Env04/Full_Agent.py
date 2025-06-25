@@ -20,13 +20,15 @@ class Full_Agent_Pipe():
         else:
             self.segmentator = segmentator
         if observer is None:
-            self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer", name="observer_best_test_logits_2") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+            self.observer = ObserverNetwork(checkpoint_dir=checkpoint_dir+"observer", name="observer_final_v7") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
             self.observer.load_model()
             self.observer.eval() #importante para apagar las capas de dropout.
         else:
             self.observer = observer
         if actor is None:
             self.actor = ActorNetwork(checkpoint_dir=checkpoint_dir+"td3", hidden_layers=[64,32,16]) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+            #self.actor.checkpoint_file = checkpoint_dir + "td3/actor_episode_25000"
+            self.actor.checkpoint_file =  "model_weights_docs/td3/v2_trainset/actor_episode_6500" # Para visualizar aprendizaje con pesos en episodios bajos
             self.actor.load_checkpoint()
             self.actor.eval() # no estoy seguro si es necesario, pero es estándar.
         else:

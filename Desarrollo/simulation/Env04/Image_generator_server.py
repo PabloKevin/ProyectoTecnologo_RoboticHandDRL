@@ -21,7 +21,7 @@ class ImageGenerator():
 
         # Initialize tkinter window
         self.root = tk.Tk()
-        self.root.title("Image Viewer")
+        self.root.title("Segmentator Input")
         self.label = tk.Label(self.root)
         self.label.pack()
 
