@@ -42,95 +42,108 @@ smoothing_factor = 0.92
 #df['score_ewm'] = df['score'].ewm(alpha=1-smoothing_factor, adjust=False).mean()
 df['score_ewm'] = df['Value'].ewm(alpha=1-smoothing_factor, adjust=False).mean()
 
-# ahora dibujamos raw vs. smoothed
-fig = go.Figure()
-fig.add_trace(go.Scatter(
-    x=df['Step'], y=df['Value'],
-    mode='lines',
-    name='raw',
-    line=dict(color="#EE4E0F", width=1),
-    opacity=0.3
-))
-fig.add_trace(go.Scatter(
-    x=df['Step'], y=df['score_ewm'],
-    mode='lines',
-    name=f'smoothed (α={1-smoothing_factor:.2f})',
-    line=dict(color="#E9612B", width=2)
-))
 
-
-
-# Lista de episodios a marcar
-highlight_eps = [1500, 4000, 6500, 25000]
-
-# Supongamos que tu DataFrame se llama df y tiene columnas 'episode' y 'score'
-# Si quisieras el suavizado en su lugar, cambia 'score' por 'score_ewm'
-val_map = df.set_index('Step')['score_ewm'].to_dict()
-#print(val_map[4000])
-
-# 1) Recolecta todos los puntos de una sola vez:
-xs, ys = [], []
-for ep in highlight_eps:
-    if ep in val_map:
-        xs.append(ep)
-        ys.append(val_map[ep])
-
-# 2) Añade un único scatter con todos los highlights
-fig.add_trace(go.Scatter(
-    x=xs,
-    y=ys,
-    mode='markers',
-    marker=dict(color="#F5B02F", size=15),
-    name='Puntos de verificación'
-))
-
-# 3) (Opcional) si quieres las etiquetas como texto junto al marker:
-annotations = []
-for i, ep in enumerate(highlight_eps):
-    val = val_map.get(ep)
-    if val is None:
-        continue
-    annotations.append(dict(
-        x=ep,
-        y=val,
-        text=f"Episodio: {ep}; Score (smoothed): {val:.2f}",
-        showarrow=True,
-        arrowhead=0,        # estilo de punta (0–8)
-        arrowsize=1,        # escala de la punta
-        arrowwidth=3,       # grosor de la línea
-        arrowcolor="#F5B02F",  # color de la flecha
-        ax=0,              # desplaza la cola 40px a la derecha
-        ay=300,             # desplaza la cola 30px hacia arriba
-        xanchor='left' if i<3 else 'right',
-        yanchor='bottom',
-        font=dict(color='white', size=23),
-        bgcolor='rgba(0,0,0,0.5)',
-        bordercolor='white',
-        borderwidth=1,
-        borderpad=4
+def plot_scores_vs_episodes(df, save_dir=None, save=False, show=True):
+    # ahora dibujamos raw vs. smoothed
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df['Step'], y=df['Value'],
+        mode='lines',
+        name='raw',
+        line=dict(color="#EE4E0F", width=1),
+        opacity=0.3
+    ))
+    fig.add_trace(go.Scatter(
+        x=df['Step'], y=df['score_ewm'],
+        mode='lines',
+        name=f'smoothed (α={1-smoothing_factor:.2f})',
+        line=dict(color="#E9612B", width=2)
     ))
 
 
-# Ajustes de estilo para fondo y ejes
-fig.update_layout(
-    title='Actor TD3 - Train Set V2',
-    paper_bgcolor='#303030',   # fondo general
-    plot_bgcolor='#303030',    # fondo del área de dibujo
-    font=dict(color='white', size=25),  # texto en blanco
-    xaxis=dict(
-        title='Episodio',
-        gridcolor='#666666',    # rejilla más clara
-        zerolinecolor='#444444' # línea cero opcional
-    ),
-    yaxis=dict(
-        title='Score',
-        gridcolor='#666666',
-        zerolinecolor='#444444'
-    ),
-    annotations=annotations
-)
-fig.update_yaxes(range=[-30, -5])
-fig.update_xaxes(range=[0, 25200])
 
-fig.write_image('Desarrollo/Documentacion/actor/train_set/plot/scores_vs_episodes.png', width=1920, height=1080)
-#fig.show()
+    # Lista de episodios a marcar
+    highlight_eps = [1500, 4000, 6500, 25000]
+
+    # Supongamos que tu DataFrame se llama df y tiene columnas 'episode' y 'score'
+    # Si quisieras el suavizado en su lugar, cambia 'score' por 'score_ewm'
+    val_map = df.set_index('Step')['score_ewm'].to_dict()
+    #print(val_map[4000])
+
+    # 1) Recolecta todos los puntos de una sola vez:
+    xs, ys = [], []
+    for ep in highlight_eps:
+        if ep in val_map:
+            xs.append(ep)
+            ys.append(val_map[ep])
+
+    # 2) Añade un único scatter con todos los highlights
+    fig.add_trace(go.Scatter(
+        x=xs,
+        y=ys,
+        mode='markers',
+        marker=dict(color="#F5B02F", size=15),
+        name='Puntos de verificación'
+    ))
+
+    # 3) (Opcional) si quieres las etiquetas como texto junto al marker:
+    annotations = []
+    for i, ep in enumerate(highlight_eps):
+        val = val_map.get(ep)
+        if val is None:
+            continue
+        annotations.append(dict(
+            x=ep,
+            y=val,
+            text=f"Episodio: {ep}; Score (smoothed): {val:.2f}",
+            showarrow=True,
+            arrowhead=0,        # estilo de punta (0–8)
+            arrowsize=1,        # escala de la punta
+            arrowwidth=3,       # grosor de la línea
+            arrowcolor="#F5B02F",  # color de la flecha
+            ax=0,              # desplaza la cola 40px a la derecha
+            ay=300,             # desplaza la cola 30px hacia arriba
+            xanchor='left' if i<3 else 'right',
+            yanchor='bottom',
+            font=dict(color='white', size=23),
+            bgcolor='rgba(0,0,0,0.5)',
+            bordercolor='white',
+            borderwidth=1,
+            borderpad=4
+        ))
+
+
+    # Ajustes de estilo para fondo y ejes
+    fig.update_layout(
+        title='Actor TD3 - Train Set V2',
+        paper_bgcolor='#303030',   # fondo general
+        plot_bgcolor='#303030',    # fondo del área de dibujo
+        font=dict(color='white', size=25),  # texto en blanco
+        xaxis=dict(
+            title='Episodio',
+            gridcolor='#666666',    # rejilla más clara
+            zerolinecolor='#444444' # línea cero opcional
+        ),
+        yaxis=dict(
+            title='Score',
+            gridcolor='#666666',
+            zerolinecolor='#444444'
+        ),
+        annotations=annotations
+    )
+    fig.update_yaxes(range=[-30, -5])
+    fig.update_xaxes(range=[0, 25200])
+
+    if save:
+        fig.write_image(save_dir, width=1920, height=1080)
+    
+    if show:
+        fig.show()
+
+
+if __name__ == "__main__":
+    path = 'Desarrollo/Documentacion/actor/train_set/plot/'
+    #for i in range(df.shape[0]+1):
+    #    plot_scores_vs_episodes(df.iloc[:i], save_dir=path+f"sc_vs_ep_{df['Step'].iloc[i]}.png",save=True, show=False)
+
+    plot_scores_vs_episodes(df)
