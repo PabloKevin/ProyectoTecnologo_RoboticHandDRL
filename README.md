@@ -42,3 +42,8 @@ Este proyecto desarrolló un sistema mecatrónico compuesto por cuatro módulos 
 Los datasets fueron generados mediante técnicas de aumentación de datos e incluyeron nueve tipos de herramientas y una imagen en blanco. El Observer, entrenado con aprendizaje supervisado, produjo salidas que permitieron clasificar las herramientas con un 75% de precisión. Estas salidas alimentaron al agente de DRL, implementado con el algoritmo Twin Delayed Deep Deterministic Policy Gradient (TD3), compuesto por seis redes neuronales profundas entrenadas en un entorno simulado desarrollado en este proyecto. La función de recompensas fue diseñada para promover combinaciones de dedos coherentes con agarres funcionales. El Actor alcanzó un 88% de precisión en la predicción de agarres adecuados.
 
 >**Palabras claves — _Mano Robótica; Emulación de Agarres; Aprendizaje por Refuerzo Profundo; TD3; Visión por Computadora; ESP32; ROS2._**
+
+## License
+> [!IMPORTANT]
+> - **Código fuente**: Apache License 2.0. Véase [`LICENSE-APACHE-2.0`](LICENSE-APACHE-2.0).
+> - **Documentación y recursos académicos**: Creative Commons Attribution 4.0 (CC BY 4.0). Véase [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0).
