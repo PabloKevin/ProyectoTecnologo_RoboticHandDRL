@@ -176,14 +176,18 @@ def main():
     time.sleep(1)  # Wait for MQTT connection
 
     try:
-        #while True:
+        """
+        # Simular empty + 3 iteraciones
         tools_dict = {"agarre_0": ["empty"],
                       "agarre_1": ["tuerca", "tornillo", "clavo"],
                       "agarre_2": ["lapicera", "tenedor", "cuchara"],
                       "agarre_3": ["destornillador", "martillo", "pinza"]}
-        for i in range(4): # Simular empty + 3 iteraciones
-            #tool_in = input("Tool: ")
+        for i in range(4):
+            
             tool_in = np.random.choice(list(tools_dict.values())[i]) # Simular input
+        """
+        while True: # Comentar esta línea para simular el empty + 3 iteraciones
+            tool_in = input("Tool: ")
             tool_in = None if tool_in == "random" else tool_in
             image_received, error = get_observation_img("all", tool_in)
             if error:
