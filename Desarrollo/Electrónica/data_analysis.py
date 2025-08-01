@@ -51,6 +51,8 @@ df = pl.DataFrame({
     "current":  currents,
 })
 
+df = df.filter((pl.col("time")>3) & (pl.col("time")<410))
+
 # 1) Generamos una columna booleana is_peak
 df_peaks = df.filter(
         (pl.col("current") > 0.22)  # umbral mínimo
@@ -81,24 +83,84 @@ df_peaks = df_peaks[indices]
 n_peaks = df_peaks.count()
 print(f"Número de picos > 0.2: {n_peaks}")
 
+transitions = [ # esto sale de un excel usado durante la práctica para tener un orden de las transiciones
+    "empty a martillo",
+    "martillo a lapicera",
+    "lapicera a martillo",
+    "martillo a tornillo",
+    "tornillo a martillo",
+    "martillo a empty",
+    "empty a lapicera",
+    "lapicera a tornillo",
+    "tornillo a lapicera",
+    "lapicera a empty",
+    "empty a tornillo",
+    "tornillo a empty",
+    "empty a completo",
+    "completo a empty",
+]
+
 # Plot current vs time
 plt.figure(figsize=(10, 6))
-plt.plot(df["time"].to_numpy(), df["current"].to_numpy(), color="blue", label='Current')
+plt.plot(df["time"].to_numpy(), df["current"].to_numpy(), color="blue", label='Corriente')
 #plt.plot([0,600], [0.22, 0.22], color="red", linestyle='--', label='Threshold')
 #plt.scatter([t1, t2], [df_peaks["current"][5], df_peaks["current"][6]], color="red", label='Peaks')
-plt.scatter(df_peaks["time"].to_numpy(), df_peaks["current"].to_numpy(), color="purple", marker="^", label='Filtered Peaks')
-plt.xlabel('Time')
-plt.ylabel('Current')
-plt.title(f'Current vs Time ({csv_file})')
+plt.scatter(df_peaks["time"].to_numpy(), df_peaks["current"].to_numpy(), color="purple", marker="^", label='Picos de corriente en transiciones')
+plt.xlabel('Tiempo (s)')
+plt.ylabel('Corriente (A)')
+plt.title(f'Corriente en función del tiempo durante transiciones de agarres del prototipo')
 plt.legend()
 plt.grid(True)
-plt.show()
+
+# Anotaciones con flechas para las transiciones
+xt = [-20, -30, -22, -10, -22, -20, -20, -20, -15, -20, -50, -45, -20, -20]
+yt = [0.06, 0.06, 0.10, 0.06, 0.10, 0.06, 0.10, 0.06, 0.06, 0.06, -0.01, -0.02, 0.06, 0.06]
+for i, transition in enumerate(transitions):
+    transition = transition.replace(" ", "\n", 1)  # Reemplazar espacios por saltos de línea
+    x = df_peaks["time"][i]
+    y = df_peaks["current"][i]
+    plt.annotate(transition,
+                xy=(x, y),         # punto al que apunta
+                xytext=(x+xt[i], y+yt[i]),     # posición del texto
+                arrowprops=dict(arrowstyle="->", linewidth=1, color="purple"),
+                fontsize=10.5, color="purple",)
+
+#plt.show()
+plt.savefig(f"Desarrollo/Electrónica/Graficos/All_transitions.png", format="png", dpi=300, bbox_inches="tight")
 
 # Movimientos individuales
 #df_move = df.filter((pl.col("time")>df_peaks["time"][0]-t_min/3) & (pl.col("time")<df_peaks["time"][0]+t_min/3))
 window_pre = 1
 window_post = 3
-df_move = df.filter((pl.col("time")>df_peaks["time"][0]-window_pre) & (pl.col("time")<df_peaks["time"][0]+window_post))
+
+"""for i, transition in enumerate(transitions):
+    df_move = df.filter((pl.col("time")>df_peaks["time"][i]-window_pre) & (pl.col("time")<df_peaks["time"][i]+window_post))
+
+    # Plot current vs time
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_move["time"].to_numpy(), df_move["current"].to_numpy(), color="blue", marker=".",label='Current')
+    plt.plot(df_move["time"].to_numpy(), df_move["current"].to_numpy(), color="blue", label='Current')
+    #plt.plot([0,600], [0.22, 0.22], color="red", linestyle='--', label='Threshold')
+    #plt.scatter([t1, t2], [df_peaks["current"][5], df_peaks["current"][6]], color="red", label='Peaks')
+    plt.annotate(f'Imax={df_peaks["current"][i]*1000:.2f} mA', 
+                 xy=(df_peaks["time"][i], df_peaks["current"][i]),
+                 xytext=(df_peaks["time"][i]+0.5, df_peaks["current"][i]), 
+                 color="purple",
+                 arrowprops=dict(arrowstyle="->", linewidth=1, color="purple"),
+                 fontsize=10.5)
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Corriente (A)')
+    plt.title(f'Pico de corriente en transición: {transition}')
+    plt.legend()
+    plt.grid(True)
+    #plt.show()
+    
+    #plt.savefig(f"Desarrollo/Electrónica/Graficos/{transition.replace(' ', '_')}.png", format="png", dpi=300, bbox_inches="tight")"""
+
+window_pre = 1
+window_post = 5
+i=12
+df_move = df.filter((pl.col("time")>df_peaks["time"][i]-window_pre) & (pl.col("time")<df_peaks["time"][i]+window_post))
 
 # Plot current vs time
 plt.figure(figsize=(10, 6))
@@ -106,10 +168,16 @@ plt.scatter(df_move["time"].to_numpy(), df_move["current"].to_numpy(), color="bl
 plt.plot(df_move["time"].to_numpy(), df_move["current"].to_numpy(), color="blue", label='Current')
 #plt.plot([0,600], [0.22, 0.22], color="red", linestyle='--', label='Threshold')
 #plt.scatter([t1, t2], [df_peaks["current"][5], df_peaks["current"][6]], color="red", label='Peaks')
-plt.scatter(df_peaks["time"][0], df_peaks["current"][0], color="purple", marker="^", label='Filtered Peaks')
-plt.xlabel('Time')
-plt.ylabel('Current')
-plt.title(f'Current vs Time ({csv_file})')
+plt.annotate(f'Imax={df_peaks["current"][i]*1000:.2f} mA', 
+                xy=(df_peaks["time"][i], df_peaks["current"][i]),
+                xytext=(df_peaks["time"][i]+0.5, df_peaks["current"][i]), 
+                color="purple",
+                arrowprops=dict(arrowstyle="->", linewidth=1, color="purple"),
+                fontsize=10.5)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('Corriente (A)')
+plt.title(f'Pico de corriente en transición: {transitions[12]}')
 plt.legend()
 plt.grid(True)
-plt.show()
+#plt.show()
+plt.savefig("Desarrollo/Electrónica/Graficos/empty_a_completo.png", format="png", dpi=300, bbox_inches="tight")
