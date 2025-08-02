@@ -31,9 +31,11 @@ This work has contributed a functional intelligent grasping system and stands ou
 >**Keywords — _Robotic Hand, Grasp Emulation, Deep Reinforcement Learning, TD3, Computer Vision, ESP32, ROS2._**
 
 
+# Adaptación de un Prototipo de Mano Robótica en Hardware y Software para Emulación de Agarres Usando Métodos de Machine Learning
+
 ## Resumen
 Este proyecto desarrolló un sistema mecatrónico compuesto por cuatro módulos principales.
-- Módulo 0: una interfaz de control Machine-to-Machine entre los componentes del sistema, que incluye una interfaz de usuario por línea de comandos.\
+- Módulo 0: una interfaz de control Machine-to-Machine entre los componentes del sistema, que incluye una interfaz de usuario por línea de comandos.
 - Módulo 1: implementación de un pipeline de segmentación de imágenes (Segmentator), una red neuronal convolucional para clasificación de herramientas (Observer) y un agente de aprendizaje por refuerzo profundo para la predicción de agarres (Actor).
 - Módulo 2: simulación del prototipo de mano robótica utilizando ROS2.
 - Módulo 3: desarrollo del firmware de control y del circuito electrónico del prototipo físico; el control se dividió entre comunicación MQTT y control de servomotores, que transmiten el movimiento a los dedos robóticos mediante cables que emulan tendones elásticos. 
