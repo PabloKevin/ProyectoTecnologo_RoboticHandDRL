@@ -123,7 +123,8 @@ def plot_single_transition(ax, df, df_peaks, idx, transition, window_pre=1, wind
     ax.set_ylabel("Corriente (A)")
     ax.grid(True)
 
-# === Primera figura: 8 transiciones (4 filas x 2 columnas) ===
+"""
+# === Figuras de 4 transiciones (2 filas x 2 columnas) ===
 for i in range(0,3):
     first_block = transitions[0+i*4:4+i*4]
     print(first_block)
@@ -139,7 +140,7 @@ for i in range(0,3):
     plt.close(fig1)
     print(f"Guardado: {out1}")
 
-# === Segunda figura: 6 transiciones (3 filas x 2 columnas) ===
+# === Figura de 2 transiciones (2 filas x 1 columnas) ===
 second_block = transitions[12:14]
 offset = 12
 fig2, axes2 = plt.subplots(2, 1, figsize=(9, 12), constrained_layout=True)
@@ -157,3 +158,79 @@ out2 = os.path.join(output_dir, "combined_transitions_3.png")
 fig2.savefig(out2, dpi=300, bbox_inches="tight")
 plt.close(fig2)
 print(f"Guardado: {out2}")
+"""
+
+# BOXPLOT DE PICOS DE CORRIENTE
+# Asume que df_peaks ya está definido y tiene la columna "current"
+
+def boxplot(data, color, text_color, title, filename=None):
+    # Posiciones: puntos a la izquierda (x≈0.8), boxplot a la derecha (x=1.1)
+    x_box = 1.1
+    x_points_center = 0.8
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+
+    # 1. Boxplot (a la derecha)
+    bp = ax.boxplot(
+        data,
+        positions=[x_box],
+        widths=0.3,
+        patch_artist=True,
+        showfliers=False,  # ocultamos outliers porque ya los mostramos como puntos
+        boxprops=dict(facecolor=color, alpha=0.7, edgecolor="none"),
+        medianprops=dict(color="black", linewidth=2),
+        whiskerprops=dict(color="gray", linewidth=1),
+        capprops=dict(color="gray", linewidth=1),
+    )
+
+    # 2. Puntos individuales (a la izquierda) con jitter horizontal
+    rng = np.random.default_rng(seed=46)
+    x_jitter = rng.normal(loc=x_points_center, scale=0.03, size=len(data))
+    ax.scatter(x_jitter, data,
+            color=color, alpha=0.8, s=40,
+            edgecolors="none", label="Picos individuales")
+
+    # 3. Línea punteada de la media (dentro del boxplot)
+    mean_val = data.mean()
+    q1 = np.percentile(data, 25, method="linear") 
+    q3 = np.percentile(data, 75, method="linear")
+
+    ax.hlines(mean_val, x_box - 0.15, x_box + 0.15,
+            colors=text_color, linestyles="--", linewidth=2, label="Media")
+
+    # Etiquetas y formato
+    ax.set_xticks([ (x_points_center + x_box) / 2 ])  # etiqueta centrada debajo
+    ax.set_xticklabels(["Picos de corriente"])
+    ax.set_ylabel("Corriente (A)")
+    ax.set_title(title)
+    ax.grid(axis="y", linestyle=":", alpha=0.7)
+
+    # Leyenda
+    #ax.legend(loc="upper right", frameon=False)
+
+    # Ajuste de límites para que se vean separados y no cortados
+    x_min = x_points_center - 0.2
+    x_max = x_box + 0.4
+    ax.set_xlim(x_min, x_max)
+
+    # Opcional: mostrar valor de la media
+    ax.text(x_box + 0.16, mean_val, f"mean={mean_val:.3f}", va="center", fontsize=10, color=text_color)
+    ax.text(x_box + 0.16, np.median(data), f"median={np.median(data):.3f}", va="center", fontsize=10, color=text_color)
+    ax.text(x_box + 0.16, data.min(), f"min={data.min():.3f}", va="center", fontsize=10, color=text_color)
+    ax.text(x_box + 0.16, data.max(), f"max={data.max():.3f}", va="center", fontsize=10, color=text_color)
+    ax.text(x_box + 0.16, q1, f"Quartile_1={q1:.3f}", va="center", fontsize=10, color=color)
+    ax.text(x_box + 0.16, q3, f"Quartile_3={q3:.3f}", va="center", fontsize=10, color=color)
+
+    plt.tight_layout()
+    plt.show()
+
+    if filename is not None:
+        out3 = os.path.join(output_dir, filename)
+        fig.savefig(out3, dpi=300, bbox_inches="tight")
+
+peaks = df_peaks["current"].to_numpy()
+boxplot(peaks, color="#4db6ac", text_color="darkgreen", title="Distribución de picos de corriente", filename="boxplot_Ipeaks.png")
+
+current = df.filter(pl.col("current") < 0.16)
+current = current["current"].to_numpy()
+boxplot(current, color="#4d58b6", text_color="darkblue", title="Distribución de corriente", filename="boxplot_I.png")
