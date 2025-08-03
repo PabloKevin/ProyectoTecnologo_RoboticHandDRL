@@ -2,6 +2,8 @@ import os
 import polars as pl
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 # === Configuración de rutas ===
 data_dir = os.path.join(os.path.dirname(__file__), 'Mediciones_Reales')
@@ -163,12 +165,12 @@ print(f"Guardado: {out2}")
 # BOXPLOT DE PICOS DE CORRIENTE
 # Asume que df_peaks ya está definido y tiene la columna "current"
 
-def boxplot(data, color, text_color, title, filename=None):
+def boxplot(data, color, text_color, title, figsize=(6,6), filename=None, hist=False):
     # Posiciones: puntos a la izquierda (x≈0.8), boxplot a la derecha (x=1.1)
     x_box = 1.1
     x_points_center = 0.8
 
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=figsize)
 
     # 1. Boxplot (a la derecha)
     bp = ax.boxplot(
@@ -199,8 +201,7 @@ def boxplot(data, color, text_color, title, filename=None):
             colors=text_color, linestyles="--", linewidth=2, label="Media")
 
     # Etiquetas y formato
-    ax.set_xticks([ (x_points_center + x_box) / 2 ])  # etiqueta centrada debajo
-    ax.set_xticklabels(["Picos de corriente"])
+    ax.set_xticks([])              # no mostrar ticks duplicados
     ax.set_ylabel("Corriente (A)")
     ax.set_title(title)
     ax.grid(axis="y", linestyle=":", alpha=0.7)
@@ -221,6 +222,27 @@ def boxplot(data, color, text_color, title, filename=None):
     ax.text(x_box + 0.16, q1, f"Quartile_1={q1:.3f}", va="center", fontsize=10, color=color)
     ax.text(x_box + 0.16, q3, f"Quartile_3={q3:.3f}", va="center", fontsize=10, color=color)
 
+    if hist:    
+        divider = make_axes_locatable(ax)
+        ax_hist = divider.append_axes("right", size="25%", pad=0.1, sharey=ax)
+
+        # Histograma horizontal de la misma variable
+        sns.histplot(
+        data=pl.DataFrame({"current": data}),
+        y="current",
+        bins=70,
+        kde=True,                     # equivalente a distplot: hist + KDE
+        stat="count",
+        ax=ax_hist,
+        color=color,
+        alpha=0.7,
+        line_kws={"linewidth": 1},
+        )
+
+        ax_hist.tick_params(axis="y", which="both", labelleft=False, left=False)
+        ax_hist.set_ylabel("")              # quitar cualquier label redundante
+
+
     plt.tight_layout()
     plt.show()
 
@@ -233,4 +255,5 @@ boxplot(peaks, color="#4db6ac", text_color="darkgreen", title="Distribución de 
 
 current = df.filter(pl.col("current") < 0.16)
 current = current["current"].to_numpy()
-boxplot(current, color="#4d58b6", text_color="darkblue", title="Distribución de corriente", filename="boxplot_I.png")
+boxplot(current, color="#4d58b6", text_color="darkblue", title="Distribución de Corriente < 0.16 A", 
+        filename="boxplot_I.png", figsize=(7, 6), hist=True)
