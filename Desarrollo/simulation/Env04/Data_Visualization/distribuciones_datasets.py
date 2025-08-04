@@ -29,7 +29,7 @@ def create_dataframe(path, dataset_names):
     return df
     
 def plot_distributions(df_data, palette, title, show=True, filename=None):
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
     #df = pd.DataFrame({"label": data})
 
