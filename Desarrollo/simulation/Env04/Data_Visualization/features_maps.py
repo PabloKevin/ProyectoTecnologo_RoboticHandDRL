@@ -20,10 +20,10 @@ class ObserverNetwork(nn.Module):
     def __init__(self, 
                  conv_channels=[16, 32, 64], 
                  hidden_layers=[64, 32, 16], 
-                 learning_rate= 0.0008,
-                 dropout2d=0.3, 
-                 dropout=0.3, 
-                 input_dims = (256, 256, 1), output_dims = 1, 
+                 learning_rate= 0.0002,
+                 dropout2d=0.25, 
+                 dropout=0.25, 
+                 input_dims = (256, 256, 1), output_dims = 10,  
                  name='observer', checkpoint_dir='Desarrollo/simulation/Env04/tmp/observer'):
         super(ObserverNetwork, self).__init__()
         self.input_dims = input_dims
@@ -36,21 +36,26 @@ class ObserverNetwork(nn.Module):
         self.checkpoint_dir = checkpoint_dir
         self.name = name
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name+'_supervised')
-        self.features_maps = [None, None, None]
+        self.features_maps = []  # To store feature maps
 
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=5, stride=1, padding=2)
-        self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=5, stride=1, padding=2)
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=conv_channels[0], kernel_size=8, stride=1, padding=2)
+        self.conv2 = nn.Conv2d(in_channels=conv_channels[0], out_channels=conv_channels[1], kernel_size=6, stride=1, padding=2)
+        self.conv3 = nn.Conv2d(in_channels=conv_channels[1], out_channels=conv_channels[2], kernel_size=5, stride=1, padding=2)
         
         # Pooling layers
-        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 2, input_dims[1] // 2))
-        self.pool2 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
+        """self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2)"""
+        self.pool1 = nn.AdaptiveAvgPool2d(output_size=(input_dims[0] // 4, input_dims[1] // 4))
+        self.pool2 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 8, input_dims[1] // 8))
+        self.pool3 = nn.AdaptiveMaxPool2d(output_size=(input_dims[0] // 16, input_dims[1] // 16)) 
 
         # Dropout2d para intentar mejorar el overfitting
         self.conv_dropout = nn.Dropout2d(p=dropout2d)
 
         # After three times pooling by factor of 2, 
         # the spatial dimensions become (H/8) x (W/8)
-        self.fc1 = nn.Linear(4 * (input_dims[0] // 4) * (input_dims[1] // 4), hidden_layers[0])
+        self.fc1 = nn.Linear(conv_channels[2] * (input_dims[0] // 16) * (input_dims[1] // 16), hidden_layers[0])
         self.fc2 = nn.Linear(hidden_layers[0], hidden_layers[1])
         self.fc3 = nn.Linear(hidden_layers[1], hidden_layers[2])
         self.fc4 = nn.Linear(hidden_layers[2], output_dims)
@@ -62,23 +67,50 @@ class ObserverNetwork(nn.Module):
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         print(f"Created Observer Network on device: {self.device}")
         self.to(self.device)
-        
+    
     def forward(self, img):
         if not isinstance(img, torch.Tensor):
-            img = torch.tensor(img, dtype=torch.float).to(self.device)
+            if isinstance(img, np.ndarray):
+                img = torch.from_numpy(img)
+            else:
+                img = torch.tensor(img)
 
-        img = torch.tensor(img, dtype=torch.float).to(self.device)
-        x = self.conv1(img)
-        x = F.leaky_relu(x)
+        img = img.float()  # conv2d espera float32
+
+        # Asegurar 1 canal y orden NCHW
+        if img.dim() == 2:
+            # [H, W] -> [N=1, C=1, H, W]
+            img = img.unsqueeze(0).unsqueeze(0)
+        elif img.dim() == 3:
+            # Puede ser [H, W, C] o [C, H, W]
+            if img.shape[0] in (1, 3):  # [C, H, W]
+                img = img.unsqueeze(0)   # -> [N, C, H, W]
+            else:                        # [H, W, C]
+                img = img.permute(2, 0, 1).unsqueeze(0)  # -> [N, C, H, W]
+
+        img = img.to(self.device, non_blocking=True)
+
+        features_maps = []
+        # Convolution block 1
+        x = F.leaky_relu(self.conv1(img))
+        features_maps.append(x)
         x = self.pool1(x)
-        features_maps_1 = x
-        x = self.conv2(x)
-        x = F.leaky_relu(x)
-        x = self.pool2(x)
-        features_maps_2 = x
         
-        self.features_maps[0] = features_maps_1.cpu().detach().numpy()
-        self.features_maps[1] = features_maps_2.cpu().detach().numpy()
+        
+        # Convolution block 2
+        x = F.leaky_relu(self.conv2(x))
+        features_maps.append(x)
+        x = self.pool2(x)
+        
+
+        # Convolution block 3
+        x = F.leaky_relu(self.conv3(x))
+        features_maps.append(x)
+        x = self.pool3(x)
+        
+
+        for fm in features_maps:
+            self.features_maps.append(fm.cpu().detach().numpy())
 
         # Apagar neuronas tras la 3ra capa conv
         x = self.conv_dropout(x)
@@ -86,10 +118,10 @@ class ObserverNetwork(nn.Module):
         #print(f"Shape after conv3: {x.shape}")
         # Check if the input is a batch or a single image
         if len(x.shape) == 4:  # Batch case: [batch_size, channels, height, width]
-            #x = x[:, [0, 4, 6, 9, 22, 25, 30, 31], :, :]
+            #x = x[:, [0, 4, 6, 9, 22, 25, 30, 31], :, :] # Just interesting features maps
             x = x.reshape((x.size(0), -1))  # Flatten each sample in the batch
         elif len(x.shape) == 3:  # Single image case: [channels, height, width]
-            #x = x[[0, 4, 6, 9, 22, 25, 30, 31], :, :]
+            #x = x[[0, 4, 6, 9, 22, 25, 30, 31], :, :] # Just interesting features maps
             x = x.reshape(-1)  # Flatten the single image
         x = F.leaky_relu(self.fc1(x))
 
@@ -105,16 +137,16 @@ class ObserverNetwork(nn.Module):
         x = self.dropout(x)
         #tool_reg = F.leaky_relu(self.fc3(x))
         #tool_reg = torch.tanh(self.fc3(x))*3.5+2.5
-        tool_reg = self.fc4(x)
+        logits = self.fc4(x)
             
-        return tool_reg # Tool regresion
+        return logits # Tool regresion
     
-    #def save_checkpoint(self):
-    #    torch.save(self.state_dict(), self.checkpoint_file)
-
     def load_model(self):
-        self.load_state_dict(torch.load(self.checkpoint_file))
+        state = torch.load(self.checkpoint_file, map_location=self.device)
+        self.load_state_dict(state)
         print("Successfully loaded observer model")
+
+
 
 
 def plot_feature_maps(feature_maps, ncols=4, cmap='gray'):
@@ -150,8 +182,13 @@ train_dataset = MyImageDataset("Desarrollo/simulation/Env04/DataSets/TrainSet_ma
 
 #observer = ObserverNetwork(checkpoint_dir="Desarrollo/simulation/Env04/tmp/observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
 #observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test")
-observer = ObserverNetwork(checkpoint_dir="Desarrollo/simulation/Env04/models_params_weights/observer") # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
-observer.checkpoint_file = os.path.join(observer.checkpoint_dir, "observer_best_test_logits_best2")
+model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
+model_name = "observer_final_v7"
+
+observer = ObserverNetwork(checkpoint_dir=model_weight_dir) # para ejecutar en vsc quitar el checkpoint para usar el que está por defecto. 
+observer.checkpoint_file = os.path.join(observer.checkpoint_dir, model_name)
+
+
 observer.load_model()
 observer.eval()
 
@@ -159,8 +196,10 @@ for _ in range(1):
     img = get_random_image(train_dataset)
     observer(img)
 
-    plot_feature_maps(observer.features_maps[0], ncols=1)
-    print("shape:", observer.features_maps[1].shape)
-    plot_feature_maps(observer.features_maps[1], ncols=2)
+    for fm in observer.features_maps:
+        cols = int(np.sqrt(fm.shape[1]))
+        cols = 8 if cols**2 != fm.shape[1] else cols
+        print(cols)
+        plot_feature_maps(fm.squeeze(0), ncols=cols)
     #plot_feature_maps(observer.features_maps[1][[0, 4, 6, 9, 22, 25, 30, 31], :, :], ncols=4)
     

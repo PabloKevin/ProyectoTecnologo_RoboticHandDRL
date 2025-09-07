@@ -20,11 +20,11 @@ int Action[5]; //grados de cierre para cada dedo
 bool OpenAgain = 0; //flag indicadora de si luego de cerrar dedos en un movimiento, se deben volver a abrir o no
 
 // Credenciales de red Wi-Fi
-const char* ssid = "PK"; //"La Baticueva "; // Tu red Wi-Fi
-const char* password = "delunoalocho"; //"45631242"; // Contraseña de tu red Wi-Fi
+const char* ssid = "PK"; // red Wi-Fi
+const char* password = "delunoalocho"; // Contraseña de red Wi-Fi
 
 // Dirección del broker MQTT
-const char* mqtt_server = "192.168.120.138"; //"192.168.1.12"; // IP del broker (tu PC)
+const char* mqtt_server = "10.24.134.138"; //"192.168.1.12"; // IP del broker (tu PC)
 char action_topic[] = "RoboticHand_ML/action";
 char logs_topic[] = "RoboticHand_ML/logs";
 

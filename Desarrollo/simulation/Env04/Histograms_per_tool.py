@@ -28,6 +28,7 @@ for j, tool_name in enumerate(tools_of_interest):
     hidden_layers=[64,32,16] 
 
     agent = Agent(env=env, hidden_layers=hidden_layers, noise=0.0) 
+    agent.actor.checkpoint_file = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset/actor_episode_25000"
 
     agent.load_models()
 
@@ -78,7 +79,8 @@ cols = 5
 rows = math.ceil(len(tools_of_interest) / cols)
 
 # Create the figure and axes
-fig, axes = plt.subplots(rows, cols, figsize=(17, 10), constrained_layout=False)
+fig, axes = plt.subplots(rows, cols, figsize=(10, 10), constrained_layout=False)
+plt.subplots_adjust(hspace=0.4)  # Ajusta el espacio vertical entre filas
 axes = axes.flatten()  # Flatten so we can index easily
 
 # Loop through the files for the current figure
@@ -125,9 +127,10 @@ for idx, tool in enumerate(tools_of_interest):
     
     # Add the weird combo text *below* the x-axis. 
     # ax.transAxes: (0,0) is bottom-left of the entire Axes; (1,1) is top-right
+    y = -0.20 if idx % 2 == 0 else -0.25
     ax.text(
         0.5,
-        -0.2,                 # negative moves the text below the x-axis
+        y,                 # negative moves the text below the x-axis
         weird_text,
         transform=ax.transAxes,
         ha='center',
@@ -146,12 +149,23 @@ for idx, tool in enumerate(tools_of_interest):
 # Add overall title for the current figure
 fig.suptitle(
     f"Frequency of Specific Action Combinations per tool\nTotal episodes per tool: {episodes}",
-    fontsize=16
+    fontsize=14
 )
+
+# Añadir un recuadro con las combinaciones y sus agarres respectivos
+combinations_text = "\n".join([f"{name}: {combo}" for name, combo in combinations.items()][:-1])
+plt.figtext(
+    0.75, 0.91,  # Coordenadas (x, y) en la figura (ajusta según sea necesario)
+    f"Combinations:\n{combinations_text}",
+    wrap=True,
+    horizontalalignment='center',
+    fontsize=10,
+    bbox=dict(facecolor='white', alpha=0.8, edgecolor='black')
+)
+
 plt.xticks(rotation=15)
 # Increase bottom margin to accommodate the weird combos text
 plt.tight_layout()
-#plt.subplots_adjust(bottom=0.5)
 plt.show()
 
 print("weird combinations:", weird_combinations)
