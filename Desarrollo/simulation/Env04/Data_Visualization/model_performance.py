@@ -57,8 +57,23 @@ class Model_Metrics():
         disp.plot(cmap=plt.cm.Reds, ax=ax, colorbar=True)  # avoids creating new fig
 
         ax.set_title(f"Confusion Matrix")
-
+        # Ticks (etiquetas de clases)
+        ax.tick_params(axis='both', labelsize=15)
         ax.set_xticklabels(self.class_names, rotation=45)
+
+        # Etiquetas de ejes y título
+        ax.set_xlabel('Predicted label', fontsize=18, fontweight='bold')
+        ax.set_ylabel('True label', fontsize=18, fontweight='bold')
+        ax.set_title('Confusion Matrix', fontsize=20)
+
+        # Números dentro de cada celda
+        for t in disp.text_.ravel():
+            t.set_fontsize(18)
+
+        # Ticks del colorbar (si lo activaste)
+        cbar = disp.im_.colorbar
+        if cbar is not None:
+            cbar.ax.tick_params(labelsize=18)
 
         if show:
             ax.set_title(f"Confusion Matrix\nmodel: {self.model_name}")
@@ -147,13 +162,13 @@ class Observer_Metrics(Model_Metrics):
 
         super().__init__(df_test=self.predictor.df_test, thresholds_list=thresholds_list, class_names_list=class_names_list)
 
-    def show_model_performance(self, model_name, update=False):
+    def show_model_performance(self, model_name, update=False, save_path=None):
         if update:
             self.update()
         #fig, axs = plt.subplots(2, 2, figsize=(15, 13))
-        fig, axs = plt.subplots(1, 2, figsize=(15, 6))
+        fig, axs = plt.subplots(1, 1, figsize=(15, 15))
         
-        self.plot_confusion_matrix(ax=axs[0])
+        self.plot_confusion_matrix(ax=axs)
         #self.plot_confusion_matrix(ax=axs[0, 0])
         #self.plot_predicted_vs_true(ax=axs[1, 0])
         
@@ -164,12 +179,12 @@ class Observer_Metrics(Model_Metrics):
             f"Recall: {self.recall_val:.2f}\n"
             f"Accuracy: {self.accuracy:.2f}"
         )
-        fig.text(0.05, 0.1, metrics_text_0, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        #fig.text(0.05, 0.1, metrics_text_0, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
 
         #thresholds text
-        fig.text(0.4, 0.1, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        fig.text(0.33, 0.06, f"thresholds:\n{self.thresholds}", fontsize=16, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
 
-        self.thresholds = self.thresholds_list[1]
+        """self.thresholds = self.thresholds_list[1]
         self.class_names = self.class_names_list[1]
         self.update()
         self.plot_confusion_matrix(ax=axs[1])
@@ -187,15 +202,24 @@ class Observer_Metrics(Model_Metrics):
         #thresholds text
         fig.text(0.7, 0.1, f"thresholds:\n{self.thresholds}", fontsize=10, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         
-        # Add figure-wide title
-        fig.text(0.1, 0.98, f'Model Performance: {model_name}', 
-                 ha='left', va='top', fontsize=14, fontweight='bold')
+        
 
-        plt.tight_layout(rect=[0, 0.01, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+        
 
         # Draw separators
         #fig.add_artist(plt.Line2D([0, 1], [0.445, 0.445], color='grey', linewidth=1, linestyle='--'))  # horizontal
-        fig.add_artist(plt.Line2D([0.5, 0.5], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical
+        fig.add_artist(plt.Line2D([0.5, 0.5], [0, 0.955], color='grey', linewidth=1, linestyle='--'))  # vertical"""
+
+        # Add figure-wide title
+        fig.text(0.35, 0.98, f'Model Performance: {model_name}', 
+                 ha='left', va='top', fontsize=20, fontweight='bold')
+        
+        plt.tight_layout(rect=[0, 0.15, 1, 0.938], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
+
+        if save_path is not None:
+            fig.savefig(save_path,
+                        dpi=300,
+                        bbox_inches='tight')
 
         plt.show()
 
@@ -232,11 +256,26 @@ class Actor_Metrics(Model_Metrics):
         all_labels = list(range(len(self.class_names)))  # [0, 1, 2, 3, 4] for 5 classes
         cm = confusion_matrix(self.true_labels, self.pred_labels, labels=all_labels)
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=self.class_names)
-        disp.plot(cmap=plt.cm.Reds, ax=ax, colorbar=True)  # avoids creating new fig
+        disp.plot(cmap=plt.cm.Blues, ax=ax, colorbar=True)  # avoids creating new fig
 
         ax.set_title(f"Confusion Matrix")
-
+        # Ticks (etiquetas de clases)
+        ax.tick_params(axis='both', labelsize=15)
         ax.set_xticklabels(self.class_names, rotation=45)
+
+        # Etiquetas de ejes y título
+        ax.set_xlabel('Predicted label', fontsize=16, fontweight='bold')
+        ax.set_ylabel('True label', fontsize=16, fontweight='bold')
+        ax.set_title('Confusion Matrix', fontsize=18)
+
+        # Números dentro de cada celda
+        for t in disp.text_.ravel():
+            t.set_fontsize(15)
+
+        # Ticks del colorbar (si lo activaste)
+        cbar = disp.im_.colorbar
+        if cbar is not None:
+            cbar.ax.tick_params(labelsize=14)
 
         if show:
             ax.set_title(f"Confusion Matrix\nmodel: {self.model_name}")
@@ -254,10 +293,10 @@ class Actor_Metrics(Model_Metrics):
             f"Recall: {self.recall_val:.2f}\n"
             f"Accuracy: {self.accuracy:.2f}"
         )
-        fig.text(0.855, 0.938, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
+        #fig.text(0.855, 0.938, metrics_text_1, fontsize=12, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.8, boxstyle='round'))
         #title text
-        fig.text(0.20, 0.98, f'Model Performance: {model_name}', 
-                 ha='left', va='top', fontsize=14, fontweight='bold')
+        fig.text(0.30, 0.98, f'Model Performance: {model_name}', 
+                 ha='left', va='top', fontsize=18, fontweight='bold')
         
         plt.tight_layout(rect=[0, 0.01, 1, 0.9], h_pad=5.0, w_pad=1.5)  # [left, bottom, right, top] Leave space at bottom for metrics
         
@@ -280,8 +319,8 @@ if __name__ == "__main__":
     #model_name = "observer_best_test_logits_best2"
 
     model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/observer/v7/"
-    #model_name = "observer_final_v7"
-    model_name = "observer_epoch_90"
+    model_name = "observer_final_v7"
+    #model_name = "observer_epoch_90"
 
     conv_channels = [16, 32, 64]
     hidden_layers = [64, 32, 16]
@@ -304,7 +343,7 @@ if __name__ == "__main__":
     observer_performance = Observer_Metrics(conv_channels=conv_channels, hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, 
                                             model_name=model_name, thresholds_list=thresholds_list, class_names_list=class_names_list)
     name, _, epoch = model_name.split("_")
-    observer_performance.show_model_performance(f'"{name}" - Epoch: {epoch}')
+    observer_performance.show_model_performance(f'"{name}" - Epoch: {epoch}', save_path="Desarrollo/Documentacion/observer/observer_cm_Poster.png")
 
 
     # ACTOR PERFORMANCE
@@ -312,13 +351,13 @@ if __name__ == "__main__":
     #model_weight_dir = "Desarrollo/simulation/Env04/tmp/td3"
     #model_weight_dir = "Desarrollo/simulation/Env04/models_params_weights/td3"
     #model_name = "Actor_Last_Trained_Model"
-    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_fullset"
+    model_weight_dir = "Desarrollo/simulation/Env04/model_weights_docs/td3/v2_trainset"
     model_name = "actor_episode_25000"
     hidden_layers = [64,32,16]
     class_names = ["agarre_0", "agarre_1", "agarre_2", "agarre_3", "agarre_indefinido"]
 
     actor_performance = Actor_Metrics(hidden_layers=hidden_layers, model_weight_dir=model_weight_dir, model_name=model_name, class_names=class_names, file_name=model_name)
-    #actor_performance.show_model_performance(model_name)
+    actor_performance.show_model_performance(model_name, save_path="Desarrollo/Documentacion/observer/actor_cm_Poster.png")
     
 
    
