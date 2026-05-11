@@ -45,6 +45,9 @@ Los datasets fueron generados mediante técnicas de aumentación de datos e incl
 
 >**Palabras claves — _Mano Robótica; Emulación de Agarres; Aprendizaje por Refuerzo Profundo; TD3; Visión por Computadora; ESP32; ROS2._**
 
+## Carpeta de Drive con documento escrito completo, presentaciones y videos relevantes:
+https://drive.google.com/drive/folders/1xKJPUp4ORKh0YtxwA0MRv6gLPJiIZgAG?usp=sharing
+
 ## License
 > [!IMPORTANT]
 > - **Código fuente**: Apache License 2.0. Véase [`LICENSE-APACHE-2.0`](LICENSE-APACHE-2.0).
